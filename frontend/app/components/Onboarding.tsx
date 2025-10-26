@@ -52,7 +52,7 @@ const OnboardingMessage = ({message, link, type, path}: OnboardingMessageProps) 
           </Link>
         ) : (
           <button
-            className="cursor-pointer inline-flex rounded-full gap-2 items-center bg-white text-brand hover:bg-blue focus:bg-blue py-3 px-6 transition-colors duration-200"
+            className="cursor-pointer inline-flex rounded-full gap-2 items-center bg-white text-brand hover:bg-red focus:bg-red py-3 px-6 transition-colors duration-200"
             data-sanity={createDataAttribute({
               id: uuid(),
               type,

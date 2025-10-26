@@ -12,7 +12,7 @@ import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import * as demo from '@/sanity/lib/demo'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
-import {settingsQuery} from '@/sanity/lib/queries'
+import {settingsQuery, popularBrandsWithLogosQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from './client-utils'
 
@@ -60,10 +60,21 @@ const inter = Inter({
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const {isEnabled: isDraftMode} = await draftMode()
 
+  // Fetch settings and popular brands for Header and Footer
+  const [{data: settings}, {data: brands}] = await Promise.all([
+    sanityFetch({
+      query: settingsQuery,
+    }),
+    sanityFetch({
+      query: popularBrandsWithLogosQuery,
+      stega: false,
+    }),
+  ])
+
   return (
     <html lang="en" className={`${inter.variable} bg-white text-black`}>
       <body>
-        <section className="min-h-screen pt-24">
+        <section>
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />
           {isDraftMode && (
@@ -75,9 +86,9 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           )}
           {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
           <SanityLive onError={handleError} />
-          <Header />
-          <main className="">{children}</main>
-          <Footer />
+          <Header settings={settings || undefined} brands={brands || []} />
+          <main className="min-h-[calc(100vh-29rem)]">{children}</main>
+          <Footer settings={settings || undefined} brands={brands || []} />
         </section>
         <SpeedInsights />
       </body>

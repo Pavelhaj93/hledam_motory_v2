@@ -12,14 +12,53 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allPostsAndPages = await sanityFetch({
     query: sitemapData,
   })
+
   const headersList = await headers()
   const sitemap: MetadataRoute.Sitemap = []
-  const domain: String = headersList.get('host') as string
+  const domain = `https://${headersList.get('host')}` || 'https://hledammotory.cz'
+
+  // Root page
   sitemap.push({
-    url: domain as string,
+    url: domain,
     lastModified: new Date(),
     priority: 1,
     changeFrequency: 'monthly',
+  })
+
+  // Main category pages
+  const categories = [
+    'katalog',
+    'katalog/repasovane-motory',
+    'katalog/stare-motory',
+    'katalog/turbodmychadla',
+    'katalog/prevodovky',
+    'katalog/motorove-hlavy',
+  ]
+  categories.forEach((category) => {
+    sitemap.push({
+      url: `${domain}/${category}`,
+      lastModified: new Date(),
+      priority: 0.9,
+      changeFrequency: 'weekly',
+    })
+  })
+
+  // Category pages (removed brand-specific pages since we no longer have brand routing)
+  const mainCategories = [
+    'repasovane-motory',
+    'stare-motory',
+    'turbodmychadla',
+    'prevodovky',
+    'motorove-hlavy',
+  ]
+
+  mainCategories.forEach((category) => {
+    sitemap.push({
+      url: `${domain}/katalog/${category}`,
+      lastModified: new Date(),
+      priority: 0.8,
+      changeFrequency: 'monthly',
+    })
   })
 
   if (allPostsAndPages != null && allPostsAndPages.data.length != 0) {

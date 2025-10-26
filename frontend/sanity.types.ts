@@ -13,31 +13,173 @@
  */
 
 // Source: schema.json
+export type BenefitsSection = {
+  _type: 'benefitsSection'
+  eyebrow?: string
+  heading?: string
+  benefits?: Array<{
+    icon?: 'users' | 'database' | 'checkCircle' | 'mapPin' | 'star' | 'zap' | 'shield' | 'clock'
+    title?: string
+    description?: string
+    _type: 'benefit'
+    _key: string
+  }>
+  footerText?: string
+  ctaText?: string
+  ctaLink?: Link
+  backgroundImage?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
+export type HomepageTeaserSection = {
+  _type: 'homepageTeaserSection'
+  title: string
+  description: string
+  primaryButton?: {
+    text?: string
+    link?: Link
+  }
+  secondaryButton?: {
+    text?: string
+    link?: Link
+  }
+}
+
+export type HowItWorksSection = {
+  _type: 'howItWorksSection'
+  heading?: string
+  subheading?: string
+  steps?: Array<{
+    title: string
+    description: string
+    icon?:
+      | 'ClipboardCheck'
+      | 'Mail'
+      | 'Handshake'
+      | 'Megaphone'
+      | 'Target'
+      | 'Package'
+      | 'Search'
+      | 'Phone'
+      | 'Settings'
+      | 'CheckCircle'
+    _type: 'step'
+    _key: string
+  }>
+  ctaText?: string
+  ctaLink?: Link
+}
+
+export type RichTextSection = {
+  _type: 'richTextSection'
+  title?: string
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      linkType?: 'href' | 'page' | 'post'
+      href?: string
+      page?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'page'
+      }
+      post?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'post'
+      }
+      openInNewTab?: boolean
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  backgroundColor?: 'white' | 'gray-50' | 'gray-100' | 'blue-50' | 'red-50'
+  maxWidth?: 'full' | '7xl' | '4xl' | '2xl'
+}
+
+export type ContactSection = {
+  _type: 'contactSection'
+  heading: string
+  description?: string
+  layout?: 'form-info' | 'form-only' | 'info-only'
+  showContactInfo?: boolean
+  contactInfo?: {
+    email?: string
+    phone?: string
+    address?: string
+    businessHours?: string
+  }
+  formConfiguration?: {
+    submitButtonText?: string
+    successMessage?: string
+  }
+}
+
+export type ProductShowcase = {
+  _type: 'productShowcase'
+  heading: string
+  description?: string
+  layout?: 'grid' | 'featured' | 'carousel'
+  maxProducts?: number
+}
+
+export type HeroSection = {
+  _type: 'heroSection'
+  headline: string
+  subheadline?: string
+  description?: string
+  heroImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  }
+  imagePosition?: 'left' | 'right' | 'background'
+  primaryButton?: {
+    text?: string
+    link?: Link
+  }
+  secondaryButton?: {
+    text?: string
+    link?: Link
+  }
+}
+
 export type CallToAction = {
   _type: 'callToAction'
   heading: string
   text?: string
   buttonText?: string
   link?: Link
-}
-
-export type Link = {
-  _type: 'link'
-  linkType?: 'href' | 'page' | 'post'
-  href?: string
-  page?: {
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    [internalGroqTypeReferenceTo]?: 'page'
-  }
-  post?: {
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    [internalGroqTypeReferenceTo]?: 'post'
-  }
-  openInNewTab?: boolean
 }
 
 export type InfoSection = {
@@ -111,6 +253,360 @@ export type BlockContent = Array<{
   _key: string
 }>
 
+export type Turbodmychadlo = {
+  _id: string
+  _type: 'turbodmychadlo'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name: string
+  slug: Slug
+  brand: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'brand'
+  }
+  engineCodes?: Array<string>
+  turboCode?: string
+  displacement?: string
+  power?: string
+  manufacturer?: 'garrett' | 'kkk' | 'ihi' | 'mitsubishi' | 'holset' | 'jiny'
+  description: string
+  detailedDescription?: BlockContent
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price: number
+  currency?: 'CZK'
+  specifications?: Array<{
+    label: string
+    value: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  condition: 'nove' | 'repasovane' | 'pouzite-funkcni' | 'na-dily'
+  mileage?: string
+  boostPressure?: string
+  oilType?: string
+  warrantyPeriod?: string
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type Prevodovka = {
+  _id: string
+  _type: 'prevodovka'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name: string
+  slug: Slug
+  brand: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'brand'
+  }
+  engineCodes?: Array<string>
+  transmissionCode?: string
+  transmissionType: 'manualni' | 'automaticka' | 'cvt' | 'sekvencni'
+  gearCount?: string
+  driveType?: 'predni' | 'zadni' | '4x4' | 'awd'
+  description: string
+  detailedDescription?: BlockContent
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price: number
+  currency?: 'CZK'
+  specifications?: Array<{
+    label: string
+    value: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  mileage?: string
+  condition: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
+  fluidType?: string
+  warrantyPeriod?: string
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type MotorovaHlava = {
+  _id: string
+  _type: 'motorovaHlava'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name: string
+  slug: Slug
+  brand: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'brand'
+  }
+  engineCodes?: Array<string>
+  valveCount?: string
+  material?: 'litina' | 'hlinik' | 'slitina-hliniku'
+  description: string
+  detailedDescription?: BlockContent
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price: number
+  currency?: 'CZK'
+  specifications?: Array<{
+    label: string
+    value: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  condition: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
+  includedComponents?: Array<string>
+  warrantyPeriod?: string
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type StaryMotor = {
+  _id: string
+  _type: 'staryMotor'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name: string
+  slug: Slug
+  brand: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'brand'
+  }
+  engineCodes?: Array<string>
+  displacement?: string
+  power?: string
+  fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
+  description: string
+  detailedDescription?: BlockContent
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price: number
+  currency?: 'CZK'
+  specifications?: Array<{
+    label: string
+    value: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  mileage: string
+  year?: string
+  condition: 'funkcni' | 'na-dily' | 'kompletni' | 'nekompletni'
+  damageDescription?: string
+  relatedTurbochargers?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'turbodmychadlo'
+  }>
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type RepasovanyMotor = {
+  _id: string
+  _type: 'repasovanyMotor'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name: string
+  slug: Slug
+  brand: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'brand'
+  }
+  engineCodes?: Array<string>
+  displacement?: string
+  power?: string
+  fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
+  description: string
+  detailedDescription?: BlockContent
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price: number
+  currency?: 'CZK'
+  specifications?: Array<{
+    label: string
+    value: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  warrantyPeriod?: string
+  mileage?: string
+  condition?: 'repasovany' | 'generalka' | 'testovany'
+  relatedTurbochargers?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'turbodmychadlo'
+  }>
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type Brand = {
+  _id: string
+  _type: 'brand'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name: string
+  slug: Slug
+  logo?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  isPopular?: boolean
+}
+
+export type Homepage = {
+  _id: string
+  _type: 'homepage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+  pageBuilder?: Array<
+    | ({
+        _key: string
+      } & CallToAction)
+    | ({
+        _key: string
+      } & InfoSection)
+    | ({
+        _key: string
+      } & HeroSection)
+    | ({
+        _key: string
+      } & ProductShowcase)
+    | ({
+        _key: string
+      } & ContactSection)
+    | ({
+        _key: string
+      } & RichTextSection)
+    | ({
+        _key: string
+      } & HowItWorksSection)
+    | ({
+        _key: string
+      } & HomepageTeaserSection)
+    | ({
+        _key: string
+      } & BenefitsSection)
+  >
+}
+
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -183,7 +679,47 @@ export type Page = {
     | ({
         _key: string
       } & InfoSection)
+    | ({
+        _key: string
+      } & HeroSection)
+    | ({
+        _key: string
+      } & ProductShowcase)
+    | ({
+        _key: string
+      } & ContactSection)
+    | ({
+        _key: string
+      } & RichTextSection)
+    | ({
+        _key: string
+      } & HowItWorksSection)
+    | ({
+        _key: string
+      } & HomepageTeaserSection)
+    | ({
+        _key: string
+      } & BenefitsSection)
   >
+}
+
+export type Link = {
+  _type: 'link'
+  linkType?: 'href' | 'page' | 'post'
+  href?: string
+  page?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'page'
+  }
+  post?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'post'
+  }
+  openInNewTab?: boolean
 }
 
 export type Post = {
@@ -397,25 +933,25 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: 'sanity.imageDimensions'
-  height?: number
-  width?: number
-  aspectRatio?: number
+  height: number
+  width: number
+  aspectRatio: number
 }
 
 export type SanityImageHotspot = {
   _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
+  x: number
+  y: number
+  height: number
+  width: number
 }
 
 export type SanityImageCrop = {
   _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
+  top: number
+  bottom: number
+  left: number
+  right: number
 }
 
 export type SanityFileAsset = {
@@ -495,12 +1031,26 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | BenefitsSection
+  | HomepageTeaserSection
+  | HowItWorksSection
+  | RichTextSection
+  | ContactSection
+  | ProductShowcase
+  | HeroSection
   | CallToAction
-  | Link
   | InfoSection
   | BlockContent
+  | Turbodmychadlo
+  | Prevodovka
+  | MotorovaHlava
+  | StaryMotor
+  | RepasovanyMotor
+  | Brand
+  | Homepage
   | Settings
   | Page
+  | Link
   | Post
   | Person
   | SanityAssistInstructionTask
@@ -584,16 +1134,53 @@ export type SettingsQueryResult = {
     _type: 'image'
   }
 } | null
-// Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },    },  }
-export type GetPageQueryResult = {
+// Variable: homepageQuery
+// Query: *[_type == "homepage"][0]{    _id,    _type,    title,    seo,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        link {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "infoSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },    },  }
+export type HomepageQueryResult = {
   _id: string
-  _type: 'page'
-  name: string
-  slug: Slug
-  heading: string
-  subheading: string | null
+  _type: 'homepage'
+  title: string | null
+  seo: {
+    metaTitle?: string
+    metaDescription?: string
+  } | null
   pageBuilder: Array<
+    | {
+        _key: string
+        _type: 'benefitsSection'
+        eyebrow?: string
+        heading?: string
+        benefits?: Array<{
+          icon?:
+            | 'checkCircle'
+            | 'clock'
+            | 'database'
+            | 'mapPin'
+            | 'shield'
+            | 'star'
+            | 'users'
+            | 'zap'
+          title?: string
+          description?: string
+          _type: 'benefit'
+          _key: string
+        }>
+        footerText?: string
+        ctaText?: string
+        ctaLink?: Link
+        backgroundImage?: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+      }
     | {
         _key: string
         _type: 'callToAction'
@@ -608,6 +1195,317 @@ export type GetPageQueryResult = {
           post: string | null
           openInNewTab?: boolean
         } | null
+      }
+    | {
+        _key: string
+        _type: 'contactSection'
+        heading: string
+        description?: string
+        layout?: 'form-info' | 'form-only' | 'info-only'
+        showContactInfo?: boolean
+        contactInfo?: {
+          email?: string
+          phone?: string
+          address?: string
+          businessHours?: string
+        }
+        formConfiguration?: {
+          submitButtonText?: string
+          successMessage?: string
+        }
+      }
+    | {
+        _key: string
+        _type: 'heroSection'
+        headline: string
+        subheadline?: string
+        description?: string
+        heroImage: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt: string
+          _type: 'image'
+        }
+        imagePosition?: 'background' | 'left' | 'right'
+        primaryButton: {
+          text?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+        secondaryButton: {
+          text?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'homepageTeaserSection'
+        title: string
+        description: string
+        primaryButton: {
+          text?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+        secondaryButton: {
+          text?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+        products: Array<
+          | {
+              _id: string
+              _type: 'motorovaHlava'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+          | {
+              _id: string
+              _type: 'prevodovka'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+          | {
+              _id: string
+              _type: 'repasovanyMotor'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+          | {
+              _id: string
+              _type: 'staryMotor'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+          | {
+              _id: string
+              _type: 'turbodmychadlo'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+        >
+      }
+    | {
+        _key: string
+        _type: 'howItWorksSection'
+        heading?: string
+        subheading?: string
+        steps?: Array<{
+          title: string
+          description: string
+          icon?:
+            | 'CheckCircle'
+            | 'ClipboardCheck'
+            | 'Handshake'
+            | 'Mail'
+            | 'Megaphone'
+            | 'Package'
+            | 'Phone'
+            | 'Search'
+            | 'Settings'
+            | 'Target'
+          _type: 'step'
+          _key: string
+        }>
+        ctaText?: string
+        ctaLink?: Link
       }
     | {
         _key: string
@@ -636,6 +1534,472 @@ export type GetPageQueryResult = {
           _type: 'block'
           _key: string
         }> | null
+      }
+    | {
+        _key: string
+        _type: 'productShowcase'
+        heading: string
+        description?: string
+        layout?: 'carousel' | 'featured' | 'grid'
+        maxProducts?: number
+      }
+    | {
+        _key: string
+        _type: 'richTextSection'
+        title?: string
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs: Array<{
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+            _type: 'link'
+            _key: string
+          }> | null
+          level?: number
+          _type: 'block'
+          _key: string
+        }> | null
+        backgroundColor?: 'blue-50' | 'gray-100' | 'gray-50' | 'red-50' | 'white'
+        maxWidth?: '2xl' | '4xl' | '7xl' | 'full'
+      }
+  > | null
+} | null
+// Variable: getPageQuery
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        secondaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },    },  }
+export type GetPageQueryResult = {
+  _id: string
+  _type: 'page'
+  name: string
+  slug: Slug
+  heading: string
+  subheading: string | null
+  pageBuilder: Array<
+    | {
+        _key: string
+        _type: 'benefitsSection'
+        eyebrow?: string
+        heading?: string
+        benefits?: Array<{
+          icon?:
+            | 'checkCircle'
+            | 'clock'
+            | 'database'
+            | 'mapPin'
+            | 'shield'
+            | 'star'
+            | 'users'
+            | 'zap'
+          title?: string
+          description?: string
+          _type: 'benefit'
+          _key: string
+        }>
+        footerText?: string
+        ctaText?: string
+        ctaLink?: Link
+        backgroundImage?: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+      }
+    | {
+        _key: string
+        _type: 'callToAction'
+        heading: string
+        text?: string
+        buttonText?: string
+        link: {
+          _type: 'link'
+          linkType?: 'href' | 'page' | 'post'
+          href?: string
+          page: string | null
+          post: string | null
+          openInNewTab?: boolean
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'contactSection'
+        heading: string
+        description?: string
+        layout?: 'form-info' | 'form-only' | 'info-only'
+        showContactInfo?: boolean
+        contactInfo?: {
+          email?: string
+          phone?: string
+          address?: string
+          businessHours?: string
+        }
+        formConfiguration?: {
+          submitButtonText?: string
+          successMessage?: string
+        }
+      }
+    | {
+        _key: string
+        _type: 'heroSection'
+        headline: string
+        subheadline?: string
+        description?: string
+        heroImage: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt: string
+          _type: 'image'
+        }
+        imagePosition?: 'background' | 'left' | 'right'
+        primaryButton: {
+          text?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+        secondaryButton: {
+          text?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'homepageTeaserSection'
+        title: string
+        description: string
+        primaryButton: {
+          text?: string
+          link: {
+            link: null
+          } | null
+        } | null
+        secondaryButton: {
+          text?: string
+          link: {
+            link: null
+          } | null
+        } | null
+        products: Array<
+          | {
+              _id: string
+              _type: 'motorovaHlava'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+          | {
+              _id: string
+              _type: 'prevodovka'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+          | {
+              _id: string
+              _type: 'repasovanyMotor'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+          | {
+              _id: string
+              _type: 'staryMotor'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+          | {
+              _id: string
+              _type: 'turbodmychadlo'
+              name: string
+              slug: string
+              images: Array<{
+                asset?: {
+                  _ref: string
+                  _type: 'reference'
+                  _weak?: boolean
+                  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                }
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                alt: string
+                caption?: string
+                _type: 'image'
+                _key: string
+              }>
+              price: number
+              description: string
+              brand: {
+                name: string
+                logo: {
+                  asset?: {
+                    _ref: string
+                    _type: 'reference'
+                    _weak?: boolean
+                    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+                  }
+                  media?: unknown
+                  hotspot?: SanityImageHotspot
+                  crop?: SanityImageCrop
+                  _type: 'image'
+                } | null
+              }
+              category: null
+            }
+        >
+      }
+    | {
+        _key: string
+        _type: 'howItWorksSection'
+        heading?: string
+        subheading?: string
+        steps?: Array<{
+          title: string
+          description: string
+          icon?:
+            | 'CheckCircle'
+            | 'ClipboardCheck'
+            | 'Handshake'
+            | 'Mail'
+            | 'Megaphone'
+            | 'Package'
+            | 'Phone'
+            | 'Search'
+            | 'Settings'
+            | 'Target'
+          _type: 'step'
+          _key: string
+        }>
+        ctaText?: string
+        ctaLink?: Link
+      }
+    | {
+        _key: string
+        _type: 'infoSection'
+        heading?: string
+        subheading?: string
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs: Array<{
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+            _type: 'link'
+            _key: string
+          }> | null
+          level?: number
+          _type: 'block'
+          _key: string
+        }> | null
+      }
+    | {
+        _key: string
+        _type: 'productShowcase'
+        heading: string
+        description?: string
+        layout?: 'carousel' | 'featured' | 'grid'
+        maxProducts?: number
+      }
+    | {
+        _key: string
+        _type: 'richTextSection'
+        title?: string
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs: Array<{
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+            _type: 'link'
+            _key: string
+          }> | null
+          level?: number
+          _type: 'block'
+          _key: string
+        }> | null
+        backgroundColor?: 'blue-50' | 'gray-100' | 'gray-50' | 'red-50' | 'white'
+        maxWidth?: '2xl' | '4xl' | '7xl' | 'full'
       }
   > | null
 } | null
@@ -805,18 +2169,1086 @@ export type PostPagesSlugsResult = Array<{
 export type PagesSlugsResult = Array<{
   slug: string
 }>
+// Variable: allBrandsWithLogosQuery
+// Query: *[_type == "brand"] | order(isPopular desc, name asc) {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
+export type AllBrandsWithLogosQueryResult = Array<{
+  _id: string
+  name: string
+  slug: string
+  logo: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+  isPopular: boolean | null
+}>
+// Variable: popularBrandsWithLogosQuery
+// Query: *[_type == "brand" && isPopular == true] | order(name asc) {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
+export type PopularBrandsWithLogosQueryResult = Array<{
+  _id: string
+  name: string
+  slug: string
+  logo: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+  isPopular: boolean | null
+}>
+// Variable: brandBySlugQuery
+// Query: *[_type == "brand" && slug.current == $slug][0] {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
+export type BrandBySlugQueryResult = {
+  _id: string
+  name: string
+  slug: string
+  logo: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+  isPopular: boolean | null
+} | null
+// Variable: allRepasovaneMotoryQuery
+// Query: *[_type == "repasovanyMotor" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  }  }
+export type AllRepasovaneMotoryQueryResult = Array<{
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  displacement: string | null
+  power: string | null
+  fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  warrantyPeriod: string | null
+  mileage: string | null
+  condition: 'generalka' | 'repasovany' | 'testovany' | null
+  relatedTurbochargers: Array<{
+    _id: string
+    name: string
+    slug: string
+    brand: string
+    mainImage: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt: string
+      caption?: string
+      _type: 'image'
+      _key: string
+    } | null
+    price: number
+    currency: 'CZK' | null
+    inStock: boolean | null
+    turboCode: string | null
+    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
+  }> | null
+}>
+// Variable: repasovanyMotorQuery
+// Query: *[_type == "repasovanyMotor" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo  }
+export type RepasovanyMotorQueryResult = {
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  displacement: string | null
+  power: string | null
+  fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  warrantyPeriod: string | null
+  mileage: string | null
+  condition: 'generalka' | 'repasovany' | 'testovany' | null
+  relatedTurbochargers: Array<{
+    _id: string
+    name: string
+    slug: string
+    brand: string
+    mainImage: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt: string
+      caption?: string
+      _type: 'image'
+      _key: string
+    } | null
+    price: number
+    currency: 'CZK' | null
+    inStock: boolean | null
+    turboCode: string | null
+    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
+  }> | null
+  detailedDescription: BlockContent | null
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  seo: {
+    metaTitle?: string
+    metaDescription?: string
+  } | null
+} | null
+// Variable: repasovaneMotoryPagesSlugs
+// Query: *[_type == "repasovanyMotor" && defined(slug.current)]  {"slug": slug.current}
+export type RepasovaneMotoryPagesSlugsResult = Array<{
+  slug: string
+}>
+// Variable: allStareMotoryQuery
+// Query: *[_type == "staryMotor" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  }  }
+export type AllStareMotoryQueryResult = Array<{
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  displacement: string | null
+  power: string | null
+  fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  mileage: string
+  year: string | null
+  condition: 'funkcni' | 'kompletni' | 'na-dily' | 'nekompletni'
+  damageDescription: string | null
+  relatedTurbochargers: Array<{
+    _id: string
+    name: string
+    slug: string
+    brand: string
+    mainImage: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt: string
+      caption?: string
+      _type: 'image'
+      _key: string
+    } | null
+    price: number
+    currency: 'CZK' | null
+    inStock: boolean | null
+    turboCode: string | null
+    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
+  }> | null
+}>
+// Variable: staryMotorQuery
+// Query: *[_type == "staryMotor" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo  }
+export type StaryMotorQueryResult = {
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  displacement: string | null
+  power: string | null
+  fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  mileage: string
+  year: string | null
+  condition: 'funkcni' | 'kompletni' | 'na-dily' | 'nekompletni'
+  damageDescription: string | null
+  relatedTurbochargers: Array<{
+    _id: string
+    name: string
+    slug: string
+    brand: string
+    mainImage: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt: string
+      caption?: string
+      _type: 'image'
+      _key: string
+    } | null
+    price: number
+    currency: 'CZK' | null
+    inStock: boolean | null
+    turboCode: string | null
+    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
+  }> | null
+  detailedDescription: BlockContent | null
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  seo: {
+    metaTitle?: string
+    metaDescription?: string
+  } | null
+} | null
+// Variable: stareMotoryPagesSlugs
+// Query: *[_type == "staryMotor" && defined(slug.current)]  {"slug": slug.current}
+export type StareMotoryPagesSlugsResult = Array<{
+  slug: string
+}>
+// Variable: allMotoroveHlavyQuery
+// Query: *[_type == "motorovaHlava" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod  }
+export type AllMotoroveHlavyQueryResult = Array<{
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  valveCount: string | null
+  material: 'hlinik' | 'litina' | 'slitina-hliniku' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
+  includedComponents: Array<string> | null
+  warrantyPeriod: string | null
+}>
+// Variable: motorovaHlavaQuery
+// Query: *[_type == "motorovaHlava" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod,    detailedDescription,    images[],    seo  }
+export type MotorovaHlavaQueryResult = {
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  valveCount: string | null
+  material: 'hlinik' | 'litina' | 'slitina-hliniku' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
+  includedComponents: Array<string> | null
+  warrantyPeriod: string | null
+  detailedDescription: BlockContent | null
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  seo: {
+    metaTitle?: string
+    metaDescription?: string
+  } | null
+} | null
+// Variable: motoroveHlavyPagesSlugs
+// Query: *[_type == "motorovaHlava" && defined(slug.current)]  {"slug": slug.current}
+export type MotoroveHlavyPagesSlugsResult = Array<{
+  slug: string
+}>
+// Variable: allPrevodovkyQuery
+// Query: *[_type == "prevodovka" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod  }
+export type AllPrevodovkyQueryResult = Array<{
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  transmissionCode: string | null
+  transmissionType: 'automaticka' | 'cvt' | 'manualni' | 'sekvencni'
+  gearCount: string | null
+  driveType: '4x4' | 'awd' | 'predni' | 'zadni' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  mileage: string | null
+  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
+  fluidType: string | null
+  warrantyPeriod: string | null
+}>
+// Variable: prevodovkaQuery
+// Query: *[_type == "prevodovka" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod,    detailedDescription,    images[],    seo  }
+export type PrevodovkaQueryResult = {
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  transmissionCode: string | null
+  transmissionType: 'automaticka' | 'cvt' | 'manualni' | 'sekvencni'
+  gearCount: string | null
+  driveType: '4x4' | 'awd' | 'predni' | 'zadni' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  mileage: string | null
+  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
+  fluidType: string | null
+  warrantyPeriod: string | null
+  detailedDescription: BlockContent | null
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  seo: {
+    metaTitle?: string
+    metaDescription?: string
+  } | null
+} | null
+// Variable: prevodovkyPagesSlugs
+// Query: *[_type == "prevodovka" && defined(slug.current)]  {"slug": slug.current}
+export type PrevodovkyPagesSlugsResult = Array<{
+  slug: string
+}>
+// Variable: allTurbodmychadlaQuery
+// Query: *[_type == "turbodmychadlo" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod  }
+export type AllTurbodmychadlaQueryResult = Array<{
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  turboCode: string | null
+  displacement: string | null
+  power: string | null
+  manufacturer: 'garrett' | 'holset' | 'ihi' | 'jiny' | 'kkk' | 'mitsubishi' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
+  mileage: string | null
+  boostPressure: string | null
+  oilType: string | null
+  warrantyPeriod: string | null
+}>
+// Variable: turbodmychadloQuery
+// Query: *[_type == "turbodmychadlo" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod,    detailedDescription,    images[],    seo  }
+export type TurbodmychadloQueryResult = {
+  _id: string
+  name: string
+  slug: string
+  brand: {
+    name: string
+    slug: string
+    logo: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  }
+  engineCodes: Array<string> | null
+  turboCode: string | null
+  displacement: string | null
+  power: string | null
+  manufacturer: 'garrett' | 'holset' | 'ihi' | 'jiny' | 'kkk' | 'mitsubishi' | null
+  description: string
+  mainImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  } | null
+  price: number
+  currency: 'CZK' | null
+  inStock: boolean | null
+  featured: boolean | null
+  specifications: Array<{
+    label: string
+    value: string
+  }> | null
+  compatibility: Array<string> | null
+  condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
+  mileage: string | null
+  boostPressure: string | null
+  oilType: string | null
+  warrantyPeriod: string | null
+  detailedDescription: BlockContent | null
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  seo: {
+    metaTitle?: string
+    metaDescription?: string
+  } | null
+} | null
+// Variable: turbodmychadlaPagesSlugs
+// Query: *[_type == "turbodmychadlo" && defined(slug.current)]  {"slug": slug.current}
+export type TurbodmychadlaPagesSlugsResult = Array<{
+  slug: string
+}>
+// Variable: latestProductsQuery
+// Query: *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{    _id,    _type,    name,    "slug": slug.current,    images[],    price,    description,    brand->{      name,      logo    },    category  }
+export type LatestProductsQueryResult = Array<
+  | {
+      _id: string
+      _type: 'motorovaHlava'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: string
+      brand: {
+        name: string
+        logo: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'prevodovka'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: string
+      brand: {
+        name: string
+        logo: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'repasovanyMotor'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: string
+      brand: {
+        name: string
+        logo: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'staryMotor'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: string
+      brand: {
+        name: string
+        logo: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'turbodmychadlo'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: string
+      brand: {
+        name: string
+        logo: {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+>
 
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult
-    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n    },\n  }\n': GetPageQueryResult
+    '\n  *[_type == "homepage"][0]{\n    _id,\n    _type,\n    title,\n    seo,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        ...,\n        link {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "infoSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n    },\n  }\n': HomepageQueryResult
+    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n    },\n  }\n': GetPageQueryResult
     '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult
     '\n  *[_type == "post" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': PostQueryResult
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult
     '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
+    '\n  *[_type == "brand"] | order(isPopular desc, name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': AllBrandsWithLogosQueryResult
+    '\n  *[_type == "brand" && isPopular == true] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': PopularBrandsWithLogosQueryResult
+    '\n  *[_type == "brand" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': BrandBySlugQueryResult
+    '\n  *[_type == "repasovanyMotor" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    currency,\n    inStock,\n    turboCode,\n    condition\n  }\n\n  }\n': AllRepasovaneMotoryQueryResult
+    '\n  *[_type == "repasovanyMotor" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    currency,\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': RepasovanyMotorQueryResult
+    '\n  *[_type == "repasovanyMotor" && defined(slug.current)]\n  {"slug": slug.current}\n': RepasovaneMotoryPagesSlugsResult
+    '\n  *[_type == "staryMotor" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    currency,\n    inStock,\n    turboCode,\n    condition\n  }\n\n  }\n': AllStareMotoryQueryResult
+    '\n  *[_type == "staryMotor" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    currency,\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': StaryMotorQueryResult
+    '\n  *[_type == "staryMotor" && defined(slug.current)]\n  {"slug": slug.current}\n': StareMotoryPagesSlugsResult
+    '\n  *[_type == "motorovaHlava" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n\n  }\n': AllMotoroveHlavyQueryResult
+    '\n  *[_type == "motorovaHlava" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': MotorovaHlavaQueryResult
+    '\n  *[_type == "motorovaHlava" && defined(slug.current)]\n  {"slug": slug.current}\n': MotoroveHlavyPagesSlugsResult
+    '\n  *[_type == "prevodovka" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n\n  }\n': AllPrevodovkyQueryResult
+    '\n  *[_type == "prevodovka" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': PrevodovkaQueryResult
+    '\n  *[_type == "prevodovka" && defined(slug.current)]\n  {"slug": slug.current}\n': PrevodovkyPagesSlugsResult
+    '\n  *[_type == "turbodmychadlo" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n\n  }\n': AllTurbodmychadlaQueryResult
+    '\n  *[_type == "turbodmychadlo" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': TurbodmychadloQueryResult
+    '\n  *[_type == "turbodmychadlo" && defined(slug.current)]\n  {"slug": slug.current}\n': TurbodmychadlaPagesSlugsResult
+    '\n  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{\n    _id,\n    _type,\n    name,\n    "slug": slug.current,\n    images[],\n    price,\n    description,\n    brand->{\n      name,\n      logo\n    },\n    category\n  }\n': LatestProductsQueryResult
   }
 }

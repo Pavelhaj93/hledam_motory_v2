@@ -1,0 +1,142 @@
+[
+  {
+    "_type": "brand",
+    "_id": "brand-bmw",
+    "name": "BMW",
+    "slug": {
+      "current": "bmw"
+    },
+    "description": "Bayerische Motoren Werke AG is a German multinational corporation which produces luxury vehicles and motorcycles.",
+    "website": "https://www.bmw.com",
+    "countryOfOrigin": "Germany",
+    "founded": 1916,
+    "isActive": true,
+    "sortOrder": 10
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-audi",
+    "name": "Audi",
+    "slug": {
+      "current": "audi"
+    },
+    "description": "Audi AG is a German automotive manufacturer of luxury vehicles headquartered in Ingolstadt, Bavaria.",
+    "website": "https://www.audi.com",
+    "countryOfOrigin": "Germany",
+    "founded": 1910,
+    "isActive": true,
+    "sortOrder": 20
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-volkswagen",
+    "name": "Volkswagen",
+    "slug": {
+      "current": "volkswagen"
+    },
+    "description": "Volkswagen is a German motor vehicle manufacturer headquartered in Wolfsburg, Lower Saxony.",
+    "website": "https://www.volkswagen.com",
+    "countryOfOrigin": "Germany",
+    "founded": 1937,
+    "isActive": true,
+    "sortOrder": 30
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-mercedes-benz",
+    "name": "Mercedes-Benz",
+    "slug": {
+      "current": "mercedes-benz"
+    },
+    "description": "Mercedes-Benz is a German global automobile marque and a division of Daimler AG.",
+    "website": "https://www.mercedes-benz.com",
+    "countryOfOrigin": "Germany",
+    "founded": 1926,
+    "isActive": true,
+    "sortOrder": 40
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-skoda",
+    "name": "Škoda",
+    "slug": {
+      "current": "skoda"
+    },
+    "description": "Škoda Auto is a Czech automobile manufacturer founded in 1895.",
+    "website": "https://www.skoda-auto.com",
+    "countryOfOrigin": "Czech Republic",
+    "founded": 1895,
+    "isActive": true,
+    "sortOrder": 50
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-ford",
+    "name": "Ford",
+    "slug": {
+      "current": "ford"
+    },
+    "description": "Ford Motor Company is an American multinational automobile manufacturer.",
+    "website": "https://www.ford.com",
+    "countryOfOrigin": "United States",
+    "founded": 1903,
+    "isActive": true,
+    "sortOrder": 60
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-opel",
+    "name": "Opel",
+    "slug": {
+      "current": "opel"
+    },
+    "description": "Opel is a German automobile manufacturer which has been a subsidiary of Stellantis since 2021.",
+    "website": "https://www.opel.com",
+    "countryOfOrigin": "Germany",
+    "founded": 1862,
+    "isActive": true,
+    "sortOrder": 70
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-peugeot",
+    "name": "Peugeot",
+    "slug": {
+      "current": "peugeot"
+    },
+    "description": "Peugeot is a French automotive manufacturer, part of Stellantis.",
+    "website": "https://www.peugeot.com",
+    "countryOfOrigin": "France",
+    "founded": 1810,
+    "isActive": true,
+    "sortOrder": 80
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-citroen",
+    "name": "Citroën",
+    "slug": {
+      "current": "citroen"
+    },
+    "description": "Citroën is a French brand of automobiles owned by Stellantis.",
+    "website": "https://www.citroen.com",
+    "countryOfOrigin": "France",
+    "founded": 1919,
+    "isActive": true,
+    "sortOrder": 90
+  },
+  {
+    "_type": "brand",
+    "_id": "brand-renault",
+    "name": "Renault",
+    "slug": {
+      "current": "renault"
+    },
+    "description": "Renault is a French multinational automobile manufacturer established in 1899.",
+    "website": "https://www.renault.com",
+    "countryOfOrigin": "France",
+    "founded": 1899,
+    "isActive": true,
+    "sortOrder": 100
+  }
+]

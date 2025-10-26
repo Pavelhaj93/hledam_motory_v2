@@ -1,0 +1,730 @@
+[{
+  "_id": {
+    "$oid": "64d9fb6a0bf00b60a4ec8efe"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-20-tdi-ckt",
+  "name": "Motor Volkswagen 2.0 TDI 84-120 KW, kód motoru-CKT,CKU,CSN,CSL",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\nmodely aut-Crafter\n\nrok výroby:2011-2016\n",
+  "price": 60000,
+  "createdAt": {
+    "$date": "2023-08-14T10:01:14.743Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:20:35.121Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1692007262/tdwgceuggzqgp2yyo5e6.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1692007263/gzhjrji79dep3vh6vpsp.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1692007263/ivbk0patapdjnej9tbou.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1692007263/tc8izkdfd1k0f0xk4ept.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "64ef0a69087bd0efa3c9be70"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-volkswagen-20-tdi-cfc-64ef0a69087bd0efa3c9be70",
+  "name": "Motor Volkswagen 2.0 Bi-TDI 16V 132 KW, kód motoru-CFC,CFCA",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Transporter T5, T6, Multivan, Caravelle\n\nrok výroby:2008-2017",
+  "price": 60000,
+  "createdAt": {
+    "$date": "2023-08-30T09:22:49.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:21:33.703Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1693386846/r6rsw4somnnf1eukqouk.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1693386931/ccsunhhcsplhuiyoo5qa.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1693386937/wv0tm0c3hhd5m4zgi8yi.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1693386991/hzh8bqsd5fmuomcbgyzs.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1693387021/lszjlelzytm6owbwv1vp.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655e75eebf8101bac761a544"
+  },
+  "markName": "Citroën",
+  "slug": "motor-citroen-20-hdi-ah03-655e75eebf8101bac761a544",
+  "name": "Motor Citroen 2.0,BlueHDI 96-132 KW, EU6 , kód motoru-4H03 AHP AHM AHN AH03/10DYZZ, BLFA, YNFA",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Boxer, Jumper, Jumpy, Transit\n\nrok výroby:2016-2020",
+  "price": 80000,
+  "createdAt": {
+    "$date": "2023-11-22T21:43:10.569Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:34:40.395Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700689325/xzntv3aksibabloz95e6.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700689325/gmzermzecr7zztre4rtr.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700689326/pcqqla5qkbfblgmsdgat.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700689326/erbkiv0ltndcoqhl78dr.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700689326/jhotjswsvk6hr0vfpruh.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655e7b564e3a4e6ed2366227"
+  },
+  "markName": "Peugeot",
+  "slug": "motor-fiat-20-hdi-ah03-655e7b564e3a4e6ed2366227",
+  "name": "Motor Peugeot 2.0,BlueHDI 96-132 KW,UE6, kód motoru-4H03,AHP,AHN,AH03/10DYZZ",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Boxer, Jumper, Jumpy, Transit\n\nrok výroby:2016-2020",
+  "price": 80000,
+  "createdAt": {
+    "$date": "2023-11-22T22:06:14.136Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:25:48.206Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700690765/ss8tpugft1xoqr634uz0.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700690765/dfecb7vtla0mkulvrycd.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700690766/a2ipyyhxxeowfn0hjcxl.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700690766/umwd3adqjlc9ncm45u6v.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1700690766/r2uupysulnxtwke8erwm.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6569d77fe92a1778dd88de5e"
+  },
+  "markName": "Mercedes",
+  "slug": "motor-mercedes-22-cdi-651xxx-6569d77fe92a1778dd88de5e",
+  "name": "Motor Mercedes 2.2, CDI 88-127 KW, 651.xxx",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Sprinter\n\nrok výroby:2009-2016\n",
+  "price": 85000,
+  "createdAt": {
+    "$date": "2023-12-01T12:54:23.753Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:26:49.848Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561316/cudhp9jkaxw1mo14tldu.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561316/jwuucb6zdkrgsvmluvg1.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561316/tpahywlkipfolgla1v81.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561317/w71t8hiqhna796rvtqni.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6569d807e92a1778dd88de5f"
+  },
+  "markName": "Opel",
+  "slug": "motor-opel-20-cdti-a20dth-6569d807e92a1778dd88de5f",
+  "name": "Motor Opel 2.0, CDTI 118 KW, kód motoru- A20DTH,A20DTJ,A20DT",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Insignia, Astra J \n\nrok výroby:2004-2014",
+  "price": 40000,
+  "createdAt": {
+    "$date": "2023-12-01T12:56:39.377Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-20T12:48:53.941Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435383/emrqn8ssf9yi5ltrjjw9.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435383/geslircksupsvuly08cf.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435383/cvpp6idhmjcw6pquf3mn.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435383/eg6g7xlk49dyjpgw4bxz.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435384/ri3s51n7jjqog4lfrgtv.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6569d84be92a1778dd88de60"
+  },
+  "markName": "Renault",
+  "slug": "motor-renault-20-dci-m9r-6569d84be92a1778dd88de60",
+  "name": "Motor Renault 2.3 dCI 16V 103-147 KW EU6, kód motoru- M9T",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Master, Movano\n\nrok výroby:2016-2022",
+  "price": 70000,
+  "createdAt": {
+    "$date": "2023-12-01T12:57:47.264Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:24:57.597Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435454/cykwyjqohxshfgmzml94.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435453/lmdhfbe33kyea7utne0s.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435454/mhscpql3ubomfzc44etx.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435455/b0xttdjbs9um16hj6muj.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435456/q2x9kl8cgwkhjckpvy3n.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6569d8b41dbab8ee66ec660d"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-volkswagen-20-tdi-csh-6569d8b41dbab8ee66ec660d",
+  "name": "Motor Volkswagen 2.0 Bi-TDI 132 KW, kód motoru-CSH",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-VW Amarok\n\nrok výroby:2010-2022",
+  "price": 65000,
+  "createdAt": {
+    "$date": "2023-12-01T12:59:32.170Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:21:58.743Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435558/uamsk64fcnm5qluzibxf.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435558/u29hplzbp2chwhnhemo6.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435558/hnjlkctxbtxjl278c1em.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435558/apsw9wdegtheuuldugiq.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435559/qvro0yk7fgbdjxbmnvkh.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6569d9981dbab8ee66ec660e"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-volkswagen-20-tdi-dfm-6569d9981dbab8ee66ec660e",
+  "name": "Motor Volkswagen 2.0, TDI 135 KW, kód motoru-DFM,CUWA",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-VW Sharan, Seat Alhambra\n\nrok výroby:2015-2017",
+  "price": 70000,
+  "createdAt": {
+    "$date": "2023-12-01T13:03:20.359Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:22:25.511Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435770/ic7ktomp90vjy1gp4aq9.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435770/xpmztcnlnwmcoeqachzo.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435771/d9qmfxax7rws2bhaadve.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435770/jfjcktbwzctlphpbwm0w.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435772/kod1obk1dccgy1gnofr3.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6569da331dbab8ee66ec660f"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-volkswagen-19-bls-6569da331dbab8ee66ec660f",
+  "name": "Motor Volkswagen 1.9 TDI 74-77 KW, kód motoru-BXE,BKC,BRU,BXF,AVQ",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Škoda Octavia II; Superb II, VW Golf V; Touran 1T; Jetta III; Passat B6; Audi A3 8P; Seat Altea 5P; Leon 1P; Toledo III\n\nrok výroby:2004-2013",
+  "price": 22000,
+  "createdAt": {
+    "$date": "2023-12-01T13:05:55.395Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:22:53.394Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435930/caqkvdxpgewyoan41vqn.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435930/u0ljdsfmyoizxhkvouxg.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435930/atb5qel5uvx6bh22doub.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435943/km6s20cdd9gvbcflvcdb.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435943/lgc9ugt4uv5ou6yeqqkl.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701435943/dfdz0jdxtwlottx3v0bc.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "656dfd90c4ffb8d2116f14ed"
+  },
+  "markName": "BMW",
+  "slug": "motor-bmw-20d-n47-656dfd90c4ffb8d2116f14ed",
+  "name": "Motor BMW 2.0D 105-135 KW, kód motoru-N47",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\nmodely aut-E81, E87, E82, E90, E91, E92, E60, E61, E83",
+  "price": 80000,
+  "createdAt": {
+    "$date": "2023-12-04T16:25:52.726Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T12:46:22.633Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701707062/lxxnt0r3awm6v8vkjvtm.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701707050/qxlxddnhvhxzxo0zybrd.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701707067/xeeg906ndjb0kfmxed5l.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701707069/svm1mcausxi6kmhey1yy.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701707085/ml4w5syvtmujqw4uta3o.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1701707089/nkvjjfvki3kmblqllfkd.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "670651dcc7b3d820245bd86e"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-volkswagen-20-tdi-caa-670651dcc7b3d820245bd86e",
+  "name": "Motor Volkswagen 2.0 TDI 103 KW, kód motoru-CAA,CAAA,CAAC,CAAB",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Transporter, Multivan\n\nrok výroby:2004-2015\n\n",
+  "price": 60000,
+  "createdAt": {
+    "$date": "2024-10-09T09:50:20.057Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:23:18.979Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467414/vihcty4yzfaa0dmoniso.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467414/zdigbekv8ny5ytii7cfs.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467414/kkelsxopfck66xbpdbvf.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467414/miyh06ydolixt2oh5cnc.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467414/leh1mdrwdpv6c4dzfwos.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "670652c9c7b3d820245bd86f"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-volkswagen-19-bls-670652c9c7b3d820245bd86f",
+  "name": "Motor Volkswagen 1.9 TDI 77 KW, kód motoru-BLS",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Škoda Octavia II; VW Golf V; Touran 1T; Jetta III; Passat B6; Audi A3 8P; Seat Altea 5P; Leon 1P; Toledo III\n\nrok výroby:2005-2010",
+  "price": 25000,
+  "createdAt": {
+    "$date": "2024-10-09T09:54:17.495Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:23:43.336Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467653/l079oyd71x0gaoxqyauq.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467653/lsyfy64eqe3ofamfhnrf.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467654/ggu9cjd6mayfjalyrpn2.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467654/lajnsf5r622h1sfjwij3.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467653/ega4fknashxenmuubjv9.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "670653d3c7b3d820245bd870"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-volkswagen-20-tdi-bmmbmp-670653d3c7b3d820245bd870",
+  "name": "Motor Volkswagen 2.0 TDI 103 KW, kód motoru-BMM,BMP",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-VW Passat B6, Škoda Superb II\n\nrok výroby:2005-2017\n\n",
+  "price": 25000,
+  "createdAt": {
+    "$date": "2024-10-09T09:58:43.390Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:24:05.262Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467912/mlbhsgp1hljooltyzwx0.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467913/fkik2ay2yyooblawugmx.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467913/lbzla80nxwxcrcuacclo.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467913/vvvhlx8fgx2ijnnwttwo.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728467913/ixqahq3vapje4lbxrsnn.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67065f86fac34a8b0dd72b9b"
+  },
+  "markName": "Volkswagen",
+  "slug": "motor-volkswagen-20-tdi-cupacunacupcun-67065f86fac34a8b0dd72b9b",
+  "name": "Motor Volkswagen 2.0, TDI 135 KW, kod motoru-CUPA,CUNA,CUP,CUN",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-VW Passat B8, Škoda Octavia III, Seat Leon (5f)\n\nrok výroby:2013-2017",
+  "price": 70000,
+  "createdAt": {
+    "$date": "2024-10-09T10:48:38.083Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:24:33.586Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728472776/phb61y20thvgmkhogp1a.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728472866/ewp07rbobo662wbcdcq2.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728472876/mns4gbjp3g1kovh5np5l.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728472887/wozjdsvjrurtypsch5rd.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728472895/sqngt8f86a45vpqvwket.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728472903/w35d18e0kgz3h4nsvhhl.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728472910/jhdtfq2uhkjwtkvjrvzv.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67066a537405b95617c9b825"
+  },
+  "markName": "Mercedes",
+  "slug": "motor-mercedes-22-cdi-646xxx-67066a537405b95617c9b825",
+  "name": "Motor Mercedes 2.2, CDI 65-125 KW, 646.xxx",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Sprinter, C,E,S,M,GL-class, Vito, Viano\n\nrok výroby:2003-2010",
+  "price": 65000,
+  "createdAt": {
+    "$date": "2024-10-09T11:34:43.151Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:27:33.618Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561182/xcnkdzct81znlntxymcn.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561182/rx6qzpmrhnpsprmyyy6i.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561182/gdup1anm3puh7b1rwair.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561182/u64qndyqfe4fvccmzbxg.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561182/jrehc8u3bdnrd78fpmwy.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67066ac67405b95617c9b826"
+  },
+  "markName": "Mercedes",
+  "slug": "motor-mercedes-22-cdi-654xxx-67066ac67405b95617c9b826",
+  "name": "Motor Mercedes 2.2, CDI 88-127 KW, 654.xxx",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-C (W205), E-Class (W213), Vito/V-Class, GLE, GLS, A-Claas, B-Class\n\nrok výroby:2016-2023",
+  "price": 95000,
+  "createdAt": {
+    "$date": "2024-10-09T11:36:38.873Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:27:56.173Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561425/ayyezyf3m3uox4ifm4g6.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561425/znjw4p0ydehmoucitudj.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561425/g8caysblgyevncr3i8tj.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561425/s4agufybm6hi2eabztt3.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728561426/rfslrne6msjvjemkss9m.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67066d467405b95617c9b827"
+  },
+  "markName": "Ford",
+  "slug": "motor-transit-22-tdci-drf5-drff-4h03-67066d467405b95617c9b827",
+  "name": "Motor Transit 2.2 TDCI 63-114 KW, kód motoru DRF5, DRFF, 4H03",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Transit Custom\n\nrok výroby:2011-2018\n\n",
+  "price": 60000,
+  "createdAt": {
+    "$date": "2024-10-09T11:47:18.658Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:28:21.803Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728474400/r4odwthurz0c66gbqqir.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "670672f70ea3777f683600ef"
+  },
+  "markName": "Fiat",
+  "slug": "motor-fiat-ducato-30-jtd-euro-5-670672f70ea3777f683600ef",
+  "name": "Motor Fiat Ducato 3.0 JTD 16V 107-130 KW, EU5-kód motoru-F1CFL411, F1CFL411H, F1CE3481E",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n \nmodely aut-Ducato, Peugeot Boxer, Citroen Jumper, Iveco Daily\n\nrok výroby:2011-2018",
+  "price": 65000,
+  "createdAt": {
+    "$date": "2024-10-09T12:11:35.976Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:32:06.232Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728475875/pps1wl6h3mgx037bss2i.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728475875/rr8uau9yxjx9eg7omtsu.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728475875/pftjxjbriw2mcxpuqwz0.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728475876/ivq6xbippu2m9raupbpv.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "670673580ea3777f683600f0"
+  },
+  "markName": "Fiat",
+  "slug": "motor-fiat-ducato-30-jtd-euro-4-670673580ea3777f683600f0",
+  "name": "Motor Fiat Ducato 3.0 JTD 16V 122 KW, EU4, kód motoru  F1CEO481",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n \nmodely aut-Ducato, Peugeot Boxer, Citroen Jumper, Iveco Daily\n\nrok výroby:2006-2011",
+  "price": 65000,
+  "createdAt": {
+    "$date": "2024-10-09T12:13:12.891Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:32:28.027Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728475986/qyxurbytjj3p6iqnowsd.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728475986/kskaa9vne6k7jlrbirzk.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728475986/b9n1rbirampwondlzqpw.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728475986/rabt26ja4dqnpc31hwi5.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "670793535fc8fcb6382265f3"
+  },
+  "markName": "Ford",
+  "slug": "motor-transit-24-tdci-74104-kw-eu-4-kd-motoru-jxfa-phfah9fb-670793535fc8fcb6382265f3",
+  "name": "Motor Transit 2.4 TDCI 74-104 KW,  EU 4, kód motoru JXFA, PHFA,H9FB",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Transit\n\nrok výroby:2006-2011",
+  "price": 55000,
+  "createdAt": {
+    "$date": "2024-10-10T08:41:55.837Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:28:48.114Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728549703/c6jly5nsnauopcpwdk6u.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67079ac4be8ca575aa16584e"
+  },
+  "markName": "Ford",
+  "slug": "motor-ford-20bluehdi-96132-kwue6-kd-motorublfa-67079ac4be8ca575aa16584e",
+  "name": "Motor FORD 2.0,BlueHDI 96-132 KW,UE6, kód motoru-BLFA",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Transit\n\nrok výroby:2016-2020",
+  "price": 80000,
+  "createdAt": {
+    "$date": "2024-10-10T09:13:40.621Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:29:39.056Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728551599/oqd8xpod85yyndzhbzyq.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728551599/vrmlkwwee4fmt3pdersd.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728551599/apwnn84kleehqfqadzep.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728551599/ncfnbfedbzn8qr4uhzob.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728551599/saxgmpo5by6tzygqh796.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67079ebf5fc8fcb6382265f4"
+  },
+  "markName": "Renault",
+  "slug": "motor-renault-23-dci-16v-74125-kw-eu5-kd-motoru-m9t702-67079ebf5fc8fcb6382265f4",
+  "name": "Motor Renault 2.3 dCI 16V 74-125 KW EU5, kód motoru- M9T702",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Master, Movano, NV400\n\nrok výroby:2010-2018",
+  "price": 70000,
+  "createdAt": {
+    "$date": "2024-10-10T09:30:39.586Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:25:24.175Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728552629/gmmyipkcjnm8julwlhg4.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728552629/txyxizwsppeu2qkju4yg.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728552629/ysu55tf6sevrbw1derv6.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728552629/g0gkfcsiqglhyjtz5oct.webp",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728552629/fzhsp0tnenpx5tnsq6kz.webp"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707a500a4843d6658c21012"
+  },
+  "markName": "Fiat",
+  "slug": "motor-fiat-ducato-20-d-85-kw-eu5-kd-motoru250a1000-6707a500a4843d6658c21012",
+  "name": "Motor Fiat Ducato 2.0 D 85 KW EU5, kód motoru-250A1000",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Ducato\n\nrok výroby:2012-2020",
+  "price": 50000,
+  "createdAt": {
+    "$date": "2024-10-10T09:57:20.438Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:32:57.411Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728554232/egqflmzyi0lyt4japgfu.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728554232/as5ozo62e88rzzhb6edl.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728554232/pgimfqldfgcq3n3slbg3.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728554232/ujnsvxmcwt4gwizppzfm.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728554232/lkaksphdebyug27rqthb.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707a63ba4843d6658c21013"
+  },
+  "markName": "Fiat",
+  "slug": "motor-fiat-13-jtd-66-kw-kd-motoru263a2000-a13dte-199a9000-330a1000--6707a63ba4843d6658c21013",
+  "name": "Motor Fiat  1.3 JTD 66 KW, kód motoru-263A2000. A13DTE, 199A9000, 330A1000 ",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Doblo, Fiorino, Qubo, 500, Grade Punto, Evo Punto, Panda, Opel Astra J, Combo, Corsa D\n\nrok výroby:2010-2016\n",
+  "price": 60000,
+  "createdAt": {
+    "$date": "2024-10-10T10:02:35.793Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:33:21.623Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728554553/f8ypvvyhumdfw3tocwen.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728554553/cf16hjvdiaqb6fh8p6sh.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728554553/d4kpmfpgh7oeuz93xmvr.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707a92ea4843d6658c21014"
+  },
+  "markName": "Fiat",
+  "slug": "motor-fiat-ducato-23-jtd-95110-kw-eu6-kd-motoruf1agl411af1agl411bf1agl411cf1agl411d-6707a92ea4843d6658c21014",
+  "name": "Motor Fiat Ducato 2.3 JTD 95-110 KW EU6, kód motoru-F1AGL411A,F1AGL411B,F1AGL411C,F1AGL411D",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Ducato, Iveco Daily\n\nrok výroby:2016-2023",
+  "price": 60000,
+  "createdAt": {
+    "$date": "2024-10-10T10:15:10.719Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:33:53.017Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555266/iwkzix2ngvcc4fiuobsz.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555266/teugkqq9v2w3qrlzzsjg.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555266/dkv5eoomvyxiefdvpcje.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555266/qpf51bmxws8jkwrt0io2.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555275/s7wf06gwu4hohbkunr2q.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555275/ofnefsdfevudjmn8khkc.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707aaa93c457d683c0accf9"
+  },
+  "markName": "Fiat",
+  "slug": "motor-fiat-ducato-23-jtd-95110-kw-eu5-kd-motoruf1ae3481-6707aaa93c457d683c0accf9",
+  "name": "Motor Fiat Ducato 2.3 JTD 95-110 KW EU5, kód motoru-F1AE3481",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Ducato, Iveco Daily\n\nrok výroby:2011-2017",
+  "price": 60000,
+  "createdAt": {
+    "$date": "2024-10-10T10:21:29.918Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:34:13.146Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555677/qf69nlb8160xshhhocbz.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555677/u2lrlaab9gidybt1joxb.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555677/sekeaye10ngzh7wdkdjs.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555677/yocur0qijb2pmkd1bb9e.png",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728555677/xjzcyrgfntfo6vn7pa4q.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707acdf3c457d683c0accfa"
+  },
+  "markName": "Ford",
+  "slug": "motor-ford-10-ecoboost-7492-kw-kd-motorum1dam2dam1jasfjasfjbm1ddm1je-6707acdf3c457d683c0accfa",
+  "name": "Motor Ford 1.0 Ecoboost 74-92 KW, kód motoru-M1DA,M2DA,M1JA,SFJA,SFJB,M1DD,M1JE",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Focus, Fiesta, Transit Connect, B-Max, C-Max, Ecosport\n\nrok výroby:2010-2019",
+  "price": 55000,
+  "createdAt": {
+    "$date": "2024-10-10T10:30:55.785Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:30:03.386Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728556135/pfumbrghhmcksfsfbrks.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728556136/qvjaiw1dhtz9vidq6sai.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728556136/ckupzh4isrtsybzngqwb.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728556136/nltdrht0mzp8iogcwc8d.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728556142/cuizaqe6fxqifhpck0qr.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728556143/zq0i05q0cd4sbxogkeog.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728556143/emcrsekuu7vzgcokucdy.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707bb6fc084e2525651d817"
+  },
+  "markName": "Ford",
+  "slug": "motor-ford-22-tdci-63114-kw-eu4-kd-motorup8fasrfa-6707bb6fc084e2525651d817",
+  "name": "Motor Ford 2.2 TDCI 63-114 KW EU4, kód motoru-P8FA,SRFA",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Transit\n\nrok výroby:2011-2018",
+  "price": 55000,
+  "createdAt": {
+    "$date": "2024-10-10T11:33:03.517Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:30:59.329Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728559931/fdup2nzmqfbbligx0q08.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728559931/qubrfao1lyejq5fjao8k.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728559931/mkpxidlxda810gv6lsxq.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728559931/p3gk2htmy05zgqikauaj.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728559945/mwkq1x44g4353zquzr8t.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728559945/uwl65pwdw6g2rvgpuhgo.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707bc38c084e2525651d818"
+  },
+  "markName": "Ford",
+  "slug": "motor-ford-22-tdci-63114-kw-eu5-kd-motorudrfacyrbcyfa-6707bc38c084e2525651d818",
+  "name": "Motor Ford 2.2 TDCI 63-114 KW EU5, kód motoru-DRFA,CYRB,CYFA",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Transit\n\nrok výroby:2011-2018",
+  "price": 55000,
+  "createdAt": {
+    "$date": "2024-10-10T11:36:24.283Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:31:30.046Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560166/g046m2aasmsi7jhp2p6w.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560166/uxqqtnwe5es6oyeik5y7.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560166/bci8em0usb4ojatbzzs0.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560167/romg8b4668uojpoch5ji.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560174/tujioiyarlj7b8m51pcf.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560174/rpj7a4np1y0upqy16iwy.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707bca4c084e2525651d819"
+  },
+  "markName": "Citroën",
+  "slug": "motor-citron-22-tdci-63114-kw-eu4-kd-motoru4hv4hu-6707bca4c084e2525651d819",
+  "name": "Motor Citroën 2.2 TDCI 63-114 KW EU4, kód motoru-4HV,4HU",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Jumper",
+  "price": 55000,
+  "createdAt": {
+    "$date": "2024-10-10T11:38:12.828Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T13:35:02.733Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560278/enfyyfn6huqgdxxbayi4.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560279/vjtpk1e3xrv2qdfqlu0w.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560279/fwgt7jsc2ps0mlcyyewn.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560279/o7doqta0vu6ncbi5qk9d.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560289/iq8dbvcrftlwk7l24csu.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6707bd21c084e2525651d81a"
+  },
+  "markName": "Citroën",
+  "slug": "motor-citron-22-tdci-63114-kw-eu5-kd-motoru4hh-4hj-4hg4hm-6707bd21c084e2525651d81a",
+  "name": "Motor Citroën 2.2 TDCI 63-114 KW EU5, kód motoru-4HH, 4HJ, 4HG,4HM",
+  "description": "Po profesionální renovaci:\n• hlava motoru\n• válce bloku (broušené a testované na těsnost)\n• nové olejové čerpadlo\n• nová ojniční ložiska\n• nová hlavní ložiska na klice\n• nové pístní kroužky\n• nové těsnění motoru\n\nCena je s vrácením Vašeho starého motoru bez díry v bloku.\n\nmodely aut-Jumper",
+  "price": 55000,
+  "createdAt": {
+    "$date": "2024-10-10T11:40:17.839Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T12:45:35.479Z"
+  },
+  "images": [
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560402/nxwxxvwnfedxcdm48ftl.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560402/ftlkw7ia2yp9iqn2oqrl.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560402/ucvvarhivdydxowgdn3z.jpg",
+    "https://res.cloudinary.com/dxqnem4vn/image/upload/v1728560402/jnrst3fzjortz7v2zsjd.jpg"
+  ]
+}]

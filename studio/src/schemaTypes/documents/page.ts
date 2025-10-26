@@ -44,15 +44,41 @@ export const page = defineType({
       name: 'pageBuilder',
       title: 'Page builder',
       type: 'array',
-      of: [{type: 'callToAction'}, {type: 'infoSection'}],
+      of: [
+        {type: 'callToAction'},
+        {type: 'infoSection'},
+        {type: 'heroSection'},
+        {type: 'productShowcase'},
+        {type: 'contactSection'},
+        {type: 'richTextSection'},
+        {type: 'howItWorksSection'},
+        {type: 'homepageTeaserSection'},
+        {type: 'benefitsSection'},
+      ],
       options: {
         insertMenu: {
           // Configure the "Add Item" menu to display a thumbnail preview of the content type. https://www.sanity.io/docs/array-type#efb1fe03459d
           views: [
             {
               name: 'grid',
-              previewImageUrl: (schemaTypeName) =>
-                `/static/page-builder-thumbnails/${schemaTypeName}.webp`,
+              previewImageUrl: (schemaTypeName) => {
+                // Check if SVG exists first, then fallback to WebP
+                const svgPath = `/static/page-builder-thumbnails/${schemaTypeName}.svg`
+                const webpPath = `/static/page-builder-thumbnails/${schemaTypeName}.webp`
+
+                // For heroSection, productShowcase, richTextSection, howItWorksSection, homepageTeaserSection, and benefitsSection, use SVG, others use WebP
+                if (
+                  schemaTypeName === 'heroSection' ||
+                  schemaTypeName === 'productShowcase' ||
+                  schemaTypeName === 'richTextSection' ||
+                  schemaTypeName === 'howItWorksSection' ||
+                  schemaTypeName === 'homepageTeaserSection' ||
+                  schemaTypeName === 'benefitsSection'
+                ) {
+                  return svgPath
+                }
+                return webpPath
+              },
             },
           ],
         },

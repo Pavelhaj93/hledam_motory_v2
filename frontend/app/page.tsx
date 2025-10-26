@@ -1,18 +1,51 @@
 import {Suspense} from 'react'
 import Link from 'next/link'
 import {PortableText} from '@portabletext/react'
+import type {Metadata} from 'next'
+import {ExternalLink} from 'lucide-react'
 
-import {AllPosts} from '@/app/components/Posts'
 import GetStartedCode from '@/app/components/GetStartedCode'
 import SideBySideIcons from '@/app/components/SideBySideIcons'
-import {settingsQuery} from '@/sanity/lib/queries'
+import BlockRenderer from '@/app/components/BlockRenderer'
+import {settingsQuery, homepageQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
 
-export default async function Page() {
-  const {data: settings} = await sanityFetch({
-    query: settingsQuery,
+export async function generateMetadata(): Promise<Metadata> {
+  const {data: homepage} = await sanityFetch({
+    query: homepageQuery,
+    stega: false,
   })
 
+  return {
+    title: homepage?.seo?.metaTitle || 'Homepage',
+    description: homepage?.seo?.metaDescription || 'Welcome to our engine parts catalog',
+  }
+}
+
+export default async function Page() {
+  const [{data: settings}, {data: homepage}] = await Promise.all([
+    sanityFetch({query: settingsQuery}),
+    sanityFetch({query: homepageQuery}),
+  ])
+
+  // If homepage content exists, use page builder
+  if (homepage?.pageBuilder && homepage.pageBuilder.length > 0) {
+    return (
+      <div>
+        {homepage.pageBuilder.map((block: any, index: number) => (
+          <BlockRenderer
+            key={block._key}
+            index={index}
+            block={block}
+            pageId={homepage._id}
+            pageType={homepage._type}
+          />
+        ))}
+      </div>
+    )
+  }
+
+  // Fallback to original homepage content if no page builder content exists
   return (
     <>
       <div className="relative">
@@ -57,14 +90,7 @@ export default async function Page() {
                   rel="noopener noreferrer"
                 >
                   Sanity Documentation
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4 ml-1 inline"
-                    fill="currentColor"
-                  >
-                    <path d="M10 6V8H5V19H16V14H18V20C18 20.5523 17.5523 21 17 21H4C3.44772 21 3 20.5523 3 20V7C3 6.44772 3.44772 6 4 6H10ZM21 3V12L17.206 8.207L11.2071 14.2071L9.79289 12.7929L15.792 6.793L12 3H21Z"></path>
-                  </svg>
+                  <ExternalLink className="w-4 h-4 ml-1 inline" />
                 </Link>
               </div>
             </div>
@@ -73,9 +99,7 @@ export default async function Page() {
       </div>
       <div className="border-t border-gray-100 bg-gray-50">
         <div className="container">
-          <aside className="py-12 sm:py-20">
-            <Suspense>{await AllPosts()}</Suspense>
-          </aside>
+          <aside className="py-12 sm:py-20">{/* <Suspense>{await AllPosts()}</Suspense> */}</aside>
         </div>
       </div>
     </>

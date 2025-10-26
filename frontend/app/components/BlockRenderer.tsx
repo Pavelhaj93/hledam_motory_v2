@@ -2,6 +2,13 @@ import React from 'react'
 
 import Cta from '@/app/components/Cta'
 import Info from '@/app/components/InfoSection'
+import HeroSection from '@/app/components/HeroSection'
+import ProductShowcase from '@/app/components/ProductShowcase'
+import ContactSection from '@/app/components/ContactSection'
+import RichTextSection from '@/app/components/RichTextSection'
+import HowItWorksSection from '@/app/components/HowItWorksSection'
+import HomepageTeaserSection from '@/app/components/HomepageTeaserSection'
+import BenefitsSection from '@/app/components/BenefitsSection'
 import {dataAttr} from '@/sanity/lib/utils'
 
 type BlocksType = {
@@ -23,6 +30,13 @@ type BlockProps = {
 const Blocks: BlocksType = {
   callToAction: Cta,
   infoSection: Info,
+  heroSection: HeroSection,
+  productShowcase: ProductShowcase,
+  contactSection: ContactSection,
+  richTextSection: RichTextSection,
+  howItWorksSection: HowItWorksSection,
+  homepageTeaserSection: HomepageTeaserSection,
+  benefitsSection: BenefitsSection,
 }
 
 /**

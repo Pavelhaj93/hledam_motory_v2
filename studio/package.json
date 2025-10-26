@@ -13,11 +13,14 @@
     "deploy": "sanity deploy",
     "dev": "sanity dev",
     "extract-types": "sanity schema extract --enforce-required-fields",
+    "migrate-brands": "node migrate-brands.js",
+    "migrate-brands-json": "node migrate-brands-from-json.js",
     "start": "sanity start",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@sanity/assist": "^5.0.0",
+    "@sanity/client": "^6.0.0",
     "@sanity/icons": "^3.7.4",
     "@sanity/vision": "^4.5.0",
     "date-fns": "^4.1.0",

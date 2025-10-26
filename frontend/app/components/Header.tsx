@@ -1,54 +1,220 @@
-import Link from 'next/link'
-import {settingsQuery} from '@/sanity/lib/queries'
-import {sanityFetch} from '@/sanity/lib/live'
+'use client'
 
-export default async function Header() {
-  const {data: settings} = await sanityFetch({
-    query: settingsQuery,
-  })
+import {useState} from 'react'
+import Link from 'next/link'
+import {Mail, Phone, Menu, Cross, X} from 'lucide-react'
+import Image from 'next/image'
+import BrandSelector from './BrandSelector'
+import {AllBrandsWithLogosQueryResult} from '@/sanity.types'
+import {Button} from './ui/button'
+
+interface HeaderProps {
+  settings?: {
+    title?: string
+  }
+  brands: AllBrandsWithLogosQueryResult
+}
+
+// Client-side Header Component
+export default function Header({settings, brands}: HeaderProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <header className="fixed z-50 h-24 inset-0 bg-white/80 flex items-center backdrop-blur-lg">
-      <div className="container py-6 px-2 sm:px-6">
-        <div className="flex items-center justify-between gap-5">
-          <Link className="flex items-center gap-2" href="/">
-            <span className="text-lg sm:text-2xl pl-2 font-semibold">
-              {settings?.title || 'Sanity + Next.js'}
-            </span>
-          </Link>
+    <header className="bg-white shadow-sm border-b sticky top-0 z-40">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-20 justify-between items-center">
+          {/* Logo */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image
+                src="/images/logo.png"
+                alt="Logo"
+                width={240}
+                height={60}
+                className="h-20 w-auto hover:scale-105 transition-transform"
+              />
+            </Link>
+          </div>
 
-          <nav>
-            <ul
-              role="list"
-              className="flex items-center gap-4 md:gap-6 leading-5 text-xs sm:text-base tracking-tight font-mono"
+          {/* Contact Info - Hidden on mobile */}
+          <div className="hidden md:flex items-center space-x-6  text-gray-600">
+            <a
+              href="mailto:info@hledammotory.cz"
+              className="flex items-center space-x-2 hover:text-red-600"
             >
-              <li>
-                <Link href="/about" className="hover:underline">
-                  About
-                </Link>
-              </li>
+              <Mail className="size-6 text-red-600" />
+              <span>info@hledammotory.cz</span>
+            </a>
+            <a href="tel:+420792644755" className="flex items-center space-x-2 hover:text-red-600">
+              <Phone className="size-6 text-red-600" />
+              <span>+420 792 644 755</span>
+            </a>
+          </div>
 
-              <li className="sm:before:w-[1px] sm:before:bg-gray-200 before:block flex sm:gap-4 md:gap-6">
-                <Link
-                  className="rounded-full flex gap-4 items-center bg-black hover:bg-blue focus:bg-blue py-2 px-4 justify-center sm:py-3 sm:px-6 text-white transition-colors duration-200"
-                  href="https://github.com/sanity-io/sanity-template-nextjs-clean"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="whitespace-nowrap">View on GitHub</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="hidden sm:block h-4 sm:h-6"
+          {/* Navigation - Hidden on mobile */}
+          <nav className="hidden lg:flex items-center space-x-6">
+            <Link href="/" className="text-gray-900 hover:text-red-600 font-medium">
+              Domů
+            </Link>
+            <Link href="/o-nas" className="text-gray-900 hover:text-red-600 font-medium">
+              O nás
+            </Link>
+            <div className="relative group">
+              <Link href="/katalog" className="text-gray-900 hover:text-red-600 font-medium">
+                Katalog
+              </Link>
+              <div className="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg border rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="py-2">
+                  <Link
+                    href="/katalog/repasovane-motory"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    <path d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"></path>
-                  </svg>
-                </Link>
-              </li>
-            </ul>
+                    Repasované motory
+                  </Link>
+                  <Link
+                    href="/katalog/turbodmychadla"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Turbodmychadla
+                  </Link>
+                  <Link
+                    href="/katalog/prevodovky"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Převodovky
+                  </Link>
+                  <Link
+                    href="/katalog/motorove-hlavy"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Motorové hlavy
+                  </Link>
+                  <Link
+                    href="/katalog/stare-motory"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Staré motory
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <Link href="/kontakt">
+              <Button size="lg">Kontakt</Button>
+            </Link>
           </nav>
+
+          {/* Mobile menu button */}
+          <div className="lg:hidden">
+            {isMobileMenuOpen ? (
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-gray-900 hover:text-red-600"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-gray-900 hover:text-red-600"
+              >
+                <Menu className="h-6 w-6" />
+              </button>
+            )}
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden border-t border-gray-200 py-4">
+            <div className="space-y-4">
+              <Link
+                href="/"
+                className="block text-gray-900 hover:text-red-600 font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Domů
+              </Link>
+              <Link
+                href="/katalog"
+                className="block text-gray-900 hover:text-red-600 font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Katalog
+              </Link>
+              <div className="pl-4 space-y-2">
+                <Link
+                  href="/katalog/repasovane-motory"
+                  className="block text-sm text-gray-600 hover:text-red-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Repasované motory
+                </Link>
+                <Link
+                  href="/katalog/turbodmychadla"
+                  className="block text-sm text-gray-600 hover:text-red-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Turbodmychadla
+                </Link>
+                <Link
+                  href="/katalog/prevodovky"
+                  className="block text-sm text-gray-600 hover:text-red-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Převodovky
+                </Link>
+                <Link
+                  href="/katalog/motorove-hlavy"
+                  className="block text-sm text-gray-600 hover:text-red-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Motorové hlavy
+                </Link>
+                <Link
+                  href="/katalog/stare-motory"
+                  className="block text-sm text-gray-600 hover:text-red-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Staré motory
+                </Link>
+              </div>
+
+              {/* Popular Brands */}
+              <div className="pt-4 border-t border-gray-200">
+                <h3 className="text-sm font-medium text-gray-900 mb-2">Populární značky</h3>
+                <BrandSelector
+                  brands={brands}
+                  layout="compact"
+                  showLogos={false}
+                  maxBrands={6}
+                  className="text-sm"
+                />
+              </div>
+
+              {/* Contact info in mobile menu */}
+              <div className="pt-4 border-t border-gray-200 space-y-2">
+                <a
+                  href="mailto:info@hledammotory.cz"
+                  className="flex items-center space-x-2 text-sm text-gray-600 hover:text-red-600"
+                >
+                  <Mail className="h-4 w-4" />
+                  <span>info@hledammotory.cz</span>
+                </a>
+                <a
+                  href="tel:+420123456789"
+                  className="flex items-center space-x-2 text-sm text-gray-600 hover:text-red-600"
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>+420 123 456 789</span>
+                </a>
+              </div>
+
+              <Link href="/kontakt" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button size="lg">Kontakt</Button>
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   )
