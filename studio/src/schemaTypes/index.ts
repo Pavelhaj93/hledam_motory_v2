@@ -10,6 +10,7 @@ import {turbodmychadla} from './documents/turbodmychadla'
 import {callToAction} from './objects/callToAction'
 import {infoSection} from './objects/infoSection'
 import {heroSection} from './objects/heroSection'
+import heroSectionCarousel from './objects/heroSectionCarousel'
 import {productShowcase} from './objects/productShowcase'
 import {contactSection} from './objects/contactSection'
 import {richTextSection} from './objects/richTextSection'
@@ -43,6 +44,7 @@ export const schemaTypes = [
   infoSection,
   callToAction,
   heroSection,
+  heroSectionCarousel,
   productShowcase,
   contactSection,
   richTextSection,

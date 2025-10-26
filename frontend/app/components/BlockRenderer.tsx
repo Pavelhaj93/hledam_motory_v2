@@ -3,6 +3,7 @@ import React from 'react'
 import Cta from '@/app/components/Cta'
 import Info from '@/app/components/InfoSection'
 import HeroSection from '@/app/components/HeroSection'
+import HeroSectionCarousel from '@/app/components/HeroSectionCarousel'
 import ProductShowcase from '@/app/components/ProductShowcase'
 import ContactSection from '@/app/components/ContactSection'
 import RichTextSection from '@/app/components/RichTextSection'
@@ -31,6 +32,7 @@ const Blocks: BlocksType = {
   callToAction: Cta,
   infoSection: Info,
   heroSection: HeroSection,
+  heroSectionCarousel: HeroSectionCarousel,
   productShowcase: ProductShowcase,
   contactSection: ContactSection,
   richTextSection: RichTextSection,

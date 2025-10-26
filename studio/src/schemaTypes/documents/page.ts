@@ -48,6 +48,7 @@ export const page = defineType({
         {type: 'callToAction'},
         {type: 'infoSection'},
         {type: 'heroSection'},
+        {type: 'heroSectionCarousel'},
         {type: 'productShowcase'},
         {type: 'contactSection'},
         {type: 'richTextSection'},
@@ -66,9 +67,10 @@ export const page = defineType({
                 const svgPath = `/static/page-builder-thumbnails/${schemaTypeName}.svg`
                 const webpPath = `/static/page-builder-thumbnails/${schemaTypeName}.webp`
 
-                // For heroSection, productShowcase, richTextSection, howItWorksSection, homepageTeaserSection, and benefitsSection, use SVG, others use WebP
+                // For heroSection, heroSectionCarousel, productShowcase, richTextSection, howItWorksSection, homepageTeaserSection, and benefitsSection, use SVG, others use WebP
                 if (
                   schemaTypeName === 'heroSection' ||
+                  schemaTypeName === 'heroSectionCarousel' ||
                   schemaTypeName === 'productShowcase' ||
                   schemaTypeName === 'richTextSection' ||
                   schemaTypeName === 'howItWorksSection' ||

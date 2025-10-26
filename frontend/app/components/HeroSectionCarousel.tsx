@@ -1,90 +1,178 @@
 'use client'
 
-import * as React from 'react'
+import React, {useEffect} from 'react'
 import Image from 'next/image'
-import Autoplay from 'embla-carousel-autoplay'
-import {Carousel, CarouselContent, CarouselItem} from '@/app/components/ui/Carousel'
-import {Badge} from '@/app/components/ui/Badge'
-import {BookButton} from '@/app/components/others/BookButton'
-import {HomepagePicturesQueryResult} from '@/sanity.types'
 import {urlForImage} from '@/sanity/lib/utils'
+import ResolvedLink from './ResolvedLink'
+import {Button} from './ui/button'
+import {Carousel, CarouselContent, CarouselItem, type CarouselApi} from './ui/carousel'
+import Autoplay from 'embla-carousel-autoplay'
 
-export default function HeroSectionCarousel({pictures}: {pictures?: HomepagePicturesQueryResult}) {
-  const plugin = React.useRef(Autoplay({delay: 5000, stopOnInteraction: false}))
+type HeroSectionCarouselProps = {
+  block: {
+    _type: 'heroSectionCarousel'
+    headline?: string
+    subheadline?: string
+    description?: string
+    images?: Array<{
+      asset: any
+      alt?: string
+      hotspot?: any
+      _key: string
+    }>
+    primaryButton?: {
+      text?: string
+      link?: any
+    }
+    secondaryButton?: {
+      text?: string
+      link?: any
+    }
+    autoplayDelay?: number
+  }
+}
+
+export default function HeroSectionCarousel({block}: HeroSectionCarouselProps) {
+  const {
+    headline,
+    subheadline,
+    description,
+    images = [],
+    primaryButton,
+    secondaryButton,
+    autoplayDelay = 5000,
+  } = block
+
+  const [api, setApi] = React.useState<CarouselApi>()
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    // Optional: Add any custom carousel behavior here
+  }, [api])
+
+  if (!images || images.length === 0) {
+    return (
+      <section className="relative min-h-[600px] flex items-center text-white bg-gray-900">
+        <div className="relative z-10 container mx-auto px-4 pl-8 md:pl-16 max-w-4xl">
+          {headline && (
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-left">
+              {headline}
+            </h1>
+          )}
+          {subheadline && (
+            <p className="text-xl md:text-2xl mb-6 opacity-90 text-left">{subheadline}</p>
+          )}
+          {description && (
+            <p className="text-lg mb-8 opacity-80 max-w-2xl text-left">{description}</p>
+          )}
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            {primaryButton?.text && primaryButton?.link && (
+              <ResolvedLink link={primaryButton.link}>
+                <Button>{primaryButton.text}</Button>
+              </ResolvedLink>
+            )}
+            {secondaryButton?.text && secondaryButton?.link && (
+              <ResolvedLink link={secondaryButton.link}>
+                <Button variant="outline">{secondaryButton.text}</Button>
+              </ResolvedLink>
+            )}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
-    <section className="relative h-[700px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[600px] overflow-hidden">
       <Carousel
-        plugins={[plugin.current]}
-        className="absolute inset-0 h-screen w-full"
-        opts={{loop: true}}
+        setApi={setApi}
+        className="w-full h-full"
+        opts={{
+          align: 'start',
+          loop: true,
+        }}
+        plugins={[
+          Autoplay({
+            delay: autoplayDelay,
+            stopOnInteraction: false,
+            stopOnMouseEnter: true,
+          }),
+        ]}
       >
-        <CarouselContent className="h-screen">
-          {pictures?.image?.map((src, idx) => (
-            <CarouselItem key={idx} className="relative h-full w-full">
-              <Image
-                src={
-                  urlForImage(src)
-                    ?.height(1600)
-                    .width(2400)
-                    .fit('crop')
-                    .auto('format')
-                    .quality(100)
-                    .url() as string
-                }
-                sizes="100vw"
-                fill
-                alt={src?.alt || 'Medifree'}
-                priority={idx === 0}
-                quality={100}
-                className="object-cover"
-              />
+        <CarouselContent className="h-full">
+          {images.map((image, index) => (
+            <CarouselItem key={image._key || index} className="relative">
+              <div className="relative min-h-[600px] flex items-center justify-center text-white">
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                  <Image
+                    src={urlForImage(image)?.width(1920).height(1080).url() || ''}
+                    alt={image.alt || `Hero image ${index + 1}`}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                  />
+                  <div className="absolute inset-0 bg-black/50" />
+                </div>
+
+                {/* Content - Only show on first slide to avoid duplication */}
+              </div>
             </CarouselItem>
           ))}
-
-          {/* <CarouselItem key={"test"} className="relative h-full w-full">
-            <Image
-              src={
-                urlForImage(pictures?.image[0])
-                  ?.height(700)
-                  .width(1600)
-                  .fit("crop")
-                  .auto("format")
-                  .quality(100)
-                  .url() as string
-              }
-              sizes="100vw"
-              fill
-              alt={"Hero image"}
-              priority
-              quality={100}
-              className="object-cover"
-            />
-          </CarouselItem> */}
         </CarouselContent>
       </Carousel>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/20" />
-
-      {/* Content */}
-      <div className="relative container mx-auto h-full justify-center items-center my-auto px-4 md:px-10 text-center md:text-left text-white pb-10 flex flex-col">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center mt-10">
-          <div className="max-w-3xl">
-            <Badge variant="primary" className="mb-4 inline-block opacity-0 animate-fade-in">
-              Medifree
-            </Badge>
-            <h1 className="text-5xl md:text-6xl leading-tight mb-8 opacity-0 animate-fade-in-up animation-delay-200">
-              Váš prostor pro zdraví a rovnováhu
+      {/* Content overlay for all slides */}
+      <div className="absolute inset-0 z-20 flex items-center  pointer-events-none">
+        <div className="container mx-auto px-4 max-w-5xl">
+          {headline && (
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-left text-white">
+              {headline}
             </h1>
-            <p className="text-lg md:text-xl mb-8 opacity-0 animate-fade-in-up animation-delay-400">
-              Nabízíme celostní terapeutické přístupy, které vás podpoří na cestě k plnohodnotnému
-              životu.
+          )}
+          {subheadline && (
+            <p className="text-xl md:text-2xl mb-6 opacity-90 text-left text-white">
+              {subheadline}
             </p>
-            <div className="opacity-0 animate-fade-in-up animation-delay-600">
-              <BookButton />
-            </div>
+          )}
+          {description && (
+            <p className="text-lg mb-8 opacity-80 max-w-2xl text-left text-white">{description}</p>
+          )}
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 pointer-events-auto">
+            {primaryButton?.text && primaryButton?.link && (
+              <ResolvedLink link={primaryButton.link}>
+                <Button size="lg">{primaryButton.text}</Button>
+              </ResolvedLink>
+            )}
+            {secondaryButton?.text && secondaryButton?.link && (
+              <ResolvedLink link={secondaryButton.link}>
+                <Button variant="outline" size="lg">
+                  {secondaryButton.text}
+                </Button>
+              </ResolvedLink>
+            )}
           </div>
+        </div>
+      </div>
+
+      {/* Carousel indicators */}
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30">
+        <div className="flex space-x-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className="w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-200 cursor-pointer"
+              onClick={() => api?.scrollTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>

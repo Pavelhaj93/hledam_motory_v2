@@ -40,7 +40,7 @@ export default function HeroSection({block}: HeroSectionProps) {
 
   if (imagePosition === 'background') {
     return (
-      <section className="relative min-h-[600px] flex items-center justify-center text-white">
+      <section className="relative min-h-[600px] flex items-center justify-center">
         {/* Background Image */}
         {heroImage && (
           <div className="absolute inset-0 z-0">

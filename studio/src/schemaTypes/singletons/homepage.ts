@@ -49,6 +49,7 @@ export const homepage = defineType({
         {type: 'callToAction'},
         {type: 'infoSection'},
         {type: 'heroSection'},
+        {type: 'heroSectionCarousel'},
         {type: 'productShowcase'},
         {type: 'contactSection'},
         {type: 'richTextSection'},

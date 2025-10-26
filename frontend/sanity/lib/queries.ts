@@ -231,6 +231,29 @@ export const homepageQuery = defineQuery(`
           }
         }
       },
+      _type == "heroSectionCarousel" => {
+        ...,
+        primaryButton {
+          ...,
+          link {
+            ...,
+            _type == "link" => {
+              "page": page->slug.current,
+              "post": post->slug.current
+            }
+          }
+        },
+        secondaryButton {
+          ...,
+          link {
+            ...,
+            _type == "link" => {
+              "page": page->slug.current,
+              "post": post->slug.current
+            }
+          }
+        }
+      },
       _type == "productShowcase" => {
         ...
       },
@@ -339,6 +362,17 @@ export const getPageQuery = defineQuery(`
         }
       },
       _type == "heroSection" => {
+        ...,
+        primaryButton {
+          ...,
+          ${linkFields}
+        },
+        secondaryButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "heroSectionCarousel" => {
         ...,
         primaryButton {
           ...,
