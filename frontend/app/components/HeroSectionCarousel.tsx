@@ -129,7 +129,7 @@ export default function HeroSectionCarousel({block}: HeroSectionCarouselProps) {
 
       {/* Content overlay for all slides */}
       <div className="absolute inset-0 z-20 flex items-center  pointer-events-none">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4 max-w-6xl">
           {headline && (
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-left text-white">
               {headline}
