@@ -25,8 +25,10 @@ export type BenefitsSection = {
     _key: string
   }>
   footerText?: string
-  ctaText?: string
-  ctaLink?: Link
+  primaryButton?: {
+    text?: string
+    link?: Link
+  }
   backgroundImage?: {
     asset?: {
       _ref: string
@@ -143,6 +145,36 @@ export type ProductShowcase = {
   description?: string
   layout?: 'grid' | 'featured' | 'carousel'
   maxProducts?: number
+}
+
+export type HeroSectionCarousel = {
+  _type: 'heroSectionCarousel'
+  headline: string
+  subheadline?: string
+  description?: string
+  images: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+    _key: string
+  }>
+  autoplayDelay?: number
+  primaryButton?: {
+    text: string
+    link: Link
+  }
+  secondaryButton?: {
+    text?: string
+    link?: Link
+  }
 }
 
 export type HeroSection = {
@@ -588,6 +620,9 @@ export type Homepage = {
       } & HeroSection)
     | ({
         _key: string
+      } & HeroSectionCarousel)
+    | ({
+        _key: string
       } & ProductShowcase)
     | ({
         _key: string
@@ -682,6 +717,9 @@ export type Page = {
     | ({
         _key: string
       } & HeroSection)
+    | ({
+        _key: string
+      } & HeroSectionCarousel)
     | ({
         _key: string
       } & ProductShowcase)
@@ -1037,6 +1075,7 @@ export type AllSanitySchemaTypes =
   | RichTextSection
   | ContactSection
   | ProductShowcase
+  | HeroSectionCarousel
   | HeroSection
   | CallToAction
   | InfoSection
@@ -1166,8 +1205,10 @@ export type HomepageQueryResult = {
           _key: string
         }>
         footerText?: string
-        ctaText?: string
-        ctaLink?: Link
+        primaryButton?: {
+          text?: string
+          link?: Link
+        }
         backgroundImage?: {
           asset?: {
             _ref: string
@@ -1244,6 +1285,50 @@ export type HomepageQueryResult = {
             post: string | null
             openInNewTab?: boolean
           } | null
+        } | null
+        secondaryButton: {
+          text?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'heroSectionCarousel'
+        headline: string
+        subheadline?: string
+        description?: string
+        images: Array<{
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt?: string
+          _type: 'image'
+          _key: string
+        }>
+        autoplayDelay?: number
+        primaryButton: {
+          text: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          }
         } | null
         secondaryButton: {
           text?: string
@@ -1605,8 +1690,10 @@ export type GetPageQueryResult = {
           _key: string
         }>
         footerText?: string
-        ctaText?: string
-        ctaLink?: Link
+        primaryButton?: {
+          text?: string
+          link?: Link
+        }
         backgroundImage?: {
           asset?: {
             _ref: string
@@ -1683,6 +1770,50 @@ export type GetPageQueryResult = {
             post: string | null
             openInNewTab?: boolean
           } | null
+        } | null
+        secondaryButton: {
+          text?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'heroSectionCarousel'
+        headline: string
+        subheadline?: string
+        description?: string
+        images: Array<{
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt?: string
+          _type: 'image'
+          _key: string
+        }>
+        autoplayDelay?: number
+        primaryButton: {
+          text: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          }
         } | null
         secondaryButton: {
           text?: string

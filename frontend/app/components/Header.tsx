@@ -38,16 +38,16 @@ export default function Header({settings, brands}: HeaderProps) {
 
           {/* Contact Info - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-6  text-gray-600">
+            <a href="tel:+420792644755" className="flex items-center space-x-2 hover:text-red-600">
+              <Phone className="size-6 text-red-600" />
+              <span>+420 792 644 755</span>
+            </a>
             <a
               href="mailto:info@hledammotory.cz"
               className="flex items-center space-x-2 hover:text-red-600"
             >
               <Mail className="size-6 text-red-600" />
               <span>info@hledammotory.cz</span>
-            </a>
-            <a href="tel:+420792644755" className="flex items-center space-x-2 hover:text-red-600">
-              <Phone className="size-6 text-red-600" />
-              <span>+420 792 644 755</span>
             </a>
           </div>
 

@@ -127,7 +127,6 @@ function ProductCard({product}: {product: Product}) {
 
 export default function ProductCatalog({products}: ProductCatalogProps) {
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedBrand, setSelectedBrand] = useState('all')
   const [sortBy, setSortBy] = useState('name-asc')
   const [priceRange, setPriceRange] = useState({min: 0, max: 100000})
@@ -135,7 +134,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 12
 
-  // Get unique brands and categories - with compatibility for string and reference types
+  // Get unique brands - with compatibility for string and reference types
   const uniqueBrands = useMemo(() => {
     const brands = products
       .map((p) => {
@@ -152,15 +151,6 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
       .filter((brand, index, arr) => arr.indexOf(brand) === index)
       .sort()
     return brands as string[]
-  }, [products])
-
-  const uniqueCategories = useMemo(() => {
-    const categories = products
-      .map((p) => p.category)
-      .filter(Boolean)
-      .filter((category, index, arr) => arr.indexOf(category) === index)
-      .sort()
-    return categories as string[]
   }, [products])
 
   // Set initial price range based on products
@@ -194,9 +184,6 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
         (Array.isArray(product.partNumber) &&
           product.partNumber.some((pn) => pn.toLowerCase().includes(searchTerm.toLowerCase())))
 
-      // Category filter
-      const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory
-
       // Brand filter - handle both string and reference types
       const brandMatch =
         selectedBrand === 'all' ||
@@ -213,7 +200,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
       // Price filter
       const priceMatch = product.price >= priceRange.min && product.price <= priceRange.max
 
-      return searchMatch && categoryMatch && brandMatch && priceMatch
+      return searchMatch && brandMatch && priceMatch
     })
 
     // Sort products
@@ -235,7 +222,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
     })
 
     return filtered
-  }, [products, searchTerm, selectedCategory, selectedBrand, priceRange, sortBy])
+  }, [products, searchTerm, selectedBrand, priceRange, sortBy])
 
   // Pagination calculations
   const totalItems = filteredAndSortedProducts.length
@@ -247,11 +234,10 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
   // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchTerm, selectedCategory, selectedBrand, priceRange, sortBy])
+  }, [searchTerm, selectedBrand, priceRange, sortBy])
 
   const clearFilters = () => {
     setSearchTerm('')
-    setSelectedCategory('all')
     setSelectedBrand('all')
     setSortBy('name-asc')
     setCurrentPage(1)
@@ -290,25 +276,8 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
 
         {/* Filters */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ${showFilters ? 'block' : 'hidden lg:grid'}`}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${showFilters ? 'block' : 'hidden lg:grid'}`}
         >
-          {/* Category Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Kategorie</label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            >
-              <option value="all">Všechny kategorie</option>
-              {uniqueCategories.map((category) => (
-                <option key={category} value={category}>
-                  {categoryLabels[category] || category}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {/* Brand Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Značka</label>
