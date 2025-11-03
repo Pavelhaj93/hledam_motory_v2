@@ -6,10 +6,12 @@ import {Inter} from 'next/font/google'
 import {draftMode} from 'next/headers'
 import {VisualEditing, toPlainText} from 'next-sanity'
 import {Toaster} from 'sonner'
+import Script from 'next/script'
 
 import DraftModeToast from '@/app/components/DraftModeToast'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
+import CookieBanner from '@/app/components/CookieBanner'
 import * as demo from '@/sanity/lib/demo'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery, popularBrandsWithLogosQuery} from '@/sanity/lib/queries'
@@ -73,6 +75,54 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 
   return (
     <html lang="en" className={`${inter.variable} bg-white text-black`}>
+      <head>
+        {/* Google Analytics - Initialize with denied consent */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-ND4D88XRC9"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            
+            // Default consent to denied
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied',
+              'ad_storage': 'denied'
+            });
+            
+            gtag('config', 'G-ND4D88XRC9');
+          `}
+        </Script>
+
+        {/* Seznam.cz Retargeting */}
+        <Script
+          type="text/javascript"
+          src="https://c.seznam.cz/js/rc.js"
+          strategy="afterInteractive"
+        />
+        <Script id="seznam-analytics" strategy="afterInteractive">
+          {`
+            if (window.sznIVA && window.sznIVA.IS) {
+              window.sznIVA.IS.updateIdentities({
+                eid: null
+              });
+            }
+
+            var retargetingConf = {
+              rtgId: 1558266,
+              consent: null
+            };
+
+            if (window.rc && window.rc.retargetingHit) {
+              window.rc.retargetingHit(retargetingConf);
+            }
+          `}
+        </Script>
+      </head>
       <body>
         <section>
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
@@ -89,6 +139,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           <Header settings={settings || undefined} brands={brands || []} />
           <main className="min-h-[calc(100vh-29rem)]">{children}</main>
           <Footer settings={settings || undefined} brands={brands || []} />
+          <CookieBanner />
         </section>
         <SpeedInsights />
       </body>
