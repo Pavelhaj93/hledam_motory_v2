@@ -36,8 +36,8 @@ export default function CookiesPage() {
             Díky těmto informacím vám můžeme nabízet kvalitní a relevantní obsah nebo reklamní
             nabídky, které vás skutečně zajímají. Svým souhlasem nám napomáháte financovat a
             zlepšovat naše služby, které tak můžeme nabízet zdarma. Kliknutím na tlačítko
-            „souhlasím“, potvrzujete svůj souhlas k přístupu a zpracování výše uvedených osobních
-            údajů a jejich možným sdílením s našimi vybranými partnery (včetně analytických
+            &bdquo;souhlasím&ldquo;, potvrzujete svůj souhlas k přístupu a zpracování výše uvedených
+            osobních údajů a jejich možným sdílením s našimi vybranými partnery (včetně analytických
             nástrojů) pro tyto účely (typy zpracování):
           </p>
 
@@ -64,18 +64,18 @@ export default function CookiesPage() {
 
           <p className="mb-6 text-gray-700">
             Právní titul zpracování dat vybranými partnery najdete pro jednotlivé účely pod
-            tlačítkem „Další volby“. Partneři, kteří nejsou součástí TCF 2.0, mají definované účely
-            dle svých zásad zpracování.
+            tlačítkem &bdquo;Další volby&ldquo;. Partneři, kteří nejsou součástí TCF 2.0, mají
+            definované účely dle svých zásad zpracování.
           </p>
 
           <p className="mb-6 text-gray-700">
             Vaše nastavení se vztahuje na tuto doménu, weby a aplikace zapojené do reklamní sítě
             provozované společností Seznam.cz, a.s. Své rozhodnutí můžete upravit kliknutím na
-            tlačítko „Další volby", kde najdete rovněž informace k oprávněným zájmům a možnosti
-            proti nim namítat, případně svůj souhlas zcela či částečně odvolat. V případě, že svým
-            nastavením preferencí nebudete žádné údaje sdílet, bude vám zobrazován méně relevantní
-            obsah a reklamní sdělení. Své nastavení můžete kdykoli změnit či odvolat na této stránce
-            nebo ve svém Profilu na Seznam.cz.
+            tlačítko &bdquo;Další volby&ldquo;, kde najdete rovněž informace k oprávněným zájmům a
+            možnosti proti nim namítat, případně svůj souhlas zcela či částečně odvolat. V případě,
+            že svým nastavením preferencí nebudete žádné údaje sdílet, bude vám zobrazován méně
+            relevantní obsah a reklamní sdělení. Své nastavení můžete kdykoli změnit či odvolat na
+            této stránce nebo ve svém Profilu na Seznam.cz.
           </p>
         </div>
       </div>
