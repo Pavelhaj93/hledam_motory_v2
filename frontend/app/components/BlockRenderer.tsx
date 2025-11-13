@@ -10,6 +10,9 @@ import RichTextSection from '@/app/components/RichTextSection'
 import HowItWorksSection from '@/app/components/HowItWorksSection'
 import HomepageTeaserSection from '@/app/components/HomepageTeaserSection'
 import BenefitsSection from '@/app/components/BenefitsSection'
+import CategoryGrid from '@/app/components/CategoryGrid'
+import FeatureGrid from '@/app/components/FeatureGrid'
+import CtaBanner from '@/app/components/CtaBanner'
 import {dataAttr} from '@/sanity/lib/utils'
 
 type BlocksType = {
@@ -39,6 +42,9 @@ const Blocks: BlocksType = {
   howItWorksSection: HowItWorksSection,
   homepageTeaserSection: HomepageTeaserSection,
   benefitsSection: BenefitsSection,
+  categoryGrid: CategoryGrid,
+  featureGrid: FeatureGrid,
+  ctaBanner: CtaBanner,
 }
 
 /**

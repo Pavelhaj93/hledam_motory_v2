@@ -17,6 +17,9 @@ import {richTextSection} from './objects/richTextSection'
 import {howItWorksSection} from './objects/howItWorksSection'
 import {homepageTeaserSection} from './objects/homepageTeaserSection'
 import benefitsSection from './objects/benefitsSection'
+import {categoryGrid} from './objects/categoryGrid'
+import {featureGrid} from './objects/featureGrid'
+import {ctaBanner} from './objects/ctaBanner'
 import {settings} from './singletons/settings'
 import {homepage} from './singletons/homepage'
 import {link} from './objects/link'
@@ -51,5 +54,8 @@ export const schemaTypes = [
   howItWorksSection,
   homepageTeaserSection,
   benefitsSection,
+  categoryGrid,
+  featureGrid,
+  ctaBanner,
   link,
 ]
