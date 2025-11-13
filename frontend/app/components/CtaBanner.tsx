@@ -1,8 +1,8 @@
 'use client'
 
-import Link from 'next/link'
 import ResolvedLink from './ResolvedLink'
 import {Users, Mail, Phone, MessageCircle, Search, ArrowRight, ExternalLink} from 'lucide-react'
+import {Button} from './ui/button'
 
 interface ButtonData {
   text?: string
@@ -58,21 +58,19 @@ export default function CtaBanner({block}: CtaBannerProps) {
         )}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {primaryButton?.text && primaryButton?.link && (
-            <ResolvedLink
-              link={primaryButton.link}
-              className="bg-white text-red-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors inline-flex items-center justify-center"
-            >
-              {PrimaryIcon && <PrimaryIcon className="w-5 h-5 mr-2" />}
-              {primaryButton.text}
+            <ResolvedLink link={primaryButton.link}>
+              <Button variant="secondary" size="lg">
+                {PrimaryIcon && <PrimaryIcon className="size-6" />}
+                {primaryButton.text}
+              </Button>
             </ResolvedLink>
           )}
           {secondaryButton?.text && secondaryButton?.link && (
-            <ResolvedLink
-              link={secondaryButton.link}
-              className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-red-600 transition-colors inline-flex items-center justify-center"
-            >
-              {SecondaryIcon && <SecondaryIcon className="w-5 h-5 mr-2" />}
-              {secondaryButton.text}
+            <ResolvedLink link={secondaryButton.link}>
+              <Button variant="default" size="lg">
+                {SecondaryIcon && <SecondaryIcon className="size-6" />}
+                {secondaryButton.text}
+              </Button>
             </ResolvedLink>
           )}
         </div>
