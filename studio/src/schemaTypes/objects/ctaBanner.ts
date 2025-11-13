@@ -91,21 +91,6 @@ export const ctaBanner = defineType({
         }),
       ],
     }),
-    defineField({
-      name: 'backgroundColor',
-      title: 'Background Color',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Red Gradient', value: 'bg-gradient-to-r from-red-600 to-red-700'},
-          {title: 'Blue Gradient', value: 'bg-gradient-to-r from-blue-600 to-blue-700'},
-          {title: 'Green Gradient', value: 'bg-gradient-to-r from-green-600 to-green-700'},
-          {title: 'Purple Gradient', value: 'bg-gradient-to-r from-purple-600 to-purple-700'},
-          {title: 'Orange Gradient', value: 'bg-gradient-to-r from-orange-600 to-orange-700'},
-        ],
-      },
-      initialValue: 'bg-gradient-to-r from-red-600 to-red-700',
-    }),
   ],
   preview: {
     select: {

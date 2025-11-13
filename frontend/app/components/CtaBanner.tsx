@@ -15,7 +15,6 @@ interface CtaBannerData {
   description?: string
   primaryButton?: ButtonData
   secondaryButton?: ButtonData
-  backgroundColor?: string
 }
 
 interface CtaBannerProps {
@@ -34,13 +33,11 @@ const iconMap = {
 }
 
 export default function CtaBanner({block}: CtaBannerProps) {
-  const {heading, description, primaryButton, secondaryButton, backgroundColor} = block ?? {}
+  const {heading, description, primaryButton, secondaryButton} = block ?? {}
 
   if (!heading && !description) {
     return null
   }
-
-  const bgClass = backgroundColor || 'bg-gradient-to-r from-red-600 to-red-700'
 
   const PrimaryIcon = primaryButton?.icon
     ? iconMap[primaryButton.icon as keyof typeof iconMap]
@@ -51,7 +48,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className={`${bgClass} rounded-2xl p-8 lg:p-12 text-white text-center`}>
+      <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 lg:p-12 text-white text-center">
         {heading && <h2 className="text-3xl lg:text-4xl font-bold mb-4">{heading}</h2>}
         {description && (
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">{description}</p>
