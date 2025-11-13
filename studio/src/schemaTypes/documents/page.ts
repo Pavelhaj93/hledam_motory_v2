@@ -55,6 +55,9 @@ export const page = defineType({
         {type: 'howItWorksSection'},
         {type: 'homepageTeaserSection'},
         {type: 'benefitsSection'},
+        {type: 'categoryGrid'},
+        {type: 'featureGrid'},
+        {type: 'ctaBanner'},
       ],
       options: {
         insertMenu: {
@@ -67,7 +70,7 @@ export const page = defineType({
                 const svgPath = `/static/page-builder-thumbnails/${schemaTypeName}.svg`
                 const webpPath = `/static/page-builder-thumbnails/${schemaTypeName}.webp`
 
-                // For heroSection, heroSectionCarousel, productShowcase, richTextSection, howItWorksSection, homepageTeaserSection, and benefitsSection, use SVG, others use WebP
+                // For heroSection, heroSectionCarousel, productShowcase, richTextSection, howItWorksSection, homepageTeaserSection, benefitsSection, categoryGrid, featureGrid, and ctaBanner, use SVG, others use WebP
                 if (
                   schemaTypeName === 'heroSection' ||
                   schemaTypeName === 'heroSectionCarousel' ||
@@ -75,7 +78,10 @@ export const page = defineType({
                   schemaTypeName === 'richTextSection' ||
                   schemaTypeName === 'howItWorksSection' ||
                   schemaTypeName === 'homepageTeaserSection' ||
-                  schemaTypeName === 'benefitsSection'
+                  schemaTypeName === 'benefitsSection' ||
+                  schemaTypeName === 'categoryGrid' ||
+                  schemaTypeName === 'featureGrid' ||
+                  schemaTypeName === 'ctaBanner'
                 ) {
                   return svgPath
                 }

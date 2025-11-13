@@ -1,0 +1,48 @@
+<svg width="200" height="150" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="150" fill="#f3f4f6" />
+
+    <!-- Title -->
+    <rect x="40" y="15" width="120" height="8" rx="4" fill="#d1d5db" />
+    <rect x="60" y="27" width="80" height="6" rx="3" fill="#e5e7eb" />
+
+    <!-- Grid of 6 cards (2x3) -->
+    <g>
+        <!-- Row 1 -->
+        <rect x="10" y="45" width="55" height="40" rx="4" fill="#ffffff" stroke="#d1d5db"
+            stroke-width="1" />
+        <circle cx="23" cy="58" r="5" fill="#ef4444" />
+        <rect x="16" y="68" width="35" height="4" rx="2" fill="#e5e7eb" />
+        <rect x="16" y="75" width="25" height="3" rx="1.5" fill="#f3f4f6" />
+
+        <rect x="72" y="45" width="55" height="40" rx="4" fill="#ffffff" stroke="#d1d5db"
+            stroke-width="1" />
+        <circle cx="85" cy="58" r="5" fill="#10b981" />
+        <rect x="78" y="68" width="35" height="4" rx="2" fill="#e5e7eb" />
+        <rect x="78" y="75" width="25" height="3" rx="1.5" fill="#f3f4f6" />
+
+        <rect x="134" y="45" width="55" height="40" rx="4" fill="#ffffff" stroke="#d1d5db"
+            stroke-width="1" />
+        <circle cx="147" cy="58" r="5" fill="#8b5cf6" />
+        <rect x="140" y="68" width="35" height="4" rx="2" fill="#e5e7eb" />
+        <rect x="140" y="75" width="25" height="3" rx="1.5" fill="#f3f4f6" />
+
+        <!-- Row 2 -->
+        <rect x="10" y="95" width="55" height="40" rx="4" fill="#ffffff" stroke="#d1d5db"
+            stroke-width="1" />
+        <circle cx="23" cy="108" r="5" fill="#f59e0b" />
+        <rect x="16" y="118" width="35" height="4" rx="2" fill="#e5e7eb" />
+        <rect x="16" y="125" width="25" height="3" rx="1.5" fill="#f3f4f6" />
+
+        <rect x="72" y="95" width="55" height="40" rx="4" fill="#ffffff" stroke="#d1d5db"
+            stroke-width="1" />
+        <circle cx="85" cy="108" r="5" fill="#eab308" />
+        <rect x="78" y="118" width="35" height="4" rx="2" fill="#e5e7eb" />
+        <rect x="78" y="125" width="25" height="3" rx="1.5" fill="#f3f4f6" />
+
+        <rect x="134" y="95" width="55" height="40" rx="4" fill="#ffffff" stroke="#d1d5db"
+            stroke-width="1" />
+        <circle cx="147" cy="108" r="5" fill="#3b82f6" />
+        <rect x="140" y="118" width="35" height="4" rx="2" fill="#e5e7eb" />
+        <rect x="140" y="125" width="25" height="3" rx="1.5" fill="#f3f4f6" />
+    </g>
+</svg>
