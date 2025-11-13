@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {ArrowLeft, Mail, Phone, Check, X} from 'lucide-react'
 import CustomPortableText from '@/app/components/PortableText'
+import ImageGallery from '@/app/components/ImageGallery'
 
 type Props = {
   params: Promise<{slug: string}>
@@ -72,8 +73,10 @@ export default async function TurbodmychadloDetailPage({params}: Props) {
       </Link>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div className="space-y-4">
-          <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
-            {turbodmychadlo.mainImage ? (
+          {turbodmychadlo.images && turbodmychadlo.images.length > 0 ? (
+            <ImageGallery images={turbodmychadlo.images} productName={turbodmychadlo.name} />
+          ) : turbodmychadlo.mainImage ? (
+            <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
               <Image
                 src={urlForImage(turbodmychadlo.mainImage)?.width(600).height(600).url() || ''}
                 alt={turbodmychadlo.mainImage.alt || turbodmychadlo.name}
@@ -82,20 +85,20 @@ export default async function TurbodmychadloDetailPage({params}: Props) {
                 className="h-full w-full object-cover object-center"
                 priority
               />
-            ) : (
+            </div>
+          ) : (
+            <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
               <div className="h-full w-full bg-gray-200 flex items-center justify-center">
                 <span className="text-gray-400">Bez obrázku</span>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
         <div className="space-y-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{turbodmychadlo.name}</h1>
           <p className="text-lg text-red-600 font-medium">{turbodmychadlo.brand?.name}</p>
           {turbodmychadlo.turboCode && (
-            <p className="text-sm text-gray-500">
-              Kód turbodmychadla: {turbodmychadlo.turboCode}
-            </p>
+            <p className="text-sm text-gray-500">Kód turbodmychadla: {turbodmychadlo.turboCode}</p>
           )}
           <div className="border-t border-b py-6">
             <div className="flex items-center justify-between">
@@ -147,7 +150,7 @@ export default async function TurbodmychadloDetailPage({params}: Props) {
           <div className="bg-red-50 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Objednávka</h3>
             <p className="text-gray-600 mb-4">Pro objednání nebo více informací nás kontaktujte:</p>
-            <div className="space-y-2">
+            <div className="flex flex-col items-start space-y-2">
               <a
                 href="tel:+420724704764"
                 className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700"

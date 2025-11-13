@@ -17,6 +17,8 @@ import {
   Car,
   Search,
 } from 'lucide-react'
+import {urlForImage} from '@/sanity/lib/utils'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Katalog náhradních dílů | Repasované motory a turbodmychadla',
@@ -108,10 +110,19 @@ const features = [
 ]
 
 export default async function katalogPage() {
-  const {data: brands} = await sanityFetch({
-    query: allBrandsWithLogosQuery,
-    stega: false,
-  })
+  let brands: any[] = []
+
+  try {
+    const {data} = await sanityFetch({
+      query: allBrandsWithLogosQuery,
+      stega: false,
+    })
+    brands = data || []
+  } catch (error) {
+    console.error('Failed to fetch brands:', error)
+    // Fallback to empty array if fetch fails
+    brands = []
+  }
 
   const popularBrands = ['BMW', 'Audi', 'Volkswagen', 'Mercedes-Benz', 'Škoda', 'Ford']
 
@@ -263,7 +274,7 @@ export default async function katalogPage() {
         </div>
 
         {/* Popular Brands Section */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Populární značky</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -281,9 +292,13 @@ export default async function katalogPage() {
                   className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-all duration-300 group cursor-pointer"
                 >
                   {brand.logo ? (
-                    <div className="h-12 w-12 mx-auto mb-3 bg-gray-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <span className="text-xs text-gray-600 font-semibold">{brand.name}</span>
-                    </div>
+                    <Image
+                      src={brand.logo ? urlForImage(brand.logo).width(48).height(48).url() : ''}
+                      alt={brand.name}
+                      width={48}
+                      height={48}
+                      className="object-cover"
+                    />
                   ) : (
                     <div className="h-12 w-12 mx-auto mb-3 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Car className="w-6 h-6 text-gray-600" />
@@ -295,7 +310,7 @@ export default async function katalogPage() {
                 </div>
               ))}
           </div>
-        </div>
+        </div> */}
 
         {/* CTA Section */}
         <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 lg:p-12 text-white text-center">
