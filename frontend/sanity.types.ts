@@ -32,6 +32,56 @@ export type Link = {
   openInNewTab?: boolean
 }
 
+export type CtaBanner = {
+  _type: 'ctaBanner'
+  heading: string
+  description?: string
+  primaryButton?: {
+    text?: string
+    link?: Link
+    icon?: 'users' | 'mail' | 'phone' | 'messageCircle' | 'none'
+  }
+  secondaryButton?: {
+    text?: string
+    link?: Link
+    icon?: 'search' | 'arrowRight' | 'externalLink' | 'none'
+  }
+}
+
+export type FeatureGrid = {
+  _type: 'featureGrid'
+  heading: string
+  subheading?: string
+  features?: Array<{
+    title: string
+    description: string
+    icon: 'shield' | 'wrench' | 'package' | 'star' | 'clock' | 'users' | 'checkCircle' | 'truck'
+    _key: string
+  }>
+}
+
+export type CategoryGrid = {
+  _type: 'categoryGrid'
+  heading: string
+  subheading?: string
+  categories?: Array<{
+    title: string
+    slug: string
+    description: string
+    icon: 'zap' | 'cog' | 'settings' | 'wrench' | 'car' | 'truck' | 'package'
+    color?:
+      | 'bg-gradient-to-br from-red-500 to-red-600'
+      | 'bg-gradient-to-br from-green-500 to-green-600'
+      | 'bg-gradient-to-br from-purple-500 to-purple-600'
+      | 'bg-gradient-to-br from-orange-500 to-orange-600'
+      | 'bg-gradient-to-br from-yellow-500 to-yellow-600'
+      | 'bg-gradient-to-br from-blue-500 to-blue-600'
+    itemCount?: string
+    featured?: boolean
+    _key: string
+  }>
+}
+
 export type BenefitsSection = {
   _type: 'benefitsSection'
   eyebrow?: string
@@ -119,7 +169,8 @@ export type ContactSection = {
     email?: string
     phone?: string
     address?: string
-    businessHours?: string
+    companyName?: string
+    vatNumber?: string
   }
   formConfiguration?: {
     submitButtonText?: string
@@ -717,6 +768,15 @@ export type Page = {
     | ({
         _key: string
       } & BenefitsSection)
+    | ({
+        _key: string
+      } & CategoryGrid)
+    | ({
+        _key: string
+      } & FeatureGrid)
+    | ({
+        _key: string
+      } & CtaBanner)
   >
 }
 
@@ -1008,6 +1068,9 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | Link
+  | CtaBanner
+  | FeatureGrid
+  | CategoryGrid
   | BenefitsSection
   | HomepageTeaserSection
   | HowItWorksSection
@@ -1186,8 +1249,8 @@ export type HomepageQueryResult = {
           email: string | null
           phone: string | null
           address: string | null
-          companyName: null
-          vatNumber: null
+          companyName: string | null
+          vatNumber: string | null
         } | null
         formConfiguration: {
           submitButtonText: string | null
@@ -1505,6 +1568,28 @@ export type GetPageQueryResult = {
       }
     | {
         _key: string
+        _type: 'categoryGrid'
+        heading: string
+        subheading?: string
+        categories?: Array<{
+          title: string
+          slug: string
+          description: string
+          icon: 'car' | 'cog' | 'package' | 'settings' | 'truck' | 'wrench' | 'zap'
+          color?:
+            | 'bg-gradient-to-br from-blue-500 to-blue-600'
+            | 'bg-gradient-to-br from-green-500 to-green-600'
+            | 'bg-gradient-to-br from-orange-500 to-orange-600'
+            | 'bg-gradient-to-br from-purple-500 to-purple-600'
+            | 'bg-gradient-to-br from-red-500 to-red-600'
+            | 'bg-gradient-to-br from-yellow-500 to-yellow-600'
+          itemCount?: string
+          featured?: boolean
+          _key: string
+        }>
+      }
+    | {
+        _key: string
         _type: 'contactSection'
         heading: string
         description?: string
@@ -1514,13 +1599,49 @@ export type GetPageQueryResult = {
           email: string | null
           phone: string | null
           address: string | null
-          companyName: null
-          vatNumber: null
+          companyName: string | null
+          vatNumber: string | null
         } | null
         formConfiguration: {
           submitButtonText: string | null
           successMessage: string | null
         } | null
+      }
+    | {
+        _key: string
+        _type: 'ctaBanner'
+        heading: string
+        description?: string
+        primaryButton?: {
+          text?: string
+          link?: Link
+          icon?: 'mail' | 'messageCircle' | 'none' | 'phone' | 'users'
+        }
+        secondaryButton?: {
+          text?: string
+          link?: Link
+          icon?: 'arrowRight' | 'externalLink' | 'none' | 'search'
+        }
+      }
+    | {
+        _key: string
+        _type: 'featureGrid'
+        heading: string
+        subheading?: string
+        features?: Array<{
+          title: string
+          description: string
+          icon:
+            | 'checkCircle'
+            | 'clock'
+            | 'package'
+            | 'shield'
+            | 'star'
+            | 'truck'
+            | 'users'
+            | 'wrench'
+          _key: string
+        }>
       }
     | {
         _key: string

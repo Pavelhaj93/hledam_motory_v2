@@ -48,7 +48,7 @@ export default function ContactSection({block}: ContactSectionProps) {
     successMessage = 'Děkujeme za váš zájem! Brzy se vám ozveme.',
   } = formConfiguration
 
-  const {email, phone, address, businessHours, companyName, vatNumber} = contactInfo
+  const {email, phone, address, companyName, vatNumber} = contactInfo
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
