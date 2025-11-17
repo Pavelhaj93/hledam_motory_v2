@@ -16,25 +16,6 @@ const formatPrice = (price?: number, currency = 'CZK'): string => {
   }).format(price)
 }
 
-const categoryLabels: {[key: string]: string} = {
-  repasovanyMotor: 'Repasovaný motor',
-  staryMotor: 'Starý motor',
-  motorovaHlava: 'Motorová hlava',
-  prevodovka: 'Převodovka',
-  turbodmychadlo: 'Turbodmychadlo',
-}
-
-const getCategoryPath = (category: string) => {
-  const categoryMap: {[key: string]: string} = {
-    repasovanyMotor: 'repasovane-motory',
-    staryMotor: 'stare-motory',
-    motorovaHlava: 'motorove-hlavy',
-    prevodovka: 'prevodovky',
-    turbodmychadlo: 'turbodmychadla',
-  }
-  return categoryMap[category] || category
-}
-
 type HomepageTeaserSectionData = {
   title?: string
   description?: string
@@ -55,8 +36,8 @@ type HomepageTeaserSectionProps = {
 
 export default function HomepageTeaserSection({block}: HomepageTeaserSectionProps) {
   const {
-    title = 'Objevte nejnovější produkty',
-    description = 'Podívejte se na nejnovější produkty v našem katalogu. Vyberte si z široké nabídky motorů a dílů.',
+    title = 'Nejnovější repasované motory',
+    description = 'Podívejte se na nejnovější repasované motory v našem katalogu. Vyberte si z široké nabídky kvalitních a důkladně zkontrolovaných motorů.',
     primaryButton,
     secondaryButton,
     products,
@@ -78,11 +59,15 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
         {/* Products Grid */}
         {products && products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-            {products.map((product) => (
+            {products.map((product, index) => (
               <Link
                 key={product._id}
-                href={`/katalog/${getCategoryPath(product._type)}/${product.slug}`}
-                className="group"
+                href={`/katalog/repasovane-motory/${product.slug}`}
+                className={`group ${index >= 3 ? 'hidden' : ''} ${
+                  index >= 3 && index < 6 ? 'sm:block' : ''
+                } ${index >= 6 && index < 9 ? 'lg:block' : ''} ${
+                  index >= 9 && index < 12 ? 'xl:block' : ''
+                } ${index >= 12 ? '2xl:block' : ''}`}
               >
                 <div className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow h-full flex flex-col">
                   {/* Product Image */}
@@ -96,8 +81,8 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
                         className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-200"
                       />
                     ) : (
-                      <div className="w-full h-32 bg-gray-100 flex items-center justify-center">
-                        <span className="text-gray-400 text-sm">Bez obrázku</span>
+                      <div className="h-full w-full bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">Bez obrázku</span>
                       </div>
                     )}
                   </div>
@@ -108,29 +93,32 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
                       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
                         {product.name}
                       </h3>
+
                       {/* Brand - handle both old string format and new reference format */}
                       {(product as any).brand && (
-                        <p className="text-xl text-red-600 font-medium mt-1">
-                          {product.brand.name}
+                        <p className="text-sm text-red-600 font-medium mt-1">
+                          {typeof (product as any).brand === 'string'
+                            ? (product as any).brand
+                            : (product as any).brand?.name || ''}
                         </p>
                       )}
-                      {product.category && (
-                        <span className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium mt-2">
-                          {categoryLabels[product.category] || product.category}
-                        </span>
-                      )}
+
+                      <span className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium mt-2">
+                        Repasované motory
+                      </span>
 
                       {product.description && (
                         <p className="text-sm text-gray-600 mt-2 line-clamp-2">
                           {product.description}
                         </p>
                       )}
-                      <div className="mt-4 pt-4 border-t border-gray-100">
-                        <div className="flex items-center justify-end">
-                          <span className="text-lg font-bold text-gray-900">
-                            {formatPrice(product.price, 'CZK')}
-                          </span>
-                        </div>
+                    </div>
+
+                    <div className="mt-4 pt-4 border-t border-gray-100">
+                      <div className="flex items-center justify-end">
+                        <span className="text-lg font-bold text-gray-900">
+                          {formatPrice(product.price, 'CZK')}
+                        </span>
                       </div>
                     </div>
                   </div>

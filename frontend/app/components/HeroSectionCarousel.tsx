@@ -44,13 +44,18 @@ export default function HeroSectionCarousel({block}: HeroSectionCarouselProps) {
   } = block
 
   const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
 
   useEffect(() => {
     if (!api) {
       return
     }
 
-    // Optional: Add any custom carousel behavior here
+    setCurrent(api.selectedScrollSnap())
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap())
+    })
   }, [api])
 
   if (!images || images.length === 0) {
@@ -100,7 +105,7 @@ export default function HeroSectionCarousel({block}: HeroSectionCarouselProps) {
           Autoplay({
             delay: autoplayDelay,
             stopOnInteraction: false,
-            stopOnMouseEnter: true,
+            stopOnMouseEnter: false,
           }),
         ]}
       >
@@ -168,7 +173,9 @@ export default function HeroSectionCarousel({block}: HeroSectionCarouselProps) {
           {images.map((_, index) => (
             <button
               key={index}
-              className="w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-200 cursor-pointer"
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                current === index ? 'w-8 bg-red-500' : 'w-3 bg-white/50 hover:bg-white/80'
+              }`}
               onClick={() => api?.scrollTo(index)}
               aria-label={`Go to slide ${index + 1}`}
             />

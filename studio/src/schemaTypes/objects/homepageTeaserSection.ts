@@ -11,7 +11,7 @@ export const homepageTeaserSection = defineType({
       name: 'title',
       title: 'Section Title',
       type: 'string',
-      initialValue: 'Objevte nejnovější produkty',
+      initialValue: 'Nejnovější repasované motory',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -20,7 +20,7 @@ export const homepageTeaserSection = defineType({
       type: 'text',
       rows: 3,
       initialValue:
-        'Podívejte se na nejnovější produkty v našem katalogu. Vyberte si z široké nabídky motorů a dílů.',
+        'Podívejte se na nejnovější repasované motory v našem katalogu. Vyberte si z široké nabídky kvalitních a důkladně zkontrolovaných motorů.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

@@ -282,7 +282,7 @@ export const homepageQuery = defineQuery(`
             }
           }
         },
-        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{
+        "products": *[_type == "repasovanyMotor"] | order(_createdAt desc)[0...15]{
           _id,
           _type,
           name,
@@ -618,7 +618,7 @@ export const turbodmychadlaPagesSlugs = defineQuery(`
 
 // Latest products query for homepage teaser
 export const latestProductsQuery = defineQuery(`
-  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{
+  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...15]{
     _id,
     _type,
     name,
