@@ -308,6 +308,29 @@ export const homepageQuery = defineQuery(`
           category
         }
       },
+      _type == "howItWorksSection" => {
+        ...,
+        ctaLink {
+          ...,
+          _type == "link" => {
+            "page": page->slug.current,
+            "post": post->slug.current
+          }
+        }
+      },
+      _type == "benefitsSection" => {
+        ...,
+        primaryButton {
+          ...,
+          link {
+            ...,
+            _type == "link" => {
+              "page": page->slug.current,
+              "post": post->slug.current
+            }
+          }
+        }
+      },
       _type == "richTextSection" => {
         ...,
         content[]{
@@ -438,6 +461,29 @@ export const getPageQuery = defineQuery(`
             logo
           },
           category
+        }
+      },
+      _type == "howItWorksSection" => {
+        ...,
+        ctaLink {
+          ...,
+          _type == "link" => {
+            "page": page->slug.current,
+            "post": post->slug.current
+          }
+        }
+      },
+      _type == "benefitsSection" => {
+        ...,
+        primaryButton {
+          ...,
+          link {
+            ...,
+            _type == "link" => {
+              "page": page->slug.current,
+              "post": post->slug.current
+            }
+          }
         }
       },
       _type == "richTextSection" => {
