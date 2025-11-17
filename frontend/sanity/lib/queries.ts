@@ -258,7 +258,18 @@ export const homepageQuery = defineQuery(`
         ...
       },
       _type == "contactSection" => {
-        ...
+        ...,
+        contactInfo {
+          email,
+          phone,
+          address,
+          companyName,
+          vatNumber
+        },
+        formConfiguration {
+          submitButtonText,
+          successMessage
+        }
       },
       _type == "homepageTeaserSection" => {
         ...,
@@ -387,7 +398,18 @@ export const getPageQuery = defineQuery(`
         ...
       },
       _type == "contactSection" => {
-        ...
+        ...,
+        contactInfo {
+          email,
+          phone,
+          address,
+          companyName,
+          vatNumber
+        },
+        formConfiguration {
+          submitButtonText,
+          successMessage
+        }
       },
       _type == "homepageTeaserSection" => {
         ...,

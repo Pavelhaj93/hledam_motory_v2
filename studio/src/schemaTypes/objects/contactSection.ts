@@ -68,10 +68,14 @@ export const contactSection = defineType({
           rows: 3,
         }),
         defineField({
-          name: 'businessHours',
-          title: 'Business Hours',
-          type: 'text',
-          rows: 2,
+          name: 'companyName',
+          title: 'Company Name',
+          type: 'string',
+        }),
+        defineField({
+          name: 'vatNumber',
+          title: 'VAT Number / IČO',
+          type: 'string',
         }),
       ],
     }),

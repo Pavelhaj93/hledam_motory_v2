@@ -5,31 +5,34 @@ import {Mail, Phone, MapPin, Building2, SendIcon, SendHorizonalIcon, MailIcon} f
 import {Button} from './ui/button'
 
 interface ContactSectionProps {
-  heading?: string
-  description?: string
-  layout?: 'form-info' | 'form-only' | 'info-only'
-  showContactInfo?: boolean
-  contactInfo?: {
-    email?: string
-    phone?: string
-    address?: string
-    companyName?: string
-    vatNumber?: string
-  }
-  formConfiguration?: {
-    submitButtonText?: string
-    successMessage?: string
+  block?: {
+    heading?: string
+    description?: string
+    layout?: 'form-info' | 'form-only' | 'info-only'
+    showContactInfo?: boolean
+    contactInfo?: {
+      email?: string
+      phone?: string
+      address?: string
+      companyName?: string
+      vatNumber?: string
+    }
+    formConfiguration?: {
+      submitButtonText?: string
+      successMessage?: string
+    }
   }
 }
 
-export default function ContactSection({
-  heading = 'Kontaktujte nás',
-  description,
-  layout = 'form-info',
-  showContactInfo = true,
-  contactInfo = {},
-  formConfiguration = {},
-}: ContactSectionProps) {
+export default function ContactSection({block}: ContactSectionProps) {
+  const {
+    heading = 'Kontaktujte nás',
+    description,
+    layout = 'form-info',
+    showContactInfo = true,
+    contactInfo = {},
+    formConfiguration = {},
+  } = block || {}
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,13 +47,7 @@ export default function ContactSection({
     successMessage = 'Děkujeme za váš zájem! Brzy se vám ozveme.',
   } = formConfiguration
 
-  const {
-    email = 'info@hledammotory.cz',
-    phone = '+420 724 704 764',
-    address = 'Prachnerova 642/10, Praha 5, 150 00',
-    companyName = 'Neuro s.r.o.',
-    vatNumber = 'IČO: 12345678',
-  } = contactInfo
+  const {email, phone, address, companyName, vatNumber} = contactInfo
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -179,7 +176,7 @@ export default function ContactSection({
             </a>
 
             <a
-              href={`tel:${phone.replace(/\s/g, '')}`}
+              href={`tel:${phone?.replace(/\s/g, '')}`}
               className="flex items-center space-x-3 text-gray-700 hover:text-red-600 transition-colors"
             >
               <Phone className="h-5 w-5 text-red-600" />
@@ -196,18 +193,20 @@ export default function ContactSection({
           </div>
         </div>
 
-        <div>
-          <h4 className="text-lg font-semibold text-gray-900 mb-2">Údaje o společnosti</h4>
-          <div className="space-y-2">
-            <div className="flex items-start space-x-3 text-gray-700">
-              <Building2 className="h-5 w-5 text-red-600 mt-0.5" />
-              <div>
-                <div className="font-medium">{companyName}</div>
-                <div className="text-sm text-gray-600">{vatNumber}</div>
+        {(companyName || vatNumber) && (
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-2">Údaje o společnosti</h4>
+            <div className="space-y-2">
+              <div className="flex items-start space-x-3 text-gray-700">
+                <Building2 className="h-5 w-5 text-red-600 mt-0.5" />
+                <div>
+                  {companyName && <div className="font-medium">{companyName}</div>}
+                  {vatNumber && <div className="text-sm text-gray-600">{vatNumber}</div>}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
