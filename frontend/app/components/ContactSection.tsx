@@ -41,32 +41,51 @@ export default function ContactSection({block}: ContactSectionProps) {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [showError, setShowError] = useState(false)
 
   const {
     submitButtonText = 'Odeslat zprávu',
     successMessage = 'Děkujeme za váš zájem! Brzy se vám ozveme.',
   } = formConfiguration
 
-  const {email, phone, address, companyName, vatNumber} = contactInfo
+  const {email, phone, address, businessHours, companyName, vatNumber} = contactInfo
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setShowError(false)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
 
-    setIsSubmitting(false)
-    setShowSuccess(true)
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-    })
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
 
-    // Hide success message after 5 seconds
-    setTimeout(() => setShowSuccess(false), 5000)
+      setShowSuccess(true)
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
+      })
+
+      // Hide success message after 5 seconds
+      setTimeout(() => setShowSuccess(false), 5000)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setShowError(true)
+      // Hide error message after 5 seconds
+      setTimeout(() => setShowError(false), 5000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (
@@ -85,6 +104,15 @@ export default function ContactSection({block}: ContactSectionProps) {
       {showSuccess && (
         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md">
           <p className="text-green-700">{successMessage}</p>
+        </div>
+      )}
+
+      {showError && (
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md">
+          <p className="text-red-700">
+            Nepodařilo se odeslat zprávu. Zkuste to prosím znovu nebo nás kontaktujte přímo na
+            email.
+          </p>
         </div>
       )}
 
