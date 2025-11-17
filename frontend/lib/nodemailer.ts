@@ -8,4 +8,7 @@ export const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER || 'info@hledammotory.cz',
     pass: process.env.SMTP_PASSWORD || '',
   },
+  tls: {
+    rejectUnauthorized: false,
+  },
 })
