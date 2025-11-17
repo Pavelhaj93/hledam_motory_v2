@@ -3,6 +3,7 @@
 import {useState} from 'react'
 import {Mail, Phone, MapPin, Building2, SendIcon, SendHorizonalIcon, MailIcon} from 'lucide-react'
 import {Button} from './ui/button'
+import Link from 'next/link'
 
 interface ContactSectionProps {
   block?: {
@@ -38,6 +39,7 @@ export default function ContactSection({block}: ContactSectionProps) {
     email: '',
     phone: '',
     message: '',
+    gdprConsent: false,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
@@ -74,6 +76,7 @@ export default function ContactSection({block}: ContactSectionProps) {
         email: '',
         phone: '',
         message: '',
+        gdprConsent: false,
       })
 
       // Hide success message after 5 seconds
@@ -179,7 +182,36 @@ export default function ContactSection({block}: ContactSectionProps) {
           />
         </div>
 
-        <Button type="submit" disabled={isSubmitting} size="lg" className="w-full">
+        <div className="flex items-start space-x-2">
+          <input
+            type="checkbox"
+            id="gdprConsent"
+            name="gdprConsent"
+            required
+            checked={formData.gdprConsent}
+            onChange={(e) => setFormData((prev) => ({...prev, gdprConsent: e.target.checked}))}
+            className="mt-1 h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
+          />
+          <label htmlFor="gdprConsent" className="text-sm text-gray-700">
+            Souhlasím se{' '}
+            <Link
+              href="/ochrana-osobnich-udaju"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-600 hover:text-red-700 underline"
+            >
+              zpracováním osobních údajů
+            </Link>{' '}
+            *
+          </label>
+        </div>
+
+        <Button
+          type="submit"
+          disabled={isSubmitting || !formData.gdprConsent}
+          size="lg"
+          className="w-full"
+        >
           {isSubmitting ? 'Odesílání...' : submitButtonText}
           <MailIcon className="size-6 ml-2" />
         </Button>
