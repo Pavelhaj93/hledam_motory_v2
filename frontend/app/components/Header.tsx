@@ -19,6 +19,26 @@ interface HeaderProps {
 export default function Header({settings, brands}: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
+  const handlePhoneClick = () => {
+    // Track Sklik phone call conversion (ID: 100221747)
+    if (typeof window !== 'undefined' && (window as any).sznIVA && (window as any).rc) {
+      try {
+        ;(window as any).sznIVA.IS.updateIdentities({
+          eid: null,
+        })
+
+        const conversionConf = {
+          id: 100221747,
+          value: null,
+          consent: null,
+        }
+        ;(window as any).rc.conversionHit(conversionConf)
+      } catch (e) {
+        console.error('Sklik tracking error:', e)
+      }
+    }
+  }
+
   return (
     <header className="bg-white shadow-sm border-b sticky top-0 z-40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -38,7 +58,11 @@ export default function Header({settings, brands}: HeaderProps) {
 
           {/* Contact Info - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-6  text-gray-600">
-            <a href="tel:+420792644755" className="flex items-center space-x-2 hover:text-red-600">
+            <a
+              href="tel:+420792644755"
+              onClick={handlePhoneClick}
+              className="flex items-center space-x-2 hover:text-red-600"
+            >
               <Phone className="size-6 text-red-600" />
               <span>+420 792 644 755</span>
             </a>

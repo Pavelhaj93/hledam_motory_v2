@@ -52,6 +52,26 @@ export default function ContactSection({block}: ContactSectionProps) {
 
   const {email, phone, address, companyName, vatNumber} = contactInfo
 
+  const handlePhoneClick = () => {
+    // Track Sklik phone call conversion (ID: 100221747)
+    if (typeof window !== 'undefined' && (window as any).sznIVA && (window as any).rc) {
+      try {
+        ;(window as any).sznIVA.IS.updateIdentities({
+          eid: null,
+        })
+
+        const conversionConf = {
+          id: 100221747,
+          value: null,
+          consent: null,
+        }
+        ;(window as any).rc.conversionHit(conversionConf)
+      } catch (e) {
+        console.error('Sklik tracking error:', e)
+      }
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -68,6 +88,24 @@ export default function ContactSection({block}: ContactSectionProps) {
 
       if (!response.ok) {
         throw new Error('Failed to send message')
+      }
+
+      // Track Sklik form conversion (ID: 100221746)
+      if (typeof window !== 'undefined' && (window as any).sznIVA && (window as any).rc) {
+        try {
+          ;(window as any).sznIVA.IS.updateIdentities({
+            eid: formData.email || null,
+          })
+
+          const conversionConf = {
+            id: 100221746,
+            value: null,
+            consent: formData.gdprConsent ? 1 : 0,
+          }
+          ;(window as any).rc.conversionHit(conversionConf)
+        } catch (e) {
+          console.error('Sklik tracking error:', e)
+        }
       }
 
       setShowSuccess(true)
@@ -237,6 +275,7 @@ export default function ContactSection({block}: ContactSectionProps) {
 
             <a
               href={`tel:${phone?.replace(/\s/g, '')}`}
+              onClick={handlePhoneClick}
               className="flex items-center space-x-3 text-gray-700 hover:text-red-600 transition-colors"
             >
               <Phone className="h-5 w-5 text-red-600" />

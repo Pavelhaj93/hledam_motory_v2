@@ -98,6 +98,21 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           `}
         </Script>
 
+        {/* Google Analytics - Additional Tracking */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-PLBFP71HBC"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics-secondary" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-PLBFP71HBC');
+          `}
+        </Script>
+
         {/* Seznam.cz Retargeting */}
         <Script
           type="text/javascript"
