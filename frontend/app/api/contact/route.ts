@@ -10,9 +10,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({error: 'Missing required fields'}, {status: 400})
     }
 
+    console.log('Attempting to send email with config:', {
+      host: process.env.SMTP_HOST || 'mailproxy.webglobe.com',
+      port: process.env.SMTP_PORT || 587,
+      user: process.env.SMTP_USER || 'info@hledammotory.cz',
+      from: process.env.SMTP_USER || 'info@hledammotory.cz',
+      to: 'info@hledammotory.cz',
+    })
+
     // Send email
-    await transporter.sendMail({
-      from: process.env.SMTP_USER,
+    const info = await transporter.sendMail({
+      from: process.env.SMTP_USER || 'info@hledammotory.cz',
       to: 'info@hledammotory.cz',
       subject: `Nová zpráva z kontaktního formuláře od ${name}`,
       html: `
@@ -54,9 +62,35 @@ Tato zpráva byla odeslána z kontaktního formuláře na webu hledammotory.cz
       `,
     })
 
+    console.log('Email sent successfully:', info.messageId)
+
     return NextResponse.json({success: true, message: 'Email sent successfully'})
   } catch (error) {
     console.error('Error sending email:', error)
-    return NextResponse.json({error: 'Failed to send email'}, {status: 500})
+    console.error('Error details:', {
+      message: (error as any).message,
+      code: (error as any).code,
+      command: (error as any).command,
+      response: (error as any).response,
+      responseCode: (error as any).responseCode,
+    })
+
+    // Check if it's a country restriction error
+    const errorMessage = (error as any).message || ''
+    if (errorMessage.includes('country') && errorMessage.includes('not allowed')) {
+      return NextResponse.json(
+        {
+          error: 'Geographic restriction',
+          details:
+            'Email service is restricted from this location. This will work in production/Czech Republic.',
+        },
+        {status: 500},
+      )
+    }
+
+    return NextResponse.json(
+      {error: 'Failed to send email', details: (error as any).message},
+      {status: 500},
+    )
   }
 }
