@@ -215,11 +215,11 @@ export default async function StaryMotorDetailPage({params}: Props) {
             <p className="text-gray-600 mb-4">Pro objednání nebo více informací nás kontaktujte:</p>
             <div className="flex flex-col items-start space-y-2">
               <a
-                href="tel:+420724704764"
+                href="tel:+420792644755"
                 className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700"
               >
                 <Phone className="h-4 w-4" />
-                <span>+420 724 704 764</span>
+                <span>+420 792 644 755</span>
               </a>
               <a
                 href="mailto:info@hledammotory.cz"

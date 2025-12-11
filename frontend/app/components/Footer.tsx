@@ -140,10 +140,10 @@ export default function Footer({settings, brands}: FooterProps) {
                 <div className="flex items-center space-x-3">
                   <Phone className="h-4 w-4 text-red-400 flex-shrink-0" />
                   <a
-                    href="tel:+420724704764"
+                    href="tel:+420792644755"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    +420 724 704 764
+                    +420 792 644 755
                   </a>
                 </div>
 
