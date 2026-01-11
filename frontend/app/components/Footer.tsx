@@ -20,7 +20,7 @@ export default function Footer({settings, brands}: FooterProps) {
     <footer className="bg-gray-800 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
-        <div className="py-12">
+        <div className="py-4 md:py-8 lg:py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-1">
@@ -128,7 +128,7 @@ export default function Footer({settings, brands}: FooterProps) {
               <h3 className="text-lg font-semibold mb-4">Kontaktní údaje</h3>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <Mail className="h-4 w-4 text-red-400 flex-shrink-0" />
+                  <Mail className="h-4 w-4 text-red-400 shrink-0" />
                   <a
                     href="mailto:info@hledammotory.cz"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
@@ -138,7 +138,7 @@ export default function Footer({settings, brands}: FooterProps) {
                 </div>
 
                 <div className="flex items-center space-x-3">
-                  <Phone className="h-4 w-4 text-red-400 flex-shrink-0" />
+                  <Phone className="h-4 w-4 text-red-400 shrink-0" />
                   <a
                     href="tel:+420792644755"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
@@ -148,7 +148,7 @@ export default function Footer({settings, brands}: FooterProps) {
                 </div>
 
                 <div className="flex items-start space-x-3">
-                  <MapPin className="h-4 w-4 text-red-400 flex-shrink-0 mt-0.5" />
+                  <MapPin className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
                   <div className="text-gray-300 text-sm">
                     Prachnerova 642/10
                     <br />
@@ -159,7 +159,7 @@ export default function Footer({settings, brands}: FooterProps) {
                 </div>
 
                 <div className="flex items-start space-x-3">
-                  <Building2 className="h-4 w-4 text-red-400 flex-shrink-0 mt-0.5" />
+                  <Building2 className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
                   <div className="text-gray-300 text-sm">
                     <div className="font-medium">Neuro s.r.o.</div>
                     <div className="text-gray-400">DIČ: CZ19679041</div>
@@ -172,7 +172,7 @@ export default function Footer({settings, brands}: FooterProps) {
 
         {/* Footer Bottom */}
         <div className="border-t border-gray-800 py-6">
-          <div className="flex flex-col xl:flex-row justify-between items-center space-y-4 md:space-y-2">
+          <div className="flex flex-col xl:flex-row justify-between items-center gap-4 md:gap-2">
             {/* Copyright */}
             <div className="text-gray-400 text-sm">
               © {currentYear} {settings?.title || 'Motorové díly'}. Všechna práva vyhrazena.

@@ -87,7 +87,7 @@ export default function CookieBanner() {
 
               {/* Icon and Content */}
               <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="bg-red-100 rounded-full p-3">
                     <Cookie className="size-8 text-red-600" />
                   </div>

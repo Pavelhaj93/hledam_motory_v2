@@ -58,6 +58,14 @@ export default async function RepasovanyMotorDetailPage({params}: Props) {
   return (
     <div className="container mx-auto px-4 py-8">
       <nav className="text-sm text-gray-600 mb-6">
+        <Link href="/" className="hover:text-gray-900">
+          Domů
+        </Link>
+        <span className="mx-2">/</span>
+        <Link href="/katalog" className="hover:text-gray-900">
+          Katalog
+        </Link>
+        <span className="mx-2">/</span>
         <Link href="/katalog/repasovane-motory" className="hover:text-gray-900">
           Repasované motory
         </Link>
@@ -163,7 +171,7 @@ export default async function RepasovanyMotorDetailPage({params}: Props) {
                   >
                     <div className="flex items-start space-x-3">
                       {turbo.mainImage && (
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                        <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden shrink-0">
                           <Image
                             src={urlForImage(turbo.mainImage)?.width(64).height(64).url() || ''}
                             alt={turbo.mainImage.alt || turbo.name}

@@ -344,6 +344,20 @@ export const homepageQuery = defineQuery(`
           }
         }
       },
+      _type == "categoryGrid" => {
+        ...,
+        categories[]{
+          ...,
+          "itemCount": select(
+            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),
+            slug == "stare-motory" => count(*[_type == "staryMotor"]),
+            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),
+            slug == "prevodovky" => count(*[_type == "prevodovka"]),
+            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),
+            0
+          )
+        }
+      },
     },
   }
 `)
@@ -497,6 +511,20 @@ export const getPageQuery = defineQuery(`
               "post": post->slug.current
             }
           }
+        }
+      },
+      _type == "categoryGrid" => {
+        ...,
+        categories[]{
+          ...,
+          "itemCount": select(
+            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),
+            slug == "stare-motory" => count(*[_type == "staryMotor"]),
+            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),
+            slug == "prevodovky" => count(*[_type == "prevodovka"]),
+            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),
+            0
+          )
         }
       },
     },

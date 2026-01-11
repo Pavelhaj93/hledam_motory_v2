@@ -90,13 +90,6 @@ export const categoryGrid = defineType({
               initialValue: 'bg-gradient-to-br from-red-500 to-red-600',
             }),
             defineField({
-              name: 'itemCount',
-              title: 'Item Count',
-              type: 'string',
-              description: 'Display count like "200+"',
-              initialValue: '0+',
-            }),
-            defineField({
               name: 'featured',
               title: 'Featured',
               type: 'boolean',
@@ -127,7 +120,6 @@ export const categoryGrid = defineType({
             'Kompletní repasované motory s plnou zárukou. Profesionální renovace s výměnou všech opotřebovaných dílů.',
           icon: 'zap',
           color: 'bg-gradient-to-br from-red-500 to-red-600',
-          itemCount: '200+',
           featured: true,
         },
         {
@@ -137,7 +129,6 @@ export const categoryGrid = defineType({
             'Repasovaná turbodmychadla pro všechny typy vozidel. Kompletní renovace s novými ložisky a těsněními.',
           icon: 'cog',
           color: 'bg-gradient-to-br from-green-500 to-green-600',
-          itemCount: '150+',
           featured: true,
         },
         {
@@ -147,7 +138,6 @@ export const categoryGrid = defineType({
             'Manuální a automatické převodovky po kompletní renovaci. Výměna všech opotřebovaných komponentů.',
           icon: 'settings',
           color: 'bg-gradient-to-br from-purple-500 to-purple-600',
-          itemCount: '80+',
           featured: false,
         },
         {
@@ -156,7 +146,6 @@ export const categoryGrid = defineType({
           description: 'Repasované motorové hlavy s nově zabroušenými ventily a novými těsněními.',
           icon: 'wrench',
           color: 'bg-gradient-to-br from-orange-500 to-orange-600',
-          itemCount: '120+',
           featured: false,
         },
         {
@@ -166,7 +155,6 @@ export const categoryGrid = defineType({
             'Široký výběr starých motorů pro různé značky a modely vozidel. Ideální pro renovace a opravy.',
           icon: 'car',
           color: 'bg-gradient-to-br from-yellow-500 to-yellow-600',
-          itemCount: '300+',
           featured: true,
         },
       ],

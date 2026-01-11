@@ -171,7 +171,7 @@ export default async function StaryMotorDetailPage({params}: Props) {
                   >
                     <div className="flex items-start space-x-3">
                       {turbo.mainImage && (
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                        <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden shrink-0">
                           <Image
                             src={urlForImage(turbo.mainImage)?.width(64).height(64).url() || ''}
                             alt={turbo.mainImage.alt || turbo.name}

@@ -9,7 +9,7 @@ interface Category {
   description: string
   icon: string
   color: string
-  itemCount: string
+  itemCount: number | string
   featured: boolean
 }
 
@@ -79,7 +79,9 @@ export default function CategoryGrid({block}: CategoryGridProps) {
                       {category.title}
                     </h3>
                     <span className="text-sm font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                      {category.itemCount}
+                      {typeof category.itemCount === 'number' 
+                        ? `${category.itemCount}+` 
+                        : category.itemCount}
                     </span>
                   </div>
 
