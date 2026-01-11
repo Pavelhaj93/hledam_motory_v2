@@ -10,11 +10,20 @@ interface ConsentHandler {
   (consent: boolean): void
 }
 
-export default function CookieBanner() {
+interface CookieBannerProps {
+  isDraftMode?: boolean
+}
+
+export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
   const [openBanner, setOpenBanner] = useState(false)
   const [showButton, setShowButton] = useState(false)
 
   useEffect(() => {
+    // Don't show cookie banner in draft/editing mode
+    if (isDraftMode) {
+      return
+    }
+
     const consentCookie = Cookies.get('cookie-consent')
     if (consentCookie === undefined) {
       // Show banner after a short delay for better UX
@@ -23,7 +32,7 @@ export default function CookieBanner() {
       // Show the floating button if consent was already given
       setShowButton(true)
     }
-  }, [])
+  }, [isDraftMode])
 
   const handleConsent: ConsentHandler = (consent: boolean) => {
     // Store consent for 1 year
@@ -49,6 +58,11 @@ export default function CookieBanner() {
         })
       }
     }
+  }
+
+  // Don't render anything in draft/editing mode
+  if (isDraftMode) {
+    return null
   }
 
   return (

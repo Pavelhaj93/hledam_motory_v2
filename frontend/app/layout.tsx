@@ -154,7 +154,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           <Header settings={settings || undefined} brands={brands || []} />
           <main className="min-h-[calc(100vh-29rem)]">{children}</main>
           <Footer settings={settings || undefined} brands={brands || []} />
-          <CookieBanner />
+          <CookieBanner isDraftMode={isDraftMode} />
         </section>
         <SpeedInsights />
       </body>
