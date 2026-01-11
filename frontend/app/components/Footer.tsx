@@ -67,7 +67,7 @@ export default function Footer({settings, brands}: FooterProps) {
                 </li>
                 <li>
                   <Link
-                    href="/contact"
+                    href="/kontakt"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     Kontakt
@@ -75,7 +75,7 @@ export default function Footer({settings, brands}: FooterProps) {
                 </li>
                 <li>
                   <Link
-                    href="/about"
+                    href="/o-nas"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     O nás
