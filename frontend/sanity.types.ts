@@ -12,7 +12,7 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: schema.json
+// Source: ../studio/schema.json
 export type Link = {
   _type: 'link'
   linkType?: 'href' | 'page' | 'post'
@@ -1116,8 +1116,16 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
+
 export declare const internalGroqTypeReferenceTo: unique symbol
-// Source: ./sanity/lib/queries.ts
+
+type ArrayOf<T> = Array<
+  T & {
+    _key: string
+  }
+>
+
+// Source: sanity/lib/queries.ts
 // Variable: settingsQuery
 // Query: *[_type == "settings"][0]
 export type SettingsQueryResult = {
@@ -1174,6 +1182,8 @@ export type SettingsQueryResult = {
     _type: 'image'
   }
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: homepageQuery
 // Query: *[_type == "homepage"][0]{    _id,    _type,    title,    seo,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        link {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "infoSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          phone,          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        "products": *[_type == "repasovanyMotor"] | order(_createdAt desc)[0...15]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),            slug == "stare-motory" => count(*[_type == "staryMotor"]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),            slug == "prevodovky" => count(*[_type == "prevodovka"]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),            0          )        }      },    },  }
 export type HomepageQueryResult = {
@@ -1517,6 +1527,8 @@ export type HomepageQueryResult = {
       }
   > | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: getPageQuery
 // Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          phone,          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        secondaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),            slug == "stare-motory" => count(*[_type == "staryMotor"]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),            slug == "prevodovky" => count(*[_type == "prevodovka"]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),            0          )        }      },    },  }
 export type GetPageQueryResult = {
@@ -2065,6 +2077,8 @@ export type GetPageQueryResult = {
       }
   > | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: sitemapData
 // Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
 export type SitemapDataResult = Array<
@@ -2079,6 +2093,8 @@ export type SitemapDataResult = Array<
       _updatedAt: string
     }
 >
+
+// Source: sanity/lib/queries.ts
 // Variable: allPostsQuery
 // Query: *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type AllPostsQueryResult = Array<{
@@ -2119,6 +2135,8 @@ export type AllPostsQueryResult = Array<{
     }
   } | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: morePostsQuery
 // Query: *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type MorePostsQueryResult = Array<{
@@ -2159,6 +2177,8 @@ export type MorePostsQueryResult = Array<{
     }
   } | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: postQuery
 // Query: *[_type == "post" && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type PostQueryResult = {
@@ -2221,16 +2241,22 @@ export type PostQueryResult = {
     }
   } | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: postPagesSlugs
 // Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current}
 export type PostPagesSlugsResult = Array<{
   slug: string
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: pagesSlugs
 // Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
 export type PagesSlugsResult = Array<{
   slug: string
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: allBrandsWithLogosQuery
 // Query: *[_type == "brand"] | order(isPopular desc, name asc) {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
 export type AllBrandsWithLogosQueryResult = Array<{
@@ -2251,6 +2277,8 @@ export type AllBrandsWithLogosQueryResult = Array<{
   } | null
   isPopular: boolean | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: popularBrandsWithLogosQuery
 // Query: *[_type == "brand" && isPopular == true] | order(name asc) {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
 export type PopularBrandsWithLogosQueryResult = Array<{
@@ -2269,8 +2297,10 @@ export type PopularBrandsWithLogosQueryResult = Array<{
     crop?: SanityImageCrop
     _type: 'image'
   } | null
-  isPopular: boolean | null
+  isPopular: true
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: brandBySlugQuery
 // Query: *[_type == "brand" && slug.current == $slug][0] {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
 export type BrandBySlugQueryResult = {
@@ -2291,6 +2321,8 @@ export type BrandBySlugQueryResult = {
   } | null
   isPopular: boolean | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: allRepasovaneMotoryQuery
 // Query: *[_type == "repasovanyMotor" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  }  }
 export type AllRepasovaneMotoryQueryResult = Array<{
@@ -2372,6 +2404,8 @@ export type AllRepasovaneMotoryQueryResult = Array<{
     condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   }> | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: repasovanyMotorQuery
 // Query: *[_type == "repasovanyMotor" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo  }
 export type RepasovanyMotorQueryResult = {
@@ -2473,11 +2507,15 @@ export type RepasovanyMotorQueryResult = {
     metaDescription?: string
   } | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: repasovaneMotoryPagesSlugs
 // Query: *[_type == "repasovanyMotor" && defined(slug.current)]  {"slug": slug.current}
 export type RepasovaneMotoryPagesSlugsResult = Array<{
   slug: string
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: allStareMotoryQuery
 // Query: *[_type == "staryMotor" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  }  }
 export type AllStareMotoryQueryResult = Array<{
@@ -2560,6 +2598,8 @@ export type AllStareMotoryQueryResult = Array<{
     condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   }> | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: staryMotorQuery
 // Query: *[_type == "staryMotor" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo  }
 export type StaryMotorQueryResult = {
@@ -2662,11 +2702,15 @@ export type StaryMotorQueryResult = {
     metaDescription?: string
   } | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: stareMotoryPagesSlugs
 // Query: *[_type == "staryMotor" && defined(slug.current)]  {"slug": slug.current}
 export type StareMotoryPagesSlugsResult = Array<{
   slug: string
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: allMotoroveHlavyQuery
 // Query: *[_type == "motorovaHlava" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod  }
 export type AllMotoroveHlavyQueryResult = Array<{
@@ -2721,6 +2765,8 @@ export type AllMotoroveHlavyQueryResult = Array<{
   includedComponents: Array<string> | null
   warrantyPeriod: string | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: motorovaHlavaQuery
 // Query: *[_type == "motorovaHlava" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod,    detailedDescription,    images[],    seo  }
 export type MotorovaHlavaQueryResult = {
@@ -2795,11 +2841,15 @@ export type MotorovaHlavaQueryResult = {
     metaDescription?: string
   } | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: motoroveHlavyPagesSlugs
 // Query: *[_type == "motorovaHlava" && defined(slug.current)]  {"slug": slug.current}
 export type MotoroveHlavyPagesSlugsResult = Array<{
   slug: string
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: allPrevodovkyQuery
 // Query: *[_type == "prevodovka" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod  }
 export type AllPrevodovkyQueryResult = Array<{
@@ -2857,6 +2907,8 @@ export type AllPrevodovkyQueryResult = Array<{
   fluidType: string | null
   warrantyPeriod: string | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: prevodovkaQuery
 // Query: *[_type == "prevodovka" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod,    detailedDescription,    images[],    seo  }
 export type PrevodovkaQueryResult = {
@@ -2934,11 +2986,15 @@ export type PrevodovkaQueryResult = {
     metaDescription?: string
   } | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: prevodovkyPagesSlugs
 // Query: *[_type == "prevodovka" && defined(slug.current)]  {"slug": slug.current}
 export type PrevodovkyPagesSlugsResult = Array<{
   slug: string
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: allTurbodmychadlaQuery
 // Query: *[_type == "turbodmychadlo" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod  }
 export type AllTurbodmychadlaQueryResult = Array<{
@@ -2997,6 +3053,8 @@ export type AllTurbodmychadlaQueryResult = Array<{
   oilType: string | null
   warrantyPeriod: string | null
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: turbodmychadloQuery
 // Query: *[_type == "turbodmychadlo" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod,    detailedDescription,    images[],    seo  }
 export type TurbodmychadloQueryResult = {
@@ -3075,11 +3133,15 @@ export type TurbodmychadloQueryResult = {
     metaDescription?: string
   } | null
 } | null
+
+// Source: sanity/lib/queries.ts
 // Variable: turbodmychadlaPagesSlugs
 // Query: *[_type == "turbodmychadlo" && defined(slug.current)]  {"slug": slug.current}
 export type TurbodmychadlaPagesSlugsResult = Array<{
   slug: string
 }>
+
+// Source: sanity/lib/queries.ts
 // Variable: latestProductsQuery
 // Query: *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...15]{    _id,    _type,    name,    "slug": slug.current,    images[],    price,    description,    brand->{      name,      logo    },    category  }
 export type LatestProductsQueryResult = Array<
