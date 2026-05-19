@@ -1,31 +1,35 @@
 import {MetadataRoute} from 'next'
 import {sanityFetch} from '@/sanity/lib/live'
-import {sitemapData} from '@/sanity/lib/queries'
+import {sitemapData, sitemapProductsData} from '@/sanity/lib/queries'
 import {headers} from 'next/headers'
 
-/**
- * This file creates a sitemap (sitemap.xml) for the application. Learn more about sitemaps in Next.js here: https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
- * Be sure to update the `changeFrequency` and `priority` values to match your application's content.
- */
+const productTypeToPath: Record<string, string> = {
+  repasovanyMotor: 'katalog/repasovane-motory',
+  staryMotor: 'katalog/stare-motory',
+  motorovaHlava: 'katalog/motorove-hlavy',
+  prevodovka: 'katalog/prevodovky',
+  turbodmychadlo: 'katalog/turbodmychadla',
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const allPostsAndPages = await sanityFetch({
-    query: sitemapData,
-  })
+  const [allPostsAndPages, allProducts] = await Promise.all([
+    sanityFetch({query: sitemapData}),
+    sanityFetch({query: sitemapProductsData}),
+  ])
 
   const headersList = await headers()
-  const sitemap: MetadataRoute.Sitemap = []
   const domain = `https://${headersList.get('host')}` || 'https://hledammotory.cz'
+  const result: MetadataRoute.Sitemap = []
 
   // Root page
-  sitemap.push({
+  result.push({
     url: domain,
     lastModified: new Date(),
     priority: 1,
     changeFrequency: 'monthly',
   })
 
-  // Main category pages
+  // Category pages (once, no duplicates)
   const categories = [
     'katalog',
     'katalog/repasovane-motory',
@@ -35,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'katalog/motorove-hlavy',
   ]
   categories.forEach((category) => {
-    sitemap.push({
+    result.push({
       url: `${domain}/${category}`,
       lastModified: new Date(),
       priority: 0.9,
@@ -43,58 +47,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   })
 
-  // Category pages (removed brand-specific pages since we no longer have brand routing)
-  const mainCategories = [
-    'repasovane-motory',
-    'stare-motory',
-    'turbodmychadla',
-    'prevodovky',
-    'motorove-hlavy',
-  ]
-
-  mainCategories.forEach((category) => {
-    sitemap.push({
-      url: `${domain}/katalog/${category}`,
-      lastModified: new Date(),
-      priority: 0.8,
-      changeFrequency: 'monthly',
-    })
-  })
-
-  if (allPostsAndPages != null && allPostsAndPages.data.length != 0) {
-    let priority: number
-    let changeFrequency:
-      | 'monthly'
-      | 'always'
-      | 'hourly'
-      | 'daily'
-      | 'weekly'
-      | 'yearly'
-      | 'never'
-      | undefined
-    let url: string
-
-    for (const p of allPostsAndPages.data) {
-      switch (p._type) {
-        case 'page':
-          priority = 0.8
-          changeFrequency = 'monthly'
-          url = `${domain}/${p.slug}`
-          break
-        case 'post':
-          priority = 0.5
-          changeFrequency = 'never'
-          url = `${domain}/posts/${p.slug}`
-          break
-      }
-      sitemap.push({
-        lastModified: p._updatedAt || new Date(),
-        priority,
-        changeFrequency,
-        url,
+  // Product detail pages
+  if (allProducts?.data?.length) {
+    for (const product of allProducts.data) {
+      const basePath = productTypeToPath[product._type]
+      if (!basePath || !product.slug) continue
+      result.push({
+        url: `${domain}/${basePath}/${product.slug}`,
+        lastModified: product._updatedAt || new Date(),
+        priority: 0.8,
+        changeFrequency: 'weekly',
       })
     }
   }
 
-  return sitemap
+  // CMS pages and posts
+  if (allPostsAndPages?.data?.length) {
+    for (const p of allPostsAndPages.data) {
+      if (!p.slug) continue
+      if (p._type === 'page') {
+        result.push({
+          url: `${domain}/${p.slug}`,
+          lastModified: p._updatedAt || new Date(),
+          priority: 0.8,
+          changeFrequency: 'monthly',
+        })
+      } else if (p._type === 'post') {
+        result.push({
+          url: `${domain}/posts/${p.slug}`,
+          lastModified: p._updatedAt || new Date(),
+          priority: 0.5,
+          changeFrequency: 'never',
+        })
+      }
+    }
+  }
+
+  return result
 }
+

@@ -539,6 +539,14 @@ export const sitemapData = defineQuery(`
   }
 `)
 
+export const sitemapProductsData = defineQuery(`
+  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && defined(slug.current)] {
+    "slug": slug.current,
+    _type,
+    _updatedAt,
+  }
+`)
+
 export const allPostsQuery = defineQuery(`
   *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {
     ${postFields}

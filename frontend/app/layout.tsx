@@ -36,9 +36,9 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     metadataBase = settings?.ogImage?.metadataBase
       ? new URL(settings.ogImage.metadataBase)
-      : undefined
+      : new URL('https://hledammotory.cz')
   } catch {
-    // ignore
+    metadataBase = new URL('https://hledammotory.cz')
   }
   return {
     metadataBase,
@@ -47,6 +47,9 @@ export async function generateMetadata(): Promise<Metadata> {
       default: title,
     },
     description: toPlainText(description),
+    alternates: {
+      canonical: '/',
+    },
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
@@ -74,7 +77,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   ])
 
   return (
-    <html lang="en" className={`${inter.variable} bg-white text-black`}>
+    <html lang="cs" className={`${inter.variable} bg-white text-black`}>
       <head>
         {/* Google Analytics - Initialize with denied consent */}
         <Script
