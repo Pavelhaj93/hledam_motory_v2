@@ -175,7 +175,7 @@ const turbodmychadloFields = /* groq */ `
   warrantyPeriod
 `
 
-export const settingsQuery = defineQuery(`*[_type == "settings"][0]`)
+export const settingsQuery = defineQuery(`*[_type == "settings"][0]{title, phone, description, ogImage}`)
 
 export const homepageQuery = defineQuery(`
   *[_type == "homepage"][0]{
@@ -261,7 +261,7 @@ export const homepageQuery = defineQuery(`
         ...,
         contactInfo {
           email,
-          phone,
+          "phone": coalesce(*[_type == "settings"][0].phone, phone),
           address,
           companyName,
           vatNumber
@@ -438,7 +438,7 @@ export const getPageQuery = defineQuery(`
         ...,
         contactInfo {
           email,
-          phone,
+          "phone": coalesce(*[_type == "settings"][0].phone, phone),
           address,
           companyName,
           vatNumber

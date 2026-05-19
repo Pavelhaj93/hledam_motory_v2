@@ -23,6 +23,13 @@ export const settings = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'phone',
+      title: 'Telefonní číslo',
+      description: 'Telefonní číslo pro kontakt na webu (zobrazí se ve footeru, headeru, kontaktech atd.)',
+      type: 'string',
+      validation: (rule) => rule.required().regex(/^\+?\d[\d\s]{7,}$/),
+    }),
+    defineField({
       name: 'description',
       description: 'Used on the Homepage',
       title: 'Description',

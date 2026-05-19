@@ -11,6 +11,7 @@ import {Button} from './ui/button'
 interface HeaderProps {
   settings?: {
     title?: string
+    phone?: string
   }
   brands: AllBrandsWithLogosQueryResult
 }
@@ -18,6 +19,7 @@ interface HeaderProps {
 // Client-side Header Component
 export default function Header({settings, brands}: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const phone = settings?.phone || '+420 792 644 755'
 
   const handlePhoneClick = () => {
     // Track Sklik phone call conversion (ID: 100221747)
@@ -59,12 +61,12 @@ export default function Header({settings, brands}: HeaderProps) {
           {/* Contact Info - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-6  text-gray-600">
             <a
-              href="tel:+420792644755"
+              href={`tel:${phone.replace(/\s/g, '')}`}
               onClick={handlePhoneClick}
               className="flex items-center space-x-2 hover:text-red-600"
             >
               <Phone className="size-6 text-red-600" />
-              <span>+420 792 644 755</span>
+              <span>{phone}</span>
             </a>
             <a
               href="mailto:info@hledammotory.cz"
@@ -225,11 +227,12 @@ export default function Header({settings, brands}: HeaderProps) {
                   <span>info@hledammotory.cz</span>
                 </a>
                 <a
-                  href="tel:+420123456789"
+                  href={`tel:${phone.replace(/\s/g, '')}`}
+                  onClick={handlePhoneClick}
                   className="flex items-center space-x-2 text-sm text-gray-600 hover:text-red-600"
                 >
                   <Phone className="h-4 w-4" />
-                  <span>+420 123 456 789</span>
+                  <span>{phone}</span>
                 </a>
               </div>
 

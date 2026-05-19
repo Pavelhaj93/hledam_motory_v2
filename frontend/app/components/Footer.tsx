@@ -9,12 +9,14 @@ import Image from 'next/image'
 interface FooterProps {
   settings?: {
     title?: string
+    phone?: string
   }
   brands: AllBrandsWithLogosQueryResult
 }
 
 export default function Footer({settings, brands}: FooterProps) {
   const currentYear = new Date().getFullYear()
+  const phone = settings?.phone || '+420 792 644 755'
 
   return (
     <footer className="bg-gray-800 text-white">
@@ -140,10 +142,10 @@ export default function Footer({settings, brands}: FooterProps) {
                 <div className="flex items-center space-x-3">
                   <Phone className="h-4 w-4 text-red-400 shrink-0" />
                   <a
-                    href="tel:+420792644755"
+                    href={`tel:${phone.replace(/\s/g, '')}`}
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    +420 792 644 755
+                    {phone}
                   </a>
                 </div>
 

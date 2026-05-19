@@ -4,13 +4,12 @@
   "scripts": {
     "prebuild": "npm run typegen",
     "build": "next build",
-    "predev": "npm run typegen",
     "dev": "next dev --turbopack",
     "lint": "next lint",
     "migrate:old-motors": "node scripts/migrate-old-motors.js",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "typegen": "sanity typegen generate"
+    "typegen": "(cd ../studio && ../node_modules/.bin/sanity typegen generate)"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
