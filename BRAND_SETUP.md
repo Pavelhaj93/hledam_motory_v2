@@ -11,6 +11,7 @@ This document explains how to use the new Brand document system in Sanity for yo
 ## Brand Document Features
 
 ### Fields
+
 - **Name**: Brand display name (e.g., "BMW", "Audi")
 - **Slug**: URL-friendly identifier (e.g., "bmw", "audi")
 - **Logo**: Brand logo image (with alt text)
@@ -34,6 +35,7 @@ npm run migrate-brands
 ```
 
 This will:
+
 - Import 10 common car brands (BMW, Audi, VW, Mercedes, etc.)
 - Migrate existing products to use brand references
 
@@ -63,28 +65,29 @@ Display brands with logos in your frontend:
 import BrandSelector from '@/app/components/BrandSelector'
 
 // Grid layout with logos
-<BrandSelector 
-  category="repasovane-motory" 
-  layout="grid" 
+<BrandSelector
+  category="repasovane-motory"
+  layout="grid"
   showLogos={true}
 />
 
 // Compact list for navigation
-<BrandSelector 
-  layout="compact" 
+<BrandSelector
+  layout="compact"
   maxBrands={6}
   showLogos={true}
 />
 
 // List with descriptions
-<BrandSelector 
-  layout="list" 
+<BrandSelector
+  layout="list"
   showDescriptions={true}
   showLogos={true}
 />
 ```
 
 ### Props
+
 - `category`: Filter to category-specific brands
 - `layout`: 'grid', 'list', or 'compact'
 - `showLogos`: Display brand logos
@@ -97,12 +100,13 @@ import BrandSelector from '@/app/components/BrandSelector'
 Brands now work with the SEO URL structure:
 
 - `/repasovane-motory/bmw/` - BMW engines
-- `/turbodmychadla/audi/` - Audi turbochargers  
+- `/turbodmychadla/audi/` - Audi turbochargers
 - `/prevodovky/volkswagen/` - VW transmissions
 
 ## Queries
 
 ### Get All Brands with Logos
+
 ```groq
 *[_type == "brand" && isActive == true] | order(sortOrder asc, name asc) {
   _id,
@@ -115,6 +119,7 @@ Brands now work with the SEO URL structure:
 ```
 
 ### Get Products by Brand
+
 ```groq
 *[_type == "product" && brand->name == "BMW"] {
   name,
@@ -142,16 +147,19 @@ Brands now work with the SEO URL structure:
 ## Troubleshooting
 
 ### Products showing no brand
+
 - Check if brand references are properly set
 - Verify brand documents exist and are active
 - Run the migration script if needed
 
 ### TypeScript errors
+
 - Run `npm run typegen` in frontend directory
 - Restart your development server
 - Check that queries include brand references
 
 ### Missing logos
+
 - Upload logos to brand documents in Sanity Studio
 - Ensure alt text is provided for accessibility
 - Logos should be square format for best display

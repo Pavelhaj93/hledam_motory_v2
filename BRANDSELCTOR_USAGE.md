@@ -5,6 +5,7 @@ Here are the recommended places to use the BrandSelector component for maximum S
 ## 🏗️ **Architecture Overview**
 
 The BrandSelector system uses a **server-client pattern**:
+
 - **`BrandSelectorServer`** - Server component that fetches brands from Sanity
 - **`BrandSelector`** - Client component that renders the UI with passed brands
 - **Layout Integration** - Brands fetched in layout.tsx and passed to Header/Footer
@@ -12,68 +13,51 @@ The BrandSelector system uses a **server-client pattern**:
 ## 📋 **Component Usage**
 
 ### **Server Components (Recommended)**
+
 Use `BrandSelectorServer` for most pages:
+
 ```tsx
 import BrandSelectorServer from '@/app/components/BrandSelectorServer'
 
-<BrandSelectorServer 
-  layout="grid"
-  showLogos={true}
-  maxBrands={12}
-  className="mb-6"
-/>
+;<BrandSelectorServer layout="grid" showLogos={true} maxBrands={12} className="mb-6" />
 ```
 
 ### **Client Components**
+
 Use `BrandSelector` when brands are already available:
+
 ```tsx
 import BrandSelector from '@/app/components/BrandSelector'
 
-<BrandSelector 
-  brands={brands}
-  layout="grid"
-  showLogos={true}
-  maxBrands={12}
-/>
+;<BrandSelector brands={brands} layout="grid" showLogos={true} maxBrands={12} />
 ```
 
 ## 1. 🏠 **Homepage/Landing Page**
+
 ```tsx
 // Hero section with top brands
-<BrandSelectorServer 
-  layout="compact"
-  showLogos={true}
-  maxBrands={8}
-  className="mt-8"
-/>
+<BrandSelectorServer layout="compact" showLogos={true} maxBrands={8} className="mt-8" />
 ```
 
 ## 2. 📋 **katalog Overview Page** ✅ IMPLEMENTED
+
 ```tsx
 // Popular brands section
-<BrandSelectorServer 
-  layout="grid"
-  showLogos={true}
-  maxBrands={12}
-  className="mb-6"
-/>
+<BrandSelectorServer layout="grid" showLogos={true} maxBrands={12} className="mb-6" />
 ```
 
 ## 3. ⚙️ **Category Pages** ✅ IMPLEMENTED
+
 ```tsx
 // Category-specific brands (engines, turbos, etc.)
-<BrandSelectorServer 
-  category="repasovane-motory"
-  layout="grid"
-  showLogos={true}
-  maxBrands={12}
-/>
+<BrandSelectorServer category="repasovane-motory" layout="grid" showLogos={true} maxBrands={12} />
 ```
 
 ## 4. 🚗 **Brand-Specific Pages**
+
 ```tsx
 // Related brands in same category
-<BrandSelectorServer 
+<BrandSelectorServer
   category="repasovane-motory"
   layout="compact"
   showLogos={true}
@@ -83,9 +67,10 @@ import BrandSelector from '@/app/components/BrandSelector'
 ```
 
 ## 5. 📱 **Header Navigation** ✅ IMPLEMENTED
+
 ```tsx
 // Mobile mega menu (brands passed from layout)
-<BrandSelector 
+<BrandSelector
   brands={brands}
   layout="compact"
   showLogos={false}
@@ -95,9 +80,10 @@ import BrandSelector from '@/app/components/BrandSelector'
 ```
 
 ## 6. 🦶 **Footer** ✅ IMPLEMENTED
+
 ```tsx
 // Footer brand showcase (brands passed from layout)
-<BrandSelector 
+<BrandSelector
   brands={brands}
   layout="compact"
   showLogos={false}
@@ -107,20 +93,17 @@ import BrandSelector from '@/app/components/BrandSelector'
 ```
 
 ## 7. 🔍 **Search Results Page**
+
 ```tsx
 // Filter by brand
-<BrandSelector 
-  layout="compact"
-  showLogos={true}
-  maxBrands={8}
-  className="mb-4"
-/>
+<BrandSelector layout="compact" showLogos={true} maxBrands={8} className="mb-4" />
 ```
 
 ## 8. 📄 **Product Detail Pages**
+
 ```tsx
 // "Other [Brand] products" section
-<BrandSelector 
+<BrandSelector
   category="repasovane-motory"
   layout="list"
   showLogos={true}
@@ -130,30 +113,30 @@ import BrandSelector from '@/app/components/BrandSelector'
 ```
 
 ## 9. 🎯 **Landing Pages**
+
 ```tsx
 // SEO landing pages for specific searches
-<BrandSelector 
-  layout="grid"
-  showLogos={true}
-  showDescriptions={true}
-/>
+<BrandSelector layout="grid" showLogos={true} showDescriptions={true} />
 ```
 
 ## Layout Recommendations
 
 ### **Grid Layout** - Best for:
+
 - Main showcase areas
 - Category pages
 - Homepage sections
 - When you have space
 
 ### **Compact Layout** - Best for:
+
 - Navigation areas
 - Sidebars
 - Mobile menus
 - Quick filters
 
 ### **List Layout** - Best for:
+
 - Product detail pages
 - Search results
 - When descriptions are important

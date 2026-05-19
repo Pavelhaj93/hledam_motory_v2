@@ -39,7 +39,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
               url: urlForImage(prevodovka.mainImage)?.width(800).height(600).url() || '',
               width: 800,
               height: 600,
-              alt: prevodovka.mainImage.alt || prevodovka.name,
+              alt: prevodovka.mainImage.alt || prevodovka.name || undefined,
             },
           ]
         : [],
@@ -79,7 +79,7 @@ export default async function PrevodovkaDetailPage({params}: Props) {
             <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
               <Image
                 src={urlForImage(prevodovka.mainImage)?.width(600).height(600).url() || ''}
-                alt={prevodovka.mainImage.alt || prevodovka.name}
+                alt={prevodovka.mainImage.alt || prevodovka.name || ''}
                 width={600}
                 height={600}
                 className="h-full w-full object-cover object-center"

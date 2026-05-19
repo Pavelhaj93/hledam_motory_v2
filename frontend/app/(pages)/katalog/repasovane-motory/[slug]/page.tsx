@@ -39,7 +39,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
               url: urlForImage(motor.mainImage)?.width(800).height(600).url() || '',
               width: 800,
               height: 600,
-              alt: motor.mainImage.alt || motor.name,
+              alt: motor.mainImage.alt || motor.name || undefined,
             },
           ]
         : [],
@@ -87,7 +87,7 @@ export default async function RepasovanyMotorDetailPage({params}: Props) {
             <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
               <Image
                 src={urlForImage(motor.mainImage)?.width(600).height(600).url() || ''}
-                alt={motor.mainImage.alt || motor.name}
+                alt={motor.mainImage.alt || motor.name || ''}
                 width={600}
                 height={600}
                 className="h-full w-full object-cover object-center"

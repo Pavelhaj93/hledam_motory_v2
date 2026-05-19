@@ -7,7 +7,7 @@ import {urlForImage} from '@/sanity/lib/utils'
 
 interface ImageGalleryProps {
   images: any[]
-  productName: string
+  productName: string | null | undefined
 }
 
 export default function ImageGallery({images, productName}: ImageGalleryProps) {

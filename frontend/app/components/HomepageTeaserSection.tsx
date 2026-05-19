@@ -75,7 +75,7 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
                     {product.images?.[0] ? (
                       <Image
                         src={urlForImage(product.images?.[0])?.width(400).height(400).url() || ''}
-                        alt={product.name}
+                        alt={product.name ?? ''}
                         width={400}
                         height={400}
                         className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-200"
@@ -117,7 +117,7 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
                     <div className="mt-4 pt-4 border-t border-gray-100">
                       <div className="flex items-center justify-end">
                         <span className="text-lg font-bold text-gray-900">
-                          {formatPrice(product.price, 'CZK')}
+                          {formatPrice(product.price ?? undefined, 'CZK')}
                         </span>
                       </div>
                     </div>

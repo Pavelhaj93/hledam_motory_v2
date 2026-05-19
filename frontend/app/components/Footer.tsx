@@ -8,9 +8,9 @@ import Image from 'next/image'
 
 interface FooterProps {
   settings?: {
-    title?: string
-    phone?: string
-  }
+    title?: string | null
+    phone?: string | null
+  } | null
   brands: AllBrandsWithLogosQueryResult
 }
 

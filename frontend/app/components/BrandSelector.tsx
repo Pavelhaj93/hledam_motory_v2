@@ -56,7 +56,7 @@ export default function BrandSelector({
     }
   }
 
-  const brandUrl = (brand: {slug: string}) => {
+  const brandUrl = (brand: {slug: string | null}) => {
     if (category) {
       // Link to the category page since we no longer have brand-specific routing
       return `/katalog/${category}`

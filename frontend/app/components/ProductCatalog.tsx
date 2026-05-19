@@ -8,24 +8,24 @@ import {urlForImage} from '@/sanity/lib/utils'
 
 type Product = {
   _id: string
-  name: string
-  slug: string
+  name: string | null
+  slug: string | null
   brand: {
-    name: string
-    slug: string
+    name: string | null
+    slug: string | null
     logo: any | null
   } | null
   category: string
   partNumber: string[]
   description: string | null
   mainImage: any | null
-  price: number
+  price: number | null
   currency: string
-  inStock: boolean
-  featured: boolean
+  inStock: boolean | null
+  featured: boolean | null
   specifications: Array<{
-    label: string
-    value: string
+    label: string | null
+    value: string | null
   }> | null
   compatibility: string[] | null
 }
@@ -73,7 +73,7 @@ function ProductCard({product}: {product: Product}) {
           {product.mainImage ? (
             <Image
               src={urlForImage(product.mainImage)?.width(400).height(400).url() || ''}
-              alt={product.mainImage.alt || product.name}
+              alt={product.mainImage.alt || product.name || ''}
               width={400}
               height={400}
               className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-200"
@@ -115,7 +115,7 @@ function ProductCard({product}: {product: Product}) {
           <div className="mt-4 pt-4 border-t border-gray-100">
             <div className="flex items-center justify-end">
               <span className="text-lg font-bold text-gray-900">
-                {formatPrice(product.price, product.currency || 'CZK')}
+                {formatPrice(product.price ?? 0, product.currency || 'CZK')}
               </span>
             </div>
           </div>
@@ -156,7 +156,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
   // Set initial price range based on products
   useEffect(() => {
     if (products.length > 0) {
-      const prices = products.map((p) => p.price)
+      const prices = products.map((p) => p.price ?? 0)
       const minPrice = Math.min(...prices)
       const maxPrice = Math.max(...prices)
       setPriceRange({min: minPrice, max: maxPrice})
@@ -169,7 +169,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
       // Search filter
       const searchMatch =
         searchTerm === '' ||
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         // Handle brand search for both string and reference types
         (() => {
@@ -198,7 +198,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
         })()
 
       // Price filter
-      const priceMatch = product.price >= priceRange.min && product.price <= priceRange.max
+      const priceMatch = (product.price ?? 0) >= priceRange.min && (product.price ?? 0) <= priceRange.max
 
       return searchMatch && brandMatch && priceMatch
     })
@@ -207,13 +207,13 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'name-asc':
-          return a.name.localeCompare(b.name)
+          return (a.name ?? '').localeCompare(b.name ?? '')
         case 'name-desc':
-          return b.name.localeCompare(a.name)
+          return (b.name ?? '').localeCompare(a.name ?? '')
         case 'price-asc':
-          return a.price - b.price
+          return (a.price ?? 0) - (b.price ?? 0)
         case 'price-desc':
-          return b.price - a.price
+          return (b.price ?? 0) - (a.price ?? 0)
         case 'category':
           return (a.category || '').localeCompare(b.category || '')
         default:
@@ -242,7 +242,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
     setSortBy('name-asc')
     setCurrentPage(1)
     if (products.length > 0) {
-      const prices = products.map((p) => p.price)
+      const prices = products.map((p) => p.price ?? 0)
       setPriceRange({min: Math.min(...prices), max: Math.max(...prices)})
     }
   }

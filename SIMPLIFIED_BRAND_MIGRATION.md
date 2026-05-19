@@ -3,12 +3,14 @@
 ## ✅ **What We've Simplified**
 
 ### **Removed Fields:**
+
 - ❌ `description` - Text description of the brand
-- ❌ `website` - Official website URL  
+- ❌ `website` - Official website URL
 - ❌ `countryOfOrigin` - Country where brand originated
 - ❌ `founded` - Year the brand was founded
 
 ### **Kept Essential Fields:**
+
 - ✅ `name` - Brand name (required)
 - ✅ `slug` - URL-friendly identifier (required)
 - ✅ `logo` - Brand logo image with alt text
@@ -18,6 +20,7 @@
 ## 🚀 **New Migration Script**
 
 ### **Features:**
+
 - ✅ Creates brands from your JSON list of 131 brands
 - ✅ Auto-generates URL-friendly slugs
 - ✅ Proper Sanity document structure
@@ -26,6 +29,7 @@
 - ✅ Progress logging and error handling
 
 ### **Auto-Generated Slugs Examples:**
+
 - "BMW" → `bmw`
 - "Alfa Romeo" → `alfa-romeo`
 - "Mercedes" → `mercedes`
@@ -35,30 +39,36 @@
 ## 📁 **Updated Files**
 
 ### **Schema:**
+
 - ✅ `/studio/src/schemaTypes/documents/brand.ts` - Simplified brand schema
 
 ### **Frontend Types:**
+
 - ✅ `/frontend/app/components/BrandSelector.tsx` - Updated Brand type
-- ✅ `/frontend/app/components/BrandSelectorServer.tsx` - Updated Brand type  
+- ✅ `/frontend/app/components/BrandSelectorServer.tsx` - Updated Brand type
 - ✅ `/frontend/app/components/Header.tsx` - Updated Brand type
 - ✅ `/frontend/app/components/Footer.tsx` - Updated Brand type
 
 ### **Queries:**
+
 - ✅ `/frontend/sanity/lib/queries.ts` - Updated allBrandsWithLogosQuery
 
 ### **Migration:**
+
 - ✅ `/studio/migrate-brands-from-json.js` - New migration script
 - ✅ `/studio/package.json` - Added migration script
 
 ## 🏃‍♂️ **How to Run Migration**
 
 ### **1. Run the Migration:**
+
 ```bash
 cd studio
 npm run migrate-brands-json
 ```
 
 ### **2. Expected Output:**
+
 ```
 🚗 Starting brand migration...
 📊 Found 131 brands to migrate
@@ -75,6 +85,7 @@ npm run migrate-brands-json
 ```
 
 ### **3. Manual Steps in Sanity Studio:**
+
 1. Go to Sanity Studio (localhost:3333)
 2. Navigate to "Brands" section
 3. For each brand:
@@ -85,16 +96,19 @@ npm run migrate-brands-json
 ## 🎯 **Benefits of Simplified Schema**
 
 ### **Performance:**
+
 - ✅ Faster queries (fewer fields to fetch)
 - ✅ Smaller data transfer
 - ✅ Simpler components
 
 ### **Maintenance:**
+
 - ✅ Focus on essential data (name, slug, logo)
 - ✅ Less data to maintain manually
 - ✅ Easier to migrate/update
 
 ### **User Experience:**
+
 - ✅ Logos are the main visual element
 - ✅ Clean brand presentation
 - ✅ Fast loading brand selectors
@@ -102,9 +116,10 @@ npm run migrate-brands-json
 ## 📋 **Brand List (131 Total)**
 
 Popular automotive brands included:
+
 - **German**: BMW, Audi, Mercedes, Volkswagen, Opel, Porsche
 - **Italian**: Ferrari, Lamborghini, Fiat, Alfa Romeo, Lancia
-- **Japanese**: Toyota, Honda, Nissan, Mazda, Subaru, Mitsubishi  
+- **Japanese**: Toyota, Honda, Nissan, Mazda, Subaru, Mitsubishi
 - **American**: Ford, Chevrolet, Cadillac, Chrysler, Jeep
 - **British**: Jaguar, Land Rover, Bentley, Rolls-Royce, Mini
 - **French**: Peugeot, Renault, Citroën
@@ -124,6 +139,7 @@ Popular automotive brands included:
 ## ✅ **Ready to Use**
 
 The system is now ready with:
+
 - 131 automotive brands with proper slugs
 - Simplified, maintainable schema
 - Clean BrandSelector components

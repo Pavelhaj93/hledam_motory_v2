@@ -41,7 +41,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
               url: urlForImage(hlava.mainImage)?.width(800).height(600).url() || '',
               width: 800,
               height: 600,
-              alt: hlava.mainImage.alt || hlava.name,
+              alt: hlava.mainImage.alt || hlava.name || undefined,
             },
           ]
         : [],
@@ -85,7 +85,7 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
             <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
               <Image
                 src={urlForImage(hlava.mainImage)?.width(600).height(600).url() || ''}
-                alt={hlava.mainImage.alt || hlava.name}
+                alt={hlava.mainImage.alt || hlava.name || ''}
                 width={600}
                 height={600}
                 className="h-full w-full object-cover object-center"

@@ -10,9 +10,9 @@ import {Button} from './ui/button'
 
 interface HeaderProps {
   settings?: {
-    title?: string
-    phone?: string
-  }
+    title?: string | null
+    phone?: string | null
+  } | null
   brands: AllBrandsWithLogosQueryResult
 }
 
