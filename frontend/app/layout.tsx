@@ -1,5 +1,4 @@
 import './globals.css'
-
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
@@ -7,7 +6,6 @@ import {draftMode} from 'next/headers'
 import {VisualEditing, toPlainText} from 'next-sanity'
 import {Toaster} from 'sonner'
 import Script from 'next/script'
-
 import DraftModeToast from '@/app/components/DraftModeToast'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
@@ -52,6 +50,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       images: ogImage ? [ogImage] : [],
+    },
+    verification: {
+      google: ['48d390b9748589f4', '52fe5e4697a16ec5'],
     },
   }
 }
