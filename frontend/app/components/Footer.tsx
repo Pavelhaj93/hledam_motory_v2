@@ -92,7 +92,7 @@ export default function Footer({settings, brands}: FooterProps) {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/repasovane-motory"
+                    href="/katalog/repasovane-motory"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     Repasované motory
@@ -100,7 +100,15 @@ export default function Footer({settings, brands}: FooterProps) {
                 </li>
                 <li>
                   <Link
-                    href="/turbodmychadla"
+                    href="/katalog/stare-motory"
+                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                  >
+                    Staré motory
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/katalog/turbodmychadla"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     Turbodmychadla
@@ -108,7 +116,7 @@ export default function Footer({settings, brands}: FooterProps) {
                 </li>
                 <li>
                   <Link
-                    href="/prevodovky"
+                    href="/katalog/prevodovky"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     Převodovky
@@ -116,7 +124,7 @@ export default function Footer({settings, brands}: FooterProps) {
                 </li>
                 <li>
                   <Link
-                    href="/motorove-hlavy"
+                    href="/katalog/motorove-hlavy"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     Motorové hlavy
