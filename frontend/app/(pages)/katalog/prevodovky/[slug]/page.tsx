@@ -1,16 +1,26 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {sanityFetch} from '@/sanity/lib/live'
-import {prevodovkaQuery} from '@/sanity/lib/queries'
+import {prevodovkaQuery, prevodovkyPagesSlugs} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import {ArrowLeft, Mail, Phone, Check, X} from 'lucide-react'
 import CustomPortableText from '@/app/components/PortableText'
 import ImageGallery from '@/app/components/ImageGallery'
+import {productJsonLd} from '@/app/lib/jsonld'
 
 type Props = {
   params: Promise<{slug: string}>
+}
+
+export async function generateStaticParams() {
+  const {data} = await sanityFetch({
+    query: prevodovkyPagesSlugs,
+    perspective: 'published',
+    stega: false,
+  })
+  return data
 }
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
@@ -27,11 +37,16 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     }
   }
   return {
-    title: `${prevodovka.name} | Převodovka ${prevodovka.brand?.name || ''}`,
-    description: prevodovka.description || '',
+    title: prevodovka.seo?.metaTitle || `${prevodovka.name} | Převodovka ${prevodovka.brand?.name || ''}`,
+    description: prevodovka.seo?.metaDescription || prevodovka.description || '',
+    alternates: {
+      canonical: `/katalog/prevodovky/${slug}`,
+    },
     openGraph: {
-      title: `${prevodovka.name} | Převodovka ${prevodovka.brand?.name || ''}`,
-      description: prevodovka.description || '',
+      title:
+        prevodovka.seo?.metaTitle ||
+        `${prevodovka.name} | Převodovka ${prevodovka.brand?.name || ''}`,
+      description: prevodovka.seo?.metaDescription || prevodovka.description || '',
       type: 'website',
       images: prevodovka.mainImage
         ? [
@@ -55,8 +70,23 @@ export default async function PrevodovkaDetailPage({params}: Props) {
     stega: false,
   })
   if (!prevodovka) notFound()
+  const schemas = productJsonLd({
+    name: prevodovka.name ?? '',
+    description: prevodovka.description,
+    imageUrl: prevodovka.mainImage ? urlForImage(prevodovka.mainImage)?.width(800).height(600).url() : null,
+    brandName: prevodovka.brand?.name,
+    price: prevodovka.price,
+    currency: prevodovka.currency,
+    inStock: prevodovka.inStock,
+    slug,
+    categoryPath: 'katalog/prevodovky',
+    categoryLabel: 'Převodovky',
+  })
   return (
     <div className="container mx-auto px-4 py-8">
+      {schemas.map((schema, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}} />
+      ))}
       <nav className="text-sm text-gray-600 mb-6">
         <Link href="/katalog/prevodovky" className="hover:text-gray-900">
           Převodovky

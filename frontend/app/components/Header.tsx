@@ -1,8 +1,8 @@
 'use client'
 
-import {useState} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import Link from 'next/link'
-import {Mail, Phone, Menu, Cross, X} from 'lucide-react'
+import {Mail, Phone, Menu, Cross, X, ChevronDown} from 'lucide-react'
 import Image from 'next/image'
 import BrandSelector from './BrandSelector'
 import {AllBrandsWithLogosQueryResult} from '@/sanity.types'
@@ -19,7 +19,29 @@ interface HeaderProps {
 // Client-side Header Component
 export default function Header({settings, brands}: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const phone = settings?.phone || '+420 792 644 755'
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsDropdownOpen(false)
+        setIsMobileMenuOpen(false)
+      }
+    }
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   const handlePhoneClick = () => {
     // Track Sklik phone call conversion (ID: 100221747)
@@ -50,7 +72,7 @@ export default function Header({settings, brands}: HeaderProps) {
             <Link href="/" className="flex items-center space-x-2">
               <Image
                 src="/images/logo.png"
-                alt="Logo"
+                alt="Hledám motory – prodej repasovaných motorů"
                 width={240}
                 height={60}
                 className="h-20 w-auto hover:scale-105 transition-transform"
@@ -85,11 +107,26 @@ export default function Header({settings, brands}: HeaderProps) {
             <Link href="/o-nas" className="text-gray-900 hover:text-red-600 font-medium">
               O nás
             </Link>
-            <div className="relative group">
-              <Link href="/katalog" className="text-gray-900 hover:text-red-600 font-medium">
-                Katalog
-              </Link>
-              <div className="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg border rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div className="relative group" ref={dropdownRef}>
+              <div className="flex items-center">
+                <Link href="/katalog" className="text-gray-900 hover:text-red-600 font-medium">
+                  Katalog
+                </Link>
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  aria-haspopup="true"
+                  aria-expanded={isDropdownOpen}
+                  aria-controls="katalog-dropdown"
+                  aria-label="Podmenu Katalog"
+                  className="ml-1 text-gray-500 hover:text-red-600"
+                >
+                  <ChevronDown className="h-4 w-4" />
+                </button>
+              </div>
+              <div
+                id="katalog-dropdown"
+                className={`absolute top-full left-0 mt-1 w-48 bg-white shadow-lg border rounded-md transition-all duration-200 z-50 ${isDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible group-hover:opacity-100 group-hover:visible'}`}
+              >
                 <div className="py-2">
                   <Link
                     href="/katalog/repasovane-motory"
@@ -131,27 +168,21 @@ export default function Header({settings, brands}: HeaderProps) {
 
           {/* Mobile menu button */}
           <div className="lg:hidden">
-            {isMobileMenuOpen ? (
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-gray-900 hover:text-red-600"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            ) : (
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-gray-900 hover:text-red-600"
-              >
-                <Menu className="h-6 w-6" />
-              </button>
-            )}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMobileMenuOpen ? 'Zavřít menu' : 'Otevřít menu'}
+              className="text-gray-900 hover:text-red-600"
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-4">
+          <div id="mobile-menu" className="lg:hidden border-t border-gray-200 py-4">
             <div className="space-y-4">
               <Link
                 href="/"

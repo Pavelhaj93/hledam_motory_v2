@@ -1,16 +1,26 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {sanityFetch} from '@/sanity/lib/live'
-import {staryMotorQuery} from '@/sanity/lib/queries'
+import {staryMotorQuery, stareMotoryPagesSlugs} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import {ArrowLeft, Mail, Phone, Check, X} from 'lucide-react'
 import CustomPortableText from '@/app/components/PortableText'
 import ImageGallery from '@/app/components/ImageGallery'
+import {productJsonLd} from '@/app/lib/jsonld'
 
 type Props = {
   params: Promise<{slug: string}>
+}
+
+export async function generateStaticParams() {
+  const {data} = await sanityFetch({
+    query: stareMotoryPagesSlugs,
+    perspective: 'published',
+    stega: false,
+  })
+  return data
 }
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
@@ -27,11 +37,14 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     }
   }
   return {
-    title: `${motor.name} | Starý motor ${motor.brand?.name || ''}`,
-    description: motor.description || '',
+    title: motor.seo?.metaTitle || `${motor.name} | Starý motor ${motor.brand?.name || ''}`,
+    description: motor.seo?.metaDescription || motor.description || '',
+    alternates: {
+      canonical: `/katalog/stare-motory/${slug}`,
+    },
     openGraph: {
-      title: `${motor.name} | Starý motor ${motor.brand?.name || ''}`,
-      description: motor.description || '',
+      title: motor.seo?.metaTitle || `${motor.name} | Starý motor ${motor.brand?.name || ''}`,
+      description: motor.seo?.metaDescription || motor.description || '',
       type: 'website',
       images: motor.mainImage
         ? [
@@ -55,8 +68,23 @@ export default async function StaryMotorDetailPage({params}: Props) {
     stega: false,
   })
   if (!motor) notFound()
+  const schemas = productJsonLd({
+    name: motor.name ?? '',
+    description: motor.description,
+    imageUrl: motor.mainImage ? urlForImage(motor.mainImage)?.width(800).height(600).url() : null,
+    brandName: motor.brand?.name,
+    price: motor.price,
+    currency: motor.currency,
+    inStock: motor.inStock,
+    slug,
+    categoryPath: 'katalog/stare-motory',
+    categoryLabel: 'Staré motory',
+  })
   return (
     <div className="container mx-auto px-4 py-8">
+      {schemas.map((schema, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}} />
+      ))}
       <nav className="text-sm text-gray-600 mb-6">
         <Link href="/katalog/stare-motory" className="hover:text-gray-900">
           Staré motory

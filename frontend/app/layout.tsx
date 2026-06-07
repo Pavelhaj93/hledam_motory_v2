@@ -51,6 +51,10 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
+    twitter: {
+      card: 'summary_large_image',
+      images: ogImage ? [ogImage] : [],
+    },
     verification: {
       google: ['48d390b9748589f4', '52fe5e4697a16ec5'],
     },

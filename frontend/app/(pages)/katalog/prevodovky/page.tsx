@@ -4,6 +4,7 @@ import {sanityFetch} from '@/sanity/lib/live'
 import {allPrevodovkyQuery} from '@/sanity/lib/queries'
 import ProductCatalog from '@/app/components/ProductCatalog'
 import CategoryHero from '@/app/components/CategoryHero'
+import {categoryBreadcrumbJsonLd} from '@/app/lib/jsonld'
 
 export const metadata: Metadata = {
   title: 'Repasované převodovky | Manuální a automatické převodovky',
@@ -15,6 +16,13 @@ export const metadata: Metadata = {
     title: 'Repasované převodovky | Manuální a automatické převodovky',
     description: 'Široký výběr repasovaných převodovek pro všechny značky vozidel.',
     type: 'website',
+    images: [{url: '/images/logo.png', alt: 'Hledám motory – převodovky'}],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Repasované převodovky | Manuální a automatické převodovky',
+    description: 'Široký výběr repasovaných převodovek pro všechny značky vozidel.',
+    images: ['/images/logo.png'],
   },
 }
 
@@ -24,8 +32,11 @@ export default async function TransmissionsPage() {
     stega: false,
   })
 
+  const breadcrumb = categoryBreadcrumbJsonLd('Převodovky', 'katalog/prevodovky')
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(breadcrumb)}} />
       {/* Hero Section */}
       <CategoryHero
         title="Repasované převodovky"

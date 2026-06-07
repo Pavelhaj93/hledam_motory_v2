@@ -4,6 +4,7 @@ import {sanityFetch} from '@/sanity/lib/live'
 import {allStareMotoryQuery} from '@/sanity/lib/queries'
 import ProductCatalog from '@/app/components/ProductCatalog'
 import CategoryHero from '@/app/components/CategoryHero'
+import {categoryBreadcrumbJsonLd} from '@/app/lib/jsonld'
 
 export const metadata: Metadata = {
   title: 'Staré motory | Kvalitní použité motory za výhodné ceny',
@@ -16,6 +17,14 @@ export const metadata: Metadata = {
     description:
       'Široký výběr starých motorů pro všechny značky vozidel. Kvalitní použité motory, záruka funkčnosti.',
     type: 'website',
+    images: [{url: '/images/logo.png', alt: 'Hledám motory – staré motory'}],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Staré motory | Kvalitní použité motory za výhodné ceny',
+    description:
+      'Široký výběr starých motorů pro všechny značky vozidel. Kvalitní použité motory, záruka funkčnosti.',
+    images: ['/images/logo.png'],
   },
 }
 
@@ -25,8 +34,11 @@ export default async function UsedEnginesPage() {
     stega: false,
   })
 
+  const breadcrumb = categoryBreadcrumbJsonLd('Staré motory', 'katalog/stare-motory')
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(breadcrumb)}} />
       {/* Hero Section */}
       <CategoryHero
         title="Staré motory"
