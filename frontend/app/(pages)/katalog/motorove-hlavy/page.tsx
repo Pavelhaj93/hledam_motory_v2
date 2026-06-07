@@ -4,6 +4,7 @@ import {sanityFetch} from '@/sanity/lib/live'
 import {allMotoroveHlavyQuery} from '@/sanity/lib/queries'
 import ProductCatalog from '@/app/components/ProductCatalog'
 import CategoryHero from '@/app/components/CategoryHero'
+import {categoryBreadcrumbJsonLd} from '@/app/lib/jsonld'
 
 export const metadata: Metadata = {
   title: 'Repasované motorové hlavy | Kvalitní renovace s novými ventily',
@@ -15,6 +16,13 @@ export const metadata: Metadata = {
     title: 'Repasované motorové hlavy | Kvalitní renovace s novými ventily',
     description: 'Široký výběr repasovaných motorových hlav pro všechny značky vozidel.',
     type: 'website',
+    images: [{url: '/images/logo.png', alt: 'Hledám motory – motorové hlavy'}],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Repasované motorové hlavy | Kvalitní renovace s novými ventily',
+    description: 'Široký výběr repasovaných motorových hlav pro všechny značky vozidel.',
+    images: ['/images/logo.png'],
   },
 }
 
@@ -24,8 +32,11 @@ export default async function EngineHeadsPage() {
     stega: false,
   })
 
+  const breadcrumb = categoryBreadcrumbJsonLd('Motorové hlavy', 'katalog/motorove-hlavy')
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(breadcrumb)}} />
       {/* Hero Section */}
       <CategoryHero
         title="Repasované motorové hlavy"

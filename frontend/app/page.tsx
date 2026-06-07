@@ -2,6 +2,7 @@ import type {Metadata} from 'next'
 import BlockRenderer from '@/app/components/BlockRenderer'
 import {homepageQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
+import {organizationJsonLd} from '@/app/lib/jsonld'
 
 export async function generateMetadata(): Promise<Metadata> {
   const {data: homepage} = await sanityFetch({
@@ -22,6 +23,7 @@ export default async function Page() {
   if (homepage?.pageBuilder && homepage.pageBuilder.length > 0) {
     return (
       <div>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(organizationJsonLd())}} />
         {homepage.pageBuilder.map((block: any, index: number) => (
           <BlockRenderer
             key={block._key}

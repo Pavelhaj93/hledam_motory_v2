@@ -1,4 +1,6 @@
 import {MetadataRoute} from 'next'
+
+export const revalidate = 3600
 import {sanityFetch} from '@/sanity/lib/live'
 import {sitemapData, sitemapProductsData} from '@/sanity/lib/queries'
 import {headers} from 'next/headers'

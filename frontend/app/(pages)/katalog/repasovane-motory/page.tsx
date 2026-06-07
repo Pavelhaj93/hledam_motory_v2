@@ -4,6 +4,7 @@ import {sanityFetch} from '@/sanity/lib/live'
 import {allRepasovaneMotoryQuery} from '@/sanity/lib/queries'
 import ProductCatalog from '@/app/components/ProductCatalog'
 import CategoryHero from '@/app/components/CategoryHero'
+import {categoryBreadcrumbJsonLd} from '@/app/lib/jsonld'
 
 export const metadata: Metadata = {
   title: 'Repasované motory | Kvalitní renovované motory s zárukou',
@@ -16,6 +17,14 @@ export const metadata: Metadata = {
     description:
       'Široký výběr repasovaných motorů pro všechny značky vozidel. Profesionální renovace, plná záruka.',
     type: 'website',
+    images: [{url: '/images/logo.png', alt: 'Hledám motory – repasované motory'}],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Repasované motory | Kvalitní renovované motory s zárukou',
+    description:
+      'Široký výběr repasovaných motorů pro všechny značky vozidel. Profesionální renovace, plná záruka.',
+    images: ['/images/logo.png'],
   },
 }
 
@@ -25,8 +34,11 @@ export default async function EnginesPage() {
     stega: false,
   })
 
+  const breadcrumb = categoryBreadcrumbJsonLd('Repasované motory', 'katalog/repasovane-motory')
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(breadcrumb)}} />
       {/* Hero Section */}
       <CategoryHero
         title="Repasované motory"

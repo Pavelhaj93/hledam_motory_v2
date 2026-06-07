@@ -1,9 +1,6 @@
-'use client'
-
 import Link from 'next/link'
 import {Mail, Phone, MapPin, Building2} from 'lucide-react'
-import BrandSelector from './BrandSelector'
-import {AllBrandsWithLogosQueryResult, Brand} from '@/sanity.types'
+import {AllBrandsWithLogosQueryResult} from '@/sanity.types'
 import Image from 'next/image'
 
 interface FooterProps {
@@ -30,7 +27,7 @@ export default function Footer({settings, brands}: FooterProps) {
                 <Link href="/" className="flex items-center space-x-2">
                   <Image
                     src="/images/logo.png"
-                    alt="Logo"
+                    alt="Hledám motory – prodej repasovaných motorů"
                     width={240}
                     height={60}
                     className="h-20 w-auto hover:scale-105 transition-transform"

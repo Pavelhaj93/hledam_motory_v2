@@ -1,16 +1,26 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {sanityFetch} from '@/sanity/lib/live'
-import {turbodmychadloQuery} from '@/sanity/lib/queries'
+import {turbodmychadloQuery, turbodmychadlaPagesSlugs} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import {ArrowLeft, Mail, Phone, Check, X} from 'lucide-react'
 import CustomPortableText from '@/app/components/PortableText'
 import ImageGallery from '@/app/components/ImageGallery'
+import {productJsonLd} from '@/app/lib/jsonld'
 
 type Props = {
   params: Promise<{slug: string}>
+}
+
+export async function generateStaticParams() {
+  const {data} = await sanityFetch({
+    query: turbodmychadlaPagesSlugs,
+    perspective: 'published',
+    stega: false,
+  })
+  return data
 }
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
@@ -27,11 +37,18 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     }
   }
   return {
-    title: `${turbodmychadlo.name} | Turbodmychadlo ${turbodmychadlo.brand?.name || ''}`,
-    description: turbodmychadlo.description || '',
+    title:
+      turbodmychadlo.seo?.metaTitle ||
+      `${turbodmychadlo.name} | Turbodmychadlo ${turbodmychadlo.brand?.name || ''}`,
+    description: turbodmychadlo.seo?.metaDescription || turbodmychadlo.description || '',
+    alternates: {
+      canonical: `/katalog/turbodmychadla/${slug}`,
+    },
     openGraph: {
-      title: `${turbodmychadlo.name} | Turbodmychadlo ${turbodmychadlo.brand?.name || ''}`,
-      description: turbodmychadlo.description || '',
+      title:
+        turbodmychadlo.seo?.metaTitle ||
+        `${turbodmychadlo.name} | Turbodmychadlo ${turbodmychadlo.brand?.name || ''}`,
+      description: turbodmychadlo.seo?.metaDescription || turbodmychadlo.description || '',
       type: 'website',
       images: turbodmychadlo.mainImage
         ? [
@@ -55,8 +72,23 @@ export default async function TurbodmychadloDetailPage({params}: Props) {
     stega: false,
   })
   if (!turbodmychadlo) notFound()
+  const schemas = productJsonLd({
+    name: turbodmychadlo.name ?? '',
+    description: turbodmychadlo.description,
+    imageUrl: turbodmychadlo.mainImage ? urlForImage(turbodmychadlo.mainImage)?.width(800).height(600).url() : null,
+    brandName: turbodmychadlo.brand?.name,
+    price: turbodmychadlo.price,
+    currency: turbodmychadlo.currency,
+    inStock: turbodmychadlo.inStock,
+    slug,
+    categoryPath: 'katalog/turbodmychadla',
+    categoryLabel: 'Turbodmychadla',
+  })
   return (
     <div className="container mx-auto px-4 py-8">
+      {schemas.map((schema, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}} />
+      ))}
       <nav className="text-sm text-gray-600 mb-6">
         <Link href="/katalog/turbodmychadla" className="hover:text-gray-900">
           Turbodmychadla

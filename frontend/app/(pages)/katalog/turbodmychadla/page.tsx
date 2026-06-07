@@ -4,6 +4,7 @@ import {sanityFetch} from '@/sanity/lib/live'
 import {allTurbodmychadlaQuery} from '@/sanity/lib/queries'
 import ProductCatalog from '@/app/components/ProductCatalog'
 import CategoryHero from '@/app/components/CategoryHero'
+import {categoryBreadcrumbJsonLd} from '@/app/lib/jsonld'
 
 export const metadata: Metadata = {
   title: 'Repasovaná turbodmychadla | Kvalitní renovace s zárukou',
@@ -15,6 +16,13 @@ export const metadata: Metadata = {
     title: 'Repasovaná turbodmychadla | Kvalitní renovace s zárukou',
     description: 'Široký výběr repasovaných turbodmychadel pro všechny značky vozidel.',
     type: 'website',
+    images: [{url: '/images/logo.png', alt: 'Hledám motory – turbodmychadla'}],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Repasovaná turbodmychadla | Kvalitní renovace s zárukou',
+    description: 'Široký výběr repasovaných turbodmychadel pro všechny značky vozidel.',
+    images: ['/images/logo.png'],
   },
 }
 
@@ -24,8 +32,11 @@ export default async function TurbochargersPage() {
     stega: false,
   })
 
+  const breadcrumb = categoryBreadcrumbJsonLd('Turbodmychadla', 'katalog/turbodmychadla')
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(breadcrumb)}} />
       {/* Hero Section */}
       <CategoryHero
         title="Repasovaná turbodmychadla"
@@ -78,7 +89,7 @@ export default async function TurbochargersPage() {
         {/* SEO Content */}
         <div className="mt-16 bg-gray-50 rounded-lg p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Proč si vybrat naša repasovaná turbodmychadla?
+            Proč si vybrat naše repasovaná turbodmychadla?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div>

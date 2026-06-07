@@ -1,16 +1,26 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {sanityFetch} from '@/sanity/lib/live'
-import {motorovaHlavaQuery} from '@/sanity/lib/queries'
+import {motorovaHlavaQuery, motoroveHlavyPagesSlugs} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import {ArrowLeft, Mail, Phone, Check, X} from 'lucide-react'
 import CustomPortableText from '@/app/components/PortableText'
 import ImageGallery from '@/app/components/ImageGallery'
+import {productJsonLd} from '@/app/lib/jsonld'
 
 type Props = {
   params: Promise<{slug: string}>
+}
+
+export async function generateStaticParams() {
+  const {data} = await sanityFetch({
+    query: motoroveHlavyPagesSlugs,
+    perspective: 'published',
+    stega: false,
+  })
+  return data
 }
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
@@ -29,11 +39,14 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${hlava.name} | Motorová hlava ${hlava.brand?.name || ''}`,
-    description: hlava.description || '',
+    title: hlava.seo?.metaTitle || `${hlava.name} | Motorová hlava ${hlava.brand?.name || ''}`,
+    description: hlava.seo?.metaDescription || hlava.description || '',
+    alternates: {
+      canonical: `/katalog/motorove-hlavy/${slug}`,
+    },
     openGraph: {
-      title: `${hlava.name} | Motorová hlava ${hlava.brand?.name || ''}`,
-      description: hlava.description || '',
+      title: hlava.seo?.metaTitle || `${hlava.name} | Motorová hlava ${hlava.brand?.name || ''}`,
+      description: hlava.seo?.metaDescription || hlava.description || '',
       type: 'website',
       images: hlava.mainImage
         ? [
@@ -58,9 +71,24 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
   })
 
   if (!hlava) notFound()
+  const schemas = productJsonLd({
+    name: hlava.name ?? '',
+    description: hlava.description,
+    imageUrl: hlava.mainImage ? urlForImage(hlava.mainImage)?.width(800).height(600).url() : null,
+    brandName: hlava.brand?.name,
+    price: hlava.price,
+    currency: hlava.currency,
+    inStock: hlava.inStock,
+    slug,
+    categoryPath: 'katalog/motorove-hlavy',
+    categoryLabel: 'Motorové hlavy',
+  })
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {schemas.map((schema, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}} />
+      ))}
       <nav className="text-sm text-gray-600 mb-6">
         <Link href="/katalog/motorove-hlavy" className="hover:text-gray-900">
           Motorové hlavy
