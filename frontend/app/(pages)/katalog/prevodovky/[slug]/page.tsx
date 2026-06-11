@@ -1,7 +1,7 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {sanityFetch} from '@/sanity/lib/live'
-import {prevodovkaQuery, prevodovkyPagesSlugs} from '@/sanity/lib/queries'
+import {prevodovkaQuery, prevodovkyPagesSlugs, settingsQuery} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -70,6 +70,8 @@ export default async function PrevodovkaDetailPage({params}: Props) {
     stega: false,
   })
   if (!prevodovka) notFound()
+  const {data: settings} = await sanityFetch({query: settingsQuery, stega: false})
+  const phone = settings?.phone || '+420 792 644 755'
   const schemas = productJsonLd({
     name: prevodovka.name ?? '',
     description: prevodovka.description,
@@ -231,11 +233,11 @@ export default async function PrevodovkaDetailPage({params}: Props) {
             <p className="text-gray-600 mb-4">Pro objednání nebo více informací nás kontaktujte:</p>
             <div className="flex flex-col items-start space-y-2">
               <a
-                href="tel:+420792644755"
+                href={`tel:${phone.replace(/\s/g, '')}`}
                 className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700"
               >
                 <Phone className="h-4 w-4" />
-                <span>+420 792 644 755</span>
+                <span>{phone}</span>
               </a>
               <a
                 href="mailto:info@hledammotory.cz"
