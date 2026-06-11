@@ -1,6 +1,6 @@
 import type {Metadata} from 'next'
 import BlockRenderer from '@/app/components/BlockRenderer'
-import {homepageQuery} from '@/sanity/lib/queries'
+import {homepageQuery, settingsQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
 import {organizationJsonLd} from '@/app/lib/jsonld'
 
@@ -17,13 +17,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [{data: homepage}] = await Promise.all([sanityFetch({query: homepageQuery})])
+  const [{data: homepage}, {data: settings}] = await Promise.all([
+    sanityFetch({query: homepageQuery}),
+    sanityFetch({query: settingsQuery, stega: false}),
+  ])
 
   // If homepage content exists, use page builder
   if (homepage?.pageBuilder && homepage.pageBuilder.length > 0) {
     return (
       <div>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(organizationJsonLd())}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(organizationJsonLd(settings?.phone))}} />
         {homepage.pageBuilder.map((block: any, index: number) => (
           <BlockRenderer
             key={block._key}

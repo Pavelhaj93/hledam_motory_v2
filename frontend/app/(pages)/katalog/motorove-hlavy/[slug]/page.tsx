@@ -1,7 +1,7 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {sanityFetch} from '@/sanity/lib/live'
-import {motorovaHlavaQuery, motoroveHlavyPagesSlugs} from '@/sanity/lib/queries'
+import {motorovaHlavaQuery, motoroveHlavyPagesSlugs, settingsQuery} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -64,13 +64,13 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 
 export default async function MotorovaHlavaDetailPage({params}: Props) {
   const {slug} = await params
-  const {data: hlava} = await sanityFetch({
-    query: motorovaHlavaQuery,
-    params: {slug},
-    stega: false,
-  })
+  const [{data: hlava}, {data: settings}] = await Promise.all([
+    sanityFetch({query: motorovaHlavaQuery, params: {slug}, stega: false}),
+    sanityFetch({query: settingsQuery, stega: false}),
+  ])
 
   if (!hlava) notFound()
+  const phone = settings?.phone || '+420 792 644 755'
   const schemas = productJsonLd({
     name: hlava.name ?? '',
     description: hlava.description,
@@ -205,11 +205,11 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
             <p className="text-gray-600 mb-4">Pro objednání nebo více informací nás kontaktujte:</p>
             <div className="flex flex-col items-start space-y-2">
               <a
-                href="tel:+420792644755"
+                href={`tel:${phone.replace(/\s/g, '')}`}
                 className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700"
               >
                 <Phone className="h-4 w-4" />
-                <span>+420 792 644 755</span>
+                <span>{phone}</span>
               </a>
               <a
                 href="mailto:info@hledammotory.cz"

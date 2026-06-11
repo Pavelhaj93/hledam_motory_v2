@@ -73,13 +73,13 @@ export function categoryBreadcrumbJsonLd(categoryLabel: string, categoryPath: st
   }
 }
 
-export function organizationJsonLd() {
+export function organizationJsonLd(phone?: string | null) {
   return {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'LocalBusiness'],
     name: 'Hledám motory',
     url: BASE_URL,
-    telephone: '+420792644755',
+    telephone: (phone || '+420 792 644 755').replace(/\s/g, ''),
     email: 'info@hledammotory.cz',
     address: {
       '@type': 'PostalAddress',
