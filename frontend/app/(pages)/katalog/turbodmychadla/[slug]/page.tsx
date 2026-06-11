@@ -66,13 +66,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 
 export default async function TurbodmychadloDetailPage({params}: Props) {
   const {slug} = await params
-  const {data: turbodmychadlo} = await sanityFetch({
-    query: turbodmychadloQuery,
-    params: {slug},
-    stega: false,
-  })
+  const [{data: turbodmychadlo}, {data: settings}] = await Promise.all([
+    sanityFetch({query: turbodmychadloQuery, params: {slug}, stega: false}),
+    sanityFetch({query: settingsQuery, stega: false}),
+  ])
   if (!turbodmychadlo) notFound()
-  const {data: settings} = await sanityFetch({query: settingsQuery, stega: false})
   const phone = settings?.phone || '+420 792 644 755'
   const schemas = productJsonLd({
     name: turbodmychadlo.name ?? '',

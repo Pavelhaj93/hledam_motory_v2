@@ -62,13 +62,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 
 export default async function RepasovanyMotorDetailPage({params}: Props) {
   const {slug} = await params
-  const {data: motor} = await sanityFetch({
-    query: repasovanyMotorQuery,
-    params: {slug},
-    stega: false,
-  })
+  const [{data: motor}, {data: settings}] = await Promise.all([
+    sanityFetch({query: repasovanyMotorQuery, params: {slug}, stega: false}),
+    sanityFetch({query: settingsQuery, stega: false}),
+  ])
   if (!motor) notFound()
-  const {data: settings} = await sanityFetch({query: settingsQuery, stega: false})
   const phone = settings?.phone || '+420 792 644 755'
   const schemas = productJsonLd({
     name: motor.name ?? '',
