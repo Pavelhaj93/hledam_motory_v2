@@ -23,6 +23,8 @@ export const prevodovky = defineType({
     defineField({
       name: 'slug',
       title: 'Slug',
+      description:
+        'Formát: [značka]-[kód-převodovky]-[rok] → např. ford-6m6p-2018. Rok výroby odliší převodovky se stejným kódem. Pokud jsou dvě se stejným rokem, přidej číslo: ford-6m6p-2018-2. Vynech typ pohonu a počet rychlostí.',
       type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {
