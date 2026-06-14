@@ -63,7 +63,7 @@ export default async function EngineHeadsPage({params}: Props) {
             description: p.description,
             mainImage: p.mainImage,
             price: p.price || 0,
-            currency: p.currency || 'Kč',
+            currency: p.currency || 'CZK',
             inStock: p.inStock || false,
             featured: p.featured || false,
             specifications: p.specifications,
