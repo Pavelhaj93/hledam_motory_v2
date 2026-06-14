@@ -23,6 +23,8 @@ export const turbodmychadla = defineType({
     defineField({
       name: 'slug',
       title: 'Slug',
+      description:
+        'Formát: [značka]-[objem]-[palivo]-[kód-turba] → např. ford-2-2-tdci-gt1749v. Pokud jsou dvě turba se stejným kódem, přidej rok: ford-2-2-tdci-gt1749v-2018. Použij hlavní kód turba (ne celé číslo dílu).',
       type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {

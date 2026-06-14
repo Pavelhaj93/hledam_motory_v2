@@ -22,6 +22,17 @@ const DISABLED_TYPES = [
   ...translatedTypes,
 ]
 
+// Product/content types to show in the sidebar (subset of translatedTypes — excludes post/page
+// if they should not be visible as standalone lists).
+const VISIBLE_TRANSLATED_TYPES = [
+  'repasovanyMotor',
+  'staryMotor',
+  'motorovaHlava',
+  'prevodovka',
+  'turbodmychadlo',
+  'page',
+] as const
+
 // Human-readable titles for each translated type.
 const TYPE_TITLES: Record<string, string> = {
   repasovanyMotor: 'Repasované motory',
@@ -30,7 +41,6 @@ const TYPE_TITLES: Record<string, string> = {
   prevodovka: 'Převodovky',
   turbodmychadlo: 'Turbodmychadla',
   page: 'Stránky',
-  post: 'Příspěvky',
 }
 
 export const structure: StructureResolver = (S: StructureBuilder) =>
@@ -51,7 +61,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       // Translated collection types — list only the Czech (base) documents.
       // The @sanity/document-internationalization plugin adds a "Translations" panel
       // inside each document so editors can jump to / create the de-AT version from there.
-      ...translatedTypes.map((type) =>
+      ...VISIBLE_TRANSLATED_TYPES.map((type) =>
         S.listItem()
           .title(TYPE_TITLES[type] ?? type)
           .child(

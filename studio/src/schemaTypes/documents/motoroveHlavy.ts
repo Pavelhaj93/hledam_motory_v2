@@ -23,6 +23,8 @@ export const motoroveHlavy = defineType({
     defineField({
       name: 'slug',
       title: 'Slug',
+      description:
+        'Formát: [značka]-[objem]-[palivo]-[kód-motoru]-[rok] → např. ford-2-2-tdci-p8fa-2018. Rok výroby odliší hlavy se stejným kódem. Pokud jsou dvě se stejným rokem, přidej číslo: ford-2-2-tdci-p8fa-2018-2. Vynech výkon (KW) a emisní normu (EU4).',
       type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {
