@@ -80,7 +80,7 @@ export default defineConfig({
           },
           {
             route: '/:slug',
-            filter: `_type == "page" && slug.current == $slug && language == "cs" || _id == $slug`,
+            filter: `(_type == "page" && slug.current == $slug && language == "cs") || (_id == $slug && language == "cs")`,
           },
           {
             route: '/posts/:slug',
