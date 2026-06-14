@@ -1,6 +1,6 @@
 import {CogIcon, HomeIcon} from '@sanity/icons'
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
-import pluralize from 'pluralize-esm'
+import {translatedTypes} from '../schemaTypes/shared/i18n'
 
 /**
  * Structure builder is useful whenever you want to control how documents are grouped and
@@ -8,26 +8,74 @@ import pluralize from 'pluralize-esm'
  * Learn more: https://www.sanity.io/docs/structure-builder-introduction
  */
 
-const DISABLED_TYPES = ['settings', 'homepage', 'person', 'post', 'assist.instruction.context']
+// Types fully managed elsewhere: singletons with fixed IDs, internal plugin types,
+// and translated collection types (handled manually below with a cs-only filter).
+const DISABLED_TYPES = [
+  'settings',
+  'homepage',
+  'person',
+  'post',
+  'assist.instruction.context',
+  // Managed by @sanity/document-internationalization; not edited directly.
+  'translation.metadata',
+  // Translated collection types are listed manually below with language == "cs" filter.
+  ...translatedTypes,
+]
+
+// Human-readable titles for each translated type.
+const TYPE_TITLES: Record<string, string> = {
+  repasovanyMotor: 'Repasované motory',
+  staryMotor: 'Staré motory',
+  motorovaHlava: 'Motorové hlavy',
+  prevodovka: 'Převodovky',
+  turbodmychadlo: 'Turbodmychadla',
+  page: 'Stránky',
+  post: 'Příspěvky',
+}
 
 export const structure: StructureResolver = (S: StructureBuilder) =>
   S.list()
     .title('Website Content')
     .items([
-      // Homepage Singleton
+      // Homepage singleton, one document per locale
       S.listItem()
-        .title('Homepage')
-        .child(S.document().schemaType('homepage').documentId('homepage'))
+        .title('Homepage (CS)')
+        .child(S.document().schemaType('homepage').documentId('homepage-cs'))
+        .icon(HomeIcon),
+      S.listItem()
+        .title('Homepage (DE-AT)')
+        .child(S.document().schemaType('homepage').documentId('homepage-de-AT'))
         .icon(HomeIcon),
       S.divider(),
-      ...S.documentTypeListItems()
-        // Remove the "assist.instruction.context", "settings", and "homepage" content from the list of content types
-        .filter((listItem: any) => !DISABLED_TYPES.includes(listItem.getId())),
-      // Pluralize the title of each document type.  This is not required but just an option to consider.
+
+      // Translated collection types — list only the Czech (base) documents.
+      // The @sanity/document-internationalization plugin adds a "Translations" panel
+      // inside each document so editors can jump to / create the de-AT version from there.
+      ...translatedTypes.map((type) =>
+        S.listItem()
+          .title(TYPE_TITLES[type] ?? type)
+          .child(
+            S.documentList()
+              .title(TYPE_TITLES[type] ?? type)
+              .schemaType(type)
+              .filter('_type == $type && language == "cs"')
+              .params({type}),
+          ),
+      ),
+
+      // Any remaining non-disabled, non-translated document types (auto-generated).
+      ...S.documentTypeListItems().filter(
+        (listItem: any) => !DISABLED_TYPES.includes(listItem.getId()),
+      ),
+
       S.divider(),
-      // Settings Singleton in order to view/edit the one particular document for Settings.  Learn more about Singletons: https://www.sanity.io/docs/create-a-link-to-a-single-edit-page-in-your-main-document-type-list
+      // Site Settings singleton, one document per locale
       S.listItem()
-        .title('Site Settings')
-        .child(S.document().schemaType('settings').documentId('siteSettings'))
+        .title('Site Settings (CS)')
+        .child(S.document().schemaType('settings').documentId('siteSettings-cs'))
+        .icon(CogIcon),
+      S.listItem()
+        .title('Site Settings (DE-AT)')
+        .child(S.document().schemaType('settings').documentId('siteSettings-de-AT'))
         .icon(CogIcon),
     ])

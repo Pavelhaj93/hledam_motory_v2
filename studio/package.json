@@ -21,6 +21,7 @@
   "dependencies": {
     "@sanity/assist": "^5.0.0",
     "@sanity/client": "^6.0.0",
+    "@sanity/document-internationalization": "^6.2.5",
     "@sanity/icons": "^3.7.4",
     "@sanity/vision": "^5.26.0",
     "date-fns": "^4.1.0",

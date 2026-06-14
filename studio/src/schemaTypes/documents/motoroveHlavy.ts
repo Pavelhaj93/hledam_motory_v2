@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {languageField, isUniquePerLanguage} from '../shared/i18n'
 import {ComponentIcon} from '@sanity/icons'
 
 /**
@@ -12,6 +13,7 @@ export const motoroveHlavy = defineType({
   type: 'document',
   icon: ComponentIcon,
   fields: [
+    languageField,
     defineField({
       name: 'name',
       title: 'Název hlavy',
@@ -26,6 +28,7 @@ export const motoroveHlavy = defineType({
       options: {
         source: 'name',
         maxLength: 96,
+        isUnique: isUniquePerLanguage,
       },
     }),
     defineField({
@@ -117,8 +120,12 @@ export const motoroveHlavy = defineType({
       type: 'string',
       initialValue: 'CZK',
       readOnly: true,
+      hidden: true,
       options: {
-        list: [{title: 'CZK (Kč)', value: 'CZK'}],
+        list: [
+          {title: 'CZK (Kč)', value: 'CZK'},
+          {title: 'EUR (€)', value: 'EUR'},
+        ],
       },
     }),
     defineField({

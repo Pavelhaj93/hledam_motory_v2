@@ -17,7 +17,7 @@ const repasovanyMotorFields = /* groq */ `
   description,
   "mainImage": images[0],
   price,
-  currency,
+  "currency": select(language == "de-AT" => "EUR", "CZK"),
   inStock,
   featured,
   specifications[] {
@@ -35,7 +35,7 @@ const repasovanyMotorFields = /* groq */ `
     "brand": brand->name,
     "mainImage": images[0],
     price,
-    currency,
+    "currency": select(language == "de-AT" => "EUR", "CZK"),
     inStock,
     turboCode,
     condition
@@ -58,7 +58,7 @@ const staryMotorFields = /* groq */ `
   description,
   "mainImage": images[0],
   price,
-  currency,
+  "currency": select(language == "de-AT" => "EUR", "CZK"),
   inStock,
   featured,
   specifications[] {
@@ -77,7 +77,7 @@ const staryMotorFields = /* groq */ `
     "brand": brand->name,
     "mainImage": images[0],
     price,
-    currency,
+    "currency": select(language == "de-AT" => "EUR", "CZK"),
     inStock,
     turboCode,
     condition
@@ -99,7 +99,7 @@ const motorovaHlavaFields = /* groq */ `
   description,
   "mainImage": images[0],
   price,
-  currency,
+  "currency": select(language == "de-AT" => "EUR", "CZK"),
   inStock,
   featured,
   specifications[] {
@@ -129,7 +129,7 @@ const prevodovkaFields = /* groq */ `
   description,
   "mainImage": images[0],
   price,
-  currency,
+  "currency": select(language == "de-AT" => "EUR", "CZK"),
   inStock,
   featured,
   specifications[] {
@@ -160,7 +160,7 @@ const turbodmychadloFields = /* groq */ `
   description,
   "mainImage": images[0],
   price,
-  currency,
+  "currency": select(language == "de-AT" => "EUR", "CZK"),
   inStock,
   featured,
   specifications[] {
@@ -175,10 +175,10 @@ const turbodmychadloFields = /* groq */ `
   warrantyPeriod
 `
 
-export const settingsQuery = defineQuery(`*[_type == "settings"][0]{title, phone, description, ogImage}`)
+export const settingsQuery = defineQuery(`*[_type == "settings" && language == $locale][0]{title, phone, description, ogImage}`)
 
 export const homepageQuery = defineQuery(`
-  *[_type == "homepage"][0]{
+  *[_type == "homepage" && language == $locale][0]{
     _id,
     _type,
     title,
@@ -261,7 +261,7 @@ export const homepageQuery = defineQuery(`
         ...,
         contactInfo {
           email,
-          "phone": coalesce(*[_type == "settings"][0].phone, phone),
+          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),
           address,
           companyName,
           vatNumber
@@ -293,7 +293,7 @@ export const homepageQuery = defineQuery(`
             }
           }
         },
-        "products": *[_type == "repasovanyMotor"] | order(_createdAt desc)[0...15]{
+        "products": *[_type == "repasovanyMotor" && language == $locale] | order(_createdAt desc)[0...15]{
           _id,
           _type,
           name,
@@ -349,11 +349,11 @@ export const homepageQuery = defineQuery(`
         categories[]{
           ...,
           "itemCount": select(
-            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),
-            slug == "stare-motory" => count(*[_type == "staryMotor"]),
-            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),
-            slug == "prevodovky" => count(*[_type == "prevodovka"]),
-            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),
+            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),
+            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),
+            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),
+            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),
+            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),
             0
           )
         }
@@ -388,7 +388,7 @@ const linkFields = /* groq */ `
 `
 
 export const getPageQuery = defineQuery(`
-  *[_type == 'page' && slug.current == $slug][0]{
+  *[_type == "page" && language == $locale && slug.current == $slug][0]{
     _id,
     _type,
     name,
@@ -438,7 +438,7 @@ export const getPageQuery = defineQuery(`
         ...,
         contactInfo {
           email,
-          "phone": coalesce(*[_type == "settings"][0].phone, phone),
+          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),
           address,
           companyName,
           vatNumber
@@ -462,7 +462,7 @@ export const getPageQuery = defineQuery(`
             ${linkFields}
           }
         },
-        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{
+        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{
           _id,
           _type,
           name,
@@ -518,11 +518,11 @@ export const getPageQuery = defineQuery(`
         categories[]{
           ...,
           "itemCount": select(
-            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),
-            slug == "stare-motory" => count(*[_type == "staryMotor"]),
-            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),
-            slug == "prevodovky" => count(*[_type == "prevodovka"]),
-            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),
+            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),
+            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),
+            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),
+            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),
+            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),
             0
           )
         }
@@ -532,35 +532,39 @@ export const getPageQuery = defineQuery(`
 `)
 
 export const sitemapData = defineQuery(`
-  *[(_type == "page" || _type == "post") && defined(slug.current)] | order(_type asc) {
+  *[(_type == "page" || _type == "post") && language == "cs" && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
     _type,
     _updatedAt,
+    "language": language,
+    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}
   }
 `)
 
 export const sitemapProductsData = defineQuery(`
-  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && defined(slug.current)] {
+  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == "cs" && defined(slug.current)] {
     "slug": slug.current,
     _type,
     _updatedAt,
+    "language": language,
+    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}
   }
 `)
 
 export const allPostsQuery = defineQuery(`
-  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {
+  *[_type == "post" && language == $locale && defined(slug.current)] | order(date desc, _updatedAt desc) {
     ${postFields}
   }
 `)
 
 export const morePostsQuery = defineQuery(`
-  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
+  *[_type == "post" && language == $locale && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
     ${postFields}
   }
 `)
 
 export const postQuery = defineQuery(`
-  *[_type == "post" && slug.current == $slug] [0] {
+  *[_type == "post" && language == $locale && slug.current == $slug] [0] {
     content[]{
     ...,
     markDefs[]{
@@ -574,12 +578,12 @@ export const postQuery = defineQuery(`
 
 export const postPagesSlugs = defineQuery(`
   *[_type == "post" && defined(slug.current)]
-  {"slug": slug.current}
+  {"slug": slug.current, "language": language}
 `)
 
 export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
-  {"slug": slug.current}
+  {"slug": slug.current, "language": language}
 `)
 
 // Brand-specific queries
@@ -617,112 +621,117 @@ export const brandBySlugQuery = defineQuery(`
 
 // Repasované motory queries
 export const allRepasovaneMotoryQuery = defineQuery(`
-  *[_type == "repasovanyMotor" && defined(slug.current)] | order(name asc) {
+  *[_type == "repasovanyMotor" && language == $locale && defined(slug.current)] | order(name asc) {
     ${repasovanyMotorFields}
   }
 `)
 
 export const repasovanyMotorQuery = defineQuery(`
-  *[_type == "repasovanyMotor" && slug.current == $slug] [0] {
+  *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {
     ${repasovanyMotorFields},
     detailedDescription,
     images[],
-    seo
+    seo,
+    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
   }
 `)
 
 export const repasovaneMotoryPagesSlugs = defineQuery(`
   *[_type == "repasovanyMotor" && defined(slug.current)]
-  {"slug": slug.current}
+  {"slug": slug.current, "language": language}
 `)
 
 // Staré motory queries
 export const allStareMotoryQuery = defineQuery(`
-  *[_type == "staryMotor" && defined(slug.current)] | order(name asc) {
+  *[_type == "staryMotor" && language == $locale && defined(slug.current)] | order(name asc) {
     ${staryMotorFields}
   }
 `)
 
 export const staryMotorQuery = defineQuery(`
-  *[_type == "staryMotor" && slug.current == $slug] [0] {
+  *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {
     ${staryMotorFields},
     detailedDescription,
     images[],
-    seo
+    seo,
+    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
   }
 `)
 
 export const stareMotoryPagesSlugs = defineQuery(`
   *[_type == "staryMotor" && defined(slug.current)]
-  {"slug": slug.current}
+  {"slug": slug.current, "language": language}
 `)
 
 // Motorové hlavy queries
 export const allMotoroveHlavyQuery = defineQuery(`
-  *[_type == "motorovaHlava" && defined(slug.current)] | order(name asc) {
+  *[_type == "motorovaHlava" && language == $locale && defined(slug.current)] | order(name asc) {
     ${motorovaHlavaFields}
   }
 `)
 
 export const motorovaHlavaQuery = defineQuery(`
-  *[_type == "motorovaHlava" && slug.current == $slug] [0] {
+  *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {
     ${motorovaHlavaFields},
     detailedDescription,
     images[],
-    seo
+    seo,
+    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
   }
 `)
 
 export const motoroveHlavyPagesSlugs = defineQuery(`
   *[_type == "motorovaHlava" && defined(slug.current)]
-  {"slug": slug.current}
+  {"slug": slug.current, "language": language}
 `)
 
 // Převodovky queries
 export const allPrevodovkyQuery = defineQuery(`
-  *[_type == "prevodovka" && defined(slug.current)] | order(name asc) {
+  *[_type == "prevodovka" && language == $locale && defined(slug.current)] | order(name asc) {
     ${prevodovkaFields}
   }
 `)
 
 export const prevodovkaQuery = defineQuery(`
-  *[_type == "prevodovka" && slug.current == $slug] [0] {
+  *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {
     ${prevodovkaFields},
     detailedDescription,
     images[],
-    seo
+    seo,
+    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
   }
 `)
 
 export const prevodovkyPagesSlugs = defineQuery(`
   *[_type == "prevodovka" && defined(slug.current)]
-  {"slug": slug.current}
+  {"slug": slug.current, "language": language}
 `)
 
 // Turbodmychadla queries
 export const allTurbodmychadlaQuery = defineQuery(`
-  *[_type == "turbodmychadlo" && defined(slug.current)] | order(name asc) {
+  *[_type == "turbodmychadlo" && language == $locale && defined(slug.current)] | order(name asc) {
     ${turbodmychadloFields}
   }
 `)
 
 export const turbodmychadloQuery = defineQuery(`
-  *[_type == "turbodmychadlo" && slug.current == $slug] [0] {
+  *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {
     ${turbodmychadloFields},
     detailedDescription,
     images[],
-    seo
+    seo,
+    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
   }
 `)
 
 export const turbodmychadlaPagesSlugs = defineQuery(`
   *[_type == "turbodmychadlo" && defined(slug.current)]
-  {"slug": slug.current}
+  {"slug": slug.current, "language": language}
 `)
 
 // Latest products query for homepage teaser
 export const latestProductsQuery = defineQuery(`
-  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...15]{
+  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...15]{
     _id,
     _type,
     name,

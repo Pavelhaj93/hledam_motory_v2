@@ -1,0 +1,133 @@
+{
+  "Common": {
+    "home": "Domů",
+    "catalog": "Katalog",
+    "contact": "Kontakt",
+    "about": "O nás"
+  },
+  "Categories": {
+    "repasovane-motory": "Repasované motory",
+    "stare-motory": "Staré motory",
+    "turbodmychadla": "Turbodmychadla",
+    "prevodovky": "Převodovky",
+    "motorove-hlavy": "Motorové hlavy"
+  },
+  "CategoryPage": {
+    "repasovane-motory": {
+      "title": "Repasované motory",
+      "description": "Objevte náš rozsáhlý katalog profesionálně repasovaných motorů s plnou zárukou kvality a spolehlivosti.",
+      "metaTitle": "Repasované motory | Kvalitní renovované motory se zárukou",
+      "metaDescription": "Široký výběr repasovaných motorů s plnou zárukou. Profesionální renovace s výměnou opotřebovaných dílů."
+    },
+    "stare-motory": {
+      "title": "Staré motory",
+      "description": "Použité a starší motory pro renovace, díly a opravy za výhodné ceny.",
+      "metaTitle": "Staré motory | Použité motory za výhodné ceny",
+      "metaDescription": "Nabídka použitých a starších motorů vhodných pro renovaci, díly nebo opravy."
+    },
+    "turbodmychadla": {
+      "title": "Turbodmychadla",
+      "description": "Repasovaná a nová turbodmychadla pro všechny značky vozidel s plnou zárukou.",
+      "metaTitle": "Turbodmychadla | Repasovaná a nová turba se zárukou",
+      "metaDescription": "Široký výběr repasovaných a nových turbodmychadel pro osobní automobily."
+    },
+    "prevodovky": {
+      "title": "Repasované převodovky",
+      "description": "Objevte náš rozsáhlý katalog profesionálně repasovaných převodovek - manuálních i automatických. Plná záruka kvality a spolehlivosti.",
+      "metaTitle": "Repasované převodovky | Manuální a automatické převodovky",
+      "metaDescription": "Široký výběr repasovaných převodovek - manuální i automatické. Profesionální renovace s plnou zárukou."
+    },
+    "motorove-hlavy": {
+      "title": "Motorové hlavy",
+      "description": "Repasované motorové hlavy pro osobní automobily s plnou zárukou kvality.",
+      "metaTitle": "Motorové hlavy | Repasované hlavy válců se zárukou",
+      "metaDescription": "Repasované motorové hlavy pro všechny značky vozidel s plnou zárukou."
+    }
+  },
+  "Product": {
+    "inStock": "Skladem",
+    "outOfStock": "Není skladem",
+    "backToCatalog": "Zpět na katalog",
+    "noImage": "Bez obrázku",
+    "description": "Popis",
+    "specs": "Technické údaje",
+    "detailedInfo": "Detailní informace",
+    "compatibleEngines": "Kompatibilní motory",
+    "mileage": "Kilometráž",
+    "warranty": "Záruka",
+    "condition": "Stav",
+    "order": "Objednávka",
+    "orderHelp": "Pro objednání nebo více informací nás kontaktujte:",
+    "transmissionCode": "Kód převodovky",
+    "transmissionType": "Typ převodovky",
+    "gearCount": "Počet rychlostí",
+    "gears": "rychlostí",
+    "driveType": "Typ pohonu",
+    "fluidType": "Typ oleje",
+    "turboCode": "Kód turba",
+    "boostPressure": "Plnicí tlak",
+    "oilType": "Typ oleje",
+    "valveCount": "Počet ventilů",
+    "material": "Materiál",
+    "includedComponents": "Obsažené komponenty",
+    "displacement": "Objem",
+    "power": "Výkon",
+    "fuelType": "Palivo",
+    "manufacturer": "Výrobce",
+    "year": "Rok výroby",
+    "damageDescription": "Popis poškození",
+    "engineCodes": "Kódy motorů",
+    "relatedTurbos": "Doporučená turbodmychadla",
+    "relatedTurbosHelp": "K tomuto produktu doporučujeme následující turbodmychadla:",
+    "viewDetail": "Zobrazit detail →",
+    "notFound": "Produkt nenalezen",
+    "notFoundDescription": "Požadovaný produkt nebyl nalezen."
+  },
+  "Catalog": {
+    "searchPlaceholder": "Hledat produkty podle názvu, značky, popisu nebo čísla dílu...",
+    "brand": "Značka",
+    "allBrands": "Všechny značky",
+    "sortBy": "Řadit podle",
+    "filters": "Filtry",
+    "clearFilters": "Vymazat filtry",
+    "noImage": "Bez obrázku",
+    "noResultsTitle": "Žádné produkty nenalezeny",
+    "noResultsBody": "Zkuste změnit filtry nebo hledaný výraz.",
+    "foundCount": "Nalezeno {count} produktů",
+    "prev": "Předchozí",
+    "next": "Další",
+    "sortNameAsc": "Název (A-Z)",
+    "sortNameDesc": "Název (Z-A)",
+    "sortPriceAsc": "Cena (nejlevnější)",
+    "sortPriceDesc": "Cena (nejdražší)"
+  },
+  "Header": {
+    "openMenu": "Otevřít menu",
+    "closeMenu": "Zavřít menu",
+    "popularBrands": "Populární značky"
+  },
+  "Footer": {
+    "navigation": "Navigace",
+    "categories": "Kategorie",
+    "contactInfo": "Kontaktní údaje",
+    "popularBrands": "Populární značky",
+    "privacy": "Ochrana osobních údajů",
+    "cookies": "Cookies",
+    "rights": "Všechna práva vyhrazena",
+    "companyBlurb": "Specializujeme se na prodej kvalitních motorových dílů, repasovaných motorů a příslušenství. Nabízíme široký sortiment pro všechny typy vozidel."
+  },
+  "Cookies": {
+    "title": "Souhlas se zpracováním cookies",
+    "message": "Tato stránka používá soubory cookie pro sledování konverzí, personalizované reklamy a zlepšení uživatelského zážitku. Zpracování provádíme my a naši partneři včetně Seznam.cz a Google Analytics.",
+    "acceptAll": "Přijmout vše",
+    "rejectAll": "Odmítnout vše",
+    "details": "Podrobnosti o cookies",
+    "manage": "Spravovat cookies",
+    "close": "Zavřít"
+  },
+  "LangSwitcher": {
+    "label": "Jazyk",
+    "cs": "Čeština",
+    "de-AT": "Deutsch (AT)"
+  }
+}

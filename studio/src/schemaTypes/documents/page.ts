@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {DocumentIcon} from '@sanity/icons'
+import {languageField, isUniquePerLanguage} from '../shared/i18n'
 
 /**
  * Page schema.  Define and edit the fields for the 'page' content type.
@@ -12,6 +13,7 @@ export const page = defineType({
   type: 'document',
   icon: DocumentIcon,
   fields: [
+    languageField,
     defineField({
       name: 'name',
       title: 'Name',
@@ -27,6 +29,7 @@ export const page = defineType({
       options: {
         source: 'name',
         maxLength: 96,
+        isUnique: isUniquePerLanguage,
       },
     }),
     defineField({

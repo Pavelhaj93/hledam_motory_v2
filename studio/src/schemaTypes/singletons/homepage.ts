@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {HomeIcon} from '@sanity/icons'
+import {languageField} from '../shared/i18n'
 
 /**
  * Homepage schema - a singleton document for the homepage content.
@@ -14,6 +15,7 @@ export const homepage = defineType({
     title: 'Homepage',
   },
   fields: [
+    languageField,
     defineField({
       name: 'title',
       title: 'Page Title',

@@ -1,0 +1,133 @@
+{
+  "Common": {
+    "home": "Startseite",
+    "catalog": "Katalog",
+    "contact": "Kontakt",
+    "about": "Über uns"
+  },
+  "Categories": {
+    "repasovane-motory": "Generalüberholte Motoren",
+    "stare-motory": "Gebrauchtmotoren",
+    "turbodmychadla": "Turbolader",
+    "prevodovky": "Getriebe",
+    "motorove-hlavy": "Zylinderköpfe"
+  },
+  "CategoryPage": {
+    "repasovane-motory": {
+      "title": "Generalüberholte Motoren",
+      "description": "Entdecken Sie unseren umfangreichen Katalog professionell generalüberholter Motoren mit voller Qualitäts- und Zuverlässigkeitsgarantie.",
+      "metaTitle": "Generalüberholte Motoren | Qualität mit Garantie",
+      "metaDescription": "Große Auswahl an generalüberholten Motoren mit voller Garantie. Professionelle Überholung mit Austausch verschlissener Teile."
+    },
+    "stare-motory": {
+      "title": "Gebrauchtmotoren",
+      "description": "Gebrauchte und ältere Motoren für Überholungen, Ersatzteile und Reparaturen zu günstigen Preisen.",
+      "metaTitle": "Gebrauchtmotoren | Gebrauchte Motoren zu günstigen Preisen",
+      "metaDescription": "Angebot an gebrauchten und älteren Motoren für Überholung, Ersatzteile oder Reparaturen."
+    },
+    "turbodmychadla": {
+      "title": "Turbolader",
+      "description": "Überholte und neue Turbolader für alle Fahrzeugmarken mit voller Garantie.",
+      "metaTitle": "Turbolader | Überholte und neue Turbolader mit Garantie",
+      "metaDescription": "Große Auswahl an überholten und neuen Turboladern für Personenkraftwagen."
+    },
+    "prevodovky": {
+      "title": "Generalüberholte Getriebe",
+      "description": "Entdecken Sie unseren umfangreichen Katalog professionell überholter Getriebe – Schalt- und Automatikgetriebe. Volle Qualitäts- und Zuverlässigkeitsgarantie.",
+      "metaTitle": "Generalüberholte Getriebe | Schalt- und Automatikgetriebe",
+      "metaDescription": "Große Auswahl an überholten Getrieben – Schalt- und Automatikgetriebe. Professionelle Überholung mit voller Garantie."
+    },
+    "motorove-hlavy": {
+      "title": "Zylinderköpfe",
+      "description": "Überholte Zylinderköpfe für Personenkraftwagen mit voller Qualitätsgarantie.",
+      "metaTitle": "Zylinderköpfe | Überholte Zylinderköpfe mit Garantie",
+      "metaDescription": "Überholte Zylinderköpfe für alle Fahrzeugmarken mit voller Garantie."
+    }
+  },
+  "Product": {
+    "inStock": "Auf Lager",
+    "outOfStock": "Nicht auf Lager",
+    "backToCatalog": "Zurück zum Katalog",
+    "noImage": "Kein Bild",
+    "description": "Beschreibung",
+    "specs": "Technische Daten",
+    "detailedInfo": "Detaillierte Informationen",
+    "compatibleEngines": "Kompatible Motoren",
+    "mileage": "Laufleistung",
+    "warranty": "Garantie",
+    "condition": "Zustand",
+    "order": "Bestellung",
+    "orderHelp": "Für Bestellungen oder weitere Informationen kontaktieren Sie uns:",
+    "transmissionCode": "Getriebecode",
+    "transmissionType": "Getriebeart",
+    "gearCount": "Anzahl der Gänge",
+    "gears": "Gänge",
+    "driveType": "Antriebsart",
+    "fluidType": "Ölsorte",
+    "turboCode": "Turbo-Code",
+    "boostPressure": "Ladedruck",
+    "oilType": "Ölsorte",
+    "valveCount": "Anzahl der Ventile",
+    "material": "Material",
+    "includedComponents": "Enthaltene Komponenten",
+    "displacement": "Hubraum",
+    "power": "Leistung",
+    "fuelType": "Kraftstoff",
+    "manufacturer": "Hersteller",
+    "year": "Baujahr",
+    "damageDescription": "Schadensbeschreibung",
+    "engineCodes": "Motorcodes",
+    "relatedTurbos": "Empfohlene Turbolader",
+    "relatedTurbosHelp": "Zu diesem Produkt empfehlen wir folgende Turbolader:",
+    "viewDetail": "Details anzeigen →",
+    "notFound": "Produkt nicht gefunden",
+    "notFoundDescription": "Das angeforderte Produkt wurde nicht gefunden."
+  },
+  "Catalog": {
+    "searchPlaceholder": "Produkte nach Name, Marke, Beschreibung oder Teilenummer suchen...",
+    "brand": "Marke",
+    "allBrands": "Alle Marken",
+    "sortBy": "Sortieren nach",
+    "filters": "Filter",
+    "clearFilters": "Filter zurücksetzen",
+    "noImage": "Kein Bild",
+    "noResultsTitle": "Keine Produkte gefunden",
+    "noResultsBody": "Ändern Sie die Filter oder den Suchbegriff.",
+    "foundCount": "{count} Produkte gefunden",
+    "prev": "Zurück",
+    "next": "Weiter",
+    "sortNameAsc": "Name (A-Z)",
+    "sortNameDesc": "Name (Z-A)",
+    "sortPriceAsc": "Preis (aufsteigend)",
+    "sortPriceDesc": "Preis (absteigend)"
+  },
+  "Header": {
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "popularBrands": "Beliebte Marken"
+  },
+  "Footer": {
+    "navigation": "Navigation",
+    "categories": "Kategorien",
+    "contactInfo": "Kontaktdaten",
+    "popularBrands": "Beliebte Marken",
+    "privacy": "Datenschutz",
+    "cookies": "Cookies",
+    "rights": "Alle Rechte vorbehalten",
+    "companyBlurb": "Wir sind auf den Verkauf hochwertiger Motorteile, generalüberholter Motoren und Zubehör spezialisiert. Wir bieten ein breites Sortiment für alle Fahrzeugtypen."
+  },
+  "Cookies": {
+    "title": "Zustimmung zur Cookie-Verarbeitung",
+    "message": "Diese Website verwendet Cookies zur Conversion-Messung, für personalisierte Werbung und zur Verbesserung der Nutzererfahrung. Die Verarbeitung erfolgt durch uns und unsere Partner, einschließlich Seznam.cz und Google Analytics.",
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Alle ablehnen",
+    "details": "Cookie-Details",
+    "manage": "Cookies verwalten",
+    "close": "Schließen"
+  },
+  "LangSwitcher": {
+    "label": "Sprache",
+    "cs": "Čeština",
+    "de-AT": "Deutsch (AT)"
+  }
+}

@@ -1,6 +1,7 @@
 'use client'
 
 import {useState} from 'react'
+import {useLocale} from 'next-intl'
 import {Mail, Phone, MapPin, Building2, SendIcon, SendHorizonalIcon, MailIcon} from 'lucide-react'
 import {Button} from './ui/button'
 import Link from 'next/link'
@@ -72,6 +73,8 @@ export default function ContactSection({block}: ContactSectionProps) {
     }
   }
 
+  const locale = useLocale()
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -83,7 +86,7 @@ export default function ContactSection({block}: ContactSectionProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({...formData, locale}),
       })
 
       if (!response.ok) {

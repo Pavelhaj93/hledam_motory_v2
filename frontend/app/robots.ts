@@ -1,4 +1,5 @@
 import {MetadataRoute} from 'next'
+import {siteUrl} from '@/sanity/lib/api'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/studio/'],
     },
-    sitemap: 'https://hledammotory.cz/sitemap.xml',
+    sitemap: `${siteUrl}/sitemap.xml`,
   }
 }
