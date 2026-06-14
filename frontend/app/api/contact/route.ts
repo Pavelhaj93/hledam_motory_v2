@@ -6,6 +6,14 @@ export async function POST(request: NextRequest) {
     const {name, email, phone, message, locale} = await request.json()
     const isAustrian = locale === 'de-AT'
 
+    const escapeHtml = (value: string) =>
+      value.replace(/[&<>"']/g, (ch) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]!))
+
+    const nameSubject = String(name).replace(/[\r\n]+/g, ' ')
+    const nameHtml = escapeHtml(String(name))
+    const emailHtml = escapeHtml(String(email))
+    const phoneHtml = phone ? escapeHtml(String(phone)) : ''
+    const messageHtml = escapeHtml(String(message))
     // Validate required fields
     if (!name || !email || !message) {
       return NextResponse.json({error: 'Missing required fields'}, {status: 400})
