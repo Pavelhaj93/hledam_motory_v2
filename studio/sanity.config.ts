@@ -76,7 +76,7 @@ export default defineConfig({
           },
           {
             route: '/at/:slug',
-            filter: `_type == "page" && slug.current == $slug && language == "de-AT" || _id == $slug`,
+            filter: `(_type == "page" && slug.current == $slug && language == "de-AT") || (_id == $slug && language == "de-AT")`,
           },
           {
             route: '/:slug',
