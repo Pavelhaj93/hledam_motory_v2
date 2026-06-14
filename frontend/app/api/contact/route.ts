@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       text: `
 Nová poptávka
 ${marketText}
-Jméno: ${name}
+Jméno: ${nameSubject}
 E-mail: ${email}
 ${phone ? `Telefon: ${phone}` : ''}
 
