@@ -16,6 +16,8 @@ import {
   type DocumentLocation,
 } from 'sanity/presentation'
 import {assist} from '@sanity/assist'
+import {documentInternationalization} from '@sanity/document-internationalization'
+import {supportedLanguages, translatedTypes} from './src/schemaTypes/shared/i18n'
 
 // Environment variables for project configuration
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
@@ -66,11 +68,19 @@ export default defineConfig({
         mainDocuments: defineDocuments([
           {
             route: '/',
-            filter: `_type == "settings" && _id == "siteSettings"`,
+            filter: `_type == "homepage" && language == "cs"`,
+          },
+          {
+            route: '/at',
+            filter: `_type == "homepage" && language == "de-AT"`,
+          },
+          {
+            route: '/at/:slug',
+            filter: `_type == "page" && slug.current == $slug && language == "de-AT" || _id == $slug`,
           },
           {
             route: '/:slug',
-            filter: `_type == "page" && slug.current == $slug || _id == $slug`,
+            filter: `_type == "page" && slug.current == $slug && language == "cs" || _id == $slug`,
           },
           {
             route: '/posts/:slug',
@@ -121,6 +131,13 @@ export default defineConfig({
     }),
     structureTool({
       structure, // Custom studio structure configuration, imported from ./src/structure.ts
+    }),
+    // Document-level internationalization: each translated type gets a linked
+    // per-language document (own slug, price, currency, SEO).
+    documentInternationalization({
+      supportedLanguages: supportedLanguages as unknown as {id: string; title: string}[],
+      schemaTypes: [...translatedTypes],
+      languageField: 'language',
     }),
     // Additional plugins for enhanced functionality
     unsplashImageAsset(),

@@ -10,7 +10,7 @@ dotenv.config({path: '.env.local'})
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'ekg3ngzk',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'test',
-  token: process.env.SANITY_API_WRITE_TOKEN || process.env.SANITY_API_READ_TOKEN,
+  token: process.env.SANITY_API_WRITE_TOKEN,
   useCdn: false,
   apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-09-25',
 })

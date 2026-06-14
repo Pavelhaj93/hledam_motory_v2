@@ -7,8 +7,7 @@ const client = createClient({
   dataset: process.env.SANITY_STUDIO_DATASET || 'test',
   useCdn: false,
   token:
-    process.env.SANITY_API_WRITE_TOKEN ||
-    'sk7QMr8D7fFYSJ9P0BPPlF6V4k5KXTonN2NtpmcYjV16TqnhPsPbktoNJ4LL63y85WLbuBQAoSjFCYu0ueXvrhyK2FX73CNTOAeXmaBmuq03R1B6u80ovfSIBe9QVN8SYS1ZyN7owepoKlTTnUdzXvt6ZJ7hIsKukqf6CSE4R7HRtZBIshvL',
+    process.env.SANITY_API_WRITE_TOKEN,
   apiVersion: '2024-01-01',
 })
 

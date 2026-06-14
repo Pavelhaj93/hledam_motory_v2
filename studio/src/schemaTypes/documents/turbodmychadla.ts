@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {languageField, isUniquePerLanguage} from '../shared/i18n'
 import {RocketIcon} from '@sanity/icons'
 
 /**
@@ -12,6 +13,7 @@ export const turbodmychadla = defineType({
   type: 'document',
   icon: RocketIcon,
   fields: [
+    languageField,
     defineField({
       name: 'name',
       title: 'Název turbodmychadla',
@@ -26,6 +28,7 @@ export const turbodmychadla = defineType({
       options: {
         source: 'name',
         maxLength: 96,
+        isUnique: isUniquePerLanguage,
       },
     }),
     defineField({
@@ -132,8 +135,12 @@ export const turbodmychadla = defineType({
       type: 'string',
       initialValue: 'CZK',
       readOnly: true,
+      hidden: true,
       options: {
-        list: [{title: 'CZK (Kč)', value: 'CZK'}],
+        list: [
+          {title: 'CZK (Kč)', value: 'CZK'},
+          {title: 'EUR (€)', value: 'EUR'},
+        ],
       },
     }),
     defineField({

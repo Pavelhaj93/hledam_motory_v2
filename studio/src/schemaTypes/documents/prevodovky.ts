@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {languageField, isUniquePerLanguage} from '../shared/i18n'
 import {CogIcon} from '@sanity/icons'
 
 /**
@@ -12,6 +13,7 @@ export const prevodovky = defineType({
   type: 'document',
   icon: CogIcon,
   fields: [
+    languageField,
     defineField({
       name: 'name',
       title: 'Název převodovky',
@@ -26,6 +28,7 @@ export const prevodovky = defineType({
       options: {
         source: 'name',
         maxLength: 96,
+        isUnique: isUniquePerLanguage,
       },
     }),
     defineField({
@@ -138,8 +141,12 @@ export const prevodovky = defineType({
       type: 'string',
       initialValue: 'CZK',
       readOnly: true,
+      hidden: true,
       options: {
-        list: [{title: 'CZK (Kč)', value: 'CZK'}],
+        list: [
+          {title: 'CZK (Kč)', value: 'CZK'},
+          {title: 'EUR (€)', value: 'EUR'},
+        ],
       },
     }),
     defineField({

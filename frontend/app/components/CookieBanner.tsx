@@ -1,8 +1,9 @@
 'use client'
 
 import {useState, useEffect} from 'react'
+import {useTranslations} from 'next-intl'
 import Cookies from 'js-cookie'
-import Link from 'next/link'
+import {Link} from '@/i18n/navigation'
 import {Cookie, X} from 'lucide-react'
 import {Button} from './ui/button'
 
@@ -15,6 +16,7 @@ interface CookieBannerProps {
 }
 
 export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
+  const t = useTranslations('Cookies')
   const [openBanner, setOpenBanner] = useState(false)
   const [showButton, setShowButton] = useState(false)
 
@@ -72,14 +74,14 @@ export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
         <div className="group fixed bottom-6 left-6 z-50 flex items-center">
           <button
             type="button"
-            aria-label="Spravovat souhlas s nastavením cookies"
+            aria-label={t('manage')}
             className="flex items-center justify-center text-white transition-all bg-red-600 hover:bg-red-700 rounded-full p-3 cursor-pointer size-14 shadow-lg hover:shadow-xl hover:scale-105"
             onClick={() => setOpenBanner(!openBanner)}
           >
             <Cookie className="size-7" />
           </button>
           <span className="hidden group-hover:inline-block ml-3 px-4 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap">
-            Spravovat cookies
+            {t('manage')}
           </span>
         </div>
       )}
@@ -94,7 +96,7 @@ export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
                 type="button"
                 onClick={() => setOpenBanner(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-                aria-label="Zavřít"
+                aria-label={t('close')}
               >
                 <X className="size-5" />
               </button>
@@ -109,19 +111,15 @@ export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
 
                 <div className="flex-1 space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      Souhlas se zpracováním cookies
-                    </h3>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('title')}</h3>
                     <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                      Tato stránka používá soubory cookie pro sledování konverzí, personalizované
-                      reklamy a zlepšení uživatelského zážitku. Zpracování provádíme my a naši
-                      partneři včetně Seznam.cz a Google Analytics.
+                      {t('message')}
                     </p>
                   </div>
 
                   <div className="flex flex-wrap gap-3 items-center">
                     <Button size="lg" type="button" onClick={() => handleConsent(true)}>
-                      Přijmout vše
+                      {t('acceptAll')}
                     </Button>
                     <Button
                       type="button"
@@ -129,13 +127,13 @@ export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
                       size="lg"
                       className="bg-gray-200 hover:bg-gray-300 transition-colors text-gray-800 text-sm md:text-base font-medium px-6 py-3 rounded-lg"
                     >
-                      Odmítnout vše
+                      {t('rejectAll')}
                     </Button>
                     <Link
                       href="/cookies"
                       className="text-sm md:text-base text-red-600 hover:text-red-700 font-medium underline hover:no-underline transition-colors"
                     >
-                      Podrobnosti o cookies
+                      {t('details')}
                     </Link>
                   </div>
                 </div>

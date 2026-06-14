@@ -302,301 +302,13 @@ export type BlockContent = Array<{
   _key: string
 }>
 
-export type BrandReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'brand'
-}
-
-export type Turbodmychadlo = {
-  _id: string
-  _type: 'turbodmychadlo'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
-  engineCodes?: Array<string>
-  turboCode?: string
-  displacement?: string
-  power?: string
-  manufacturer?: 'garrett' | 'kkk' | 'ihi' | 'mitsubishi' | 'holset' | 'jiny'
-  description?: string
-  detailedDescription?: BlockContent
-  images?: Array<{
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    caption?: string
-    _type: 'image'
-    _key: string
-  }>
-  price?: number
-  currency?: 'CZK'
-  specifications?: Array<{
-    label?: string
-    value?: string
-    _key: string
-  }>
-  compatibility?: Array<string>
-  condition?: 'nove' | 'repasovane' | 'pouzite-funkcni' | 'na-dily'
-  mileage?: string
-  boostPressure?: string
-  oilType?: string
-  warrantyPeriod?: string
-  inStock?: boolean
-  featured?: boolean
-  seo?: {
-    metaTitle?: string
-    metaDescription?: string
-  }
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
-
-export type Prevodovka = {
-  _id: string
-  _type: 'prevodovka'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
-  engineCodes?: Array<string>
-  transmissionCode?: string
-  transmissionType?: 'manualni' | 'automaticka' | 'cvt' | 'sekvencni'
-  gearCount?: string
-  driveType?: 'predni' | 'zadni' | '4x4' | 'awd'
-  description?: string
-  detailedDescription?: BlockContent
-  images?: Array<{
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    caption?: string
-    _type: 'image'
-    _key: string
-  }>
-  price?: number
-  currency?: 'CZK'
-  specifications?: Array<{
-    label?: string
-    value?: string
-    _key: string
-  }>
-  compatibility?: Array<string>
-  mileage?: string
-  condition?: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
-  fluidType?: string
-  warrantyPeriod?: string
-  inStock?: boolean
-  featured?: boolean
-  seo?: {
-    metaTitle?: string
-    metaDescription?: string
-  }
-}
-
-export type MotorovaHlava = {
-  _id: string
-  _type: 'motorovaHlava'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
-  engineCodes?: Array<string>
-  valveCount?: string
-  material?: 'litina' | 'hlinik' | 'slitina-hliniku'
-  description?: string
-  detailedDescription?: BlockContent
-  images?: Array<{
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    caption?: string
-    _type: 'image'
-    _key: string
-  }>
-  price?: number
-  currency?: 'CZK'
-  specifications?: Array<{
-    label?: string
-    value?: string
-    _key: string
-  }>
-  compatibility?: Array<string>
-  condition?: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
-  includedComponents?: Array<string>
-  warrantyPeriod?: string
-  inStock?: boolean
-  featured?: boolean
-  seo?: {
-    metaTitle?: string
-    metaDescription?: string
-  }
-}
-
-export type TurbodmychadloReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'turbodmychadlo'
-}
-
-export type StaryMotor = {
-  _id: string
-  _type: 'staryMotor'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
-  engineCodes?: Array<string>
-  displacement?: string
-  power?: string
-  fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
-  description?: string
-  detailedDescription?: BlockContent
-  images?: Array<{
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    caption?: string
-    _type: 'image'
-    _key: string
-  }>
-  price?: number
-  currency?: 'CZK'
-  specifications?: Array<{
-    label?: string
-    value?: string
-    _key: string
-  }>
-  compatibility?: Array<string>
-  mileage?: string
-  year?: string
-  condition?: 'funkcni' | 'na-dily' | 'kompletni' | 'nekompletni'
-  damageDescription?: string
-  relatedTurbochargers?: Array<
-    {
-      _key: string
-    } & TurbodmychadloReference
-  >
-  inStock?: boolean
-  featured?: boolean
-  seo?: {
-    metaTitle?: string
-    metaDescription?: string
-  }
-}
-
-export type RepasovanyMotor = {
-  _id: string
-  _type: 'repasovanyMotor'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
-  engineCodes?: Array<string>
-  displacement?: string
-  power?: string
-  fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
-  description?: string
-  detailedDescription?: BlockContent
-  images?: Array<{
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    caption?: string
-    _type: 'image'
-    _key: string
-  }>
-  price?: number
-  currency?: 'CZK'
-  specifications?: Array<{
-    label?: string
-    value?: string
-    _key: string
-  }>
-  compatibility?: Array<string>
-  warrantyPeriod?: string
-  mileage?: string
-  condition?: 'repasovany' | 'generalka' | 'testovany'
-  relatedTurbochargers?: Array<
-    {
-      _key: string
-    } & TurbodmychadloReference
-  >
-  inStock?: boolean
-  featured?: boolean
-  seo?: {
-    metaTitle?: string
-    metaDescription?: string
-  }
-}
-
-export type Brand = {
-  _id: string
-  _type: 'brand'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  slug?: Slug
-  logo?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  isPopular?: boolean
-}
-
 export type Homepage = {
   _id: string
   _type: 'homepage'
   _createdAt: string
   _updatedAt: string
   _rev: string
+  language?: string
   title?: string
   seo?: {
     metaTitle?: string
@@ -642,6 +354,7 @@ export type Settings = {
   _createdAt: string
   _updatedAt: string
   _rev: string
+  language?: string
   title?: string
   phone?: string
   description?: Array<{
@@ -677,104 +390,20 @@ export type Settings = {
   }
 }
 
-export type Page = {
-  _id: string
-  _type: 'page'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  slug?: Slug
-  heading?: string
-  subheading?: string
-  pageBuilder?: Array<
-    | ({
-        _key: string
-      } & CallToAction)
-    | ({
-        _key: string
-      } & InfoSection)
-    | ({
-        _key: string
-      } & HeroSection)
-    | ({
-        _key: string
-      } & HeroSectionCarousel)
-    | ({
-        _key: string
-      } & ProductShowcase)
-    | ({
-        _key: string
-      } & ContactSection)
-    | ({
-        _key: string
-      } & RichTextSection)
-    | ({
-        _key: string
-      } & HowItWorksSection)
-    | ({
-        _key: string
-      } & HomepageTeaserSection)
-    | ({
-        _key: string
-      } & BenefitsSection)
-    | ({
-        _key: string
-      } & CategoryGrid)
-    | ({
-        _key: string
-      } & FeatureGrid)
-    | ({
-        _key: string
-      } & CtaBanner)
-  >
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
 }
 
-export type PersonReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'person'
-}
-
-export type Post = {
-  _id: string
-  _type: 'post'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  slug?: Slug
-  content?: BlockContent
-  excerpt?: string
-  coverImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    _type: 'image'
-  }
-  date?: string
-  author?: PersonReference
-}
-
-export type Person = {
-  _id: string
-  _type: 'person'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  firstName?: string
-  lastName?: string
-  picture?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    _type: 'image'
-  }
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
 }
 
 export type SanityAssistInstructionTask = {
@@ -914,6 +543,443 @@ export type SanityAssistSchemaTypeField = {
   >
 }
 
+export type TranslationMetadata = {
+  _id: string
+  _type: 'translation.metadata'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  translations?: InternationalizedArrayReference
+  schemaTypes?: Array<string>
+}
+
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string
+  } & InternationalizedArrayReferenceValue
+>
+
+export type RepasovanyMotorReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'repasovanyMotor'
+}
+
+export type StaryMotorReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'staryMotor'
+}
+
+export type MotorovaHlavaReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'motorovaHlava'
+}
+
+export type PrevodovkaReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'prevodovka'
+}
+
+export type TurbodmychadloReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'turbodmychadlo'
+}
+
+export type InternationalizedArrayReferenceValue = {
+  _type: 'internationalizedArrayReferenceValue'
+  value?:
+    | RepasovanyMotorReference
+    | StaryMotorReference
+    | MotorovaHlavaReference
+    | PrevodovkaReference
+    | TurbodmychadloReference
+    | PageReference
+    | PostReference
+  language?: string
+}
+
+export type BrandReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'brand'
+}
+
+export type Turbodmychadlo = {
+  _id: string
+  _type: 'turbodmychadlo'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: string
+  name?: string
+  slug?: Slug
+  brand?: BrandReference
+  engineCodes?: Array<string>
+  turboCode?: string
+  displacement?: string
+  power?: string
+  manufacturer?: 'garrett' | 'kkk' | 'ihi' | 'mitsubishi' | 'holset' | 'jiny'
+  description?: string
+  detailedDescription?: BlockContent
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price?: number
+  currency?: 'CZK' | 'EUR'
+  specifications?: Array<{
+    label?: string
+    value?: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  condition?: 'nove' | 'repasovane' | 'pouzite-funkcni' | 'na-dily'
+  mileage?: string
+  boostPressure?: string
+  oilType?: string
+  warrantyPeriod?: string
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
+}
+
+export type Prevodovka = {
+  _id: string
+  _type: 'prevodovka'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: string
+  name?: string
+  slug?: Slug
+  brand?: BrandReference
+  engineCodes?: Array<string>
+  transmissionCode?: string
+  transmissionType?: 'manualni' | 'automaticka' | 'cvt' | 'sekvencni'
+  gearCount?: string
+  driveType?: 'predni' | 'zadni' | '4x4' | 'awd'
+  description?: string
+  detailedDescription?: BlockContent
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price?: number
+  currency?: 'CZK' | 'EUR'
+  specifications?: Array<{
+    label?: string
+    value?: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  mileage?: string
+  condition?: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
+  fluidType?: string
+  warrantyPeriod?: string
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type MotorovaHlava = {
+  _id: string
+  _type: 'motorovaHlava'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: string
+  name?: string
+  slug?: Slug
+  brand?: BrandReference
+  engineCodes?: Array<string>
+  valveCount?: string
+  material?: 'litina' | 'hlinik' | 'slitina-hliniku'
+  description?: string
+  detailedDescription?: BlockContent
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price?: number
+  currency?: 'CZK' | 'EUR'
+  specifications?: Array<{
+    label?: string
+    value?: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  condition?: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
+  includedComponents?: Array<string>
+  warrantyPeriod?: string
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type StaryMotor = {
+  _id: string
+  _type: 'staryMotor'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: string
+  name?: string
+  slug?: Slug
+  brand?: BrandReference
+  engineCodes?: Array<string>
+  displacement?: string
+  power?: string
+  fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
+  description?: string
+  detailedDescription?: BlockContent
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price?: number
+  currency?: 'CZK' | 'EUR'
+  specifications?: Array<{
+    label?: string
+    value?: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  mileage?: string
+  year?: string
+  condition?: 'funkcni' | 'na-dily' | 'kompletni' | 'nekompletni'
+  damageDescription?: string
+  relatedTurbochargers?: Array<
+    {
+      _key: string
+    } & TurbodmychadloReference
+  >
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type RepasovanyMotor = {
+  _id: string
+  _type: 'repasovanyMotor'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: string
+  name?: string
+  slug?: Slug
+  brand?: BrandReference
+  engineCodes?: Array<string>
+  displacement?: string
+  power?: string
+  fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
+  description?: string
+  detailedDescription?: BlockContent
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  price?: number
+  currency?: 'CZK' | 'EUR'
+  specifications?: Array<{
+    label?: string
+    value?: string
+    _key: string
+  }>
+  compatibility?: Array<string>
+  warrantyPeriod?: string
+  mileage?: string
+  condition?: 'repasovany' | 'generalka' | 'testovany'
+  relatedTurbochargers?: Array<
+    {
+      _key: string
+    } & TurbodmychadloReference
+  >
+  inStock?: boolean
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type Page = {
+  _id: string
+  _type: 'page'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: string
+  name?: string
+  slug?: Slug
+  heading?: string
+  subheading?: string
+  pageBuilder?: Array<
+    | ({
+        _key: string
+      } & CallToAction)
+    | ({
+        _key: string
+      } & InfoSection)
+    | ({
+        _key: string
+      } & HeroSection)
+    | ({
+        _key: string
+      } & HeroSectionCarousel)
+    | ({
+        _key: string
+      } & ProductShowcase)
+    | ({
+        _key: string
+      } & ContactSection)
+    | ({
+        _key: string
+      } & RichTextSection)
+    | ({
+        _key: string
+      } & HowItWorksSection)
+    | ({
+        _key: string
+      } & HomepageTeaserSection)
+    | ({
+        _key: string
+      } & BenefitsSection)
+    | ({
+        _key: string
+      } & CategoryGrid)
+    | ({
+        _key: string
+      } & FeatureGrid)
+    | ({
+        _key: string
+      } & CtaBanner)
+  >
+}
+
+export type PersonReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'person'
+}
+
+export type Post = {
+  _id: string
+  _type: 'post'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: string
+  title?: string
+  slug?: Slug
+  content?: BlockContent
+  excerpt?: string
+  coverImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  date?: string
+  author?: PersonReference
+}
+
+export type Person = {
+  _id: string
+  _type: 'person'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  firstName?: string
+  lastName?: string
+  picture?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
+
+export type Brand = {
+  _id: string
+  _type: 'brand'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+  slug?: Slug
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  isPopular?: boolean
+}
+
 export type SanityImagePaletteSwatch = {
   _type: 'sanity.imagePaletteSwatch'
   background?: string
@@ -1041,23 +1107,10 @@ export type AllSanitySchemaTypes =
   | CallToAction
   | InfoSection
   | BlockContent
-  | BrandReference
-  | Turbodmychadlo
-  | SanityImageCrop
-  | SanityImageHotspot
-  | Slug
-  | Prevodovka
-  | MotorovaHlava
-  | TurbodmychadloReference
-  | StaryMotor
-  | RepasovanyMotor
-  | Brand
   | Homepage
   | Settings
-  | Page
-  | PersonReference
-  | Post
-  | Person
+  | SanityImageCrop
+  | SanityImageHotspot
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -1071,6 +1124,26 @@ export type AllSanitySchemaTypes =
   | SanityAssistInstructionFieldRef
   | SanityAssistInstruction
   | SanityAssistSchemaTypeField
+  | TranslationMetadata
+  | InternationalizedArrayReference
+  | RepasovanyMotorReference
+  | StaryMotorReference
+  | MotorovaHlavaReference
+  | PrevodovkaReference
+  | TurbodmychadloReference
+  | InternationalizedArrayReferenceValue
+  | BrandReference
+  | Turbodmychadlo
+  | Slug
+  | Prevodovka
+  | MotorovaHlava
+  | StaryMotor
+  | RepasovanyMotor
+  | Page
+  | PersonReference
+  | Post
+  | Person
+  | Brand
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -1082,7 +1155,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{title, phone, description, ogImage}
+// Query: *[_type == "settings" && language == $locale][0]{title, phone, description, ogImage}
 export type SettingsQueryResult = {
   title: string | null
   phone: string | null
@@ -1121,7 +1194,7 @@ export type SettingsQueryResult = {
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: homepageQuery
-// Query: *[_type == "homepage"][0]{    _id,    _type,    title,    seo,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        link {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "infoSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          "phone": coalesce(*[_type == "settings"][0].phone, phone),          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        "products": *[_type == "repasovanyMotor"] | order(_createdAt desc)[0...15]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),            slug == "stare-motory" => count(*[_type == "staryMotor"]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),            slug == "prevodovky" => count(*[_type == "prevodovka"]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),            0          )        }      },    },  }
+// Query: *[_type == "homepage" && language == $locale][0]{    _id,    _type,    title,    seo,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        link {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "infoSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        "products": *[_type == "repasovanyMotor" && language == $locale] | order(_createdAt desc)[0...15]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),            0          )        }      },    },  }
 export type HomepageQueryResult = {
   _id: string
   _type: 'homepage'
@@ -1441,7 +1514,7 @@ export type HomepageQueryResult = {
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          "phone": coalesce(*[_type == "settings"][0].phone, phone),          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        secondaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),            slug == "stare-motory" => count(*[_type == "staryMotor"]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),            slug == "prevodovky" => count(*[_type == "prevodovka"]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),            0          )        }      },    },  }
+// Query: *[_type == "page" && language == $locale && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        secondaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),            0          )        }      },    },  }
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
@@ -1918,23 +1991,89 @@ export type GetPageQueryResult = {
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: sitemapData
-// Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
+// Query: *[(_type == "page" || _type == "post") && language == "cs" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,    "language": language,    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}  }
 export type SitemapDataResult = Array<
   | {
       slug: string | null
       _type: 'page'
       _updatedAt: string
+      language: string | null
+      alt: {
+        slug: string | null
+        language: string | null
+      } | null
     }
   | {
       slug: string | null
       _type: 'post'
       _updatedAt: string
+      language: string | null
+      alt: {
+        slug: string | null
+        language: string | null
+      } | null
+    }
+>
+
+// Source: ../frontend/sanity/lib/queries.ts
+// Variable: sitemapProductsData
+// Query: *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == "cs" && defined(slug.current)] {    "slug": slug.current,    _type,    _updatedAt,    "language": language,    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}  }
+export type SitemapProductsDataResult = Array<
+  | {
+      slug: string | null
+      _type: 'motorovaHlava'
+      _updatedAt: string
+      language: string | null
+      alt: {
+        slug: string | null
+        language: string | null
+      } | null
+    }
+  | {
+      slug: string | null
+      _type: 'prevodovka'
+      _updatedAt: string
+      language: string | null
+      alt: {
+        slug: string | null
+        language: string | null
+      } | null
+    }
+  | {
+      slug: string | null
+      _type: 'repasovanyMotor'
+      _updatedAt: string
+      language: string | null
+      alt: {
+        slug: string | null
+        language: string | null
+      } | null
+    }
+  | {
+      slug: string | null
+      _type: 'staryMotor'
+      _updatedAt: string
+      language: string | null
+      alt: {
+        slug: string | null
+        language: string | null
+      } | null
+    }
+  | {
+      slug: string | null
+      _type: 'turbodmychadlo'
+      _updatedAt: string
+      language: string | null
+      alt: {
+        slug: string | null
+        language: string | null
+      } | null
     }
 >
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: allPostsQuery
-// Query: *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
+// Query: *[_type == "post" && language == $locale && defined(slug.current)] | order(date desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type AllPostsQueryResult = Array<{
   _id: string
   status: 'draft' | 'published'
@@ -1966,7 +2105,7 @@ export type AllPostsQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: morePostsQuery
-// Query: *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
+// Query: *[_type == "post" && language == $locale && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type MorePostsQueryResult = Array<{
   _id: string
   status: 'draft' | 'published'
@@ -1998,7 +2137,7 @@ export type MorePostsQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: postQuery
-// Query: *[_type == "post" && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
+// Query: *[_type == "post" && language == $locale && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
 export type PostQueryResult = {
   content: Array<{
     children?: Array<{
@@ -2052,16 +2191,18 @@ export type PostQueryResult = {
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: postPagesSlugs
-// Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type PostPagesSlugsResult = Array<{
   slug: string | null
+  language: string | null
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: pagesSlugs
-// Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type PagesSlugsResult = Array<{
   slug: string | null
+  language: string | null
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
@@ -2117,7 +2258,7 @@ export type BrandBySlugQueryResult = {
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: allRepasovaneMotoryQuery
-// Query: *[_type == "repasovanyMotor" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  }  }
+// Query: *[_type == "repasovanyMotor" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  }  }
 export type AllRepasovaneMotoryQueryResult = Array<{
   _id: string
   name: string | null
@@ -2149,7 +2290,7 @@ export type AllRepasovaneMotoryQueryResult = Array<{
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2176,7 +2317,7 @@ export type AllRepasovaneMotoryQueryResult = Array<{
       _key: string
     } | null
     price: number | null
-    currency: 'CZK' | null
+    currency: 'CZK' | 'EUR'
     inStock: boolean | null
     turboCode: string | null
     condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
@@ -2185,7 +2326,7 @@ export type AllRepasovaneMotoryQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: repasovanyMotorQuery
-// Query: *[_type == "repasovanyMotor" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo  }
+// Query: *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type RepasovanyMotorQueryResult = {
   _id: string
   name: string | null
@@ -2217,7 +2358,7 @@ export type RepasovanyMotorQueryResult = {
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2244,7 +2385,7 @@ export type RepasovanyMotorQueryResult = {
       _key: string
     } | null
     price: number | null
-    currency: 'CZK' | null
+    currency: 'CZK' | 'EUR'
     inStock: boolean | null
     turboCode: string | null
     condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
@@ -2264,18 +2405,23 @@ export type RepasovanyMotorQueryResult = {
     metaTitle?: string
     metaDescription?: string
   } | null
+  altSlug: {
+    slug: string | null
+    language: string | null
+  } | null
 } | null
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: repasovaneMotoryPagesSlugs
-// Query: *[_type == "repasovanyMotor" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "repasovanyMotor" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type RepasovaneMotoryPagesSlugsResult = Array<{
   slug: string | null
+  language: string | null
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: allStareMotoryQuery
-// Query: *[_type == "staryMotor" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  }  }
+// Query: *[_type == "staryMotor" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  }  }
 export type AllStareMotoryQueryResult = Array<{
   _id: string
   name: string | null
@@ -2307,7 +2453,7 @@ export type AllStareMotoryQueryResult = Array<{
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2335,7 +2481,7 @@ export type AllStareMotoryQueryResult = Array<{
       _key: string
     } | null
     price: number | null
-    currency: 'CZK' | null
+    currency: 'CZK' | 'EUR'
     inStock: boolean | null
     turboCode: string | null
     condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
@@ -2344,7 +2490,7 @@ export type AllStareMotoryQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: staryMotorQuery
-// Query: *[_type == "staryMotor" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    currency,    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo  }
+// Query: *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type StaryMotorQueryResult = {
   _id: string
   name: string | null
@@ -2376,7 +2522,7 @@ export type StaryMotorQueryResult = {
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2404,7 +2550,7 @@ export type StaryMotorQueryResult = {
       _key: string
     } | null
     price: number | null
-    currency: 'CZK' | null
+    currency: 'CZK' | 'EUR'
     inStock: boolean | null
     turboCode: string | null
     condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
@@ -2424,18 +2570,23 @@ export type StaryMotorQueryResult = {
     metaTitle?: string
     metaDescription?: string
   } | null
+  altSlug: {
+    slug: string | null
+    language: string | null
+  } | null
 } | null
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: stareMotoryPagesSlugs
-// Query: *[_type == "staryMotor" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "staryMotor" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type StareMotoryPagesSlugsResult = Array<{
   slug: string | null
+  language: string | null
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: allMotoroveHlavyQuery
-// Query: *[_type == "motorovaHlava" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod  }
+// Query: *[_type == "motorovaHlava" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod  }
 export type AllMotoroveHlavyQueryResult = Array<{
   _id: string
   name: string | null
@@ -2466,7 +2617,7 @@ export type AllMotoroveHlavyQueryResult = Array<{
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2481,7 +2632,7 @@ export type AllMotoroveHlavyQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: motorovaHlavaQuery
-// Query: *[_type == "motorovaHlava" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod,    detailedDescription,    images[],    seo  }
+// Query: *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type MotorovaHlavaQueryResult = {
   _id: string
   name: string | null
@@ -2512,7 +2663,7 @@ export type MotorovaHlavaQueryResult = {
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2538,18 +2689,23 @@ export type MotorovaHlavaQueryResult = {
     metaTitle?: string
     metaDescription?: string
   } | null
+  altSlug: {
+    slug: string | null
+    language: string | null
+  } | null
 } | null
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: motoroveHlavyPagesSlugs
-// Query: *[_type == "motorovaHlava" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "motorovaHlava" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type MotoroveHlavyPagesSlugsResult = Array<{
   slug: string | null
+  language: string | null
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: allPrevodovkyQuery
-// Query: *[_type == "prevodovka" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod  }
+// Query: *[_type == "prevodovka" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod  }
 export type AllPrevodovkyQueryResult = Array<{
   _id: string
   name: string | null
@@ -2582,7 +2738,7 @@ export type AllPrevodovkyQueryResult = Array<{
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2598,7 +2754,7 @@ export type AllPrevodovkyQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: prevodovkaQuery
-// Query: *[_type == "prevodovka" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod,    detailedDescription,    images[],    seo  }
+// Query: *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type PrevodovkaQueryResult = {
   _id: string
   name: string | null
@@ -2631,7 +2787,7 @@ export type PrevodovkaQueryResult = {
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2658,18 +2814,23 @@ export type PrevodovkaQueryResult = {
     metaTitle?: string
     metaDescription?: string
   } | null
+  altSlug: {
+    slug: string | null
+    language: string | null
+  } | null
 } | null
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: prevodovkyPagesSlugs
-// Query: *[_type == "prevodovka" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "prevodovka" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type PrevodovkyPagesSlugsResult = Array<{
   slug: string | null
+  language: string | null
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: allTurbodmychadlaQuery
-// Query: *[_type == "turbodmychadlo" && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod  }
+// Query: *[_type == "turbodmychadlo" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod  }
 export type AllTurbodmychadlaQueryResult = Array<{
   _id: string
   name: string | null
@@ -2702,7 +2863,7 @@ export type AllTurbodmychadlaQueryResult = Array<{
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2719,7 +2880,7 @@ export type AllTurbodmychadlaQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: turbodmychadloQuery
-// Query: *[_type == "turbodmychadlo" && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  currency,  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod,    detailedDescription,    images[],    seo  }
+// Query: *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type TurbodmychadloQueryResult = {
   _id: string
   name: string | null
@@ -2752,7 +2913,7 @@ export type TurbodmychadloQueryResult = {
     _key: string
   } | null
   price: number | null
-  currency: 'CZK' | null
+  currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
@@ -2780,18 +2941,23 @@ export type TurbodmychadloQueryResult = {
     metaTitle?: string
     metaDescription?: string
   } | null
+  altSlug: {
+    slug: string | null
+    language: string | null
+  } | null
 } | null
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: turbodmychadlaPagesSlugs
-// Query: *[_type == "turbodmychadlo" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "turbodmychadlo" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type TurbodmychadlaPagesSlugsResult = Array<{
   slug: string | null
+  language: string | null
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: latestProductsQuery
-// Query: *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...15]{    _id,    _type,    name,    "slug": slug.current,    images[],    price,    description,    brand->{      name,      logo    },    category  }
+// Query: *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...15]{    _id,    _type,    name,    "slug": slug.current,    images[],    price,    description,    brand->{      name,      logo    },    category  }
 export type LatestProductsQueryResult = Array<
   | {
       _id: string
@@ -2944,33 +3110,34 @@ export type LatestProductsQueryResult = Array<
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "settings"][0]{title, phone, description, ogImage}': SettingsQueryResult
-    '\n  *[_type == "homepage"][0]{\n    _id,\n    _type,\n    title,\n    seo,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        ...,\n        link {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "infoSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSectionCarousel" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...,\n        contactInfo {\n          email,\n          "phone": coalesce(*[_type == "settings"][0].phone, phone),\n          address,\n          companyName,\n          vatNumber\n        },\n        formConfiguration {\n          submitButtonText,\n          successMessage\n        }\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        "products": *[_type == "repasovanyMotor"] | order(_createdAt desc)[0...15]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "howItWorksSection" => {\n        ...,\n        ctaLink {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "benefitsSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "categoryGrid" => {\n        ...,\n        categories[]{\n          ...,\n          "itemCount": select(\n            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),\n            slug == "stare-motory" => count(*[_type == "staryMotor"]),\n            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),\n            slug == "prevodovky" => count(*[_type == "prevodovka"]),\n            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),\n            0\n          )\n        }\n      },\n    },\n  }\n': HomepageQueryResult
-    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "heroSectionCarousel" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...,\n        contactInfo {\n          email,\n          "phone": coalesce(*[_type == "settings"][0].phone, phone),\n          address,\n          companyName,\n          vatNumber\n        },\n        formConfiguration {\n          submitButtonText,\n          successMessage\n        }\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...10]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "howItWorksSection" => {\n        ...,\n        ctaLink {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "benefitsSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "categoryGrid" => {\n        ...,\n        categories[]{\n          ...,\n          "itemCount": select(\n            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor"]),\n            slug == "stare-motory" => count(*[_type == "staryMotor"]),\n            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava"]),\n            slug == "prevodovky" => count(*[_type == "prevodovka"]),\n            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo"]),\n            0\n          )\n        }\n      },\n    },\n  }\n': GetPageQueryResult
-    '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
-    '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult
-    '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult
-    '\n  *[_type == "post" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': PostQueryResult
-    '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult
-    '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
+    '*[_type == "settings" && language == $locale][0]{title, phone, description, ogImage}': SettingsQueryResult
+    '\n  *[_type == "homepage" && language == $locale][0]{\n    _id,\n    _type,\n    title,\n    seo,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        ...,\n        link {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "infoSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSectionCarousel" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...,\n        contactInfo {\n          email,\n          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),\n          address,\n          companyName,\n          vatNumber\n        },\n        formConfiguration {\n          submitButtonText,\n          successMessage\n        }\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        "products": *[_type == "repasovanyMotor" && language == $locale] | order(_createdAt desc)[0...15]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "howItWorksSection" => {\n        ...,\n        ctaLink {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "benefitsSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "categoryGrid" => {\n        ...,\n        categories[]{\n          ...,\n          "itemCount": select(\n            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),\n            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),\n            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),\n            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),\n            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),\n            0\n          )\n        }\n      },\n    },\n  }\n': HomepageQueryResult
+    '\n  *[_type == "page" && language == $locale && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "heroSectionCarousel" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...,\n        contactInfo {\n          email,\n          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),\n          address,\n          companyName,\n          vatNumber\n        },\n        formConfiguration {\n          submitButtonText,\n          successMessage\n        }\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "howItWorksSection" => {\n        ...,\n        ctaLink {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "benefitsSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "categoryGrid" => {\n        ...,\n        categories[]{\n          ...,\n          "itemCount": select(\n            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),\n            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),\n            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),\n            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),\n            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),\n            0\n          )\n        }\n      },\n    },\n  }\n': GetPageQueryResult
+    '\n  *[(_type == "page" || _type == "post") && language == "cs" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n    "language": language,\n    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}\n  }\n': SitemapDataResult
+    '\n  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == "cs" && defined(slug.current)] {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n    "language": language,\n    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}\n  }\n': SitemapProductsDataResult
+    '\n  *[_type == "post" && language == $locale && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult
+    '\n  *[_type == "post" && language == $locale && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult
+    '\n  *[_type == "post" && language == $locale && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': PostQueryResult
+    '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': PostPagesSlugsResult
+    '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': PagesSlugsResult
     '\n  *[_type == "brand"] | order(isPopular desc, name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': AllBrandsWithLogosQueryResult
     '\n  *[_type == "brand" && isPopular == true] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': PopularBrandsWithLogosQueryResult
     '\n  *[_type == "brand" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': BrandBySlugQueryResult
-    '\n  *[_type == "repasovanyMotor" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    currency,\n    inStock,\n    turboCode,\n    condition\n  }\n\n  }\n': AllRepasovaneMotoryQueryResult
-    '\n  *[_type == "repasovanyMotor" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    currency,\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': RepasovanyMotorQueryResult
-    '\n  *[_type == "repasovanyMotor" && defined(slug.current)]\n  {"slug": slug.current}\n': RepasovaneMotoryPagesSlugsResult
-    '\n  *[_type == "staryMotor" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    currency,\n    inStock,\n    turboCode,\n    condition\n  }\n\n  }\n': AllStareMotoryQueryResult
-    '\n  *[_type == "staryMotor" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    currency,\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': StaryMotorQueryResult
-    '\n  *[_type == "staryMotor" && defined(slug.current)]\n  {"slug": slug.current}\n': StareMotoryPagesSlugsResult
-    '\n  *[_type == "motorovaHlava" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n\n  }\n': AllMotoroveHlavyQueryResult
-    '\n  *[_type == "motorovaHlava" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': MotorovaHlavaQueryResult
-    '\n  *[_type == "motorovaHlava" && defined(slug.current)]\n  {"slug": slug.current}\n': MotoroveHlavyPagesSlugsResult
-    '\n  *[_type == "prevodovka" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n\n  }\n': AllPrevodovkyQueryResult
-    '\n  *[_type == "prevodovka" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': PrevodovkaQueryResult
-    '\n  *[_type == "prevodovka" && defined(slug.current)]\n  {"slug": slug.current}\n': PrevodovkyPagesSlugsResult
-    '\n  *[_type == "turbodmychadlo" && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n\n  }\n': AllTurbodmychadlaQueryResult
-    '\n  *[_type == "turbodmychadlo" && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  currency,\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo\n  }\n': TurbodmychadloQueryResult
-    '\n  *[_type == "turbodmychadlo" && defined(slug.current)]\n  {"slug": slug.current}\n': TurbodmychadlaPagesSlugsResult
-    '\n  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"]] | order(_createdAt desc)[0...15]{\n    _id,\n    _type,\n    name,\n    "slug": slug.current,\n    images[],\n    price,\n    description,\n    brand->{\n      name,\n      logo\n    },\n    category\n  }\n': LatestProductsQueryResult
+    '\n  *[_type == "repasovanyMotor" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n\n  }\n': AllRepasovaneMotoryQueryResult
+    '\n  *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': RepasovanyMotorQueryResult
+    '\n  *[_type == "repasovanyMotor" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': RepasovaneMotoryPagesSlugsResult
+    '\n  *[_type == "staryMotor" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n\n  }\n': AllStareMotoryQueryResult
+    '\n  *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': StaryMotorQueryResult
+    '\n  *[_type == "staryMotor" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': StareMotoryPagesSlugsResult
+    '\n  *[_type == "motorovaHlava" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n\n  }\n': AllMotoroveHlavyQueryResult
+    '\n  *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': MotorovaHlavaQueryResult
+    '\n  *[_type == "motorovaHlava" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': MotoroveHlavyPagesSlugsResult
+    '\n  *[_type == "prevodovka" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n\n  }\n': AllPrevodovkyQueryResult
+    '\n  *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': PrevodovkaQueryResult
+    '\n  *[_type == "prevodovka" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': PrevodovkyPagesSlugsResult
+    '\n  *[_type == "turbodmychadlo" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n\n  }\n': AllTurbodmychadlaQueryResult
+    '\n  *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': TurbodmychadloQueryResult
+    '\n  *[_type == "turbodmychadlo" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': TurbodmychadlaPagesSlugsResult
+    '\n  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...15]{\n    _id,\n    _type,\n    name,\n    "slug": slug.current,\n    images[],\n    price,\n    description,\n    brand->{\n      name,\n      logo\n    },\n    category\n  }\n': LatestProductsQueryResult
   }
 }

@@ -1,6 +1,7 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {format, parseISO} from 'date-fns'
 import {defineField, defineType} from 'sanity'
+import {languageField, isUniquePerLanguage} from '../shared/i18n'
 
 /**
  * Post schema.  Define and edit the fields for the 'post' content type.
@@ -13,6 +14,7 @@ export const post = defineType({
   icon: DocumentTextIcon,
   type: 'document',
   fields: [
+    languageField,
     defineField({
       name: 'title',
       title: 'Title',
@@ -27,7 +29,7 @@ export const post = defineType({
       options: {
         source: 'title',
         maxLength: 96,
-        isUnique: (value, context) => context.defaultIsUnique(value, context),
+        isUnique: isUniquePerLanguage,
       },
       validation: (rule) => rule.required(),
     }),

@@ -30,3 +30,9 @@ export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-09
  * Used to configure edit intent links, for Presentation Mode, as well as to configure where the Studio is mounted in the router.
  */
 export const studioUrl = process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'http://localhost:3333'
+
+/**
+ * Canonical public site origin, used for metadata, canonical/hreflang URLs, sitemap and JSON-LD.
+ * Falls back to the production domain (no hard throw) so build/ISR never breaks on preview deploys.
+ */
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hledammotory.cz'

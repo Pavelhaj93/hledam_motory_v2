@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import {getTranslations} from 'next-intl/server'
+import {Link} from '@/i18n/navigation'
 import {Mail, Phone, MapPin, Building2} from 'lucide-react'
 import {AllBrandsWithLogosQueryResult} from '@/sanity.types'
 import Image from 'next/image'
@@ -11,9 +12,28 @@ interface FooterProps {
   brands: AllBrandsWithLogosQueryResult
 }
 
-export default function Footer({settings, brands}: FooterProps) {
+const CATEGORY_KEYS = [
+  'repasovane-motory',
+  'stare-motory',
+  'turbodmychadla',
+  'prevodovky',
+  'motorove-hlavy',
+] as const
+
+const CATEGORY_HREFS = {
+  'repasovane-motory': '/katalog/repasovane-motory',
+  'stare-motory': '/katalog/stare-motory',
+  'turbodmychadla': '/katalog/turbodmychadla',
+  'prevodovky': '/katalog/prevodovky',
+  'motorove-hlavy': '/katalog/motorove-hlavy',
+} as const
+
+export default async function Footer({settings}: FooterProps) {
   const currentYear = new Date().getFullYear()
   const phone = settings?.phone || '+420 792 644 755'
+  const t = await getTranslations('Common')
+  const tFooter = await getTranslations('Footer')
+  const tCat = await getTranslations('Categories')
 
   return (
     <footer className="bg-gray-800 text-white">
@@ -34,10 +54,7 @@ export default function Footer({settings, brands}: FooterProps) {
                   />
                 </Link>
               </div>
-              <p className="text-gray-300 text-sm mb-4">
-                Specializujeme se na prodej kvalitních motorových dílů, repasovaných motorů a
-                příslušenství. Nabízíme široký sortiment pro všechny typy vozidel.
-              </p>
+              <p className="text-gray-300 text-sm mb-4">{tFooter('companyBlurb')}</p>
               <div className="text-gray-400 text-xs space-y-1">
                 <div className="font-medium text-gray-300">Neuro s.r.o.</div>
                 <div>DIČ: CZ19679041</div>
@@ -46,14 +63,11 @@ export default function Footer({settings, brands}: FooterProps) {
 
             {/* Navigation Links */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Navigace</h3>
+              <h3 className="text-lg font-semibold mb-4">{tFooter('navigation')}</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link
-                    href="/"
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
-                    Domů
+                  <Link href="/" className="text-gray-300 hover:text-white transition-colors text-sm">
+                    {t('home')}
                   </Link>
                 </li>
                 <li>
@@ -61,7 +75,7 @@ export default function Footer({settings, brands}: FooterProps) {
                     href="/katalog"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    Katalog
+                    {t('catalog')}
                   </Link>
                 </li>
                 <li>
@@ -69,7 +83,7 @@ export default function Footer({settings, brands}: FooterProps) {
                     href="/kontakt"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    Kontakt
+                    {t('contact')}
                   </Link>
                 </li>
                 <li>
@@ -77,7 +91,7 @@ export default function Footer({settings, brands}: FooterProps) {
                     href="/o-nas"
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    O nás
+                    {t('about')}
                   </Link>
                 </li>
               </ul>
@@ -85,54 +99,24 @@ export default function Footer({settings, brands}: FooterProps) {
 
             {/* Product Categories */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Kategorie</h3>
+              <h3 className="text-lg font-semibold mb-4">{tFooter('categories')}</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="/katalog/repasovane-motory"
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
-                    Repasované motory
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/katalog/stare-motory"
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
-                    Staré motory
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/katalog/turbodmychadla"
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
-                    Turbodmychadla
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/katalog/prevodovky"
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
-                    Převodovky
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/katalog/motorove-hlavy"
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
-                    Motorové hlavy
-                  </Link>
-                </li>
+                {CATEGORY_KEYS.map((key) => (
+                  <li key={key}>
+                    <Link
+                      href={CATEGORY_HREFS[key]}
+                      className="text-gray-300 hover:text-white transition-colors text-sm"
+                    >
+                      {tCat(key)}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Kontaktní údaje</h3>
+              <h3 className="text-lg font-semibold mb-4">{tFooter('contactInfo')}</h3>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <Mail className="h-4 w-4 text-red-400 shrink-0" />
@@ -182,7 +166,7 @@ export default function Footer({settings, brands}: FooterProps) {
           <div className="flex flex-col xl:flex-row justify-between items-center gap-4 md:gap-2">
             {/* Copyright */}
             <div className="text-gray-400 text-sm">
-              © {currentYear} {settings?.title || 'Motorové díly'}. Všechna práva vyhrazena.
+              © {currentYear} {settings?.title || 'Motorové díly'}. {tFooter('rights')}.
             </div>
 
             {/* Legal Links */}
@@ -191,13 +175,13 @@ export default function Footer({settings, brands}: FooterProps) {
                 href="/ochrana-osobnich-udaju"
                 className="text-gray-400 hover:text-white transition-colors text-sm"
               >
-                Ochrana osobních údajů
+                {tFooter('privacy')}
               </Link>
               <Link
                 href="/cookies"
                 className="text-gray-400 hover:text-white transition-colors text-sm"
               >
-                Cookies
+                {tFooter('cookies')}
               </Link>
             </div>
           </div>

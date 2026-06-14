@@ -1,10 +1,12 @@
 'use client'
 
 import {useState, useEffect, useRef} from 'react'
-import Link from 'next/link'
-import {Mail, Phone, Menu, Cross, X, ChevronDown} from 'lucide-react'
+import {useTranslations} from 'next-intl'
+import {Link} from '@/i18n/navigation'
+import {Mail, Phone, Menu, X, ChevronDown} from 'lucide-react'
 import Image from 'next/image'
 import BrandSelector from './BrandSelector'
+import LocaleSwitcher from './LocaleSwitcher'
 import {AllBrandsWithLogosQueryResult} from '@/sanity.types'
 import {Button} from './ui/button'
 
@@ -16,8 +18,28 @@ interface HeaderProps {
   brands: AllBrandsWithLogosQueryResult
 }
 
+const CATEGORY_KEYS = [
+  'repasovane-motory',
+  'turbodmychadla',
+  'prevodovky',
+  'motorove-hlavy',
+  'stare-motory',
+] as const
+
+// Localized pathnames for the category links (declared in i18n/routing.ts).
+const CATEGORY_HREFS = {
+  'repasovane-motory': '/katalog/repasovane-motory',
+  'turbodmychadla': '/katalog/turbodmychadla',
+  'prevodovky': '/katalog/prevodovky',
+  'motorove-hlavy': '/katalog/motorove-hlavy',
+  'stare-motory': '/katalog/stare-motory',
+} as const
+
 // Client-side Header Component
 export default function Header({settings, brands}: HeaderProps) {
+  const t = useTranslations('Common')
+  const tCat = useTranslations('Categories')
+  const tHeader = useTranslations('Header')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -102,22 +124,22 @@ export default function Header({settings, brands}: HeaderProps) {
           {/* Navigation - Hidden on mobile */}
           <nav className="hidden lg:flex items-center space-x-6">
             <Link href="/" className="text-gray-900 hover:text-red-600 font-medium">
-              Domů
+              {t('home')}
             </Link>
             <Link href="/o-nas" className="text-gray-900 hover:text-red-600 font-medium">
-              O nás
+              {t('about')}
             </Link>
             <div className="relative group" ref={dropdownRef}>
               <div className="flex items-center">
                 <Link href="/katalog" className="text-gray-900 hover:text-red-600 font-medium">
-                  Katalog
+                  {t('catalog')}
                 </Link>
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   aria-haspopup="true"
                   aria-expanded={isDropdownOpen}
                   aria-controls="katalog-dropdown"
-                  aria-label="Podmenu Katalog"
+                  aria-label={t('catalog')}
                   className="ml-1 text-gray-500 hover:text-red-600"
                 >
                   <ChevronDown className="h-4 w-4" />
@@ -128,51 +150,32 @@ export default function Header({settings, brands}: HeaderProps) {
                 className={`absolute top-full left-0 mt-1 w-48 bg-white shadow-lg border rounded-md transition-all duration-200 z-50 ${isDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible group-hover:opacity-100 group-hover:visible'}`}
               >
                 <div className="py-2">
-                  <Link
-                    href="/katalog/repasovane-motory"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Repasované motory
-                  </Link>
-                  <Link
-                    href="/katalog/turbodmychadla"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Turbodmychadla
-                  </Link>
-                  <Link
-                    href="/katalog/prevodovky"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Převodovky
-                  </Link>
-                  <Link
-                    href="/katalog/motorove-hlavy"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Motorové hlavy
-                  </Link>
-                  <Link
-                    href="/katalog/stare-motory"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Staré motory
-                  </Link>
+                  {CATEGORY_KEYS.map((key) => (
+                    <Link
+                      key={key}
+                      href={CATEGORY_HREFS[key]}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      {tCat(key)}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
             <Link href="/kontakt">
-              <Button size="lg">Kontakt</Button>
+              <Button size="lg">{t('contact')}</Button>
             </Link>
+            <LocaleSwitcher />
           </nav>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center gap-2">
+            <LocaleSwitcher />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
-              aria-label={isMobileMenuOpen ? 'Zavřít menu' : 'Otevřít menu'}
+              aria-label={isMobileMenuOpen ? tHeader('closeMenu') : tHeader('openMenu')}
               className="text-gray-900 hover:text-red-600"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -189,56 +192,31 @@ export default function Header({settings, brands}: HeaderProps) {
                 className="block text-gray-900 hover:text-red-600 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Domů
+                {t('home')}
               </Link>
               <Link
                 href="/katalog"
                 className="block text-gray-900 hover:text-red-600 font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Katalog
+                {t('catalog')}
               </Link>
               <div className="pl-4 space-y-2">
-                <Link
-                  href="/katalog/repasovane-motory"
-                  className="block text-sm text-gray-600 hover:text-red-600"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Repasované motory
-                </Link>
-                <Link
-                  href="/katalog/turbodmychadla"
-                  className="block text-sm text-gray-600 hover:text-red-600"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Turbodmychadla
-                </Link>
-                <Link
-                  href="/katalog/prevodovky"
-                  className="block text-sm text-gray-600 hover:text-red-600"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Převodovky
-                </Link>
-                <Link
-                  href="/katalog/motorove-hlavy"
-                  className="block text-sm text-gray-600 hover:text-red-600"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Motorové hlavy
-                </Link>
-                <Link
-                  href="/katalog/stare-motory"
-                  className="block text-sm text-gray-600 hover:text-red-600"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Staré motory
-                </Link>
+                {CATEGORY_KEYS.map((key) => (
+                  <Link
+                    key={key}
+                    href={CATEGORY_HREFS[key]}
+                    className="block text-sm text-gray-600 hover:text-red-600"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {tCat(key)}
+                  </Link>
+                ))}
               </div>
 
               {/* Popular Brands */}
               <div className="pt-4 border-t border-gray-200">
-                <h3 className="text-sm font-medium text-gray-900 mb-2">Populární značky</h3>
+                <h3 className="text-sm font-medium text-gray-900 mb-2">{tHeader('popularBrands')}</h3>
                 <BrandSelector
                   brands={brands}
                   layout="compact"
@@ -268,7 +246,7 @@ export default function Header({settings, brands}: HeaderProps) {
               </div>
 
               <Link href="/kontakt" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button size="lg">Kontakt</Button>
+                <Button size="lg">{t('contact')}</Button>
               </Link>
             </div>
           </div>

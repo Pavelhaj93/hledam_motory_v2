@@ -1,10 +1,13 @@
 'use client'
 
 import {useState, useEffect, useMemo} from 'react'
+import {useLocale, useTranslations} from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import {Search, Filter, SlidersHorizontal, ChevronLeft, ChevronRight} from 'lucide-react'
 import {urlForImage} from '@/sanity/lib/utils'
+import {categoryPath, type CategoryKey} from '@/app/lib/categories'
+import {type Locale} from '@/app/lib/i18n'
 
 type Product = {
   _id: string
@@ -34,39 +37,25 @@ type ProductCatalogProps = {
   products: Product[]
 }
 
-const categoryLabels: Record<string, string> = {
-  'motorove-hlavy': 'Motorové hlavy',
-  'repasovane-motory': 'Repasované motory',
-  'stare-motory': 'Staré motory',
-  'turbodmychadla': 'Turbodmychadla',
-  'prevodovky': 'Převodovky',
-}
-
-const sortOptions = [
-  {label: 'Název (A-Z)', value: 'name-asc'},
-  {label: 'Název (Z-A)', value: 'name-desc'},
-  {label: 'Cena (nejlevnější)', value: 'price-asc'},
-  {label: 'Cena (nejdražší)', value: 'price-desc'},
-  {label: 'Kategorie', value: 'category'},
-]
-
-function formatPrice(price: number, currency: string) {
-  const currencySymbols: Record<string, string> = {
-    CZK: 'Kč',
+function formatPrice(price: number, currency: string, locale: string) {
+  try {
+    return new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: currency || 'CZK',
+      maximumFractionDigits: 0,
+    }).format(price)
+  } catch {
+    return `${price} ${currency}`
   }
-
-  const symbol = currencySymbols[currency] || currency
-  const formattedPrice = new Intl.NumberFormat('cs-CZ', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(price)
-
-  return `${formattedPrice} ${symbol}`
 }
 
 function ProductCard({product}: {product: Product}) {
+  const locale = useLocale() as Locale
+  const tCat = useTranslations('Categories')
+  const t = useTranslations('Catalog')
+  const href = `/${categoryPath(product.category as CategoryKey, locale)}/${product.slug}`
   return (
-    <Link href={`/katalog/${product.category}/${product.slug}`} className="group">
+    <Link href={href} className="group">
       <div className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow h-full flex flex-col">
         {/* Product Image */}
         <div className="aspect-square w-full overflow-hidden rounded-t-lg bg-gray-100">
@@ -80,7 +69,7 @@ function ProductCard({product}: {product: Product}) {
             />
           ) : (
             <div className="h-full w-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400">Bez obrázku</span>
+              <span className="text-gray-400">{t('noImage')}</span>
             </div>
           )}
         </div>
@@ -103,7 +92,7 @@ function ProductCard({product}: {product: Product}) {
 
             {product.category && (
               <span className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium mt-2">
-                {categoryLabels[product.category] || product.category}
+                {tCat(product.category)}
               </span>
             )}
 
@@ -115,7 +104,7 @@ function ProductCard({product}: {product: Product}) {
           <div className="mt-4 pt-4 border-t border-gray-100">
             <div className="flex items-center justify-end">
               <span className="text-lg font-bold text-gray-900">
-                {formatPrice(product.price ?? 0, product.currency || 'CZK')}
+                {formatPrice(product.price ?? 0, product.currency || 'CZK', locale)}
               </span>
             </div>
           </div>
@@ -126,6 +115,13 @@ function ProductCard({product}: {product: Product}) {
 }
 
 export default function ProductCatalog({products}: ProductCatalogProps) {
+  const t = useTranslations('Catalog')
+  const sortOptions = [
+    {label: t('sortNameAsc'), value: 'name-asc'},
+    {label: t('sortNameDesc'), value: 'name-desc'},
+    {label: t('sortPriceAsc'), value: 'price-asc'},
+    {label: t('sortPriceDesc'), value: 'price-desc'},
+  ]
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedBrand, setSelectedBrand] = useState('all')
   const [sortBy, setSortBy] = useState('name-asc')
@@ -256,7 +252,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
           <input
             type="text"
-            placeholder="Hledat produkty podle názvu, značky, popisu nebo čísla dílu..."
+            placeholder={t('searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
@@ -270,7 +266,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
             className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
           >
             <SlidersHorizontal className="h-4 w-4" />
-            <span>Filtry</span>
+            <span>{t('filters')}</span>
           </button>
         </div>
 
@@ -280,13 +276,13 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
         >
           {/* Brand Filter */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Značka</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('brand')}</label>
             <select
               value={selectedBrand}
               onChange={(e) => setSelectedBrand(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             >
-              <option value="all">Všechny značky</option>
+              <option value="all">{t('allBrands')}</option>
               {uniqueBrands.map((brand) => (
                 <option key={brand} value={brand}>
                   {brand}
@@ -297,7 +293,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
 
           {/* Sort */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Řadit podle</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('sortBy')}</label>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -314,22 +310,12 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
 
         {/* Filter Actions */}
         <div className="mt-4 flex items-center justify-between">
-          <div className="text-sm text-gray-600">
-            {totalItems > 0 && totalPages > 1 ? (
-              <>
-                Nalezeno {totalItems} produktů (stránka {currentPage} z {totalPages})
-              </>
-            ) : (
-              <>
-                Zobrazeno {totalItems} z {products.length} produktů
-              </>
-            )}
-          </div>
+          <div className="text-sm text-gray-600">{t('foundCount', {count: totalItems})}</div>
           <button
             onClick={clearFilters}
             className="text-sm text-red-600 hover:text-red-700 font-medium"
           >
-            Vymazat filtry
+            {t('clearFilters')}
           </button>
         </div>
       </div>
@@ -340,8 +326,8 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
           <div className="text-gray-400 mb-4">
             <Filter className="h-12 w-12 mx-auto" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Žádné produkty nenalezeny</h3>
-          <p className="text-gray-600">Zkuste změnit filtry nebo hledaný výraz.</p>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{t('noResultsTitle')}</h3>
+          <p className="text-gray-600">{t('noResultsBody')}</p>
         </div>
       ) : (
         <>
@@ -355,7 +341,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
           {totalPages > 1 && (
             <div className="mt-12 flex items-center justify-between">
               <div className="text-sm text-gray-700">
-                Zobrazeno {startIndex + 1}-{Math.min(endIndex, totalItems)} z {totalItems} produktů
+                {startIndex + 1}-{Math.min(endIndex, totalItems)} / {totalItems}
               </div>
 
               <div className="flex items-center space-x-2">
@@ -366,7 +352,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
                   className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft className="h-4 w-4 mr-1" />
-                  Předchozí
+                  {t('prev')}
                 </button>
 
                 {/* Page Numbers */}
@@ -415,7 +401,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
                   disabled={currentPage === totalPages}
                   className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Další
+                  {t('next')}
                   <ChevronRight className="h-4 w-4 ml-1" />
                 </button>
               </div>

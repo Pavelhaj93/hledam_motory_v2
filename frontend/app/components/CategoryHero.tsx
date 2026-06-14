@@ -13,7 +13,7 @@ interface CategoryHeroProps {
 
 export default function CategoryHero({title, description, breadcrumbs}: CategoryHeroProps) {
   return (
-    <div className="bg-gradient-to-br from-red-600 via-red-700 to-red-800 text-white relative overflow-hidden">
+    <div className="bg-linear-to-br from-red-600 via-red-700 to-red-800 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-black opacity-20"></div>
       <div
         className="absolute inset-0 opacity-20"
