@@ -47,8 +47,9 @@ export const languageField = defineField({
  */
 export const isUniquePerLanguage: SlugIsUniqueValidator = (slug, context) => {
   const {document, getClient} = context
+  if (!document?._id) return context.defaultIsUnique(slug, context)
   const client = getClient({apiVersion: '2025-09-25'})
-  const id = document?._id.replace(/^drafts\./, '')
+  const id = document._id.replace(/^drafts\./, '')
   const params = {
     draft: `drafts.${id}`,
     published: id,
