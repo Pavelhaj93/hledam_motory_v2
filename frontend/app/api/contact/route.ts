@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const info = await transporter.sendMail({
       from: process.env.SMTP_USER || 'info@hledammotory.cz',
       to: 'info@hledammotory.cz',
-      subject: `Nová poptávka – ${name}`,
+      subject: `Nová poptávka – ${nameSubject}`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px;">
           <h2 style="color: #EF4444; border-bottom: 2px solid #EF4444; padding-bottom: 10px;">
@@ -46,14 +46,14 @@ export async function POST(request: NextRequest) {
           ${marketBadge}
 
           <div style="margin: 20px 0;">
-            <p style="margin: 10px 0;"><strong>Jméno:</strong> ${name}</p>
-            <p style="margin: 10px 0;"><strong>E-mail:</strong> <a href="mailto:${email}">${email}</a></p>
-            ${phone ? `<p style="margin: 10px 0;"><strong>Telefon:</strong> <a href="tel:${phone}">${phone}</a></p>` : ''}
+            <p style="margin: 10px 0;"><strong>Jméno:</strong> ${nameHtml}</p>
+            <p style="margin: 10px 0;"><strong>E-mail:</strong> <a href="mailto:${emailHtml}">${emailHtml}</a></p>
+            ${phone ? `<p style="margin: 10px 0;"><strong>Telefon:</strong> <a href="tel:${phoneHtml}">${phoneHtml}</a></p>` : ''}
           </div>
 
           <div style="background-color: #F3F4F6; padding: 15px; border-radius: 5px; margin: 20px 0;">
             <h3 style="margin-top: 0; color: #374151;">Zpráva:</h3>
-            <p style="white-space: pre-wrap; color: #1F2937;">${message}</p>
+            <p style="white-space: pre-wrap; color: #1F2937;">${messageHtml}</p>
           </div>
 
           <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 20px 0;">
