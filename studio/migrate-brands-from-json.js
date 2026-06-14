@@ -1,6 +1,11 @@
 const fs = require('fs')
 const {createClient} = require('@sanity/client')
 
+if (!process.env.SANITY_API_WRITE_TOKEN) {
+  console.error('❌ Missing required environment variable: SANITY_API_WRITE_TOKEN')
+  process.exit(1)
+}
+
 // Initialize Sanity client
 const client = createClient({
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'ekg3ngzk',
