@@ -160,6 +160,21 @@ export default async function RootLayout({
           `}
         </Script>
 
+        {/* Google tag (gtag.js) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-5LZ6D610C6"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics-tertiary" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-5LZ6D610C6');
+          `}
+        </Script>
+
         {/* Seznam.cz Retargeting */}
         <Script
           type="text/javascript"
