@@ -1,6 +1,6 @@
 'use client'
 
-import {useState} from 'react'
+import {useState, useEffect, Suspense} from 'react'
 import {useSearchParams} from 'next/navigation'
 import {useLocale} from 'next-intl'
 import {Mail, Phone, MapPin, Building2, SendIcon, SendHorizonalIcon, MailIcon} from 'lucide-react'
@@ -27,6 +27,14 @@ interface ContactSectionProps {
   }
 }
 
+function MotorParam({onRead}: {onRead: (v: string | null) => void}) {
+  const searchParams = useSearchParams()
+  useEffect(() => {
+    onRead(searchParams.get('motor'))
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  return null
+}
+
 export default function ContactSection({block}: ContactSectionProps) {
   const {
     heading,
@@ -37,16 +45,18 @@ export default function ContactSection({block}: ContactSectionProps) {
     formConfiguration = {},
   } = block || {}
   const locale = useLocale()
-  const searchParams = useSearchParams()
-  const motorParam = searchParams.get('motor')
   const inquiryPrefix = locale === 'de-AT' ? 'Ich interessiere mich für' : 'Mám zájem o'
-  const [formData, setFormData] = useState(() => ({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    message: motorParam ? `${inquiryPrefix}: ${motorParam}` : '',
+    message: '',
     gdprConsent: false,
-  }))
+  })
+
+  const handleMotorParam = (motor: string | null) => {
+    if (motor) setFormData((prev) => ({...prev, message: `${inquiryPrefix}: ${motor}`}))
+  }
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [showError, setShowError] = useState(false)
@@ -318,6 +328,9 @@ export default function ContactSection({block}: ContactSectionProps) {
 
   return (
     <section className="py-16 bg-gray-50">
+      <Suspense fallback={null}>
+        <MotorParam onRead={handleMotorParam} />
+      </Suspense>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         {(heading || description) && (

@@ -54,8 +54,6 @@ export default async function Page(props: Props) {
     sanityFetch({query: getPageQuery, params: {locale, slug}}),
   ])
 
-  console.log('ttt slug', slug, 'locale', locale, 'page', page)
-
   if (!page?._id) {
     return (
       <div className="py-40">
