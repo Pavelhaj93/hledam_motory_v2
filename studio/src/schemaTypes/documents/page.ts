@@ -44,6 +44,13 @@ export const page = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'showIntroBanner',
+      title: 'Show intro banner',
+      description: 'When enabled, renders the page title/breadcrumb hero at the top. Disable for full-width pages like the homepage.',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
       name: 'pageBuilder',
       title: 'Page builder',
       type: 'array',
@@ -61,6 +68,7 @@ export const page = defineType({
         {type: 'categoryGrid'},
         {type: 'featureGrid'},
         {type: 'ctaBanner'},
+        {type: 'cookieSettingsButton'},
       ],
       options: {
         insertMenu: {

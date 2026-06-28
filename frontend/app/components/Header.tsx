@@ -87,7 +87,7 @@ export default function Header({settings, brands}: HeaderProps) {
 
   return (
     <header className="bg-white shadow-sm border-b sticky top-0 z-40">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto container px-4 ">
         <div className="flex h-20 justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">

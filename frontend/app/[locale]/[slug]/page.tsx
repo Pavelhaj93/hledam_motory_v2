@@ -54,8 +54,6 @@ export default async function Page(props: Props) {
     sanityFetch({query: getPageQuery, params: {locale, slug}}),
   ])
 
-  console.log('ttt slug', slug, 'locale', locale, 'page', page)
-
   if (!page?._id) {
     return (
       <div className="py-40">
@@ -64,17 +62,19 @@ export default async function Page(props: Props) {
     )
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section with Catalog-style UI */}
-      <CategoryHero
-        title={page.heading || 'Page'}
-        description={page.subheading || ''}
-        breadcrumbs={[{label: t('home'), href: '/'}, {label: page.heading || 'Page'}]}
-      />
+  const showHero = page.showIntroBanner !== false
 
-      {/* Page Content */}
-      <div className="container mx-auto px-4 py-12">
+  return (
+    <div className={showHero ? 'min-h-screen bg-gray-50' : ''}>
+      {showHero && (
+        <CategoryHero
+          title={page.heading || 'Page'}
+          description={page.subheading || ''}
+          breadcrumbs={[{label: t('home'), href: '/'}, {label: page.heading || 'Page'}]}
+        />
+      )}
+
+      <div className={showHero ? 'container mx-auto px-4 py-12' : ''}>
         <PageBuilderPage page={page as GetPageQueryResult} />
       </div>
     </div>

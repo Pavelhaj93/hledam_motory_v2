@@ -26,8 +26,8 @@ export type SecondaryButton = {
 }
 
 export type HeroSectionCarouselPrimaryButton = {
-  text?: string
-  link?: Link
+  text: string
+  link: Link
 }
 
 export type HeroSectionCarouselSecondaryButton = {
@@ -100,7 +100,7 @@ export type Link = {
 
 export type CtaBanner = {
   _type: 'ctaBanner'
-  heading?: string
+  heading: string
   description?: string
   primaryButton?: CtaBannerPrimaryButton
   secondaryButton?: CtaBannerSecondaryButton
@@ -108,25 +108,25 @@ export type CtaBanner = {
 
 export type FeatureGrid = {
   _type: 'featureGrid'
-  heading?: string
+  heading: string
   subheading?: string
   features?: Array<{
-    title?: string
-    description?: string
-    icon?: 'shield' | 'wrench' | 'package' | 'star' | 'clock' | 'users' | 'checkCircle' | 'truck'
+    title: string
+    description: string
+    icon: 'shield' | 'wrench' | 'package' | 'star' | 'clock' | 'users' | 'checkCircle' | 'truck'
     _key: string
   }>
 }
 
 export type CategoryGrid = {
   _type: 'categoryGrid'
-  heading?: string
+  heading: string
   subheading?: string
   categories?: Array<{
-    title?: string
-    slug?: string
-    description?: string
-    icon?: 'zap' | 'cog' | 'settings' | 'wrench' | 'car' | 'truck' | 'package'
+    title: string
+    slug: string
+    description: string
+    icon: 'zap' | 'cog' | 'settings' | 'wrench' | 'car' | 'truck' | 'package'
     color?:
       | 'bg-gradient-to-br from-red-500 to-red-600'
       | 'bg-gradient-to-br from-green-500 to-green-600'
@@ -170,8 +170,8 @@ export type BenefitsSection = {
 
 export type HomepageTeaserSection = {
   _type: 'homepageTeaserSection'
-  title?: string
-  description?: string
+  title: string
+  description: string
   primaryButton?: HomepageTeaserSectionPrimaryButton
   secondaryButton?: HomepageTeaserSectionSecondaryButton
 }
@@ -181,8 +181,8 @@ export type HowItWorksSection = {
   heading?: string
   subheading?: string
   steps?: Array<{
-    title?: string
-    description?: string
+    title: string
+    description: string
     icon?:
       | 'ClipboardCheck'
       | 'Mail'
@@ -211,7 +211,7 @@ export type RichTextSection = {
 
 export type ContactSection = {
   _type: 'contactSection'
-  heading?: string
+  heading: string
   description?: string
   layout?: 'form-info' | 'form-only' | 'info-only'
   showContactInfo?: boolean
@@ -221,7 +221,7 @@ export type ContactSection = {
 
 export type ProductShowcase = {
   _type: 'productShowcase'
-  heading?: string
+  heading: string
   description?: string
   layout?: 'grid' | 'featured' | 'carousel'
   maxProducts?: number
@@ -229,10 +229,10 @@ export type ProductShowcase = {
 
 export type HeroSectionCarousel = {
   _type: 'heroSectionCarousel'
-  headline?: string
+  headline: string
   subheadline?: string
   description?: string
-  images?: Array<{
+  images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -248,15 +248,15 @@ export type HeroSectionCarousel = {
 
 export type HeroSection = {
   _type: 'heroSection'
-  headline?: string
+  headline: string
   subheadline?: string
   description?: string
-  heroImage?: {
+  heroImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     _type: 'image'
   }
   imagePosition?: 'left' | 'right' | 'background'
@@ -266,7 +266,7 @@ export type HeroSection = {
 
 export type CallToAction = {
   _type: 'callToAction'
-  heading?: string
+  heading: string
   text?: string
   buttonText?: string
   link?: Link
@@ -355,8 +355,8 @@ export type Settings = {
   _updatedAt: string
   _rev: string
   language?: string
-  title?: string
-  phone?: string
+  title: string
+  phone: string
   description?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -392,155 +392,18 @@ export type Settings = {
 
 export type SanityImageCrop = {
   _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
+  top: number
+  bottom: number
+  left: number
+  right: number
 }
 
 export type SanityImageHotspot = {
   _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
-export type SanityAssistInstructionTask = {
-  _type: 'sanity.assist.instructionTask'
-  path?: string
-  instructionKey?: string
-  started?: string
-  updated?: string
-  info?: string
-}
-
-export type SanityAssistTaskStatus = {
-  _type: 'sanity.assist.task.status'
-  tasks?: Array<
-    {
-      _key: string
-    } & SanityAssistInstructionTask
-  >
-}
-
-export type SanityAssistSchemaTypeAnnotations = {
-  _type: 'sanity.assist.schemaType.annotations'
-  title?: string
-  fields?: Array<
-    {
-      _key: string
-    } & SanityAssistSchemaTypeField
-  >
-}
-
-export type SanityAssistOutputType = {
-  _type: 'sanity.assist.output.type'
-  type?: string
-}
-
-export type SanityAssistOutputField = {
-  _type: 'sanity.assist.output.field'
-  path?: string
-}
-
-export type AssistInstructionContextReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'assist.instruction.context'
-}
-
-export type SanityAssistInstructionContext = {
-  _type: 'sanity.assist.instruction.context'
-  reference?: AssistInstructionContextReference
-}
-
-export type AssistInstructionContext = {
-  _id: string
-  _type: 'assist.instruction.context'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  context?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: null
-    level?: number
-    _type: 'block'
-    _key: string
-  }>
-}
-
-export type SanityAssistInstructionUserInput = {
-  _type: 'sanity.assist.instruction.userInput'
-  message?: string
-  description?: string
-}
-
-export type SanityAssistInstructionPrompt = Array<{
-  children?: Array<
-    | {
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & SanityAssistInstructionFieldRef)
-    | ({
-        _key: string
-      } & SanityAssistInstructionContext)
-    | ({
-        _key: string
-      } & SanityAssistInstructionUserInput)
-  >
-  style?: 'normal'
-  listItem?: never
-  markDefs?: null
-  level?: number
-  _type: 'block'
-  _key: string
-}>
-
-export type SanityAssistInstructionFieldRef = {
-  _type: 'sanity.assist.instruction.fieldRef'
-  path?: string
-}
-
-export type SanityAssistInstruction = {
-  _type: 'sanity.assist.instruction'
-  prompt?: SanityAssistInstructionPrompt
-  icon?: string
-  title?: string
-  userId?: string
-  createdById?: string
-  output?: Array<
-    | ({
-        _key: string
-      } & SanityAssistOutputField)
-    | ({
-        _key: string
-      } & SanityAssistOutputType)
-  >
-}
-
-export type SanityAssistSchemaTypeField = {
-  _type: 'sanity.assist.schemaType.field'
-  path?: string
-  instructions?: Array<
-    {
-      _key: string
-    } & SanityAssistInstruction
-  >
+  x: number
+  y: number
+  height: number
+  width: number
 }
 
 export type TranslationMetadata = {
@@ -604,7 +467,7 @@ export type InternationalizedArrayReferenceValue = {
     | TurbodmychadloReference
     | PageReference
     | PostReference
-  language?: string
+  language: string
 }
 
 export type BrandReference = {
@@ -621,35 +484,35 @@ export type Turbodmychadlo = {
   _updatedAt: string
   _rev: string
   language?: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
+  name: string
+  slug: Slug
+  brand: BrandReference
   engineCodes?: Array<string>
   turboCode?: string
   displacement?: string
   power?: string
   manufacturer?: 'garrett' | 'kkk' | 'ihi' | 'mitsubishi' | 'holset' | 'jiny'
-  description?: string
+  description: string
   detailedDescription?: BlockContent
-  images?: Array<{
+  images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   }>
-  price?: number
+  price: number
   currency?: 'CZK' | 'EUR'
   specifications?: Array<{
-    label?: string
-    value?: string
+    label: string
+    value: string
     _key: string
   }>
   compatibility?: Array<string>
-  condition?: 'nove' | 'repasovane' | 'pouzite-funkcni' | 'na-dily'
+  condition: 'nove' | 'repasovane' | 'pouzite-funkcni' | 'na-dily'
   mileage?: string
   boostPressure?: string
   oilType?: string
@@ -664,7 +527,7 @@ export type Turbodmychadlo = {
 
 export type Slug = {
   _type: 'slug'
-  current?: string
+  current: string
   source?: string
 }
 
@@ -675,36 +538,36 @@ export type Prevodovka = {
   _updatedAt: string
   _rev: string
   language?: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
+  name: string
+  slug: Slug
+  brand: BrandReference
   engineCodes?: Array<string>
   transmissionCode?: string
-  transmissionType?: 'manualni' | 'automaticka' | 'cvt' | 'sekvencni'
+  transmissionType: 'manualni' | 'automaticka' | 'cvt' | 'sekvencni'
   gearCount?: string
   driveType?: 'predni' | 'zadni' | '4x4' | 'awd'
-  description?: string
+  description: string
   detailedDescription?: BlockContent
-  images?: Array<{
+  images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   }>
-  price?: number
+  price: number
   currency?: 'CZK' | 'EUR'
   specifications?: Array<{
-    label?: string
-    value?: string
+    label: string
+    value: string
     _key: string
   }>
   compatibility?: Array<string>
   mileage?: string
-  condition?: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
+  condition: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
   fluidType?: string
   warrantyPeriod?: string
   inStock?: boolean
@@ -722,33 +585,33 @@ export type MotorovaHlava = {
   _updatedAt: string
   _rev: string
   language?: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
+  name: string
+  slug: Slug
+  brand: BrandReference
   engineCodes?: Array<string>
   valveCount?: string
   material?: 'litina' | 'hlinik' | 'slitina-hliniku'
-  description?: string
+  description: string
   detailedDescription?: BlockContent
-  images?: Array<{
+  images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   }>
-  price?: number
+  price: number
   currency?: 'CZK' | 'EUR'
   specifications?: Array<{
-    label?: string
-    value?: string
+    label: string
+    value: string
     _key: string
   }>
   compatibility?: Array<string>
-  condition?: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
+  condition: 'nova' | 'repasovana' | 'pouzita-funkcni' | 'na-dily'
   includedComponents?: Array<string>
   warrantyPeriod?: string
   inStock?: boolean
@@ -766,36 +629,36 @@ export type StaryMotor = {
   _updatedAt: string
   _rev: string
   language?: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
+  name: string
+  slug: Slug
+  brand: BrandReference
   engineCodes?: Array<string>
   displacement?: string
   power?: string
   fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
-  description?: string
+  description: string
   detailedDescription?: BlockContent
-  images?: Array<{
+  images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   }>
-  price?: number
+  price: number
   currency?: 'CZK' | 'EUR'
   specifications?: Array<{
-    label?: string
-    value?: string
+    label: string
+    value: string
     _key: string
   }>
   compatibility?: Array<string>
-  mileage?: string
+  mileage: string
   year?: string
-  condition?: 'funkcni' | 'na-dily' | 'kompletni' | 'nekompletni'
+  condition: 'funkcni' | 'na-dily' | 'kompletni' | 'nekompletni'
   damageDescription?: string
   relatedTurbochargers?: Array<
     {
@@ -817,30 +680,30 @@ export type RepasovanyMotor = {
   _updatedAt: string
   _rev: string
   language?: string
-  name?: string
-  slug?: Slug
-  brand?: BrandReference
+  name: string
+  slug: Slug
+  brand: BrandReference
   engineCodes?: Array<string>
   displacement?: string
   power?: string
   fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
-  description?: string
+  description: string
   detailedDescription?: BlockContent
-  images?: Array<{
+  images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   }>
-  price?: number
+  price: number
   currency?: 'CZK' | 'EUR'
   specifications?: Array<{
-    label?: string
-    value?: string
+    label: string
+    value: string
     _key: string
   }>
   compatibility?: Array<string>
@@ -867,9 +730,9 @@ export type Page = {
   _updatedAt: string
   _rev: string
   language?: string
-  name?: string
-  slug?: Slug
-  heading?: string
+  name: string
+  slug: Slug
+  heading: string
   subheading?: string
   pageBuilder?: Array<
     | ({
@@ -928,11 +791,11 @@ export type Post = {
   _updatedAt: string
   _rev: string
   language?: string
-  title?: string
-  slug?: Slug
+  title: string
+  slug: Slug
   content?: BlockContent
   excerpt?: string
-  coverImage?: {
+  coverImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -950,9 +813,9 @@ export type Person = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  firstName?: string
-  lastName?: string
-  picture?: {
+  firstName: string
+  lastName: string
+  picture: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -968,8 +831,8 @@ export type Brand = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  name?: string
-  slug?: Slug
+  name: string
+  slug: Slug
   logo?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -1001,9 +864,9 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: 'sanity.imageDimensions'
-  height?: number
-  width?: number
-  aspectRatio?: number
+  height: number
+  width: number
+  aspectRatio: number
 }
 
 export type SanityImageMetadata = {
@@ -1029,14 +892,14 @@ export type SanityFileAsset = {
   title?: string
   description?: string
   altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
   uploadId?: string
-  path?: string
-  url?: string
+  path: string
+  url: string
   source?: SanityAssetSourceData
 }
 
@@ -1058,14 +921,14 @@ export type SanityImageAsset = {
   title?: string
   description?: string
   altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
   uploadId?: string
-  path?: string
-  url?: string
+  path: string
+  url: string
   metadata?: SanityImageMetadata
   source?: SanityAssetSourceData
 }
@@ -1111,19 +974,6 @@ export type AllSanitySchemaTypes =
   | Settings
   | SanityImageCrop
   | SanityImageHotspot
-  | SanityAssistInstructionTask
-  | SanityAssistTaskStatus
-  | SanityAssistSchemaTypeAnnotations
-  | SanityAssistOutputType
-  | SanityAssistOutputField
-  | AssistInstructionContextReference
-  | SanityAssistInstructionContext
-  | AssistInstructionContext
-  | SanityAssistInstructionUserInput
-  | SanityAssistInstructionPrompt
-  | SanityAssistInstructionFieldRef
-  | SanityAssistInstruction
-  | SanityAssistSchemaTypeField
   | TranslationMetadata
   | InternationalizedArrayReference
   | RepasovanyMotorReference
@@ -1155,10 +1005,11 @@ export type AllSanitySchemaTypes =
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings" && language == $locale][0]{title, phone, description, ogImage}
+// Query: *[_type == "settings" && language == $locale][0]{title, phone, dic, description, ogImage}
 export type SettingsQueryResult = {
-  title: string | null
-  phone: string | null
+  title: string
+  phone: string
+  dic: null
   description: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -1194,15 +1045,11 @@ export type SettingsQueryResult = {
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: homepageQuery
-// Query: *[_type == "homepage" && language == $locale][0]{    _id,    _type,    title,    seo,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        link {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "infoSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        "products": *[_type == "repasovanyMotor" && language == $locale] | order(_createdAt desc)[0...15]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),            0          )        }      },    },  }
+// Query: *[_type == "page" && language == $locale && slug.current == "/"][0]{    _id,    _type,    name,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        link {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "infoSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        secondaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        },        "products": *[_type == "repasovanyMotor" && language == $locale] | order(_createdAt desc)[0...15]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),            0          )        }      },    },  }
 export type HomepageQueryResult = {
   _id: string
-  _type: 'homepage'
-  title: string | null
-  seo: {
-    metaTitle?: string
-    metaDescription?: string
-  } | null
+  _type: 'page'
+  name: string
   pageBuilder: Array<
     | {
         _key: string
@@ -1247,7 +1094,7 @@ export type HomepageQueryResult = {
     | {
         _key: string
         _type: 'callToAction'
-        heading?: string
+        heading: string
         text?: string
         buttonText?: string
         link: {
@@ -1261,8 +1108,30 @@ export type HomepageQueryResult = {
       }
     | {
         _key: string
+        _type: 'categoryGrid'
+        heading: string
+        subheading?: string
+        categories: Array<{
+          title: string
+          slug: string
+          description: string
+          icon: 'car' | 'cog' | 'package' | 'settings' | 'truck' | 'wrench' | 'zap'
+          color?:
+            | 'bg-gradient-to-br from-blue-500 to-blue-600'
+            | 'bg-gradient-to-br from-green-500 to-green-600'
+            | 'bg-gradient-to-br from-orange-500 to-orange-600'
+            | 'bg-gradient-to-br from-purple-500 to-purple-600'
+            | 'bg-gradient-to-br from-red-500 to-red-600'
+            | 'bg-gradient-to-br from-yellow-500 to-yellow-600'
+          featured?: boolean
+          _key: string
+          itemCount: number | 0
+        }> | null
+      }
+    | {
+        _key: string
         _type: 'contactSection'
-        heading?: string
+        heading: string
         description?: string
         layout?: 'form-info' | 'form-only' | 'info-only'
         showContactInfo?: boolean
@@ -1280,16 +1149,44 @@ export type HomepageQueryResult = {
       }
     | {
         _key: string
+        _type: 'ctaBanner'
+        heading: string
+        description?: string
+        primaryButton?: CtaBannerPrimaryButton
+        secondaryButton?: CtaBannerSecondaryButton
+      }
+    | {
+        _key: string
+        _type: 'featureGrid'
+        heading: string
+        subheading?: string
+        features?: Array<{
+          title: string
+          description: string
+          icon:
+            | 'checkCircle'
+            | 'clock'
+            | 'package'
+            | 'shield'
+            | 'star'
+            | 'truck'
+            | 'users'
+            | 'wrench'
+          _key: string
+        }>
+      }
+    | {
+        _key: string
         _type: 'heroSection'
-        headline?: string
+        headline: string
         subheadline?: string
         description?: string
-        heroImage?: {
+        heroImage: {
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
           crop?: SanityImageCrop
-          alt?: string
+          alt: string
           _type: 'image'
         }
         imagePosition?: 'background' | 'left' | 'right'
@@ -1319,10 +1216,10 @@ export type HomepageQueryResult = {
     | {
         _key: string
         _type: 'heroSectionCarousel'
-        headline?: string
+        headline: string
         subheadline?: string
         description?: string
-        images?: Array<{
+        images: Array<{
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
@@ -1333,7 +1230,7 @@ export type HomepageQueryResult = {
         }>
         autoplayDelay?: number
         primaryButton: {
-          text?: string
+          text: string
           link: {
             _type: 'link'
             linkType?: 'href' | 'page' | 'post'
@@ -1341,7 +1238,7 @@ export type HomepageQueryResult = {
             page: string | null
             post: string | null
             openInNewTab?: boolean
-          } | null
+          }
         } | null
         secondaryButton: {
           text?: string
@@ -1358,8 +1255,8 @@ export type HomepageQueryResult = {
     | {
         _key: string
         _type: 'homepageTeaserSection'
-        title?: string
-        description?: string
+        title: string
+        description: string
         primaryButton: {
           text?: string
           link: {
@@ -1385,22 +1282,22 @@ export type HomepageQueryResult = {
         products: Array<{
           _id: string
           _type: 'repasovanyMotor'
-          name: string | null
-          slug: string | null
+          name: string
+          slug: string
           images: Array<{
             asset?: SanityImageAssetReference
             media?: unknown
             hotspot?: SanityImageHotspot
             crop?: SanityImageCrop
-            alt?: string
+            alt: string
             caption?: string
             _type: 'image'
             _key: string
-          }> | null
-          price: number | null
-          description: string | null
+          }>
+          price: number
+          description: string
           brand: {
-            name: string | null
+            name: string
             logo: {
               asset?: SanityImageAssetReference
               media?: unknown
@@ -1408,7 +1305,7 @@ export type HomepageQueryResult = {
               crop?: SanityImageCrop
               _type: 'image'
             } | null
-          } | null
+          }
           category: null
         }>
       }
@@ -1418,8 +1315,8 @@ export type HomepageQueryResult = {
         heading?: string
         subheading?: string
         steps?: Array<{
-          title?: string
-          description?: string
+          title: string
+          description: string
           icon?:
             | 'CheckCircle'
             | 'ClipboardCheck'
@@ -1475,7 +1372,7 @@ export type HomepageQueryResult = {
     | {
         _key: string
         _type: 'productShowcase'
-        heading?: string
+        heading: string
         description?: string
         layout?: 'carousel' | 'featured' | 'grid'
         maxProducts?: number
@@ -1514,14 +1411,15 @@ export type HomepageQueryResult = {
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == "page" && language == $locale && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        secondaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),            0          )        }      },    },  }
+// Query: *[_type == "page" && language == $locale && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    showIntroBanner,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "heroSection" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "heroSectionCarousel" => {        ...,        primaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        secondaryButton {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "productShowcase" => {        ...      },      _type == "contactSection" => {        ...,        contactInfo {          email,          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),          address,          companyName,          vatNumber        },        formConfiguration {          submitButtonText,          successMessage        }      },      _type == "homepageTeaserSection" => {        ...,        primaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        secondaryButton {          ...,          link {              link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }          }        },        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{          _id,          _type,          name,          "slug": slug.current,          images[],          price,          description,          brand->{            name,            logo          },          category        }      },      _type == "howItWorksSection" => {        ...,        ctaLink {          ...,          _type == "link" => {            "page": page->slug.current,            "post": post->slug.current          }        }      },      _type == "benefitsSection" => {        ...,        primaryButton {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "richTextSection" => {        ...,        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current            }          }        }      },      _type == "categoryGrid" => {        ...,        categories[]{          ...,          "itemCount": select(            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),            0          )        }      },    },  }
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
-  name: string | null
-  slug: Slug | null
-  heading: string | null
+  name: string
+  slug: Slug
+  heading: string
   subheading: string | null
+  showIntroBanner: null
   pageBuilder: Array<
     | {
         _key: string
@@ -1566,7 +1464,7 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'callToAction'
-        heading?: string
+        heading: string
         text?: string
         buttonText?: string
         link: {
@@ -1581,13 +1479,13 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'categoryGrid'
-        heading?: string
+        heading: string
         subheading?: string
         categories: Array<{
-          title?: string
-          slug?: string
-          description?: string
-          icon?: 'car' | 'cog' | 'package' | 'settings' | 'truck' | 'wrench' | 'zap'
+          title: string
+          slug: string
+          description: string
+          icon: 'car' | 'cog' | 'package' | 'settings' | 'truck' | 'wrench' | 'zap'
           color?:
             | 'bg-gradient-to-br from-blue-500 to-blue-600'
             | 'bg-gradient-to-br from-green-500 to-green-600'
@@ -1603,7 +1501,7 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'contactSection'
-        heading?: string
+        heading: string
         description?: string
         layout?: 'form-info' | 'form-only' | 'info-only'
         showContactInfo?: boolean
@@ -1622,7 +1520,7 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'ctaBanner'
-        heading?: string
+        heading: string
         description?: string
         primaryButton?: CtaBannerPrimaryButton
         secondaryButton?: CtaBannerSecondaryButton
@@ -1630,12 +1528,12 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'featureGrid'
-        heading?: string
+        heading: string
         subheading?: string
         features?: Array<{
-          title?: string
-          description?: string
-          icon?:
+          title: string
+          description: string
+          icon:
             | 'checkCircle'
             | 'clock'
             | 'package'
@@ -1650,15 +1548,15 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'heroSection'
-        headline?: string
+        headline: string
         subheadline?: string
         description?: string
-        heroImage?: {
+        heroImage: {
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
           crop?: SanityImageCrop
-          alt?: string
+          alt: string
           _type: 'image'
         }
         imagePosition?: 'background' | 'left' | 'right'
@@ -1688,10 +1586,10 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'heroSectionCarousel'
-        headline?: string
+        headline: string
         subheadline?: string
         description?: string
-        images?: Array<{
+        images: Array<{
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
@@ -1702,7 +1600,7 @@ export type GetPageQueryResult = {
         }>
         autoplayDelay?: number
         primaryButton: {
-          text?: string
+          text: string
           link: {
             _type: 'link'
             linkType?: 'href' | 'page' | 'post'
@@ -1710,7 +1608,7 @@ export type GetPageQueryResult = {
             page: string | null
             post: string | null
             openInNewTab?: boolean
-          } | null
+          }
         } | null
         secondaryButton: {
           text?: string
@@ -1727,8 +1625,8 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'homepageTeaserSection'
-        title?: string
-        description?: string
+        title: string
+        description: string
         primaryButton: {
           text?: string
           link: {
@@ -1745,22 +1643,22 @@ export type GetPageQueryResult = {
           | {
               _id: string
               _type: 'motorovaHlava'
-              name: string | null
-              slug: string | null
+              name: string
+              slug: string
               images: Array<{
                 asset?: SanityImageAssetReference
                 media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                alt?: string
+                alt: string
                 caption?: string
                 _type: 'image'
                 _key: string
-              }> | null
-              price: number | null
-              description: string | null
+              }>
+              price: number
+              description: string
               brand: {
-                name: string | null
+                name: string
                 logo: {
                   asset?: SanityImageAssetReference
                   media?: unknown
@@ -1768,28 +1666,28 @@ export type GetPageQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 } | null
-              } | null
+              }
               category: null
             }
           | {
               _id: string
               _type: 'prevodovka'
-              name: string | null
-              slug: string | null
+              name: string
+              slug: string
               images: Array<{
                 asset?: SanityImageAssetReference
                 media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                alt?: string
+                alt: string
                 caption?: string
                 _type: 'image'
                 _key: string
-              }> | null
-              price: number | null
-              description: string | null
+              }>
+              price: number
+              description: string
               brand: {
-                name: string | null
+                name: string
                 logo: {
                   asset?: SanityImageAssetReference
                   media?: unknown
@@ -1797,28 +1695,28 @@ export type GetPageQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 } | null
-              } | null
+              }
               category: null
             }
           | {
               _id: string
               _type: 'repasovanyMotor'
-              name: string | null
-              slug: string | null
+              name: string
+              slug: string
               images: Array<{
                 asset?: SanityImageAssetReference
                 media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                alt?: string
+                alt: string
                 caption?: string
                 _type: 'image'
                 _key: string
-              }> | null
-              price: number | null
-              description: string | null
+              }>
+              price: number
+              description: string
               brand: {
-                name: string | null
+                name: string
                 logo: {
                   asset?: SanityImageAssetReference
                   media?: unknown
@@ -1826,28 +1724,28 @@ export type GetPageQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 } | null
-              } | null
+              }
               category: null
             }
           | {
               _id: string
               _type: 'staryMotor'
-              name: string | null
-              slug: string | null
+              name: string
+              slug: string
               images: Array<{
                 asset?: SanityImageAssetReference
                 media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                alt?: string
+                alt: string
                 caption?: string
                 _type: 'image'
                 _key: string
-              }> | null
-              price: number | null
-              description: string | null
+              }>
+              price: number
+              description: string
               brand: {
-                name: string | null
+                name: string
                 logo: {
                   asset?: SanityImageAssetReference
                   media?: unknown
@@ -1855,28 +1753,28 @@ export type GetPageQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 } | null
-              } | null
+              }
               category: null
             }
           | {
               _id: string
               _type: 'turbodmychadlo'
-              name: string | null
-              slug: string | null
+              name: string
+              slug: string
               images: Array<{
                 asset?: SanityImageAssetReference
                 media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
-                alt?: string
+                alt: string
                 caption?: string
                 _type: 'image'
                 _key: string
-              }> | null
-              price: number | null
-              description: string | null
+              }>
+              price: number
+              description: string
               brand: {
-                name: string | null
+                name: string
                 logo: {
                   asset?: SanityImageAssetReference
                   media?: unknown
@@ -1884,7 +1782,7 @@ export type GetPageQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 } | null
-              } | null
+              }
               category: null
             }
         >
@@ -1895,8 +1793,8 @@ export type GetPageQueryResult = {
         heading?: string
         subheading?: string
         steps?: Array<{
-          title?: string
-          description?: string
+          title: string
+          description: string
           icon?:
             | 'CheckCircle'
             | 'ClipboardCheck'
@@ -1952,7 +1850,7 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'productShowcase'
-        heading?: string
+        heading: string
         description?: string
         layout?: 'carousel' | 'featured' | 'grid'
         maxProducts?: number
@@ -1994,22 +1892,22 @@ export type GetPageQueryResult = {
 // Query: *[(_type == "page" || _type == "post") && language == "cs" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,    "language": language,    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}  }
 export type SitemapDataResult = Array<
   | {
-      slug: string | null
+      slug: string
       _type: 'page'
       _updatedAt: string
-      language: string | null
+      language: 'cs'
       alt: {
-        slug: string | null
+        slug: string
         language: string | null
       } | null
     }
   | {
-      slug: string | null
+      slug: string
       _type: 'post'
       _updatedAt: string
-      language: string | null
+      language: 'cs'
       alt: {
-        slug: string | null
+        slug: string
         language: string | null
       } | null
     }
@@ -2020,52 +1918,52 @@ export type SitemapDataResult = Array<
 // Query: *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == "cs" && defined(slug.current)] {    "slug": slug.current,    _type,    _updatedAt,    "language": language,    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}  }
 export type SitemapProductsDataResult = Array<
   | {
-      slug: string | null
+      slug: string
       _type: 'motorovaHlava'
       _updatedAt: string
       language: string | null
       alt: {
-        slug: string | null
+        slug: string
         language: string | null
       } | null
     }
   | {
-      slug: string | null
+      slug: string
       _type: 'prevodovka'
       _updatedAt: string
       language: string | null
       alt: {
-        slug: string | null
+        slug: string
         language: string | null
       } | null
     }
   | {
-      slug: string | null
+      slug: string
       _type: 'repasovanyMotor'
       _updatedAt: string
       language: string | null
       alt: {
-        slug: string | null
+        slug: string
         language: string | null
       } | null
     }
   | {
-      slug: string | null
+      slug: string
       _type: 'staryMotor'
       _updatedAt: string
       language: string | null
       alt: {
-        slug: string | null
+        slug: string
         language: string | null
       } | null
     }
   | {
-      slug: string | null
+      slug: string
       _type: 'turbodmychadlo'
       _updatedAt: string
       language: string | null
       alt: {
-        slug: string | null
+        slug: string
         language: string | null
       } | null
     }
@@ -2077,8 +1975,8 @@ export type SitemapProductsDataResult = Array<
 export type AllPostsQueryResult = Array<{
   _id: string
   status: 'draft' | 'published'
-  title: string | 'Untitled'
-  slug: string | null
+  title: string
+  slug: string
   excerpt: string | null
   coverImage: {
     asset?: SanityImageAssetReference
@@ -2087,11 +1985,11 @@ export type AllPostsQueryResult = Array<{
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   date: string
   author: {
-    firstName: string | null
-    lastName: string | null
+    firstName: string
+    lastName: string
     picture: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2099,7 +1997,7 @@ export type AllPostsQueryResult = Array<{
       crop?: SanityImageCrop
       alt?: string
       _type: 'image'
-    } | null
+    }
   } | null
 }>
 
@@ -2109,8 +2007,8 @@ export type AllPostsQueryResult = Array<{
 export type MorePostsQueryResult = Array<{
   _id: string
   status: 'draft' | 'published'
-  title: string | 'Untitled'
-  slug: string | null
+  title: string
+  slug: string
   excerpt: string | null
   coverImage: {
     asset?: SanityImageAssetReference
@@ -2119,11 +2017,11 @@ export type MorePostsQueryResult = Array<{
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   date: string
   author: {
-    firstName: string | null
-    lastName: string | null
+    firstName: string
+    lastName: string
     picture: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2131,7 +2029,7 @@ export type MorePostsQueryResult = Array<{
       crop?: SanityImageCrop
       alt?: string
       _type: 'image'
-    } | null
+    }
   } | null
 }>
 
@@ -2163,8 +2061,8 @@ export type PostQueryResult = {
   }> | null
   _id: string
   status: 'draft' | 'published'
-  title: string | 'Untitled'
-  slug: string | null
+  title: string
+  slug: string
   excerpt: string | null
   coverImage: {
     asset?: SanityImageAssetReference
@@ -2173,11 +2071,11 @@ export type PostQueryResult = {
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   date: string
   author: {
-    firstName: string | null
-    lastName: string | null
+    firstName: string
+    lastName: string
     picture: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2185,7 +2083,7 @@ export type PostQueryResult = {
       crop?: SanityImageCrop
       alt?: string
       _type: 'image'
-    } | null
+    }
   } | null
 } | null
 
@@ -2193,15 +2091,15 @@ export type PostQueryResult = {
 // Variable: postPagesSlugs
 // Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type PostPagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
   language: string | null
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: pagesSlugs
-// Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current, "language": language}
+// Query: *[_type == "page" && defined(slug.current) && slug.current != "/"]  {"slug": slug.current, "language": language}
 export type PagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
   language: string | null
 }>
 
@@ -2210,8 +2108,8 @@ export type PagesSlugsResult = Array<{
 // Query: *[_type == "brand"] | order(isPopular desc, name asc) {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
 export type AllBrandsWithLogosQueryResult = Array<{
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   logo: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2227,8 +2125,8 @@ export type AllBrandsWithLogosQueryResult = Array<{
 // Query: *[_type == "brand" && isPopular == true] | order(name asc) {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
 export type PopularBrandsWithLogosQueryResult = Array<{
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   logo: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2244,8 +2142,8 @@ export type PopularBrandsWithLogosQueryResult = Array<{
 // Query: *[_type == "brand" && slug.current == $slug][0] {    _id,    name,    "slug": slug.current,    logo,    isPopular  }
 export type BrandBySlugQueryResult = {
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   logo: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2261,11 +2159,11 @@ export type BrandBySlugQueryResult = {
 // Query: *[_type == "repasovanyMotor" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  }  }
 export type AllRepasovaneMotoryQueryResult = Array<{
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2273,29 +2171,29 @@ export type AllRepasovaneMotoryQueryResult = Array<{
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   displacement: string | null
   power: string | null
   fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
   warrantyPeriod: string | null
@@ -2303,24 +2201,24 @@ export type AllRepasovaneMotoryQueryResult = Array<{
   condition: 'generalka' | 'repasovany' | 'testovany' | null
   relatedTurbochargers: Array<{
     _id: string
-    name: string | null
-    slug: string | null
-    brand: string | null
+    name: string
+    slug: string
+    brand: string
     mainImage: {
       asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      alt?: string
+      alt: string
       caption?: string
       _type: 'image'
       _key: string
     } | null
-    price: number | null
+    price: number
     currency: 'CZK' | 'EUR'
     inStock: boolean | null
     turboCode: string | null
-    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
+    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   }> | null
 }>
 
@@ -2329,11 +2227,11 @@ export type AllRepasovaneMotoryQueryResult = Array<{
 // Query: *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type RepasovanyMotorQueryResult = {
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2341,29 +2239,29 @@ export type RepasovanyMotorQueryResult = {
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   displacement: string | null
   power: string | null
   fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
   warrantyPeriod: string | null
@@ -2371,24 +2269,24 @@ export type RepasovanyMotorQueryResult = {
   condition: 'generalka' | 'repasovany' | 'testovany' | null
   relatedTurbochargers: Array<{
     _id: string
-    name: string | null
-    slug: string | null
-    brand: string | null
+    name: string
+    slug: string
+    brand: string
     mainImage: {
       asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      alt?: string
+      alt: string
       caption?: string
       _type: 'image'
       _key: string
     } | null
-    price: number | null
+    price: number
     currency: 'CZK' | 'EUR'
     inStock: boolean | null
     turboCode: string | null
-    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
+    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   }> | null
   detailedDescription: BlockContent | null
   images: Array<{
@@ -2396,17 +2294,17 @@ export type RepasovanyMotorQueryResult = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
-  }> | null
+  }>
   seo: {
     metaTitle?: string
     metaDescription?: string
   } | null
   altSlug: {
-    slug: string | null
+    slug: string
     language: string | null
   } | null
 } | null
@@ -2415,7 +2313,7 @@ export type RepasovanyMotorQueryResult = {
 // Variable: repasovaneMotoryPagesSlugs
 // Query: *[_type == "repasovanyMotor" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type RepasovaneMotoryPagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
   language: string | null
 }>
 
@@ -2424,11 +2322,11 @@ export type RepasovaneMotoryPagesSlugsResult = Array<{
 // Query: *[_type == "staryMotor" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  }  }
 export type AllStareMotoryQueryResult = Array<{
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2436,55 +2334,55 @@ export type AllStareMotoryQueryResult = Array<{
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   displacement: string | null
   power: string | null
   fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
-  mileage: string | null
+  mileage: string
   year: string | null
-  condition: 'funkcni' | 'kompletni' | 'na-dily' | 'nekompletni' | null
+  condition: 'funkcni' | 'kompletni' | 'na-dily' | 'nekompletni'
   damageDescription: string | null
   relatedTurbochargers: Array<{
     _id: string
-    name: string | null
-    slug: string | null
-    brand: string | null
+    name: string
+    slug: string
+    brand: string
     mainImage: {
       asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      alt?: string
+      alt: string
       caption?: string
       _type: 'image'
       _key: string
     } | null
-    price: number | null
+    price: number
     currency: 'CZK' | 'EUR'
     inStock: boolean | null
     turboCode: string | null
-    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
+    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   }> | null
 }>
 
@@ -2493,11 +2391,11 @@ export type AllStareMotoryQueryResult = Array<{
 // Query: *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type StaryMotorQueryResult = {
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2505,55 +2403,55 @@ export type StaryMotorQueryResult = {
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   displacement: string | null
   power: string | null
   fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
-  mileage: string | null
+  mileage: string
   year: string | null
-  condition: 'funkcni' | 'kompletni' | 'na-dily' | 'nekompletni' | null
+  condition: 'funkcni' | 'kompletni' | 'na-dily' | 'nekompletni'
   damageDescription: string | null
   relatedTurbochargers: Array<{
     _id: string
-    name: string | null
-    slug: string | null
-    brand: string | null
+    name: string
+    slug: string
+    brand: string
     mainImage: {
       asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      alt?: string
+      alt: string
       caption?: string
       _type: 'image'
       _key: string
     } | null
-    price: number | null
+    price: number
     currency: 'CZK' | 'EUR'
     inStock: boolean | null
     turboCode: string | null
-    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
+    condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   }> | null
   detailedDescription: BlockContent | null
   images: Array<{
@@ -2561,17 +2459,17 @@ export type StaryMotorQueryResult = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
-  }> | null
+  }>
   seo: {
     metaTitle?: string
     metaDescription?: string
   } | null
   altSlug: {
-    slug: string | null
+    slug: string
     language: string | null
   } | null
 } | null
@@ -2580,7 +2478,7 @@ export type StaryMotorQueryResult = {
 // Variable: stareMotoryPagesSlugs
 // Query: *[_type == "staryMotor" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type StareMotoryPagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
   language: string | null
 }>
 
@@ -2589,11 +2487,11 @@ export type StareMotoryPagesSlugsResult = Array<{
 // Query: *[_type == "motorovaHlava" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod  }
 export type AllMotoroveHlavyQueryResult = Array<{
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2601,31 +2499,31 @@ export type AllMotoroveHlavyQueryResult = Array<{
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   valveCount: string | null
   material: 'hlinik' | 'litina' | 'slitina-hliniku' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
-  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana' | null
+  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
   includedComponents: Array<string> | null
   warrantyPeriod: string | null
 }>
@@ -2635,11 +2533,11 @@ export type AllMotoroveHlavyQueryResult = Array<{
 // Query: *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type MotorovaHlavaQueryResult = {
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2647,31 +2545,31 @@ export type MotorovaHlavaQueryResult = {
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   valveCount: string | null
   material: 'hlinik' | 'litina' | 'slitina-hliniku' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
-  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana' | null
+  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
   includedComponents: Array<string> | null
   warrantyPeriod: string | null
   detailedDescription: BlockContent | null
@@ -2680,17 +2578,17 @@ export type MotorovaHlavaQueryResult = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
-  }> | null
+  }>
   seo: {
     metaTitle?: string
     metaDescription?: string
   } | null
   altSlug: {
-    slug: string | null
+    slug: string
     language: string | null
   } | null
 } | null
@@ -2699,7 +2597,7 @@ export type MotorovaHlavaQueryResult = {
 // Variable: motoroveHlavyPagesSlugs
 // Query: *[_type == "motorovaHlava" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type MotoroveHlavyPagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
   language: string | null
 }>
 
@@ -2708,11 +2606,11 @@ export type MotoroveHlavyPagesSlugsResult = Array<{
 // Query: *[_type == "prevodovka" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod  }
 export type AllPrevodovkyQueryResult = Array<{
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2720,34 +2618,34 @@ export type AllPrevodovkyQueryResult = Array<{
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   transmissionCode: string | null
-  transmissionType: 'automaticka' | 'cvt' | 'manualni' | 'sekvencni' | null
+  transmissionType: 'automaticka' | 'cvt' | 'manualni' | 'sekvencni'
   gearCount: string | null
   driveType: '4x4' | 'awd' | 'predni' | 'zadni' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
   mileage: string | null
-  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana' | null
+  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
   fluidType: string | null
   warrantyPeriod: string | null
 }>
@@ -2757,11 +2655,11 @@ export type AllPrevodovkyQueryResult = Array<{
 // Query: *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type PrevodovkaQueryResult = {
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2769,34 +2667,34 @@ export type PrevodovkaQueryResult = {
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   transmissionCode: string | null
-  transmissionType: 'automaticka' | 'cvt' | 'manualni' | 'sekvencni' | null
+  transmissionType: 'automaticka' | 'cvt' | 'manualni' | 'sekvencni'
   gearCount: string | null
   driveType: '4x4' | 'awd' | 'predni' | 'zadni' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
   mileage: string | null
-  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana' | null
+  condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
   fluidType: string | null
   warrantyPeriod: string | null
   detailedDescription: BlockContent | null
@@ -2805,17 +2703,17 @@ export type PrevodovkaQueryResult = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
-  }> | null
+  }>
   seo: {
     metaTitle?: string
     metaDescription?: string
   } | null
   altSlug: {
-    slug: string | null
+    slug: string
     language: string | null
   } | null
 } | null
@@ -2824,7 +2722,7 @@ export type PrevodovkaQueryResult = {
 // Variable: prevodovkyPagesSlugs
 // Query: *[_type == "prevodovka" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type PrevodovkyPagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
   language: string | null
 }>
 
@@ -2833,11 +2731,11 @@ export type PrevodovkyPagesSlugsResult = Array<{
 // Query: *[_type == "turbodmychadlo" && language == $locale && defined(slug.current)] | order(name asc) {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod  }
 export type AllTurbodmychadlaQueryResult = Array<{
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2845,33 +2743,33 @@ export type AllTurbodmychadlaQueryResult = Array<{
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   turboCode: string | null
   displacement: string | null
   power: string | null
   manufacturer: 'garrett' | 'holset' | 'ihi' | 'jiny' | 'kkk' | 'mitsubishi' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
-  condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
+  condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   mileage: string | null
   boostPressure: string | null
   oilType: string | null
@@ -2883,11 +2781,11 @@ export type AllTurbodmychadlaQueryResult = Array<{
 // Query: *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type TurbodmychadloQueryResult = {
   _id: string
-  name: string | null
-  slug: string | null
+  name: string
+  slug: string
   brand: {
-    name: string | null
-    slug: string | null
+    name: string
+    slug: string
     logo: {
       asset?: SanityImageAssetReference
       media?: unknown
@@ -2895,33 +2793,33 @@ export type TurbodmychadloQueryResult = {
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-  } | null
+  }
   engineCodes: Array<string> | null
   turboCode: string | null
   displacement: string | null
   power: string | null
   manufacturer: 'garrett' | 'holset' | 'ihi' | 'jiny' | 'kkk' | 'mitsubishi' | null
-  description: string | null
+  description: string
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
   } | null
-  price: number | null
+  price: number
   currency: 'CZK' | 'EUR'
   inStock: boolean | null
   featured: boolean | null
   specifications: Array<{
-    label: string | null
-    value: string | null
+    label: string
+    value: string
   }> | null
   compatibility: Array<string> | null
-  condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane' | null
+  condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   mileage: string | null
   boostPressure: string | null
   oilType: string | null
@@ -2932,17 +2830,17 @@ export type TurbodmychadloQueryResult = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    alt: string
     caption?: string
     _type: 'image'
     _key: string
-  }> | null
+  }>
   seo: {
     metaTitle?: string
     metaDescription?: string
   } | null
   altSlug: {
-    slug: string | null
+    slug: string
     language: string | null
   } | null
 } | null
@@ -2951,7 +2849,7 @@ export type TurbodmychadloQueryResult = {
 // Variable: turbodmychadlaPagesSlugs
 // Query: *[_type == "turbodmychadlo" && defined(slug.current)]  {"slug": slug.current, "language": language}
 export type TurbodmychadlaPagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
   language: string | null
 }>
 
@@ -2962,22 +2860,22 @@ export type LatestProductsQueryResult = Array<
   | {
       _id: string
       _type: 'motorovaHlava'
-      name: string | null
-      slug: string | null
+      name: string
+      slug: string
       images: Array<{
         asset?: SanityImageAssetReference
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
+        alt: string
         caption?: string
         _type: 'image'
         _key: string
-      }> | null
-      price: number | null
-      description: string | null
+      }>
+      price: number
+      description: string
       brand: {
-        name: string | null
+        name: string
         logo: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -2985,28 +2883,28 @@ export type LatestProductsQueryResult = Array<
           crop?: SanityImageCrop
           _type: 'image'
         } | null
-      } | null
+      }
       category: null
     }
   | {
       _id: string
       _type: 'prevodovka'
-      name: string | null
-      slug: string | null
+      name: string
+      slug: string
       images: Array<{
         asset?: SanityImageAssetReference
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
+        alt: string
         caption?: string
         _type: 'image'
         _key: string
-      }> | null
-      price: number | null
-      description: string | null
+      }>
+      price: number
+      description: string
       brand: {
-        name: string | null
+        name: string
         logo: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -3014,28 +2912,28 @@ export type LatestProductsQueryResult = Array<
           crop?: SanityImageCrop
           _type: 'image'
         } | null
-      } | null
+      }
       category: null
     }
   | {
       _id: string
       _type: 'repasovanyMotor'
-      name: string | null
-      slug: string | null
+      name: string
+      slug: string
       images: Array<{
         asset?: SanityImageAssetReference
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
+        alt: string
         caption?: string
         _type: 'image'
         _key: string
-      }> | null
-      price: number | null
-      description: string | null
+      }>
+      price: number
+      description: string
       brand: {
-        name: string | null
+        name: string
         logo: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -3043,28 +2941,28 @@ export type LatestProductsQueryResult = Array<
           crop?: SanityImageCrop
           _type: 'image'
         } | null
-      } | null
+      }
       category: null
     }
   | {
       _id: string
       _type: 'staryMotor'
-      name: string | null
-      slug: string | null
+      name: string
+      slug: string
       images: Array<{
         asset?: SanityImageAssetReference
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
+        alt: string
         caption?: string
         _type: 'image'
         _key: string
-      }> | null
-      price: number | null
-      description: string | null
+      }>
+      price: number
+      description: string
       brand: {
-        name: string | null
+        name: string
         logo: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -3072,28 +2970,28 @@ export type LatestProductsQueryResult = Array<
           crop?: SanityImageCrop
           _type: 'image'
         } | null
-      } | null
+      }
       category: null
     }
   | {
       _id: string
       _type: 'turbodmychadlo'
-      name: string | null
-      slug: string | null
+      name: string
+      slug: string
       images: Array<{
         asset?: SanityImageAssetReference
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
+        alt: string
         caption?: string
         _type: 'image'
         _key: string
-      }> | null
-      price: number | null
-      description: string | null
+      }>
+      price: number
+      description: string
       brand: {
-        name: string | null
+        name: string
         logo: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -3101,7 +2999,7 @@ export type LatestProductsQueryResult = Array<
           crop?: SanityImageCrop
           _type: 'image'
         } | null
-      } | null
+      }
       category: null
     }
 >
@@ -3110,16 +3008,16 @@ export type LatestProductsQueryResult = Array<
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "settings" && language == $locale][0]{title, phone, description, ogImage}': SettingsQueryResult
-    '\n  *[_type == "homepage" && language == $locale][0]{\n    _id,\n    _type,\n    title,\n    seo,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        ...,\n        link {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "infoSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSectionCarousel" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...,\n        contactInfo {\n          email,\n          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),\n          address,\n          companyName,\n          vatNumber\n        },\n        formConfiguration {\n          submitButtonText,\n          successMessage\n        }\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        "products": *[_type == "repasovanyMotor" && language == $locale] | order(_createdAt desc)[0...15]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "howItWorksSection" => {\n        ...,\n        ctaLink {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "benefitsSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "categoryGrid" => {\n        ...,\n        categories[]{\n          ...,\n          "itemCount": select(\n            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),\n            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),\n            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),\n            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),\n            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),\n            0\n          )\n        }\n      },\n    },\n  }\n': HomepageQueryResult
-    '\n  *[_type == "page" && language == $locale && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "heroSectionCarousel" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...,\n        contactInfo {\n          email,\n          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),\n          address,\n          companyName,\n          vatNumber\n        },\n        formConfiguration {\n          submitButtonText,\n          successMessage\n        }\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "howItWorksSection" => {\n        ...,\n        ctaLink {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "benefitsSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "categoryGrid" => {\n        ...,\n        categories[]{\n          ...,\n          "itemCount": select(\n            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),\n            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),\n            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),\n            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),\n            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),\n            0\n          )\n        }\n      },\n    },\n  }\n': GetPageQueryResult
+    '*[_type == "settings" && language == $locale][0]{title, phone, dic, description, ogImage}': SettingsQueryResult
+    '\n  *[_type == "page" && language == $locale && slug.current == "/"][0]{\n    _id,\n    _type,\n    name,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        ...,\n        link {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "infoSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "heroSectionCarousel" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...,\n        contactInfo {\n          email,\n          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),\n          address,\n          companyName,\n          vatNumber\n        },\n        formConfiguration {\n          submitButtonText,\n          successMessage\n        }\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        },\n        "products": *[_type == "repasovanyMotor" && language == $locale] | order(_createdAt desc)[0...15]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "howItWorksSection" => {\n        ...,\n        ctaLink {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "benefitsSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "categoryGrid" => {\n        ...,\n        categories[]{\n          ...,\n          "itemCount": select(\n            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),\n            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),\n            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),\n            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),\n            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),\n            0\n          )\n        }\n      },\n    },\n  }\n': HomepageQueryResult
+    '\n  *[_type == "page" && language == $locale && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    showIntroBanner,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "heroSection" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "heroSectionCarousel" => {\n        ...,\n        primaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        secondaryButton {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "productShowcase" => {\n        ...\n      },\n      _type == "contactSection" => {\n        ...,\n        contactInfo {\n          email,\n          "phone": coalesce(*[_type == "settings" && language == $locale][0].phone, phone),\n          address,\n          companyName,\n          vatNumber\n        },\n        formConfiguration {\n          submitButtonText,\n          successMessage\n        }\n      },\n      _type == "homepageTeaserSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        secondaryButton {\n          ...,\n          link {\n            \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n          }\n        },\n        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{\n          _id,\n          _type,\n          name,\n          "slug": slug.current,\n          images[],\n          price,\n          description,\n          brand->{\n            name,\n            logo\n          },\n          category\n        }\n      },\n      _type == "howItWorksSection" => {\n        ...,\n        ctaLink {\n          ...,\n          _type == "link" => {\n            "page": page->slug.current,\n            "post": post->slug.current\n          }\n        }\n      },\n      _type == "benefitsSection" => {\n        ...,\n        primaryButton {\n          ...,\n          link {\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "richTextSection" => {\n        ...,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == "link" => {\n              "page": page->slug.current,\n              "post": post->slug.current\n            }\n          }\n        }\n      },\n      _type == "categoryGrid" => {\n        ...,\n        categories[]{\n          ...,\n          "itemCount": select(\n            slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),\n            slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),\n            slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),\n            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),\n            slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),\n            0\n          )\n        }\n      },\n    },\n  }\n': GetPageQueryResult
     '\n  *[(_type == "page" || _type == "post") && language == "cs" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n    "language": language,\n    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}\n  }\n': SitemapDataResult
     '\n  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == "cs" && defined(slug.current)] {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n    "language": language,\n    "alt": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != "cs"][0].value->{"slug": slug.current, "language": language}\n  }\n': SitemapProductsDataResult
     '\n  *[_type == "post" && language == $locale && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult
     '\n  *[_type == "post" && language == $locale && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult
     '\n  *[_type == "post" && language == $locale && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': PostQueryResult
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': PostPagesSlugsResult
-    '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': PagesSlugsResult
+    '\n  *[_type == "page" && defined(slug.current) && slug.current != "/"]\n  {"slug": slug.current, "language": language}\n': PagesSlugsResult
     '\n  *[_type == "brand"] | order(isPopular desc, name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': AllBrandsWithLogosQueryResult
     '\n  *[_type == "brand" && isPopular == true] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': PopularBrandsWithLogosQueryResult
     '\n  *[_type == "brand" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': BrandBySlugQueryResult

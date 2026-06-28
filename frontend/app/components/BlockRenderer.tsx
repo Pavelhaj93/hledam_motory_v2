@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 
 import Cta from '@/app/components/Cta'
 import Info from '@/app/components/InfoSection'
@@ -13,6 +13,7 @@ import BenefitsSection from '@/app/components/BenefitsSection'
 import CategoryGrid from '@/app/components/CategoryGrid'
 import FeatureGrid from '@/app/components/FeatureGrid'
 import CtaBanner from '@/app/components/CtaBanner'
+import CookieSettingsButtonBlock from '@/app/components/CookieSettingsButtonBlock'
 import {dataAttr} from '@/sanity/lib/utils'
 
 type BlocksType = {
@@ -45,6 +46,7 @@ const Blocks: BlocksType = {
   categoryGrid: CategoryGrid,
   featureGrid: FeatureGrid,
   ctaBanner: CtaBanner,
+  cookieSettingsButton: CookieSettingsButtonBlock,
 }
 
 /**
@@ -62,11 +64,13 @@ export default function BlockRenderer({block, index, pageId, pageType}: BlockPro
           path: `pageBuilder[_key=="${block._key}"]`,
         }).toString()}
       >
-        {React.createElement(Blocks[block._type], {
-          key: block._key,
-          block: block,
-          index: index,
-        })}
+        {block._type === 'contactSection' ? (
+          <Suspense fallback={React.createElement(Blocks[block._type], {key: block._key, block, index})}>
+            {React.createElement(Blocks[block._type], {key: block._key, block, index})}
+          </Suspense>
+        ) : (
+          React.createElement(Blocks[block._type], {key: block._key, block, index})
+        )}
       </div>
     )
   }

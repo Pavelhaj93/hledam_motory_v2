@@ -3,6 +3,7 @@ import {getTranslations, setRequestLocale} from 'next-intl/server'
 import {sanityFetch} from '@/sanity/lib/live'
 import {allRepasovaneMotoryQuery} from '@/sanity/lib/queries'
 import ProductCatalog from '@/app/components/ProductCatalog'
+import CatalogNotFoundBanner from '@/app/components/CatalogNotFoundBanner'
 import CategoryHero from '@/app/components/CategoryHero'
 import {categoryBreadcrumbJsonLd} from '@/app/lib/jsonld'
 import {buildCategoryMetadata} from '@/app/lib/categoryMeta'
@@ -68,6 +69,8 @@ export default async function EnginesPage({params}: Props) {
             featured: p.featured || false,
             specifications: p.specifications,
             compatibility: p.compatibility,
+            fuelType: p.fuelType,
+            displacement: p.displacement,
           }))}
         />
 
@@ -128,6 +131,7 @@ export default async function EnginesPage({params}: Props) {
             </div>
           </div>
         )}
+        <CatalogNotFoundBanner />
       </div>
     </div>
   )

@@ -35,4 +35,4 @@ export const studioUrl = process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'http://lo
  * Canonical public site origin, used for metadata, canonical/hreflang URLs, sitemap and JSON-LD.
  * Falls back to the production domain (no hard throw) so build/ISR never breaks on preview deploys.
  */
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hledammotory.cz'
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.hledammotory.cz'

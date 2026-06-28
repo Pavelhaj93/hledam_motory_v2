@@ -31,6 +31,8 @@ type Product = {
     value: string | null
   }> | null
   compatibility: string[] | null
+  fuelType?: string | null
+  displacement?: string | null
 }
 
 type ProductCatalogProps = {
@@ -96,9 +98,13 @@ function ProductCard({product}: {product: Product}) {
               </span>
             )}
 
-            {product.description && (
+            {product.compatibility && product.compatibility.length > 0 ? (
+              <p className="text-sm text-gray-600 mt-2 line-clamp-2">
+                {product.compatibility.slice(0, 3).join(', ')}
+              </p>
+            ) : product.description ? (
               <p className="text-sm text-gray-600 mt-2 line-clamp-2">{product.description}</p>
-            )}
+            ) : null}
           </div>
 
           <div className="mt-4 pt-4 border-t border-gray-100">
@@ -124,6 +130,8 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
   ]
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedBrand, setSelectedBrand] = useState('all')
+  const [selectedFuelType, setSelectedFuelType] = useState('all')
+  const [selectedDisplacement, setSelectedDisplacement] = useState('all')
   const [sortBy, setSortBy] = useState('name-asc')
   const [priceRange, setPriceRange] = useState({min: 0, max: 100000})
   const [showFilters, setShowFilters] = useState(false)
@@ -147,6 +155,22 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
       .filter((brand, index, arr) => arr.indexOf(brand) === index)
       .sort()
     return brands as string[]
+  }, [products])
+
+  const uniqueFuelTypes = useMemo(() => {
+    return products
+      .map((p) => p.fuelType)
+      .filter((v): v is string => !!v)
+      .filter((v, i, arr) => arr.indexOf(v) === i)
+      .sort()
+  }, [products])
+
+  const uniqueDisplacements = useMemo(() => {
+    return products
+      .map((p) => p.displacement)
+      .filter((v): v is string => !!v)
+      .filter((v, i, arr) => arr.indexOf(v) === i)
+      .sort((a, b) => (parseInt(a) || 0) - (parseInt(b) || 0))
   }, [products])
 
   // Set initial price range based on products
@@ -196,7 +220,14 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
       // Price filter
       const priceMatch = (product.price ?? 0) >= priceRange.min && (product.price ?? 0) <= priceRange.max
 
-      return searchMatch && brandMatch && priceMatch
+      // Fuel type filter
+      const fuelTypeMatch = selectedFuelType === 'all' || product.fuelType === selectedFuelType
+
+      // Displacement filter
+      const displacementMatch =
+        selectedDisplacement === 'all' || product.displacement === selectedDisplacement
+
+      return searchMatch && brandMatch && priceMatch && fuelTypeMatch && displacementMatch
     })
 
     // Sort products
@@ -218,7 +249,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
     })
 
     return filtered
-  }, [products, searchTerm, selectedBrand, priceRange, sortBy])
+  }, [products, searchTerm, selectedBrand, selectedFuelType, selectedDisplacement, priceRange, sortBy])
 
   // Pagination calculations
   const totalItems = filteredAndSortedProducts.length
@@ -230,11 +261,13 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
   // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchTerm, selectedBrand, priceRange, sortBy])
+  }, [searchTerm, selectedBrand, selectedFuelType, selectedDisplacement, priceRange, sortBy])
 
   const clearFilters = () => {
     setSearchTerm('')
     setSelectedBrand('all')
+    setSelectedFuelType('all')
+    setSelectedDisplacement('all')
     setSortBy('name-asc')
     setCurrentPage(1)
     if (products.length > 0) {
@@ -272,7 +305,7 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
 
         {/* Filters */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${showFilters ? 'block' : 'hidden lg:grid'}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ${showFilters ? 'block' : 'hidden lg:grid'}`}
         >
           {/* Brand Filter */}
           <div>
@@ -290,6 +323,44 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
               ))}
             </select>
           </div>
+
+          {/* Fuel Type Filter — only shown when products have fuelType data */}
+          {uniqueFuelTypes.length > 0 && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t('fuelType')}</label>
+              <select
+                value={selectedFuelType}
+                onChange={(e) => setSelectedFuelType(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+              >
+                <option value="all">{t('allFuelTypes')}</option>
+                {uniqueFuelTypes.map((fuel) => (
+                  <option key={fuel} value={fuel}>
+                    {fuel}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* Displacement Filter — only shown when products have displacement data */}
+          {uniqueDisplacements.length > 0 && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t('displacement')}</label>
+              <select
+                value={selectedDisplacement}
+                onChange={(e) => setSelectedDisplacement(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+              >
+                <option value="all">{t('allDisplacements')}</option>
+                {uniqueDisplacements.map((d) => (
+                  <option key={d} value={d}>
+                    {d} ccm
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           {/* Sort */}
           <div>

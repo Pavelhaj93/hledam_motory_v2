@@ -17,8 +17,8 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   })
 
   return {
-    title: homepage?.seo?.metaTitle || 'Homepage',
-    description: homepage?.seo?.metaDescription || 'Welcome to our engine parts catalog',
+    title: homepage?.name || 'Homepage',
+    description: homepage?.name || 'Welcome to our engine parts catalog',
     alternates: {
       canonical: localePrefix[locale] || '/',
       languages: {'cs': '/', 'de-AT': '/at', 'x-default': '/'},
