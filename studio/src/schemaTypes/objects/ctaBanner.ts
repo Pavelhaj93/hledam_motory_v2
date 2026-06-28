@@ -18,6 +18,7 @@ export const ctaBanner = defineType({
       type: 'string',
       initialValue: 'Nenašli jste co hledáte?',
       validation: (Rule) => Rule.required(),
+      description: 'Hlavní nadpis banneru s výzvou k akci',
     }),
     defineField({
       name: 'description',

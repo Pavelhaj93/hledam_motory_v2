@@ -18,6 +18,7 @@ export const categoryGrid = defineType({
       type: 'string',
       initialValue: 'Kategorie produktů',
       validation: (Rule) => Rule.required(),
+      description: 'Nadpis sekce zobrazený na stránce',
     }),
     defineField({
       name: 'subheading',
@@ -40,6 +41,7 @@ export const categoryGrid = defineType({
               title: 'Category Title',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Název kategorie zobrazený na kartičce, např. „Repasované motory"',
             }),
             defineField({
               name: 'slug',
@@ -54,6 +56,7 @@ export const categoryGrid = defineType({
               type: 'text',
               rows: 3,
               validation: (Rule) => Rule.required(),
+              description: 'Krátký popis kategorie zobrazený pod názvem (1–2 věty)',
             }),
             defineField({
               name: 'icon',

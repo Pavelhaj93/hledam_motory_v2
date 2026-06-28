@@ -19,6 +19,7 @@ export const repasovaneMotory = defineType({
       title: 'Název motoru',
       type: 'string',
       validation: (Rule) => Rule.required(),
+      description: 'Celý název produktu, jak se zobrazí zákazníkům, např. „Motor BMW 2.0D 105 KW N47"',
     }),
     defineField({
       name: 'slug',
@@ -39,6 +40,7 @@ export const repasovaneMotory = defineType({
       type: 'reference',
       to: [{type: 'brand'}],
       validation: (Rule) => Rule.required(),
+      description: 'Vyberte značku vozidla ze seznamu. Pokud značka chybí, nejprve ji vytvořte v sekci Značky.',
     }),
     defineField({
       name: 'engineCodes',
@@ -105,6 +107,7 @@ export const repasovaneMotory = defineType({
               title: 'Alt text',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Popis obrázku pro vyhledávače a čtečky obrazovky – popište, co je na obrázku vidět, např. „Motor BMW 2.0D N47 pohled zleva"',
             }),
             defineField({
               name: 'caption',
@@ -150,12 +153,14 @@ export const repasovaneMotory = defineType({
               title: 'Název specifikace',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Název parametru, např. „Výkon", „Objem motoru", „Emisní norma"',
             }),
             defineField({
               name: 'value',
               title: 'Hodnota',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Hodnota parametru, např. „105 kW", „2,0 l", „Euro 5"',
             }),
           ],
           preview: {

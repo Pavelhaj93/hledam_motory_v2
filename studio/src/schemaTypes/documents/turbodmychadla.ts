@@ -19,6 +19,7 @@ export const turbodmychadla = defineType({
       title: 'Název turbodmychadla',
       type: 'string',
       validation: (Rule) => Rule.required(),
+      description: 'Celý název produktu, jak se zobrazí zákazníkům, např. „Turbodmychadlo Ford 2.2 TDCI GT1749V"',
     }),
     defineField({
       name: 'slug',
@@ -39,6 +40,7 @@ export const turbodmychadla = defineType({
       type: 'reference',
       to: [{type: 'brand'}],
       validation: (Rule) => Rule.required(),
+      description: 'Vyberte značku vozidla ze seznamu. Pokud značka chybí, nejprve ji vytvořte v sekci Značky.',
     }),
     defineField({
       name: 'engineCodes',
@@ -113,6 +115,7 @@ export const turbodmychadla = defineType({
               title: 'Alt text',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Popis obrázku pro vyhledávače a čtečky obrazovky – popište, co je na obrázku vidět, např. „Turbodmychadlo Garrett GT1749V pohled zprava"',
             }),
             defineField({
               name: 'caption',
@@ -158,12 +161,14 @@ export const turbodmychadla = defineType({
               title: 'Název specifikace',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Název parametru, např. „Výkon", „Objem motoru", „Emisní norma"',
             }),
             defineField({
               name: 'value',
               title: 'Hodnota',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Hodnota parametru, např. „105 kW", „2,0 l", „Euro 5"',
             }),
           ],
           preview: {

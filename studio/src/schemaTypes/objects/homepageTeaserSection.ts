@@ -13,6 +13,7 @@ export const homepageTeaserSection = defineType({
       type: 'string',
       initialValue: 'Nejnovější repasované motory',
       validation: (Rule) => Rule.required(),
+      description: 'Nadpis sekce zobrazený na stránce',
     }),
     defineField({
       name: 'description',
@@ -22,6 +23,7 @@ export const homepageTeaserSection = defineType({
       initialValue:
         'Podívejte se na nejnovější repasované motory v našem katalogu. Vyberte si z široké nabídky kvalitních a důkladně zkontrolovaných motorů.',
       validation: (Rule) => Rule.required(),
+      description: 'Krátký popisný text pod nadpisem sekce (2–3 věty)',
     }),
     defineField({
       name: 'primaryButton',

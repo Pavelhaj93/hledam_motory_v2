@@ -18,6 +18,7 @@ export const featureGrid = defineType({
       type: 'string',
       initialValue: 'Proč si vybrat nás?',
       validation: (Rule) => Rule.required(),
+      description: 'Nadpis sekce zobrazený na stránce',
     }),
     defineField({
       name: 'subheading',
@@ -39,6 +40,7 @@ export const featureGrid = defineType({
               title: 'Feature Title',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Název výhody nebo funkce, např. „Plná záruka kvality"',
             }),
             defineField({
               name: 'description',
@@ -46,6 +48,7 @@ export const featureGrid = defineType({
               type: 'text',
               rows: 2,
               validation: (Rule) => Rule.required(),
+              description: 'Krátký popis funkce (1–2 věty)',
             }),
             defineField({
               name: 'icon',
