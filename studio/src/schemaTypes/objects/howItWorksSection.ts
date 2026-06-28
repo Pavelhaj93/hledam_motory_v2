@@ -36,6 +36,7 @@ export const howItWorksSection = defineType({
               title: 'Step Title',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Název kroku v procesu, např. „Vyberte motor"',
             }),
             defineField({
               name: 'description',
@@ -43,6 +44,7 @@ export const howItWorksSection = defineType({
               type: 'text',
               rows: 3,
               validation: (Rule) => Rule.required(),
+              description: 'Popis kroku (1–2 věty)',
             }),
             defineField({
               name: 'icon',

@@ -19,6 +19,7 @@ export const prevodovky = defineType({
       title: 'Název převodovky',
       type: 'string',
       validation: (Rule) => Rule.required(),
+      description: 'Celý název produktu, jak se zobrazí zákazníkům, např. „Převodovka Ford 6M6P manuální 6-stupňová"',
     }),
     defineField({
       name: 'slug',
@@ -39,6 +40,7 @@ export const prevodovky = defineType({
       type: 'reference',
       to: [{type: 'brand'}],
       validation: (Rule) => Rule.required(),
+      description: 'Vyberte značku vozidla ze seznamu. Pokud značka chybí, nejprve ji vytvořte v sekci Značky.',
     }),
     defineField({
       name: 'engineCodes',
@@ -69,6 +71,7 @@ export const prevodovky = defineType({
         ],
       },
       validation: (Rule) => Rule.required(),
+      description: 'Vyberte typ převodovky ze seznamu',
     }),
     defineField({
       name: 'gearCount',
@@ -119,6 +122,7 @@ export const prevodovky = defineType({
               title: 'Alt text',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Popis obrázku pro vyhledávače a čtečky obrazovky – popište, co je na obrázku vidět, např. „Převodovka Ford 6M6P pohled zleva"',
             }),
             defineField({
               name: 'caption',
@@ -164,12 +168,14 @@ export const prevodovky = defineType({
               title: 'Název specifikace',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Název parametru, např. „Výkon", „Objem motoru", „Emisní norma"',
             }),
             defineField({
               name: 'value',
               title: 'Hodnota',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Hodnota parametru, např. „105 kW", „2,0 l", „Euro 5"',
             }),
           ],
           preview: {

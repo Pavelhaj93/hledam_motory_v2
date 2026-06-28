@@ -1,6 +1,5 @@
 import type {Metadata} from 'next'
 import {getTranslations, setRequestLocale} from 'next-intl/server'
-
 import PageBuilderPage from '@/app/components/PageBuilder'
 import CategoryHero from '@/app/components/CategoryHero'
 import {sanityFetch} from '@/sanity/lib/live'

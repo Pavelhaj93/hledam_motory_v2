@@ -49,9 +49,6 @@ export const post = defineType({
       type: 'image',
       options: {
         hotspot: true,
-        aiAssist: {
-          imageDescriptionField: 'alt',
-        },
       },
       fields: [
         {

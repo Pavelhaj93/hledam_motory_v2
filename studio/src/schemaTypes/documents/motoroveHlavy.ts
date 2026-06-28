@@ -19,6 +19,7 @@ export const motoroveHlavy = defineType({
       title: 'Název hlavy',
       type: 'string',
       validation: (Rule) => Rule.required(),
+      description: 'Celý název produktu, jak se zobrazí zákazníkům, např. „Motorová hlava VW 2.0 TDI 16V"',
     }),
     defineField({
       name: 'slug',
@@ -39,6 +40,7 @@ export const motoroveHlavy = defineType({
       type: 'reference',
       to: [{type: 'brand'}],
       validation: (Rule) => Rule.required(),
+      description: 'Vyberte značku vozidla ze seznamu. Pokud značka chybí, nejprve ji vytvořte v sekci Značky.',
     }),
     defineField({
       name: 'engineCodes',
@@ -98,6 +100,7 @@ export const motoroveHlavy = defineType({
               title: 'Alt text',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Popis obrázku pro vyhledávače a čtečky obrazovky – popište, co je na obrázku vidět, např. „Motorová hlava VW 2.0 TDI pohled shora"',
             }),
             defineField({
               name: 'caption',
@@ -143,12 +146,14 @@ export const motoroveHlavy = defineType({
               title: 'Název specifikace',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Název parametru, např. „Výkon", „Objem motoru", „Emisní norma"',
             }),
             defineField({
               name: 'value',
               title: 'Hodnota',
               type: 'string',
               validation: (Rule) => Rule.required(),
+              description: 'Hodnota parametru, např. „105 kW", „2,0 l", „Euro 5"',
             }),
           ],
           preview: {

@@ -15,7 +15,6 @@ import {
   defineLocations,
   type DocumentLocation,
 } from 'sanity/presentation'
-import {assist} from '@sanity/assist'
 import {documentInternationalization} from '@sanity/document-internationalization'
 import {supportedLanguages, translatedTypes} from './src/schemaTypes/shared/i18n'
 
@@ -141,10 +140,8 @@ export default defineConfig({
     }),
     // Additional plugins for enhanced functionality
     unsplashImageAsset(),
-    assist(),
     visionTool(),
   ],
-
   // Schema configuration, imported from ./src/schemaTypes/index.ts
   schema: {
     types: schemaTypes,
