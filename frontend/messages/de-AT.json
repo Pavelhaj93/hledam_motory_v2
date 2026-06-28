@@ -58,6 +58,7 @@
     "condition": "Zustand",
     "order": "Bestellung",
     "orderHelp": "Für Bestellungen oder weitere Informationen kontaktieren Sie uns:",
+    "inquireButton": "Dieses Produkt anfragen",
     "transmissionCode": "Getriebecode",
     "transmissionType": "Getriebeart",
     "gearCount": "Anzahl der Gänge",
@@ -83,6 +84,11 @@
     "notFound": "Produkt nicht gefunden",
     "notFoundDescription": "Das angeforderte Produkt wurde nicht gefunden."
   },
+  "CatalogNotFound": {
+    "heading": "Nicht gefunden, was Sie suchen?",
+    "description": "Schreiben Sie uns — wir besorgen Ihr Teil auf Bestellung.",
+    "button": "Teil anfragen"
+  },
   "Catalog": {
     "searchPlaceholder": "Produkte nach Name, Marke, Beschreibung oder Teilenummer suchen...",
     "brand": "Marke",
@@ -96,6 +102,10 @@
     "foundCount": "{count} Produkte gefunden",
     "prev": "Zurück",
     "next": "Weiter",
+    "fuelType": "Kraftstoff",
+    "allFuelTypes": "Alle Kraftstoffe",
+    "displacement": "Hubraum",
+    "allDisplacements": "Alle Hubraum",
     "sortNameAsc": "Name (A-Z)",
     "sortNameDesc": "Name (Z-A)",
     "sortPriceAsc": "Preis (aufsteigend)",

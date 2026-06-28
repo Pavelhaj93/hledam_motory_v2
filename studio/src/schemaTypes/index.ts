@@ -20,6 +20,7 @@ import benefitsSection from './objects/benefitsSection'
 import {categoryGrid} from './objects/categoryGrid'
 import {featureGrid} from './objects/featureGrid'
 import {ctaBanner} from './objects/ctaBanner'
+import {cookieSettingsButton} from './objects/cookieSettingsButton'
 import {settings} from './singletons/settings'
 import {homepage} from './singletons/homepage'
 import {link} from './objects/link'
@@ -57,5 +58,6 @@ export const schemaTypes = [
   categoryGrid,
   featureGrid,
   ctaBanner,
+  cookieSettingsButton,
   link,
 ]

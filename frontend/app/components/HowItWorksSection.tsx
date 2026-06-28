@@ -91,13 +91,10 @@ export default function HowItWorksSection({block}: HowItWorksSectionProps) {
                     }`}
                   >
                     <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                      <div className="flex items-center mb-4 lg:hidden">
-                        <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center mr-3">
+                      <div className="flex items-center mb-3">
+                        <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center mr-3 shrink-0 lg:hidden">
                           <span className="text-white font-bold">{index + 1}</span>
                         </div>
-                        <h3 className="text-xl font-semibold">{step.title}</h3>
-                      </div>
-                      <div className="hidden lg:block mb-3">
                         <h3 className="text-xl font-semibold">{step.title}</h3>
                       </div>
                       <p className="text-gray-600">{step.description}</p>

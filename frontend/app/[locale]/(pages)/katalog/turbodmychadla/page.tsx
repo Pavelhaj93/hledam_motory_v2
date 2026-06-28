@@ -3,6 +3,7 @@ import {getTranslations, setRequestLocale} from 'next-intl/server'
 import {sanityFetch} from '@/sanity/lib/live'
 import {allTurbodmychadlaQuery} from '@/sanity/lib/queries'
 import ProductCatalog from '@/app/components/ProductCatalog'
+import CatalogNotFoundBanner from '@/app/components/CatalogNotFoundBanner'
 import CategoryHero from '@/app/components/CategoryHero'
 import {categoryBreadcrumbJsonLd} from '@/app/lib/jsonld'
 import {buildCategoryMetadata} from '@/app/lib/categoryMeta'
@@ -172,6 +173,7 @@ export default async function TurbochargersPage({params}: Props) {
             </div>
           </div>
         )}
+        <CatalogNotFoundBanner />
       </div>
     </div>
   )

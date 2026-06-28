@@ -175,14 +175,13 @@ const turbodmychadloFields = /* groq */ `
   warrantyPeriod
 `
 
-export const settingsQuery = defineQuery(`*[_type == "settings" && language == $locale][0]{title, phone, description, ogImage}`)
+export const settingsQuery = defineQuery(`*[_type == "settings" && language == $locale][0]{title, phone, dic, description, ogImage}`)
 
 export const homepageQuery = defineQuery(`
-  *[_type == "homepage" && language == $locale][0]{
+  *[_type == "page" && language == $locale && slug.current == "/"][0]{
     _id,
     _type,
-    title,
-    seo,
+    name,
     "pageBuilder": pageBuilder[]{
       ...,
       _type == "callToAction" => {
@@ -395,6 +394,7 @@ export const getPageQuery = defineQuery(`
     slug,
     heading,
     subheading,
+    showIntroBanner,
     "pageBuilder": pageBuilder[]{
       ...,
       _type == "callToAction" => {
@@ -582,7 +582,7 @@ export const postPagesSlugs = defineQuery(`
 `)
 
 export const pagesSlugs = defineQuery(`
-  *[_type == "page" && defined(slug.current)]
+  *[_type == "page" && defined(slug.current) && slug.current != "/"]
   {"slug": slug.current, "language": language}
 `)
 

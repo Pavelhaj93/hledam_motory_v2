@@ -6,7 +6,10 @@ import {turbodmychadloQuery, turbodmychadlaPagesSlugs, settingsQuery} from '@/sa
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import {Link} from '@/i18n/navigation'
-import {ArrowLeft, Mail, Phone, Check, X} from 'lucide-react'
+import {Mail, Phone, Check, X, MessageSquare} from 'lucide-react'
+import BackButton from '@/app/components/BackButton'
+import {Button} from '@/app/components/ui/button'
+import CatalogNotFoundBanner from '@/app/components/CatalogNotFoundBanner'
 import CustomPortableText from '@/app/components/PortableText'
 import ImageGallery from '@/app/components/ImageGallery'
 import {productJsonLd} from '@/app/lib/jsonld'
@@ -105,13 +108,7 @@ export default async function TurbodmychadloDetailPage({params}: Props) {
         <span className="mx-2">/</span>
         <span>{turbodmychadlo.name}</span>
       </nav>
-      <Link
-        href="/katalog/turbodmychadla"
-        className="inline-flex items-center text-red-600 hover:text-red-700 mb-6"
-      >
-        <ArrowLeft className="h-4 w-4 mr-2" />
-        {t('backToCatalog')}
-      </Link>
+      <BackButton fallbackHref="/katalog/turbodmychadla" label={t('backToCatalog')} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div className="space-y-4">
           {turbodmychadlo.images && turbodmychadlo.images.length > 0 ? (
@@ -193,6 +190,15 @@ export default async function TurbodmychadloDetailPage({params}: Props) {
           <div className="bg-red-50 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('order')}</h3>
             <p className="text-gray-600 mb-4">{t('orderHelp')}</p>
+            <Link
+              href={{pathname: '/kontakt', query: {motor: turbodmychadlo.name ?? ''}}}
+              className="block mb-4"
+            >
+              <Button className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white">
+                <MessageSquare className="h-4 w-4 mr-2" />
+                {t('inquireButton')}
+              </Button>
+            </Link>
             <div className="flex flex-col items-start space-y-2">
               <a
                 href={`tel:${phone.replace(/\s/g, '')}`}
@@ -212,6 +218,7 @@ export default async function TurbodmychadloDetailPage({params}: Props) {
           </div>
         </div>
       </div>
+      <CatalogNotFoundBanner />
     </div>
   )
 }

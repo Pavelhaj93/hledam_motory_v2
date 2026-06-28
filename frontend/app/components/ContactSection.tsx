@@ -1,6 +1,7 @@
 'use client'
 
 import {useState} from 'react'
+import {useSearchParams} from 'next/navigation'
 import {useLocale} from 'next-intl'
 import {Mail, Phone, MapPin, Building2, SendIcon, SendHorizonalIcon, MailIcon} from 'lucide-react'
 import {Button} from './ui/button'
@@ -28,20 +29,24 @@ interface ContactSectionProps {
 
 export default function ContactSection({block}: ContactSectionProps) {
   const {
-    heading = 'Kontaktujte nás',
+    heading,
     description,
     layout = 'form-info',
     showContactInfo = true,
     contactInfo = {},
     formConfiguration = {},
   } = block || {}
-  const [formData, setFormData] = useState({
+  const locale = useLocale()
+  const searchParams = useSearchParams()
+  const motorParam = searchParams.get('motor')
+  const inquiryPrefix = locale === 'de-AT' ? 'Ich interessiere mich für' : 'Mám zájem o'
+  const [formData, setFormData] = useState(() => ({
     name: '',
     email: '',
     phone: '',
-    message: '',
+    message: motorParam ? `${inquiryPrefix}: ${motorParam}` : '',
     gdprConsent: false,
-  })
+  }))
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [showError, setShowError] = useState(false)
@@ -72,8 +77,6 @@ export default function ContactSection({block}: ContactSectionProps) {
       }
     }
   }
-
-  const locale = useLocale()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -317,10 +320,12 @@ export default function ContactSection({block}: ContactSectionProps) {
     <section className="py-16 bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">{heading}</h2>
-          {description && <p className="text-lg text-gray-600 max-w-2xl mx-auto">{description}</p>}
-        </div>
+        {(heading || description) && (
+          <div className="text-center mb-12">
+            {heading && <h2 className="text-4xl font-bold text-gray-900 mb-4">{heading}</h2>}
+            {description && <p className="text-lg text-gray-600 max-w-2xl mx-auto">{description}</p>}
+          </div>
+        )}
 
         {/* Content based on layout */}
         {layout === 'form-info' && (

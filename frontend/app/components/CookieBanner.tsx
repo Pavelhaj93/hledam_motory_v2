@@ -18,7 +18,6 @@ interface CookieBannerProps {
 export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
   const t = useTranslations('Cookies')
   const [openBanner, setOpenBanner] = useState(false)
-  const [showButton, setShowButton] = useState(false)
 
   useEffect(() => {
     // Don't show cookie banner in draft/editing mode
@@ -30,17 +29,18 @@ export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
     if (consentCookie === undefined) {
       // Show banner after a short delay for better UX
       setTimeout(() => setOpenBanner(true), 1000)
-    } else {
-      // Show the floating button if consent was already given
-      setShowButton(true)
     }
+
+    // Allow the cookies page to reopen the banner via a custom event
+    const handleOpen = () => setOpenBanner(true)
+    window.addEventListener('open-cookie-banner', handleOpen)
+    return () => window.removeEventListener('open-cookie-banner', handleOpen)
   }, [isDraftMode])
 
   const handleConsent: ConsentHandler = (consent: boolean) => {
     // Store consent for 1 year
     Cookies.set('cookie-consent', consent ? 'accepted' : 'rejected', {expires: 365})
     setOpenBanner(false)
-    setShowButton(true)
 
     // Handle analytics based on consent
     if (consent) {
@@ -69,22 +69,6 @@ export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
 
   return (
     <>
-      {/* Floating Cookie Button */}
-      {showButton && !openBanner && (
-        <div className="group fixed bottom-6 left-6 z-50 flex items-center">
-          <button
-            type="button"
-            aria-label={t('manage')}
-            className="flex items-center justify-center text-white transition-all bg-red-600 hover:bg-red-700 rounded-full p-3 cursor-pointer size-14 shadow-lg hover:shadow-xl hover:scale-105"
-            onClick={() => setOpenBanner(!openBanner)}
-          >
-            <Cookie className="size-7" />
-          </button>
-          <span className="hidden group-hover:inline-block ml-3 px-4 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap">
-            {t('manage')}
-          </span>
-        </div>
-      )}
 
       {/* Cookie Consent Banner */}
       {openBanner && (

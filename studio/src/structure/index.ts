@@ -1,4 +1,12 @@
-import {CogIcon, HomeIcon} from '@sanity/icons'
+import {
+  ArchiveIcon,
+  CogIcon,
+  ComponentIcon,
+  ControlsIcon,
+  DocumentsIcon,
+  PackageIcon,
+  PlugIcon,
+} from '@sanity/icons'
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
 import {translatedTypes} from '../schemaTypes/shared/i18n'
 
@@ -22,56 +30,70 @@ const DISABLED_TYPES = [
   ...translatedTypes,
 ]
 
-// Product/content types to show in the sidebar (subset of translatedTypes — excludes post/page
-// if they should not be visible as standalone lists).
-const VISIBLE_TRANSLATED_TYPES = [
-  'repasovanyMotor',
-  'staryMotor',
-  'motorovaHlava',
-  'prevodovka',
-  'turbodmychadlo',
-  'page',
-] as const
-
-// Human-readable titles for each translated type.
-const TYPE_TITLES: Record<string, string> = {
-  repasovanyMotor: 'Repasované motory',
-  staryMotor: 'Staré motory',
-  motorovaHlava: 'Motorové hlavy',
-  prevodovka: 'Převodovky',
-  turbodmychadlo: 'Turbodmychadla',
-  page: 'Stránky',
-}
-
 export const structure: StructureResolver = (S: StructureBuilder) =>
   S.list()
     .title('Website Content')
     .items([
-      // Homepage singleton, one document per locale
+      // Pages — shows all CS pages (homepage, katalog, kontakt, cookies, o-nas…)
+      // Use the Translations panel inside each doc to switch to the DE-AT version.
       S.listItem()
-        .title('Homepage (CS)')
-        .child(S.document().schemaType('homepage').documentId('homepage-cs'))
-        .icon(HomeIcon),
-      S.listItem()
-        .title('Homepage (DE-AT)')
-        .child(S.document().schemaType('homepage').documentId('homepage-de-AT'))
-        .icon(HomeIcon),
+        .title('Stránky')
+        .icon(DocumentsIcon)
+        .child(
+          S.documentList()
+            .title('Stránky')
+            .schemaType('page')
+            .filter('_type == "page" && language == "cs"'),
+        ),
+
       S.divider(),
 
-      // Translated collection types — list only the Czech (base) documents.
-      // The @sanity/document-internationalization plugin adds a "Translations" panel
-      // inside each document so editors can jump to / create the de-AT version from there.
-      ...VISIBLE_TRANSLATED_TYPES.map((type) =>
-        S.listItem()
-          .title(TYPE_TITLES[type] ?? type)
-          .child(
-            S.documentList()
-              .title(TYPE_TITLES[type] ?? type)
-              .schemaType(type)
-              .filter('_type == $type && language == "cs"')
-              .params({type}),
-          ),
-      ),
+      // Product / catalogue types — CS only; DE-AT via Translations panel
+      S.listItem()
+        .title('Repasované motory')
+        .icon(PackageIcon)
+        .child(
+          S.documentList()
+            .title('Repasované motory')
+            .schemaType('repasovanyMotor')
+            .filter('_type == "repasovanyMotor" && language == "cs"'),
+        ),
+      S.listItem()
+        .title('Staré motory')
+        .icon(ArchiveIcon)
+        .child(
+          S.documentList()
+            .title('Staré motory')
+            .schemaType('staryMotor')
+            .filter('_type == "staryMotor" && language == "cs"'),
+        ),
+      S.listItem()
+        .title('Motorové hlavy')
+        .icon(ComponentIcon)
+        .child(
+          S.documentList()
+            .title('Motorové hlavy')
+            .schemaType('motorovaHlava')
+            .filter('_type == "motorovaHlava" && language == "cs"'),
+        ),
+      S.listItem()
+        .title('Převodovky')
+        .icon(ControlsIcon)
+        .child(
+          S.documentList()
+            .title('Převodovky')
+            .schemaType('prevodovka')
+            .filter('_type == "prevodovka" && language == "cs"'),
+        ),
+      S.listItem()
+        .title('Turbodmychadla')
+        .icon(PlugIcon)
+        .child(
+          S.documentList()
+            .title('Turbodmychadla')
+            .schemaType('turbodmychadlo')
+            .filter('_type == "turbodmychadlo" && language == "cs"'),
+        ),
 
       // Any remaining non-disabled, non-translated document types (auto-generated).
       ...S.documentTypeListItems().filter(
@@ -79,13 +101,14 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       ),
 
       S.divider(),
-      // Site Settings singleton, one document per locale
+
+      // Site Settings singletons
       S.listItem()
-        .title('Site Settings (CS)')
-        .child(S.document().schemaType('settings').documentId('siteSettings-cs'))
-        .icon(CogIcon),
+        .title('Nastavení webu (CS)')
+        .icon(CogIcon)
+        .child(S.document().schemaType('settings').documentId('siteSettings-cs')),
       S.listItem()
-        .title('Site Settings (DE-AT)')
-        .child(S.document().schemaType('settings').documentId('siteSettings-de-AT'))
-        .icon(CogIcon),
+        .title('Nastavení webu (DE-AT)')
+        .icon(CogIcon)
+        .child(S.document().schemaType('settings').documentId('siteSettings-de-AT')),
     ])

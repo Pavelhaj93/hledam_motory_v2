@@ -32,6 +32,12 @@ export const settings = defineType({
       validation: (rule) => rule.required().regex(/^\+?\d[\d\s]{7,}$/),
     }),
     defineField({
+      name: 'dic',
+      title: 'DIČ',
+      description: 'Daňové identifikační číslo (DIČ) — zobrazí se ve footeru a na kontaktní stránce.',
+      type: 'string',
+    }),
+    defineField({
       name: 'description',
       description: 'Used on the Homepage',
       title: 'Description',

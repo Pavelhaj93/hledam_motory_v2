@@ -119,6 +119,7 @@ export default function HeroSectionCarousel({block}: HeroSectionCarouselProps) {
                     src={urlForImage(image)?.width(1920).height(1080).url() || ''}
                     alt={image.alt || `Hero image ${index + 1}`}
                     fill
+                    sizes="100vw"
                     className="object-cover"
                     priority={index === 0}
                   />

@@ -58,6 +58,7 @@
     "condition": "Stav",
     "order": "Objednávka",
     "orderHelp": "Pro objednání nebo více informací nás kontaktujte:",
+    "inquireButton": "Poptat tento produkt",
     "transmissionCode": "Kód převodovky",
     "transmissionType": "Typ převodovky",
     "gearCount": "Počet rychlostí",
@@ -83,6 +84,11 @@
     "notFound": "Produkt nenalezen",
     "notFoundDescription": "Požadovaný produkt nebyl nalezen."
   },
+  "CatalogNotFound": {
+    "heading": "Nenašli jste, co hledáte?",
+    "description": "Napište nám — zajistíme váš díl na objednávku.",
+    "button": "Poptat díl"
+  },
   "Catalog": {
     "searchPlaceholder": "Hledat produkty podle názvu, značky, popisu nebo čísla dílu...",
     "brand": "Značka",
@@ -96,6 +102,10 @@
     "foundCount": "Nalezeno {count} produktů",
     "prev": "Předchozí",
     "next": "Další",
+    "fuelType": "Palivo",
+    "allFuelTypes": "Všechna paliva",
+    "displacement": "Objem motoru",
+    "allDisplacements": "Všechny objemy",
     "sortNameAsc": "Název (A-Z)",
     "sortNameDesc": "Název (Z-A)",
     "sortPriceAsc": "Cena (nejlevnější)",
