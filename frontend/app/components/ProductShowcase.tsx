@@ -67,8 +67,8 @@ function CategoryCard({category, featured = false}: {category: Category; feature
   const IconComponent = category.icon
 
   const cardClass = featured
-    ? 'group bg-white rounded-lg shadow-lg border-2 border-red-200 hover:shadow-xl transition-all duration-300 p-8'
-    : 'group bg-white rounded-lg shadow-sm border hover:shadow-lg transition-all duration-300 p-6'
+    ? 'group bg-white rounded-xl shadow-sm border-2 border-red-200 hover:shadow-lg transition-all duration-300 p-8'
+    : 'group bg-white rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300 p-6'
 
   return (
     <Link href={`/katalog/${category.slug}`} className="block h-full">
@@ -105,7 +105,9 @@ export default function ProductShowcase({block}: CategoryShowcaseProps) {
       <div className="container mx-auto px-4">
         {(heading || description) && (
           <div className="text-center mb-12">
-            {heading && <h2 className="text-3xl font-bold text-gray-900 mb-4">{heading}</h2>}
+            {heading && (
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{heading}</h2>
+            )}
             {description && (
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">{description}</p>
             )}

@@ -629,7 +629,6 @@ export const allRepasovaneMotoryQuery = defineQuery(`
 export const repasovanyMotorQuery = defineQuery(`
   *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {
     ${repasovanyMotorFields},
-    detailedDescription,
     images[],
     seo,
     "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
@@ -651,7 +650,6 @@ export const allStareMotoryQuery = defineQuery(`
 export const staryMotorQuery = defineQuery(`
   *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {
     ${staryMotorFields},
-    detailedDescription,
     images[],
     seo,
     "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
@@ -673,7 +671,6 @@ export const allMotoroveHlavyQuery = defineQuery(`
 export const motorovaHlavaQuery = defineQuery(`
   *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {
     ${motorovaHlavaFields},
-    detailedDescription,
     images[],
     seo,
     "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
@@ -695,7 +692,6 @@ export const allPrevodovkyQuery = defineQuery(`
 export const prevodovkaQuery = defineQuery(`
   *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {
     ${prevodovkaFields},
-    detailedDescription,
     images[],
     seo,
     "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
@@ -717,7 +713,6 @@ export const allTurbodmychadlaQuery = defineQuery(`
 export const turbodmychadloQuery = defineQuery(`
   *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {
     ${turbodmychadloFields},
-    detailedDescription,
     images[],
     seo,
     "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
@@ -727,6 +722,25 @@ export const turbodmychadloQuery = defineQuery(`
 export const turbodmychadlaPagesSlugs = defineQuery(`
   *[_type == "turbodmychadlo" && defined(slug.current)]
   {"slug": slug.current, "language": language}
+`)
+
+// Similar products for a product detail page (same category, excluding current item)
+export const relatedProductsQuery = defineQuery(`
+  *[_type == $type && language == $locale && _id != $skip && defined(slug.current)]
+    | order(_createdAt desc) [0...4] {
+    _id,
+    _type,
+    name,
+    "slug": slug.current,
+    images[],
+    price,
+    description,
+    brand->{
+      name,
+      logo
+    },
+    category
+  }
 `)
 
 // Latest products query for homepage teaser

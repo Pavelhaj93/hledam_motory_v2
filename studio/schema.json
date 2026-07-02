@@ -464,6 +464,29 @@
     }
   },
   {
+    "name": "cookieSettingsButton",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "cookieSettingsButton"
+          }
+        },
+        "buttonText": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        }
+      }
+    }
+  },
+  {
     "name": "ctaBanner",
     "type": "type",
     "value": {
@@ -2230,6 +2253,13 @@
         },
         "optional": false
       },
+      "dic": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "description": {
         "type": "objectAttribute",
         "value": {
@@ -3016,17 +3046,10 @@
       "description": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
-        },
-        "optional": false
-      },
-      "detailedDescription": {
-        "type": "objectAttribute",
-        "value": {
           "type": "inline",
           "name": "blockContent"
         },
-        "optional": true
+        "optional": false
       },
       "images": {
         "type": "objectAttribute",
@@ -3438,17 +3461,10 @@
       "description": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
-        },
-        "optional": false
-      },
-      "detailedDescription": {
-        "type": "objectAttribute",
-        "value": {
           "type": "inline",
           "name": "blockContent"
         },
-        "optional": true
+        "optional": false
       },
       "images": {
         "type": "objectAttribute",
@@ -3787,17 +3803,10 @@
       "description": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
-        },
-        "optional": false
-      },
-      "detailedDescription": {
-        "type": "objectAttribute",
-        "value": {
           "type": "inline",
           "name": "blockContent"
         },
-        "optional": true
+        "optional": false
       },
       "images": {
         "type": "objectAttribute",
@@ -4143,17 +4152,10 @@
       "description": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
-        },
-        "optional": false
-      },
-      "detailedDescription": {
-        "type": "objectAttribute",
-        "value": {
           "type": "inline",
           "name": "blockContent"
         },
-        "optional": true
+        "optional": false
       },
       "images": {
         "type": "objectAttribute",
@@ -4525,17 +4527,10 @@
       "description": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
-        },
-        "optional": false
-      },
-      "detailedDescription": {
-        "type": "objectAttribute",
-        "value": {
           "type": "inline",
           "name": "blockContent"
         },
-        "optional": true
+        "optional": false
       },
       "images": {
         "type": "objectAttribute",
@@ -4850,6 +4845,13 @@
         },
         "optional": true
       },
+      "showIntroBanner": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "pageBuilder": {
         "type": "objectAttribute",
         "value": {
@@ -5050,6 +5052,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "ctaBanner"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "cookieSettingsButton"
                 }
               }
             ]

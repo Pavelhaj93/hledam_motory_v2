@@ -12,6 +12,7 @@
     "typegen": "(cd ../studio && ../node_modules/.bin/sanity typegen generate)"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.18",
     "@radix-ui/react-slot": "^1.2.3",
     "@sanity/client": "^7.9.0",
     "@sanity/image-url": "^1.1.0",

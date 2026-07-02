@@ -41,7 +41,7 @@ export default function LocaleSwitcher({className = ''}: {className?: string}) {
           onClick={() => onSelect(l)}
           disabled={isPending}
           aria-current={l === locale ? 'true' : undefined}
-          className={`px-2 py-1 text-sm rounded ${
+          className={`px-2 py-1 text-sm rounded transition-opacity disabled:opacity-40 disabled:cursor-wait ${
             l === locale ? 'font-semibold text-red-600' : 'text-gray-600 hover:text-red-600'
           }`}
         >

@@ -86,7 +86,7 @@ export default function Header({settings, brands}: HeaderProps) {
   }
 
   return (
-    <header className="bg-white shadow-sm border-b sticky top-0 z-40">
+    <header className="bg-white shadow-sm border-b-2 border-red-600 sticky top-0 z-40">
       <div className="mx-auto container px-4 ">
         <div className="flex h-20 justify-between items-center">
           {/* Logo */}
@@ -103,20 +103,20 @@ export default function Header({settings, brands}: HeaderProps) {
           </div>
 
           {/* Contact Info - Hidden on mobile */}
-          <div className="hidden md:flex items-center space-x-6  text-gray-600">
+          <div className="hidden lg:flex items-center space-x-6 text-gray-600">
             <a
               href={`tel:${phone.replace(/\s/g, '')}`}
               onClick={handlePhoneClick}
               className="flex items-center space-x-2 hover:text-red-600"
             >
-              <Phone className="size-6 text-red-600" />
+              <Phone className="size-5 text-red-600" />
               <span>{phone}</span>
             </a>
             <a
               href="mailto:info@hledammotory.cz"
               className="flex items-center space-x-2 hover:text-red-600"
             >
-              <Mail className="size-6 text-red-600" />
+              <Mail className="size-5 text-red-600" />
               <span>info@hledammotory.cz</span>
             </a>
           </div>
@@ -139,7 +139,7 @@ export default function Header({settings, brands}: HeaderProps) {
                   aria-haspopup="true"
                   aria-expanded={isDropdownOpen}
                   aria-controls="katalog-dropdown"
-                  aria-label={t('catalog')}
+                  aria-label={tHeader('toggleCatalogMenu')}
                   className="ml-1 text-gray-500 hover:text-red-600"
                 >
                   <ChevronDown className="h-4 w-4" />

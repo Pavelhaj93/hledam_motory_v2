@@ -98,6 +98,11 @@ export type Link = {
   openInNewTab?: boolean
 }
 
+export type CookieSettingsButton = {
+  _type: 'cookieSettingsButton'
+  buttonText: string
+}
+
 export type CtaBanner = {
   _type: 'ctaBanner'
   heading: string
@@ -357,6 +362,7 @@ export type Settings = {
   language?: string
   title: string
   phone: string
+  dic?: string
   description?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -492,8 +498,7 @@ export type Turbodmychadlo = {
   displacement?: string
   power?: string
   manufacturer?: 'garrett' | 'kkk' | 'ihi' | 'mitsubishi' | 'holset' | 'jiny'
-  description: string
-  detailedDescription?: BlockContent
+  description: BlockContent
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -546,8 +551,7 @@ export type Prevodovka = {
   transmissionType: 'manualni' | 'automaticka' | 'cvt' | 'sekvencni'
   gearCount?: string
   driveType?: 'predni' | 'zadni' | '4x4' | 'awd'
-  description: string
-  detailedDescription?: BlockContent
+  description: BlockContent
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -591,8 +595,7 @@ export type MotorovaHlava = {
   engineCodes?: Array<string>
   valveCount?: string
   material?: 'litina' | 'hlinik' | 'slitina-hliniku'
-  description: string
-  detailedDescription?: BlockContent
+  description: BlockContent
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -636,8 +639,7 @@ export type StaryMotor = {
   displacement?: string
   power?: string
   fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
-  description: string
-  detailedDescription?: BlockContent
+  description: BlockContent
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -687,8 +689,7 @@ export type RepasovanyMotor = {
   displacement?: string
   power?: string
   fuelType?: 'benzin' | 'diesel' | 'hybrid' | 'elektro'
-  description: string
-  detailedDescription?: BlockContent
+  description: BlockContent
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -734,6 +735,7 @@ export type Page = {
   slug: Slug
   heading: string
   subheading?: string
+  showIntroBanner?: boolean
   pageBuilder?: Array<
     | ({
         _key: string
@@ -774,6 +776,9 @@ export type Page = {
     | ({
         _key: string
       } & CtaBanner)
+    | ({
+        _key: string
+      } & CookieSettingsButton)
   >
 }
 
@@ -955,6 +960,7 @@ export type AllSanitySchemaTypes =
   | PageReference
   | PostReference
   | Link
+  | CookieSettingsButton
   | CtaBanner
   | FeatureGrid
   | CategoryGrid
@@ -1009,7 +1015,7 @@ export type AllSanitySchemaTypes =
 export type SettingsQueryResult = {
   title: string
   phone: string
-  dic: null
+  dic: string | null
   description: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -1146,6 +1152,11 @@ export type HomepageQueryResult = {
           submitButtonText: string | null
           successMessage: string | null
         } | null
+      }
+    | {
+        _key: string
+        _type: 'cookieSettingsButton'
+        buttonText: string
       }
     | {
         _key: string
@@ -1295,7 +1306,7 @@ export type HomepageQueryResult = {
             _key: string
           }>
           price: number
-          description: string
+          description: BlockContent
           brand: {
             name: string
             logo: {
@@ -1419,7 +1430,7 @@ export type GetPageQueryResult = {
   slug: Slug
   heading: string
   subheading: string | null
-  showIntroBanner: null
+  showIntroBanner: boolean | null
   pageBuilder: Array<
     | {
         _key: string
@@ -1516,6 +1527,11 @@ export type GetPageQueryResult = {
           submitButtonText: string | null
           successMessage: string | null
         } | null
+      }
+    | {
+        _key: string
+        _type: 'cookieSettingsButton'
+        buttonText: string
       }
     | {
         _key: string
@@ -1656,7 +1672,7 @@ export type GetPageQueryResult = {
                 _key: string
               }>
               price: number
-              description: string
+              description: BlockContent
               brand: {
                 name: string
                 logo: {
@@ -1685,7 +1701,7 @@ export type GetPageQueryResult = {
                 _key: string
               }>
               price: number
-              description: string
+              description: BlockContent
               brand: {
                 name: string
                 logo: {
@@ -1714,7 +1730,7 @@ export type GetPageQueryResult = {
                 _key: string
               }>
               price: number
-              description: string
+              description: BlockContent
               brand: {
                 name: string
                 logo: {
@@ -1743,7 +1759,7 @@ export type GetPageQueryResult = {
                 _key: string
               }>
               price: number
-              description: string
+              description: BlockContent
               brand: {
                 name: string
                 logo: {
@@ -1772,7 +1788,7 @@ export type GetPageQueryResult = {
                 _key: string
               }>
               price: number
-              description: string
+              description: BlockContent
               brand: {
                 name: string
                 logo: {
@@ -2176,7 +2192,7 @@ export type AllRepasovaneMotoryQueryResult = Array<{
   displacement: string | null
   power: string | null
   fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2224,7 +2240,7 @@ export type AllRepasovaneMotoryQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: repasovanyMotorQuery
-// Query: *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
+// Query: *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  warrantyPeriod,  mileage,  condition,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  },    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type RepasovanyMotorQueryResult = {
   _id: string
   name: string
@@ -2244,7 +2260,7 @@ export type RepasovanyMotorQueryResult = {
   displacement: string | null
   power: string | null
   fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2288,7 +2304,6 @@ export type RepasovanyMotorQueryResult = {
     turboCode: string | null
     condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   }> | null
-  detailedDescription: BlockContent | null
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2339,7 +2354,7 @@ export type AllStareMotoryQueryResult = Array<{
   displacement: string | null
   power: string | null
   fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2388,7 +2403,7 @@ export type AllStareMotoryQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: staryMotorQuery
-// Query: *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  },    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
+// Query: *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  displacement,  power,  fuelType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  year,  condition,  damageDescription,  "relatedTurbochargers": relatedTurbochargers[]->{    _id,    name,    "slug": slug.current,    "brand": brand->name,    "mainImage": images[0],    price,    "currency": select(language == "de-AT" => "EUR", "CZK"),    inStock,    turboCode,    condition  },    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type StaryMotorQueryResult = {
   _id: string
   name: string
@@ -2408,7 +2423,7 @@ export type StaryMotorQueryResult = {
   displacement: string | null
   power: string | null
   fuelType: 'benzin' | 'diesel' | 'elektro' | 'hybrid' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2453,7 +2468,6 @@ export type StaryMotorQueryResult = {
     turboCode: string | null
     condition: 'na-dily' | 'nove' | 'pouzite-funkcni' | 'repasovane'
   }> | null
-  detailedDescription: BlockContent | null
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2503,7 +2517,7 @@ export type AllMotoroveHlavyQueryResult = Array<{
   engineCodes: Array<string> | null
   valveCount: string | null
   material: 'hlinik' | 'litina' | 'slitina-hliniku' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2530,7 +2544,7 @@ export type AllMotoroveHlavyQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: motorovaHlavaQuery
-// Query: *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
+// Query: *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  valveCount,  material,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  includedComponents,  warrantyPeriod,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type MotorovaHlavaQueryResult = {
   _id: string
   name: string
@@ -2549,7 +2563,7 @@ export type MotorovaHlavaQueryResult = {
   engineCodes: Array<string> | null
   valveCount: string | null
   material: 'hlinik' | 'litina' | 'slitina-hliniku' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2572,7 +2586,6 @@ export type MotorovaHlavaQueryResult = {
   condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
   includedComponents: Array<string> | null
   warrantyPeriod: string | null
-  detailedDescription: BlockContent | null
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2624,7 +2637,7 @@ export type AllPrevodovkyQueryResult = Array<{
   transmissionType: 'automaticka' | 'cvt' | 'manualni' | 'sekvencni'
   gearCount: string | null
   driveType: '4x4' | 'awd' | 'predni' | 'zadni' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2652,7 +2665,7 @@ export type AllPrevodovkyQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: prevodovkaQuery
-// Query: *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
+// Query: *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  transmissionCode,  transmissionType,  gearCount,  driveType,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  mileage,  condition,  fluidType,  warrantyPeriod,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type PrevodovkaQueryResult = {
   _id: string
   name: string
@@ -2673,7 +2686,7 @@ export type PrevodovkaQueryResult = {
   transmissionType: 'automaticka' | 'cvt' | 'manualni' | 'sekvencni'
   gearCount: string | null
   driveType: '4x4' | 'awd' | 'predni' | 'zadni' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2697,7 +2710,6 @@ export type PrevodovkaQueryResult = {
   condition: 'na-dily' | 'nova' | 'pouzita-funkcni' | 'repasovana'
   fluidType: string | null
   warrantyPeriod: string | null
-  detailedDescription: BlockContent | null
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2749,7 +2761,7 @@ export type AllTurbodmychadlaQueryResult = Array<{
   displacement: string | null
   power: string | null
   manufacturer: 'garrett' | 'holset' | 'ihi' | 'jiny' | 'kkk' | 'mitsubishi' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2778,7 +2790,7 @@ export type AllTurbodmychadlaQueryResult = Array<{
 
 // Source: ../frontend/sanity/lib/queries.ts
 // Variable: turbodmychadloQuery
-// Query: *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod,    detailedDescription,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
+// Query: *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {      _id,  name,  "slug": slug.current,  "brand": brand->{    name,    "slug": slug.current,    logo  },  engineCodes,  turboCode,  displacement,  power,  manufacturer,  description,  "mainImage": images[0],  price,  "currency": select(language == "de-AT" => "EUR", "CZK"),  inStock,  featured,  specifications[] {    label,    value  },  compatibility,  condition,  mileage,  boostPressure,  oilType,  warrantyPeriod,    images[],    seo,    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}  }
 export type TurbodmychadloQueryResult = {
   _id: string
   name: string
@@ -2799,7 +2811,7 @@ export type TurbodmychadloQueryResult = {
   displacement: string | null
   power: string | null
   manufacturer: 'garrett' | 'holset' | 'ihi' | 'jiny' | 'kkk' | 'mitsubishi' | null
-  description: string
+  description: BlockContent
   mainImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2824,7 +2836,6 @@ export type TurbodmychadloQueryResult = {
   boostPressure: string | null
   oilType: string | null
   warrantyPeriod: string | null
-  detailedDescription: BlockContent | null
   images: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2854,9 +2865,20 @@ export type TurbodmychadlaPagesSlugsResult = Array<{
 }>
 
 // Source: ../frontend/sanity/lib/queries.ts
-// Variable: latestProductsQuery
-// Query: *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...15]{    _id,    _type,    name,    "slug": slug.current,    images[],    price,    description,    brand->{      name,      logo    },    category  }
-export type LatestProductsQueryResult = Array<
+// Variable: relatedProductsQuery
+// Query: *[_type == $type && language == $locale && _id != $skip && defined(slug.current)]    | order(_createdAt desc) [0...4] {    _id,    _type,    name,    "slug": slug.current,    images[],    price,    description,    brand->{      name,      logo    },    category  }
+export type RelatedProductsQueryResult = Array<
+  | {
+      _id: string
+      _type: 'brand'
+      name: string
+      slug: string
+      images: null
+      price: null
+      description: null
+      brand: null
+      category: null
+    }
   | {
       _id: string
       _type: 'motorovaHlava'
@@ -2873,7 +2895,7 @@ export type LatestProductsQueryResult = Array<
         _key: string
       }>
       price: number
-      description: string
+      description: BlockContent
       brand: {
         name: string
         logo: {
@@ -2884,6 +2906,28 @@ export type LatestProductsQueryResult = Array<
           _type: 'image'
         } | null
       }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'page'
+      name: string
+      slug: string
+      images: null
+      price: null
+      description: null
+      brand: null
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'post'
+      name: null
+      slug: string
+      images: null
+      price: null
+      description: null
+      brand: null
       category: null
     }
   | {
@@ -2902,7 +2946,7 @@ export type LatestProductsQueryResult = Array<
         _key: string
       }>
       price: number
-      description: string
+      description: BlockContent
       brand: {
         name: string
         logo: {
@@ -2931,7 +2975,7 @@ export type LatestProductsQueryResult = Array<
         _key: string
       }>
       price: number
-      description: string
+      description: BlockContent
       brand: {
         name: string
         logo: {
@@ -2960,7 +3004,7 @@ export type LatestProductsQueryResult = Array<
         _key: string
       }>
       price: number
-      description: string
+      description: BlockContent
       brand: {
         name: string
         logo: {
@@ -2989,7 +3033,158 @@ export type LatestProductsQueryResult = Array<
         _key: string
       }>
       price: number
-      description: string
+      description: BlockContent
+      brand: {
+        name: string
+        logo: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+>
+
+// Source: ../frontend/sanity/lib/queries.ts
+// Variable: latestProductsQuery
+// Query: *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...15]{    _id,    _type,    name,    "slug": slug.current,    images[],    price,    description,    brand->{      name,      logo    },    category  }
+export type LatestProductsQueryResult = Array<
+  | {
+      _id: string
+      _type: 'motorovaHlava'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: BlockContent
+      brand: {
+        name: string
+        logo: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'prevodovka'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: BlockContent
+      brand: {
+        name: string
+        logo: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'repasovanyMotor'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: BlockContent
+      brand: {
+        name: string
+        logo: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'staryMotor'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: BlockContent
+      brand: {
+        name: string
+        logo: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        } | null
+      }
+      category: null
+    }
+  | {
+      _id: string
+      _type: 'turbodmychadlo'
+      name: string
+      slug: string
+      images: Array<{
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+      }>
+      price: number
+      description: BlockContent
       brand: {
         name: string
         logo: {
@@ -3022,20 +3217,21 @@ declare module '@sanity/client' {
     '\n  *[_type == "brand" && isPopular == true] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': PopularBrandsWithLogosQueryResult
     '\n  *[_type == "brand" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    logo,\n    isPopular\n  }\n': BrandBySlugQueryResult
     '\n  *[_type == "repasovanyMotor" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n\n  }\n': AllRepasovaneMotoryQueryResult
-    '\n  *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': RepasovanyMotorQueryResult
+    '\n  *[_type == "repasovanyMotor" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  warrantyPeriod,\n  mileage,\n  condition,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': RepasovanyMotorQueryResult
     '\n  *[_type == "repasovanyMotor" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': RepasovaneMotoryPagesSlugsResult
     '\n  *[_type == "staryMotor" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n\n  }\n': AllStareMotoryQueryResult
-    '\n  *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': StaryMotorQueryResult
+    '\n  *[_type == "staryMotor" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  displacement,\n  power,\n  fuelType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  year,\n  condition,\n  damageDescription,\n  "relatedTurbochargers": relatedTurbochargers[]->{\n    _id,\n    name,\n    "slug": slug.current,\n    "brand": brand->name,\n    "mainImage": images[0],\n    price,\n    "currency": select(language == "de-AT" => "EUR", "CZK"),\n    inStock,\n    turboCode,\n    condition\n  }\n,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': StaryMotorQueryResult
     '\n  *[_type == "staryMotor" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': StareMotoryPagesSlugsResult
     '\n  *[_type == "motorovaHlava" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n\n  }\n': AllMotoroveHlavyQueryResult
-    '\n  *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': MotorovaHlavaQueryResult
+    '\n  *[_type == "motorovaHlava" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  valveCount,\n  material,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  includedComponents,\n  warrantyPeriod\n,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': MotorovaHlavaQueryResult
     '\n  *[_type == "motorovaHlava" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': MotoroveHlavyPagesSlugsResult
     '\n  *[_type == "prevodovka" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n\n  }\n': AllPrevodovkyQueryResult
-    '\n  *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': PrevodovkaQueryResult
+    '\n  *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  transmissionCode,\n  transmissionType,\n  gearCount,\n  driveType,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  mileage,\n  condition,\n  fluidType,\n  warrantyPeriod\n,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': PrevodovkaQueryResult
     '\n  *[_type == "prevodovka" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': PrevodovkyPagesSlugsResult
     '\n  *[_type == "turbodmychadlo" && language == $locale && defined(slug.current)] | order(name asc) {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n\n  }\n': AllTurbodmychadlaQueryResult
-    '\n  *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n,\n    detailedDescription,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': TurbodmychadloQueryResult
+    '\n  *[_type == "turbodmychadlo" && language == $locale && slug.current == $slug] [0] {\n    \n  _id,\n  name,\n  "slug": slug.current,\n  "brand": brand->{\n    name,\n    "slug": slug.current,\n    logo\n  },\n  engineCodes,\n  turboCode,\n  displacement,\n  power,\n  manufacturer,\n  description,\n  "mainImage": images[0],\n  price,\n  "currency": select(language == "de-AT" => "EUR", "CZK"),\n  inStock,\n  featured,\n  specifications[] {\n    label,\n    value\n  },\n  compatibility,\n  condition,\n  mileage,\n  boostPressure,\n  oilType,\n  warrantyPeriod\n,\n    images[],\n    seo,\n    "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}\n  }\n': TurbodmychadloQueryResult
     '\n  *[_type == "turbodmychadlo" && defined(slug.current)]\n  {"slug": slug.current, "language": language}\n': TurbodmychadlaPagesSlugsResult
+    '\n  *[_type == $type && language == $locale && _id != $skip && defined(slug.current)]\n    | order(_createdAt desc) [0...4] {\n    _id,\n    _type,\n    name,\n    "slug": slug.current,\n    images[],\n    price,\n    description,\n    brand->{\n      name,\n      logo\n    },\n    category\n  }\n': RelatedProductsQueryResult
     '\n  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...15]{\n    _id,\n    _type,\n    name,\n    "slug": slug.current,\n    images[],\n    price,\n    description,\n    brand->{\n      name,\n      logo\n    },\n    category\n  }\n': LatestProductsQueryResult
   }
 }

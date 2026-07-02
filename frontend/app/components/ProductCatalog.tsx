@@ -4,10 +4,23 @@ import {useState, useEffect, useMemo} from 'react'
 import {useLocale, useTranslations} from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
+import {toPlainText} from 'next-sanity'
 import {Search, Filter, SlidersHorizontal, ChevronLeft, ChevronRight} from 'lucide-react'
 import {urlForImage} from '@/sanity/lib/utils'
+import type {BlockContent} from '@/sanity.types'
 import {categoryPath, type CategoryKey} from '@/app/lib/categories'
 import {type Locale} from '@/app/lib/i18n'
+import MissingImage from './MissingImage'
+import {Button} from './ui/button'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from './ui/sheet'
 
 type Product = {
   _id: string
@@ -20,7 +33,7 @@ type Product = {
   } | null
   category: string
   partNumber: string[]
-  description: string | null
+  description: BlockContent | null
   mainImage: any | null
   price: number | null
   currency: string
@@ -58,9 +71,9 @@ function ProductCard({product}: {product: Product}) {
   const href = `/${categoryPath(product.category as CategoryKey, locale)}/${product.slug}`
   return (
     <Link href={href} className="group">
-      <div className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow h-full flex flex-col">
+      <div className="bg-white rounded-xl shadow-sm border hover:shadow-lg transition-shadow h-full flex flex-col">
         {/* Product Image */}
-        <div className="aspect-square w-full overflow-hidden rounded-t-lg bg-gray-100">
+        <div className="aspect-square w-full overflow-hidden rounded-t-xl bg-gray-100">
           {product.mainImage ? (
             <Image
               src={urlForImage(product.mainImage)?.width(400).height(400).url() || ''}
@@ -70,9 +83,7 @@ function ProductCard({product}: {product: Product}) {
               className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-200"
             />
           ) : (
-            <div className="h-full w-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-400">{t('noImage')}</span>
-            </div>
+            <MissingImage label={t('noImage')} />
           )}
         </div>
 
@@ -103,7 +114,9 @@ function ProductCard({product}: {product: Product}) {
                 {product.compatibility.slice(0, 3).join(', ')}
               </p>
             ) : product.description ? (
-              <p className="text-sm text-gray-600 mt-2 line-clamp-2">{product.description}</p>
+              <p className="text-sm text-gray-600 mt-2 line-clamp-2">
+                {toPlainText(product.description)}
+              </p>
             ) : null}
           </div>
 
@@ -134,7 +147,6 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
   const [selectedDisplacement, setSelectedDisplacement] = useState('all')
   const [sortBy, setSortBy] = useState('name-asc')
   const [priceRange, setPriceRange] = useState({min: 0, max: 100000})
-  const [showFilters, setShowFilters] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 12
 
@@ -190,7 +202,8 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
       const searchMatch =
         searchTerm === '' ||
         product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (product.description &&
+          toPlainText(product.description).toLowerCase().includes(searchTerm.toLowerCase())) ||
         // Handle brand search for both string and reference types
         (() => {
           const brand = (product as any).brand
@@ -251,6 +264,13 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
     return filtered
   }, [products, searchTerm, selectedBrand, selectedFuelType, selectedDisplacement, priceRange, sortBy])
 
+  const activeFilterCount = [
+    selectedBrand !== 'all',
+    selectedFuelType !== 'all',
+    selectedDisplacement !== 'all',
+    sortBy !== 'name-asc',
+  ].filter(Boolean).length
+
   // Pagination calculations
   const totalItems = filteredAndSortedProducts.length
   const totalPages = Math.ceil(totalItems / itemsPerPage)
@@ -276,6 +296,83 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
     }
   }
 
+  const filterFields = (
+    <>
+      {/* Brand Filter */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">{t('brand')}</label>
+        <select
+          value={selectedBrand}
+          onChange={(e) => setSelectedBrand(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+        >
+          <option value="all">{t('allBrands')}</option>
+          {uniqueBrands.map((brand) => (
+            <option key={brand} value={brand}>
+              {brand}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Fuel Type Filter — only shown when products have fuelType data */}
+      {uniqueFuelTypes.length > 0 && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('fuelType')}</label>
+          <select
+            value={selectedFuelType}
+            onChange={(e) => setSelectedFuelType(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          >
+            <option value="all">{t('allFuelTypes')}</option>
+            {uniqueFuelTypes.map((fuel) => (
+              <option key={fuel} value={fuel}>
+                {fuel}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {/* Displacement Filter — only shown when products have displacement data */}
+      {uniqueDisplacements.length > 0 && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {t('displacement')}
+          </label>
+          <select
+            value={selectedDisplacement}
+            onChange={(e) => setSelectedDisplacement(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          >
+            <option value="all">{t('allDisplacements')}</option>
+            {uniqueDisplacements.map((d) => (
+              <option key={d} value={d}>
+                {d} ccm
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {/* Sort */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">{t('sortBy')}</label>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+        >
+          {sortOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+    </>
+  )
+
   return (
     <div>
       {/* Search and Filters */}
@@ -292,99 +389,54 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
           />
         </div>
 
-        {/* Filter Toggle Button (Mobile) */}
-        <div className="lg:hidden mb-4">
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            <SlidersHorizontal className="h-4 w-4" />
-            <span>{t('filters')}</span>
-          </button>
+        {/* Filter Toggle Button (Mobile) — opens a slide-in sheet */}
+        <div className="lg:hidden mb-4 flex items-center gap-3">
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                <SlidersHorizontal className="h-4 w-4" />
+                <span>{t('filters')}</span>
+                {activeFilterCount > 0 && (
+                  <span className="flex items-center justify-center h-5 w-5 rounded-full bg-red-600 text-white text-xs font-medium">
+                    {activeFilterCount}
+                  </span>
+                )}
+              </button>
+            </SheetTrigger>
+            <SheetContent side="bottom" className="max-h-[85vh] overflow-y-auto">
+              <SheetHeader>
+                <SheetTitle>{t('filters')}</SheetTitle>
+              </SheetHeader>
+              <div className="grid grid-cols-1 gap-4 mt-4">{filterFields}</div>
+              <SheetFooter className="mt-6 flex-row gap-2">
+                <Button variant="outline" onClick={clearFilters} className="flex-1">
+                  {t('clearFilters')}
+                </Button>
+                <SheetClose asChild>
+                  <Button className="flex-1">{t('showResults', {count: totalItems})}</Button>
+                </SheetClose>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+          {activeFilterCount > 0 && (
+            <button
+              onClick={clearFilters}
+              className="text-sm text-red-600 hover:text-red-700 font-medium"
+            >
+              {t('clearFilters')}
+            </button>
+          )}
         </div>
 
-        {/* Filters */}
-        <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ${showFilters ? 'block' : 'hidden lg:grid'}`}
-        >
-          {/* Brand Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('brand')}</label>
-            <select
-              value={selectedBrand}
-              onChange={(e) => setSelectedBrand(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            >
-              <option value="all">{t('allBrands')}</option>
-              {uniqueBrands.map((brand) => (
-                <option key={brand} value={brand}>
-                  {brand}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Fuel Type Filter — only shown when products have fuelType data */}
-          {uniqueFuelTypes.length > 0 && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">{t('fuelType')}</label>
-              <select
-                value={selectedFuelType}
-                onChange={(e) => setSelectedFuelType(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-              >
-                <option value="all">{t('allFuelTypes')}</option>
-                {uniqueFuelTypes.map((fuel) => (
-                  <option key={fuel} value={fuel}>
-                    {fuel}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-
-          {/* Displacement Filter — only shown when products have displacement data */}
-          {uniqueDisplacements.length > 0 && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">{t('displacement')}</label>
-              <select
-                value={selectedDisplacement}
-                onChange={(e) => setSelectedDisplacement(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-              >
-                <option value="all">{t('allDisplacements')}</option>
-                {uniqueDisplacements.map((d) => (
-                  <option key={d} value={d}>
-                    {d} ccm
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-
-          {/* Sort */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('sortBy')}</label>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            >
-              {sortOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+        {/* Filters (desktop) */}
+        <div className="hidden lg:grid grid-cols-4 gap-4">{filterFields}</div>
 
         {/* Filter Actions */}
         <div className="mt-4 flex items-center justify-between">
           <div className="text-sm text-gray-600">{t('foundCount', {count: totalItems})}</div>
           <button
             onClick={clearFilters}
-            className="text-sm text-red-600 hover:text-red-700 font-medium"
+            className="hidden lg:block text-sm text-red-600 hover:text-red-700 font-medium"
           >
             {t('clearFilters')}
           </button>
@@ -398,7 +450,10 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
             <Filter className="h-12 w-12 mx-auto" />
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">{t('noResultsTitle')}</h3>
-          <p className="text-gray-600">{t('noResultsBody')}</p>
+          <p className="text-gray-600 mb-4">{t('noResultsBody')}</p>
+          <Button variant="outline" onClick={clearFilters}>
+            {t('clearFilters')}
+          </Button>
         </div>
       ) : (
         <>
@@ -454,6 +509,8 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
                       <button
                         key={pageNumber}
                         onClick={() => setCurrentPage(pageNumber)}
+                        aria-current={isCurrentPage ? 'page' : undefined}
+                        aria-label={`Strana ${pageNumber}`}
                         className={`px-3 py-2 text-sm font-medium rounded-md ${
                           isCurrentPage
                             ? 'bg-red-600 text-white'

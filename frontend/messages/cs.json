@@ -81,6 +81,7 @@
     "relatedTurbos": "Doporučená turbodmychadla",
     "relatedTurbosHelp": "K tomuto produktu doporučujeme následující turbodmychadla:",
     "viewDetail": "Zobrazit detail →",
+    "similarProducts": "Podobné produkty",
     "notFound": "Produkt nenalezen",
     "notFoundDescription": "Požadovaný produkt nebyl nalezen."
   },
@@ -100,6 +101,7 @@
     "noResultsTitle": "Žádné produkty nenalezeny",
     "noResultsBody": "Zkuste změnit filtry nebo hledaný výraz.",
     "foundCount": "Nalezeno {count} produktů",
+    "showResults": "Zobrazit {count} produktů",
     "prev": "Předchozí",
     "next": "Další",
     "fuelType": "Palivo",
@@ -114,6 +116,7 @@
   "Header": {
     "openMenu": "Otevřít menu",
     "closeMenu": "Zavřít menu",
+    "toggleCatalogMenu": "Rozbalit nabídku katalogu",
     "popularBrands": "Populární značky"
   },
   "Footer": {
