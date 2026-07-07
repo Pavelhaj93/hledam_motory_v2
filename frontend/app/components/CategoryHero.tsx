@@ -24,7 +24,7 @@ export default function CategoryHero({title, description, breadcrumbs}: Category
 
       <div className="container mx-auto px-4 py-16 relative z-10">
         {/* Breadcrumbs */}
-        <nav className="text-sm text-red-100 mb-6">
+        <nav className="text-sm text-white/80 mb-6">
           {breadcrumbs.map((breadcrumb, index) => (
             <span key={index}>
               {index > 0 && <span className="mx-2">/</span>}

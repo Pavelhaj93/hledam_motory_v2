@@ -40,7 +40,7 @@ export default async function Footer({settings}: FooterProps) {
     <footer className="bg-gray-800 text-white">
       <div className="mx-auto container px-4">
         {/* Main Footer Content */}
-        <div className="py-4 md:py-8 lg:py-12">
+        <div className="py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-1">

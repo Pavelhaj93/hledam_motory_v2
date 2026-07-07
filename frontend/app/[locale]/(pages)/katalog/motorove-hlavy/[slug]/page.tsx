@@ -1,20 +1,28 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {getFormatter, getTranslations, setRequestLocale} from 'next-intl/server'
+import {toPlainText} from 'next-sanity'
 import {sanityFetch} from '@/sanity/lib/live'
-import {motorovaHlavaQuery, motoroveHlavyPagesSlugs, settingsQuery} from '@/sanity/lib/queries'
+import {
+  motorovaHlavaQuery,
+  motoroveHlavyPagesSlugs,
+  settingsQuery,
+  relatedProductsQuery,
+} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import {Link} from '@/i18n/navigation'
-import {Mail, Phone, Check, X, MessageSquare} from 'lucide-react'
+import {Mail, Phone, Check, X, MessageSquare, ShieldCheck} from 'lucide-react'
 import BackButton from '@/app/components/BackButton'
 import {Button} from '@/app/components/ui/button'
 import CatalogNotFoundBanner from '@/app/components/CatalogNotFoundBanner'
 import CustomPortableText from '@/app/components/PortableText'
 import ImageGallery from '@/app/components/ImageGallery'
+import MissingImage from '@/app/components/MissingImage'
+import RelatedProducts from '@/app/components/RelatedProducts'
 import {productJsonLd} from '@/app/lib/jsonld'
 import {productAlternates} from '@/app/lib/categoryMeta'
-import {categoryPath} from '@/app/lib/categories'
+import {categoryPath, categoryTypeByKey} from '@/app/lib/categories'
 import {ogLocale, type Locale} from '@/app/lib/i18n'
 
 const CATEGORY = 'motorove-hlavy' as const
@@ -43,7 +51,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     return {title: t('notFound'), description: t('notFoundDescription')}
   }
   const title = hlava.seo?.metaTitle || `${hlava.name} | ${hlava.brand?.name || ''}`
-  const description = hlava.seo?.metaDescription || hlava.description || ''
+  const description = hlava.seo?.metaDescription || toPlainText(hlava.description as any) || ''
   return {
     title,
     description,
@@ -73,6 +81,7 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
   setRequestLocale(locale)
   const t = await getTranslations('Product')
   const tCommon = await getTranslations('Common')
+  const tCat = await getTranslations('Categories')
   const format = await getFormatter()
 
   const [{data: hlava}, {data: settings}] = await Promise.all([
@@ -81,9 +90,15 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
   ])
   if (!hlava) notFound()
   const phone = settings?.phone || '+420 792 644 755'
+  const catPath = categoryPath(CATEGORY, locale)
+  const {data: relatedProducts} = await sanityFetch({
+    query: relatedProductsQuery,
+    params: {type: categoryTypeByKey[CATEGORY], locale, skip: hlava._id},
+    stega: false,
+  })
   const schemas = productJsonLd({
     name: hlava.name ?? '',
-    description: hlava.description,
+    description: toPlainText(hlava.description as any),
     imageUrl: hlava.mainImage ? urlForImage(hlava.mainImage)?.width(800).height(600).url() : null,
     brandName: hlava.brand?.name,
     price: hlava.price,
@@ -102,8 +117,16 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}} />
       ))}
       <nav className="text-sm text-gray-600 mb-6">
-        <Link href="/katalog/motorove-hlavy" className="hover:text-gray-900">
+        <Link href="/" className="hover:text-gray-900">
+          {tCommon('home')}
+        </Link>
+        <span className="mx-2">/</span>
+        <Link href="/katalog" className="hover:text-gray-900">
           {tCommon('catalog')}
+        </Link>
+        <span className="mx-2">/</span>
+        <Link href="/katalog/motorove-hlavy" className="hover:text-gray-900">
+          {tCat(CATEGORY)}
         </Link>
         <span className="mx-2">/</span>
         <span>{hlava.name}</span>
@@ -112,7 +135,7 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
       <BackButton fallbackHref="/katalog/motorove-hlavy" label={t('backToCatalog')} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div className="space-y-4">
+        <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
           {hlava.images && hlava.images.length > 0 ? (
             <ImageGallery images={hlava.images} productName={hlava.name} />
           ) : hlava.mainImage ? (
@@ -128,9 +151,7 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
             </div>
           ) : (
             <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
-              <div className="h-full w-full bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-400">{t('noImage')}</span>
-              </div>
+              <MissingImage label={t('noImage')} />
             </div>
           )}
         </div>
@@ -164,12 +185,22 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
                 )}
               </div>
             </div>
+            {hlava.warrantyPeriod && (
+              <div className="flex items-center gap-2 text-sm text-gray-600 mt-3">
+                <ShieldCheck className="h-4 w-4 text-green-600" />
+                <span>
+                  {t('warranty')}: {hlava.warrantyPeriod}
+                </span>
+              </div>
+            )}
           </div>
 
-          {hlava.description && (
+          {hlava.description && hlava.description.length > 0 && (
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('description')}</h3>
-              <p className="text-gray-600">{hlava.description}</p>
+              <div className="prose prose-sm max-w-none text-gray-600">
+                <CustomPortableText value={hlava.description as any} />
+              </div>
             </div>
           )}
 
@@ -195,15 +226,6 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
                   <span className="font-medium text-gray-700">{t('valveCount')}</span>
                   <span className="text-gray-600">{hlava.valveCount}</span>
                 </div>
-              </div>
-            </div>
-          )}
-
-          {hlava.detailedDescription && (
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('detailedInfo')}</h3>
-              <div className="prose prose-sm max-w-none text-gray-600">
-                <CustomPortableText value={hlava.detailedDescription as any} />
               </div>
             </div>
           )}
@@ -239,6 +261,13 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
           </div>
         </div>
       </div>
+      <RelatedProducts
+        products={relatedProducts}
+        categoryHref={`/${catPath}`}
+        categoryLabel={tCat(CATEGORY)}
+        heading={t('similarProducts')}
+        locale={locale}
+      />
       <CatalogNotFoundBanner />
     </div>
   )

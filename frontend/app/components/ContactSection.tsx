@@ -1,9 +1,18 @@
 'use client'
 
-import {useState, useEffect, Suspense} from 'react'
+import {useState, useEffect, useRef, Suspense} from 'react'
 import {useSearchParams} from 'next/navigation'
 import {useLocale} from 'next-intl'
-import {Mail, Phone, MapPin, Building2, SendIcon, SendHorizonalIcon, MailIcon} from 'lucide-react'
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Building2,
+  SendIcon,
+  SendHorizonalIcon,
+  MailIcon,
+  X,
+} from 'lucide-react'
 import {Button} from './ui/button'
 import Link from 'next/link'
 
@@ -60,6 +69,31 @@ export default function ContactSection({block}: ContactSectionProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [showError, setShowError] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<{name?: string; email?: string; message?: string}>(
+    {},
+  )
+  const formMessageRef = useRef<HTMLDivElement>(null)
+
+  const validate = () => {
+    const errors: {name?: string; email?: string; message?: string} = {}
+    if (!formData.name.trim()) {
+      errors.name = 'Zadejte prosím jméno a příjmení'
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      errors.email = 'Zadejte prosím platnou emailovou adresu'
+    }
+    if (formData.message.trim().length < 10) {
+      errors.message = 'Zpráva musí mít alespoň 10 znaků'
+    }
+    setFieldErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  useEffect(() => {
+    if (showSuccess || showError) {
+      formMessageRef.current?.scrollIntoView({behavior: 'smooth', block: 'nearest'})
+    }
+  }, [showSuccess, showError])
 
   const {
     submitButtonText = 'Odeslat zprávu',
@@ -90,6 +124,9 @@ export default function ContactSection({block}: ContactSectionProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!validate()) {
+      return
+    }
     setIsSubmitting(true)
     setShowError(false)
 
@@ -132,14 +169,10 @@ export default function ContactSection({block}: ContactSectionProps) {
         message: '',
         gdprConsent: false,
       })
-
-      // Hide success message after 5 seconds
-      setTimeout(() => setShowSuccess(false), 5000)
+      setFieldErrors({})
     } catch (error) {
       console.error('Error submitting form:', error)
       setShowError(true)
-      // Hide error message after 5 seconds
-      setTimeout(() => setShowError(false), 5000)
     } finally {
       setIsSubmitting(false)
     }
@@ -152,28 +185,49 @@ export default function ContactSection({block}: ContactSectionProps) {
       ...prev,
       [e.target.name]: e.target.value,
     }))
+    if (e.target.name in fieldErrors) {
+      setFieldErrors((prev) => ({...prev, [e.target.name]: undefined}))
+    }
   }
 
   const renderContactForm = () => (
     <div className="bg-white rounded-lg shadow-lg p-6 lg:p-8">
       <h3 className="text-2xl font-bold text-gray-900 mb-6">Napište nám</h3>
 
-      {showSuccess && (
-        <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md">
-          <p className="text-green-700">{successMessage}</p>
-        </div>
-      )}
+      <div ref={formMessageRef}>
+        {showSuccess && (
+          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md flex items-start justify-between gap-4">
+            <p className="text-green-700">{successMessage}</p>
+            <button
+              type="button"
+              onClick={() => setShowSuccess(false)}
+              aria-label="Zavřít zprávu"
+              className="text-green-700 hover:text-green-900 shrink-0"
+            >
+              <X className="size-4" />
+            </button>
+          </div>
+        )}
 
-      {showError && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md">
-          <p className="text-red-700">
-            Nepodařilo se odeslat zprávu. Zkuste to prosím znovu nebo nás kontaktujte přímo na
-            email.
-          </p>
-        </div>
-      )}
+        {showError && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md flex items-start justify-between gap-4">
+            <p className="text-red-700">
+              Nepodařilo se odeslat zprávu. Zkuste to prosím znovu nebo nás kontaktujte přímo na
+              email.
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowError(false)}
+              aria-label="Zavřít zprávu"
+              className="text-red-700 hover:text-red-900 shrink-0"
+            >
+              <X className="size-4" />
+            </button>
+          </div>
+        )}
+      </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} noValidate className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -183,11 +237,17 @@ export default function ContactSection({block}: ContactSectionProps) {
               type="text"
               id="name"
               name="name"
-              required
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+              aria-invalid={!!fieldErrors.name}
+              aria-describedby={fieldErrors.name ? 'name-error' : undefined}
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 ${fieldErrors.name ? 'border-red-500' : 'border-gray-300'}`}
             />
+            {fieldErrors.name && (
+              <p id="name-error" className="mt-1 text-sm text-red-600">
+                {fieldErrors.name}
+              </p>
+            )}
           </div>
 
           <div>
@@ -198,11 +258,17 @@ export default function ContactSection({block}: ContactSectionProps) {
               type="email"
               id="email"
               name="email"
-              required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+              aria-invalid={!!fieldErrors.email}
+              aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 ${fieldErrors.email ? 'border-red-500' : 'border-gray-300'}`}
             />
+            {fieldErrors.email && (
+              <p id="email-error" className="mt-1 text-sm text-red-600">
+                {fieldErrors.email}
+              </p>
+            )}
           </div>
         </div>
 
@@ -228,12 +294,18 @@ export default function ContactSection({block}: ContactSectionProps) {
             id="message"
             name="message"
             rows={5}
-            required
             value={formData.message}
             onChange={handleChange}
             placeholder="Popište vaši poptávku nebo dotaz..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            aria-invalid={!!fieldErrors.message}
+            aria-describedby={fieldErrors.message ? 'message-error' : undefined}
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 ${fieldErrors.message ? 'border-red-500' : 'border-gray-300'}`}
           />
+          {fieldErrors.message && (
+            <p id="message-error" className="mt-1 text-sm text-red-600">
+              {fieldErrors.message}
+            </p>
+          )}
         </div>
 
         <div className="flex items-start space-x-2">
@@ -269,6 +341,11 @@ export default function ContactSection({block}: ContactSectionProps) {
           {isSubmitting ? 'Odesílání...' : submitButtonText}
           <MailIcon className="size-6 ml-2" />
         </Button>
+        {!isSubmitting && !formData.gdprConsent && (
+          <p className="text-sm text-gray-500 text-center">
+            Zaškrtněte souhlas výše pro odeslání
+          </p>
+        )}
       </form>
     </div>
   )
@@ -335,7 +412,9 @@ export default function ContactSection({block}: ContactSectionProps) {
         {/* Header */}
         {(heading || description) && (
           <div className="text-center mb-12">
-            {heading && <h2 className="text-4xl font-bold text-gray-900 mb-4">{heading}</h2>}
+            {heading && (
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{heading}</h2>
+            )}
             {description && <p className="text-lg text-gray-600 max-w-2xl mx-auto">{description}</p>}
           </div>
         )}

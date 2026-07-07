@@ -72,17 +72,10 @@ export const motoroveHlavy = defineType({
     }),
     defineField({
       name: 'description',
-      title: 'Krátký popis',
-      type: 'text',
-      rows: 3,
-      validation: (Rule) => Rule.required().max(300),
-      description: 'Stručný popis pro karty produktů a výpisy',
-    }),
-    defineField({
-      name: 'detailedDescription',
-      title: 'Detailní popis',
+      title: 'Popis',
       type: 'blockContent',
-      description: 'Úplný popis produktu s formátováním',
+      validation: (Rule) => Rule.required(),
+      description: 'Popis produktu s formátováním, použitý na kartách produktů i na detailu produktu',
     }),
     defineField({
       name: 'images',

@@ -46,7 +46,7 @@ export default function CategoryGrid({block}: CategoryGridProps) {
         {(heading || subheading) && (
           <div className="text-center mb-12">
             {heading && (
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">{heading}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{heading}</h2>
             )}
             {subheading && <p className="text-lg text-gray-600 max-w-2xl mx-auto">{subheading}</p>}
           </div>
@@ -59,7 +59,7 @@ export default function CategoryGrid({block}: CategoryGridProps) {
               <Link
                 key={category.slug}
                 href={`/katalog/${category.slug}`}
-                className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                className="group relative bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
               >
                 {category.featured && (
                   <div className="absolute top-4 right-4 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-semibold z-10">
@@ -78,11 +78,13 @@ export default function CategoryGrid({block}: CategoryGridProps) {
                     <h3 className="text-xl font-bold text-gray-900 group-hover:text-red-600 transition-colors">
                       {category.title}
                     </h3>
-                    <span className="text-sm font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                      {typeof category.itemCount === 'number'
-                        ? `${category.itemCount}+`
-                        : category.itemCount}
-                    </span>
+                    {(typeof category.itemCount !== 'number' || category.itemCount >= 5) && (
+                      <span className="text-sm font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                        {typeof category.itemCount === 'number'
+                          ? `${category.itemCount}+`
+                          : category.itemCount}
+                      </span>
+                    )}
                   </div>
 
                   <p className="text-gray-600 leading-relaxed mb-4">{category.description}</p>

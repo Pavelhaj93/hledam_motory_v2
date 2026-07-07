@@ -81,6 +81,7 @@
     "relatedTurbos": "Empfohlene Turbolader",
     "relatedTurbosHelp": "Zu diesem Produkt empfehlen wir folgende Turbolader:",
     "viewDetail": "Details anzeigen →",
+    "similarProducts": "Ähnliche Produkte",
     "notFound": "Produkt nicht gefunden",
     "notFoundDescription": "Das angeforderte Produkt wurde nicht gefunden."
   },
@@ -100,6 +101,7 @@
     "noResultsTitle": "Keine Produkte gefunden",
     "noResultsBody": "Ändern Sie die Filter oder den Suchbegriff.",
     "foundCount": "{count} Produkte gefunden",
+    "showResults": "{count} Produkte anzeigen",
     "prev": "Zurück",
     "next": "Weiter",
     "fuelType": "Kraftstoff",
@@ -114,6 +116,7 @@
   "Header": {
     "openMenu": "Menü öffnen",
     "closeMenu": "Menü schließen",
+    "toggleCatalogMenu": "Katalogmenü umschalten",
     "popularBrands": "Beliebte Marken"
   },
   "Footer": {

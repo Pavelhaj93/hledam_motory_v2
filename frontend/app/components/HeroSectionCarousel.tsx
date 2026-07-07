@@ -135,7 +135,7 @@ export default function HeroSectionCarousel({block}: HeroSectionCarouselProps) {
 
       {/* Content overlay for all slides */}
       <div className="absolute inset-0 z-20 flex items-center  pointer-events-none">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4 max-w-4xl">
           {headline && (
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-left text-white">
               {headline}
@@ -178,7 +178,8 @@ export default function HeroSectionCarousel({block}: HeroSectionCarouselProps) {
                 current === index ? 'w-8 bg-red-500' : 'w-3 bg-white/50 hover:bg-white/80'
               }`}
               onClick={() => api?.scrollTo(index)}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={`Přejít na snímek ${index + 1} z ${images.length}`}
+              aria-current={current === index ? 'true' : undefined}
             />
           ))}
         </div>

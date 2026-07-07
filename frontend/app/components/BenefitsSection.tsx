@@ -73,7 +73,7 @@ const BenefitsSection = ({block}: BenefitsSectionProps) => {
           <h2 className="text-red-500 text-lg font-semibold mb-2 tracking-wide uppercase">
             {eyebrow}
           </h2>
-          <h3 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 leading-tight">
+          <h3 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
             {heading}
           </h3>
           <div className="w-24 h-1 bg-red-500 mx-auto rounded-full"></div>
@@ -85,7 +85,7 @@ const BenefitsSection = ({block}: BenefitsSectionProps) => {
             return (
               <div
                 key={index}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 hover:border-red-200"
+                className="group bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-red-200"
               >
                 <div className="flex justify-center mb-6">
                   <div className="p-4 bg-red-50 rounded-2xl group-hover:bg-red-100 transition-colors duration-300 group-hover:scale-110 transform">

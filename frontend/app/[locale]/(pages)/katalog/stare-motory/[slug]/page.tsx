@@ -1,8 +1,14 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {getFormatter, getTranslations, setRequestLocale} from 'next-intl/server'
+import {toPlainText} from 'next-sanity'
 import {sanityFetch} from '@/sanity/lib/live'
-import {staryMotorQuery, stareMotoryPagesSlugs, settingsQuery} from '@/sanity/lib/queries'
+import {
+  staryMotorQuery,
+  stareMotoryPagesSlugs,
+  settingsQuery,
+  relatedProductsQuery,
+} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import {Link} from '@/i18n/navigation'
@@ -12,9 +18,11 @@ import {Button} from '@/app/components/ui/button'
 import CatalogNotFoundBanner from '@/app/components/CatalogNotFoundBanner'
 import CustomPortableText from '@/app/components/PortableText'
 import ImageGallery from '@/app/components/ImageGallery'
+import MissingImage from '@/app/components/MissingImage'
+import RelatedProducts from '@/app/components/RelatedProducts'
 import {productJsonLd} from '@/app/lib/jsonld'
 import {productAlternates} from '@/app/lib/categoryMeta'
-import {categoryPath} from '@/app/lib/categories'
+import {categoryPath, categoryTypeByKey} from '@/app/lib/categories'
 import {ogLocale, type Locale} from '@/app/lib/i18n'
 
 const CATEGORY = 'stare-motory' as const
@@ -43,7 +51,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     return {title: t('notFound'), description: t('notFoundDescription')}
   }
   const title = motor.seo?.metaTitle || `${motor.name} | ${motor.brand?.name || ''}`
-  const description = motor.seo?.metaDescription || motor.description || ''
+  const description = motor.seo?.metaDescription || toPlainText(motor.description as any) || ''
   return {
     title,
     description,
@@ -73,6 +81,7 @@ export default async function StaryMotorDetailPage({params}: Props) {
   setRequestLocale(locale)
   const t = await getTranslations('Product')
   const tCommon = await getTranslations('Common')
+  const tCat = await getTranslations('Categories')
   const format = await getFormatter()
 
   const [{data: motor}, {data: settings}] = await Promise.all([
@@ -81,10 +90,16 @@ export default async function StaryMotorDetailPage({params}: Props) {
   ])
   if (!motor) notFound()
   const phone = settings?.phone || '+420 792 644 755'
+  const catPath = categoryPath(CATEGORY, locale)
+  const {data: relatedProducts} = await sanityFetch({
+    query: relatedProductsQuery,
+    params: {type: categoryTypeByKey[CATEGORY], locale, skip: motor._id},
+    stega: false,
+  })
   const turboPath = categoryPath('turbodmychadla', locale)
   const schemas = productJsonLd({
     name: motor.name ?? '',
-    description: motor.description,
+    description: toPlainText(motor.description as any),
     imageUrl: motor.mainImage ? urlForImage(motor.mainImage)?.width(800).height(600).url() : null,
     brandName: motor.brand?.name,
     price: motor.price,
@@ -102,15 +117,23 @@ export default async function StaryMotorDetailPage({params}: Props) {
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}} />
       ))}
       <nav className="text-sm text-gray-600 mb-6">
-        <Link href="/katalog/stare-motory" className="hover:text-gray-900">
+        <Link href="/" className="hover:text-gray-900">
+          {tCommon('home')}
+        </Link>
+        <span className="mx-2">/</span>
+        <Link href="/katalog" className="hover:text-gray-900">
           {tCommon('catalog')}
+        </Link>
+        <span className="mx-2">/</span>
+        <Link href="/katalog/stare-motory" className="hover:text-gray-900">
+          {tCat(CATEGORY)}
         </Link>
         <span className="mx-2">/</span>
         <span>{motor.name}</span>
       </nav>
       <BackButton fallbackHref="/katalog/stare-motory" label={t('backToCatalog')} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div className="space-y-4">
+        <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
           {motor.images && motor.images.length > 0 ? (
             <ImageGallery images={motor.images} productName={motor.name} />
           ) : motor.mainImage ? (
@@ -126,9 +149,7 @@ export default async function StaryMotorDetailPage({params}: Props) {
             </div>
           ) : (
             <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
-              <div className="h-full w-full bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-400">{t('noImage')}</span>
-              </div>
+              <MissingImage label={t('noImage')} />
             </div>
           )}
         </div>
@@ -170,10 +191,12 @@ export default async function StaryMotorDetailPage({params}: Props) {
               </div>
             </div>
           </div>
-          {motor.description && (
+          {motor.description && motor.description.length > 0 && (
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('description')}</h3>
-              <p className="text-gray-600">{motor.description}</p>
+              <div className="prose prose-sm max-w-none text-gray-600">
+                <CustomPortableText value={motor.description as any} />
+              </div>
             </div>
           )}
           {motor.damageDescription && (
@@ -192,14 +215,6 @@ export default async function StaryMotorDetailPage({params}: Props) {
                     <span className="text-gray-600">{spec.value}</span>
                   </div>
                 ))}
-              </div>
-            </div>
-          )}
-          {motor.detailedDescription && (
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('detailedInfo')}</h3>
-              <div className="prose prose-sm max-w-none text-gray-600">
-                <CustomPortableText value={motor.detailedDescription as any} />
               </div>
             </div>
           )}
@@ -285,6 +300,13 @@ export default async function StaryMotorDetailPage({params}: Props) {
           </div>
         </div>
       </div>
+      <RelatedProducts
+        products={relatedProducts}
+        categoryHref={`/${catPath}`}
+        categoryLabel={tCat(CATEGORY)}
+        heading={t('similarProducts')}
+        locale={locale}
+      />
       <CatalogNotFoundBanner />
     </div>
   )

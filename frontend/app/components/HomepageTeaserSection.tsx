@@ -2,8 +2,10 @@ import Link from 'next/link'
 import type {LatestProductsQueryResult} from '@/sanity.types'
 import ResolvedLink from './ResolvedLink'
 import Image from 'next/image'
+import {toPlainText} from 'next-sanity'
 import {urlForImage} from '@/sanity/lib/utils'
 import {Button} from './ui/button'
+import MissingImage from './MissingImage'
 
 // Format price function
 const formatPrice = (price?: number, currency = 'CZK'): string => {
@@ -69,9 +71,9 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
                   index >= 9 && index < 12 ? 'xl:block' : ''
                 } ${index >= 12 ? '2xl:block' : ''}`}
               >
-                <div className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow h-full flex flex-col">
+                <div className="bg-white rounded-xl shadow-sm border hover:shadow-lg transition-shadow h-full flex flex-col">
                   {/* Product Image */}
-                  <div className="aspect-square w-full overflow-hidden rounded-t-lg bg-gray-100">
+                  <div className="aspect-square w-full overflow-hidden rounded-t-xl bg-gray-100">
                     {product.images?.[0] ? (
                       <Image
                         src={urlForImage(product.images?.[0])?.width(400).height(400).url() || ''}
@@ -81,9 +83,7 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
                         className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-200"
                       />
                     ) : (
-                      <div className="h-full w-full bg-gray-200 flex items-center justify-center">
-                        <span className="text-gray-400">Bez obrázku</span>
-                      </div>
+                      <MissingImage />
                     )}
                   </div>
 
@@ -109,7 +109,7 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
 
                       {product.description && (
                         <p className="text-sm text-gray-600 mt-2 line-clamp-2">
-                          {product.description}
+                          {toPlainText(product.description as any)}
                         </p>
                       )}
                     </div>

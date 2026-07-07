@@ -61,7 +61,7 @@ export default function HowItWorksSection({block}: HowItWorksSectionProps) {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">{heading}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">{subheading}</p>
         </div>
 
@@ -90,7 +90,7 @@ export default function HowItWorksSection({block}: HowItWorksSectionProps) {
                       index % 2 === 0 ? 'lg:pr-16 lg:text-right' : 'lg:pl-16'
                     }`}
                   >
-                    <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div className="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-lg transition-shadow">
                       <div className="flex items-center mb-3">
                         <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center mr-3 shrink-0 lg:hidden">
                           <span className="text-white font-bold">{index + 1}</span>
