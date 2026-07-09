@@ -1,6 +1,7 @@
 'use client'
 
-import {useState, useEffect, useMemo} from 'react'
+import {useState, useEffect, useMemo, useRef, Suspense} from 'react'
+import {usePathname, useRouter, useSearchParams} from 'next/navigation'
 import {useLocale, useTranslations} from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -133,7 +134,7 @@ function ProductCard({product}: {product: Product}) {
   )
 }
 
-export default function ProductCatalog({products}: ProductCatalogProps) {
+function ProductCatalogInner({products}: ProductCatalogProps) {
   const t = useTranslations('Catalog')
   const sortOptions = [
     {label: t('sortNameAsc'), value: 'name-asc'},
@@ -141,14 +142,26 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
     {label: t('sortPriceAsc'), value: 'price-asc'},
     {label: t('sortPriceDesc'), value: 'price-desc'},
   ]
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedBrand, setSelectedBrand] = useState('all')
-  const [selectedFuelType, setSelectedFuelType] = useState('all')
-  const [selectedDisplacement, setSelectedDisplacement] = useState('all')
-  const [sortBy, setSortBy] = useState('name-asc')
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const [searchTerm, setSearchTerm] = useState(() => searchParams.get('q') ?? '')
+  const [selectedBrand, setSelectedBrand] = useState(() => searchParams.get('znacka') ?? 'all')
+  const [selectedFuelType, setSelectedFuelType] = useState(
+    () => searchParams.get('palivo') ?? 'all',
+  )
+  const [selectedDisplacement, setSelectedDisplacement] = useState(
+    () => searchParams.get('objem') ?? 'all',
+  )
+  const [sortBy, setSortBy] = useState(() => searchParams.get('razeni') ?? 'name-asc')
   const [priceRange, setPriceRange] = useState({min: 0, max: 100000})
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(() => {
+    const page = Number(searchParams.get('strana'))
+    return Number.isInteger(page) && page > 0 ? page : 1
+  })
   const itemsPerPage = 12
+  const isFirstFilterRun = useRef(true)
 
   // Get unique brands - with compatibility for string and reference types
   const uniqueBrands = useMemo(() => {
@@ -278,10 +291,49 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
   const endIndex = startIndex + itemsPerPage
   const currentProducts = filteredAndSortedProducts.slice(startIndex, endIndex)
 
-  // Reset to first page when filters change
+  // Reset to first page when filters change (skip the initial mount so a
+  // page number restored from the URL isn't immediately wiped)
   useEffect(() => {
+    if (isFirstFilterRun.current) {
+      isFirstFilterRun.current = false
+      return
+    }
     setCurrentPage(1)
-  }, [searchTerm, selectedBrand, selectedFuelType, selectedDisplacement, priceRange, sortBy])
+  }, [searchTerm, selectedBrand, selectedFuelType, selectedDisplacement, sortBy])
+
+  // Clamp to the last valid page if a filter change or a URL-provided page
+  // number leaves currentPage out of range
+  useEffect(() => {
+    if (totalPages > 0 && currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
+
+  // Keep the URL in sync with search/filter/sort/page state
+  useEffect(() => {
+    const params = new URLSearchParams()
+    if (searchTerm) params.set('q', searchTerm)
+    if (selectedBrand !== 'all') params.set('znacka', selectedBrand)
+    if (selectedFuelType !== 'all') params.set('palivo', selectedFuelType)
+    if (selectedDisplacement !== 'all') params.set('objem', selectedDisplacement)
+    if (sortBy !== 'name-asc') params.set('razeni', sortBy)
+    if (currentPage !== 1) params.set('strana', String(currentPage))
+
+    const query = params.toString()
+    if (query !== searchParams.toString()) {
+      router.replace(query ? `${pathname}?${query}` : pathname, {scroll: false})
+    }
+  }, [
+    searchTerm,
+    selectedBrand,
+    selectedFuelType,
+    selectedDisplacement,
+    sortBy,
+    currentPage,
+    pathname,
+    router,
+    searchParams,
+  ])
 
   const clearFilters = () => {
     setSearchTerm('')
@@ -538,5 +590,33 @@ export default function ProductCatalog({products}: ProductCatalogProps) {
         </>
       )}
     </div>
+  )
+}
+
+function ProductCatalogSkeleton() {
+  return (
+    <div className="animate-pulse">
+      <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
+        <div className="h-12 bg-gray-100 rounded-lg mb-6" />
+        <div className="hidden lg:grid grid-cols-4 gap-4">
+          {Array.from({length: 4}, (_, i) => (
+            <div key={i} className="h-10 bg-gray-100 rounded-md" />
+          ))}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+        {Array.from({length: 12}, (_, i) => (
+          <div key={i} className="bg-white rounded-xl border h-80" />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default function ProductCatalog(props: ProductCatalogProps) {
+  return (
+    <Suspense fallback={<ProductCatalogSkeleton />}>
+      <ProductCatalogInner {...props} />
+    </Suspense>
   )
 }
