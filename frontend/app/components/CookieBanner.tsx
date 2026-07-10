@@ -51,6 +51,25 @@ export default function CookieBanner({isDraftMode = false}: CookieBannerProps) {
           ad_storage: 'granted',
         })
       }
+
+      // The Seznam retargeting script is only rendered server-side once the
+      // consent cookie is present, so fire it now for the current page view
+      // too (it wasn't loaded yet when this page was first rendered).
+      if (typeof window !== 'undefined' && !document.getElementById('seznam-rc-script')) {
+        const script = document.createElement('script')
+        script.id = 'seznam-rc-script'
+        script.src = 'https://c.seznam.cz/js/rc.js'
+        script.onload = () => {
+          const w = window as any
+          if (w.sznIVA && w.sznIVA.IS) {
+            w.sznIVA.IS.updateIdentities({eid: null})
+          }
+          if (w.rc && w.rc.retargetingHit) {
+            w.rc.retargetingHit({rtgId: 1558266, consent: null})
+          }
+        }
+        document.head.appendChild(script)
+      }
     } else {
       // Disable analytics tracking
       if (typeof window !== 'undefined' && (window as any).gtag) {

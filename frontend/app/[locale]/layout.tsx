@@ -2,7 +2,7 @@ import '../globals.css'
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
-import {draftMode} from 'next/headers'
+import {cookies, draftMode} from 'next/headers'
 import {notFound} from 'next/navigation'
 import {VisualEditing} from 'next-sanity/visual-editing'
 import {toPlainText} from 'next-sanity'
@@ -107,6 +107,8 @@ export default async function RootLayout({
   setRequestLocale(locale)
 
   const {isEnabled: isDraftMode} = await draftMode()
+  const cookieStore = await cookies()
+  const hasAnalyticsConsent = cookieStore.get('cookie-consent')?.value === 'accepted'
 
   // Fetch settings and popular brands for Header and Footer
   const [{data: settings}, {data: brands}] = await Promise.all([
@@ -175,30 +177,34 @@ export default async function RootLayout({
           `}
         </Script>
 
-        {/* Seznam.cz Retargeting */}
-        <Script
-          type="text/javascript"
-          src="https://c.seznam.cz/js/rc.js"
-          strategy="afterInteractive"
-        />
-        <Script id="seznam-analytics" strategy="afterInteractive">
-          {`
-            if (window.sznIVA && window.sznIVA.IS) {
-              window.sznIVA.IS.updateIdentities({
-                eid: null
-              });
-            }
+        {/* Seznam.cz Retargeting - only loaded once the visitor has accepted cookie consent */}
+        {hasAnalyticsConsent && (
+          <>
+            <Script
+              type="text/javascript"
+              src="https://c.seznam.cz/js/rc.js"
+              strategy="afterInteractive"
+            />
+            <Script id="seznam-analytics" strategy="afterInteractive">
+              {`
+                if (window.sznIVA && window.sznIVA.IS) {
+                  window.sznIVA.IS.updateIdentities({
+                    eid: null
+                  });
+                }
 
-            var retargetingConf = {
-              rtgId: 1558266,
-              consent: null
-            };
+                var retargetingConf = {
+                  rtgId: 1558266,
+                  consent: null
+                };
 
-            if (window.rc && window.rc.retargetingHit) {
-              window.rc.retargetingHit(retargetingConf);
-            }
-          `}
-        </Script>
+                if (window.rc && window.rc.retargetingHit) {
+                  window.rc.retargetingHit(retargetingConf);
+                }
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body>
         <NextIntlClientProvider>
