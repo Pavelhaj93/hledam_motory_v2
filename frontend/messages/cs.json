@@ -111,7 +111,10 @@
     "sortNameAsc": "Název (A-Z)",
     "sortNameDesc": "Název (Z-A)",
     "sortPriceAsc": "Cena (nejlevnější)",
-    "sortPriceDesc": "Cena (nejdražší)"
+    "sortPriceDesc": "Cena (nejdražší)",
+    "priceRange": "Cena",
+    "priceMin": "Cena od",
+    "priceMax": "Cena do"
   },
   "Header": {
     "openMenu": "Otevřít menu",

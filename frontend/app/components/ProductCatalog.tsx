@@ -198,15 +198,18 @@ function ProductCatalogInner({products}: ProductCatalogProps) {
       .sort((a, b) => (parseInt(a) || 0) - (parseInt(b) || 0))
   }, [products])
 
-  // Set initial price range based on products
-  useEffect(() => {
-    if (products.length > 0) {
-      const prices = products.map((p) => p.price ?? 0)
-      const minPrice = Math.min(...prices)
-      const maxPrice = Math.max(...prices)
-      setPriceRange({min: minPrice, max: maxPrice})
-    }
+  // Full min/max price bounds for the current product set — the price filter
+  // inputs never go outside this range
+  const priceBounds = useMemo(() => {
+    if (products.length === 0) return {min: 0, max: 0}
+    const prices = products.map((p) => p.price ?? 0)
+    return {min: Math.min(...prices), max: Math.max(...prices)}
   }, [products])
+
+  // Reset the selected price range to the full bounds whenever the product set changes
+  useEffect(() => {
+    setPriceRange(priceBounds)
+  }, [priceBounds])
 
   // Filter and sort products
   const filteredAndSortedProducts = useMemo(() => {
@@ -282,6 +285,7 @@ function ProductCatalogInner({products}: ProductCatalogProps) {
     selectedFuelType !== 'all',
     selectedDisplacement !== 'all',
     sortBy !== 'name-asc',
+    priceRange.min !== priceBounds.min || priceRange.max !== priceBounds.max,
   ].filter(Boolean).length
 
   // Pagination calculations
@@ -342,10 +346,7 @@ function ProductCatalogInner({products}: ProductCatalogProps) {
     setSelectedDisplacement('all')
     setSortBy('name-asc')
     setCurrentPage(1)
-    if (products.length > 0) {
-      const prices = products.map((p) => p.price ?? 0)
-      setPriceRange({min: Math.min(...prices), max: Math.max(...prices)})
-    }
+    setPriceRange(priceBounds)
   }
 
   const filterFields = (
@@ -404,6 +405,48 @@ function ProductCatalogInner({products}: ProductCatalogProps) {
               </option>
             ))}
           </select>
+        </div>
+      )}
+
+      {/* Price Range Filter — only shown when products span more than one price */}
+      {priceBounds.max > priceBounds.min && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {t('priceRange')}
+          </label>
+          <div className="flex items-center gap-2">
+            <input
+              type="number"
+              inputMode="numeric"
+              min={priceBounds.min}
+              max={priceRange.max}
+              value={priceRange.min}
+              onChange={(e) =>
+                setPriceRange((prev) => ({
+                  ...prev,
+                  min: Number(e.target.value) || priceBounds.min,
+                }))
+              }
+              aria-label={t('priceMin')}
+              className="w-full min-w-0 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            />
+            <span className="text-gray-400">–</span>
+            <input
+              type="number"
+              inputMode="numeric"
+              min={priceRange.min}
+              max={priceBounds.max}
+              value={priceRange.max}
+              onChange={(e) =>
+                setPriceRange((prev) => ({
+                  ...prev,
+                  max: Number(e.target.value) || priceBounds.max,
+                }))
+              }
+              aria-label={t('priceMax')}
+              className="w-full min-w-0 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            />
+          </div>
         </div>
       )}
 

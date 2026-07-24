@@ -111,7 +111,10 @@
     "sortNameAsc": "Name (A-Z)",
     "sortNameDesc": "Name (Z-A)",
     "sortPriceAsc": "Preis (aufsteigend)",
-    "sortPriceDesc": "Preis (absteigend)"
+    "sortPriceDesc": "Preis (absteigend)",
+    "priceRange": "Preis",
+    "priceMin": "Preis von",
+    "priceMax": "Preis bis"
   },
   "Header": {
     "openMenu": "Menü öffnen",
