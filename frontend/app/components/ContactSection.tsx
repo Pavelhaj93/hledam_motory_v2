@@ -61,6 +61,7 @@ export default function ContactSection({block}: ContactSectionProps) {
     phone: '',
     message: '',
     gdprConsent: false,
+    website: '',
   })
 
   const handleMotorParam = (motor: string | null) => {
@@ -168,6 +169,7 @@ export default function ContactSection({block}: ContactSectionProps) {
         phone: '',
         message: '',
         gdprConsent: false,
+        website: '',
       })
       setFieldErrors({})
     } catch (error) {
@@ -227,7 +229,21 @@ export default function ContactSection({block}: ContactSectionProps) {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-4">
+      <form onSubmit={handleSubmit} noValidate className="relative space-y-4">
+        {/* Honeypot: hidden from real users, bots that autofill every field trip it */}
+        <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
+          <label htmlFor="website">Website</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">

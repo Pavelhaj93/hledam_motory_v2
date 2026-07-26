@@ -1,10 +1,47 @@
 import {NextRequest, NextResponse} from 'next/server'
 import {transporter} from '@/lib/nodemailer'
 
+const RATE_LIMIT_MAX_REQUESTS = 5
+const RATE_LIMIT_WINDOW_MS = 60_000
+
+// In-memory per-instance limiter: coarse but enough to blunt scripted floods
+// without adding infra. Resets on deploy/restart; that's acceptable here.
+const requestTimestampsByIp = new Map<string, number[]>()
+
+function getClientIp(request: NextRequest): string {
+  const forwardedFor = request.headers.get('x-forwarded-for')
+  if (forwardedFor) return forwardedFor.split(',')[0].trim()
+  return request.headers.get('x-real-ip') || 'unknown'
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const timestamps = (requestTimestampsByIp.get(ip) || []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS,
+  )
+  if (timestamps.length >= RATE_LIMIT_MAX_REQUESTS) {
+    requestTimestampsByIp.set(ip, timestamps)
+    return true
+  }
+  timestamps.push(now)
+  requestTimestampsByIp.set(ip, timestamps)
+  return false
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const {name, email, phone, message, locale} = await request.json()
+    if (isRateLimited(getClientIp(request))) {
+      return NextResponse.json({error: 'Too many requests'}, {status: 429})
+    }
+
+    const {name, email, phone, message, locale, website} = await request.json()
     const isAustrian = locale === 'de-AT'
+
+    // Honeypot: real visitors never see or fill this field. Pretend success
+    // so scripts don't learn the submission was detected and adapt.
+    if (website) {
+      return NextResponse.json({success: true, message: 'Email sent successfully'})
+    }
 
     const escapeHtml = (value: string) =>
       value.replace(/[&<>"']/g, (ch) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]!))
