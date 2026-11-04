@@ -4,8 +4,8 @@ import {getFormatter, getTranslations, setRequestLocale} from 'next-intl/server'
 import {toPlainText} from 'next-sanity'
 import {sanityFetch} from '@/sanity/lib/live'
 import {
-  prevodovkaQuery,
-  prevodovkyPagesSlugs,
+  novyMotorQuery,
+  noveMotoryPagesSlugs,
   settingsQuery,
   relatedProductsQuery,
 } from '@/sanity/lib/queries'
@@ -25,12 +25,12 @@ import {productAlternates} from '@/app/lib/categoryMeta'
 import {categoryPath, categoryTypeByKey} from '@/app/lib/categories'
 import {ogLocale, type Locale} from '@/app/lib/i18n'
 
-const CATEGORY = 'prevodovky' as const
+const CATEGORY = 'nove-motory' as const
 type Props = {params: Promise<{locale: Locale; slug: string}>}
 
 export async function generateStaticParams() {
   const {data} = await sanityFetch({
-    query: prevodovkyPagesSlugs,
+    query: noveMotoryPagesSlugs,
     perspective: 'published',
     stega: false,
   })
@@ -42,35 +42,33 @@ export async function generateStaticParams() {
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale, slug} = await params
   const t = await getTranslations({locale, namespace: 'Product'})
-  const {data: prevodovka} = await sanityFetch({
-    query: prevodovkaQuery,
+  const {data: motor} = await sanityFetch({
+    query: novyMotorQuery,
     params: {locale, slug},
     stega: false,
   })
-  if (!prevodovka) {
+  if (!motor) {
     return {title: t('notFound'), description: t('notFoundDescription')}
   }
-  const title =
-    prevodovka.seo?.metaTitle || `${prevodovka.name} | ${prevodovka.brand?.name || ''}`
-  const description =
-    prevodovka.seo?.metaDescription || toPlainText(prevodovka.description as any) || ''
+  const title = motor.seo?.metaTitle || `${motor.name} | ${motor.brand?.name || ''}`
+  const description = motor.seo?.metaDescription || toPlainText(motor.description as any) || ''
   return {
     title,
     description,
-    alternates: productAlternates(locale, CATEGORY, slug, prevodovka.altSlug),
+    alternates: productAlternates(locale, CATEGORY, slug, motor.altSlug),
     openGraph: {
       title,
       description,
       type: 'website',
       locale: ogLocale[locale],
-      alternateLocale: prevodovka.altSlug?.slug ? [locale === 'cs' ? 'de_AT' : 'cs_CZ'] : [],
-      images: prevodovka.mainImage
+      alternateLocale: motor.altSlug?.slug ? [locale === 'cs' ? 'de_AT' : 'cs_CZ'] : [],
+      images: motor.mainImage
         ? [
             {
-              url: urlForImage(prevodovka.mainImage)?.width(800).height(600).url() || '',
+              url: urlForImage(motor.mainImage)?.width(800).height(600).url() || '',
               width: 800,
               height: 600,
-              alt: prevodovka.mainImage.alt || prevodovka.name || undefined,
+              alt: motor.mainImage.alt || motor.name || undefined,
             },
           ]
         : [],
@@ -78,7 +76,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   }
 }
 
-export default async function PrevodovkaDetailPage({params}: Props) {
+export default async function NovyMotorDetailPage({params}: Props) {
   const {locale, slug} = await params
   setRequestLocale(locale)
   const t = await getTranslations('Product')
@@ -86,26 +84,27 @@ export default async function PrevodovkaDetailPage({params}: Props) {
   const tCat = await getTranslations('Categories')
   const format = await getFormatter()
 
-  const [{data: prevodovka}, {data: settings}] = await Promise.all([
-    sanityFetch({query: prevodovkaQuery, params: {locale, slug}, stega: false}),
+  const [{data: motor}, {data: settings}] = await Promise.all([
+    sanityFetch({query: novyMotorQuery, params: {locale, slug}, stega: false}),
     sanityFetch({query: settingsQuery, params: {locale}, stega: false}),
   ])
-  if (!prevodovka) notFound()
+  if (!motor) notFound()
   const phone = settings?.phone || '+420 792 644 755'
+  const turboPath = categoryPath('turbodmychadla', locale)
   const catPath = categoryPath(CATEGORY, locale)
   const {data: relatedProducts} = await sanityFetch({
     query: relatedProductsQuery,
-    params: {type: categoryTypeByKey[CATEGORY], locale, skip: prevodovka._id},
+    params: {type: categoryTypeByKey[CATEGORY], locale, skip: motor._id},
     stega: false,
   })
   const schemas = productJsonLd({
-    name: prevodovka.name ?? '',
-    description: toPlainText(prevodovka.description as any),
-    imageUrl: prevodovka.mainImage ? urlForImage(prevodovka.mainImage)?.width(800).height(600).url() : null,
-    brandName: prevodovka.brand?.name,
-    price: prevodovka.price,
-    currency: prevodovka.currency,
-    inStock: prevodovka.inStock,
+    name: motor.name ?? '',
+    description: toPlainText(motor.description as any),
+    imageUrl: motor.mainImage ? urlForImage(motor.mainImage)?.width(800).height(600).url() : null,
+    brandName: motor.brand?.name,
+    price: motor.price,
+    currency: motor.currency,
+    inStock: motor.inStock,
     slug,
     categoryPath: categoryPath(CATEGORY, locale),
     categoryLabel: tCommon('catalog'),
@@ -115,7 +114,11 @@ export default async function PrevodovkaDetailPage({params}: Props) {
   return (
     <div className="container mx-auto px-4 py-8">
       {schemas.map((schema, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}} />
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}}
+        />
       ))}
       <nav className="text-sm text-gray-600 mb-6">
         <Link href="/" className="hover:text-gray-900">
@@ -126,22 +129,22 @@ export default async function PrevodovkaDetailPage({params}: Props) {
           {tCommon('catalog')}
         </Link>
         <span className="mx-2">/</span>
-        <Link href="/katalog/prevodovky" className="hover:text-gray-900">
+        <Link href="/katalog/nove-motory" className="hover:text-gray-900">
           {tCat(CATEGORY)}
         </Link>
         <span className="mx-2">/</span>
-        <span>{prevodovka.name}</span>
+        <span>{motor.name}</span>
       </nav>
-      <BackButton fallbackHref="/katalog/prevodovky" label={t('backToCatalog')} />
+      <BackButton fallbackHref="/katalog/nove-motory" label={t('backToCatalog')} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          {prevodovka.images && prevodovka.images.length > 0 ? (
-            <ImageGallery images={prevodovka.images} productName={prevodovka.name} />
-          ) : prevodovka.mainImage ? (
+          {motor.images && motor.images.length > 0 ? (
+            <ImageGallery images={motor.images} productName={motor.name} />
+          ) : motor.mainImage ? (
             <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
               <Image
-                src={urlForImage(prevodovka.mainImage)?.width(600).height(600).url() || ''}
-                alt={prevodovka.mainImage.alt || prevodovka.name || ''}
+                src={urlForImage(motor.mainImage)?.width(600).height(600).url() || ''}
+                alt={motor.mainImage.alt || motor.name || ''}
                 width={600}
                 height={600}
                 className="h-full w-full object-cover object-center"
@@ -155,27 +158,20 @@ export default async function PrevodovkaDetailPage({params}: Props) {
           )}
         </div>
         <div className="space-y-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{prevodovka.name}</h1>
-          <p className="text-lg text-red-600 font-medium">{prevodovka.brand?.name}</p>
-          {prevodovka.transmissionCode && (
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">{motor.name}</h1>
+          <p className="text-lg text-red-600 font-medium">{motor.brand?.name}</p>
+          {motor.engineCodes && motor.engineCodes.length > 0 && (
             <p className="text-sm text-gray-500">
-              {t('transmissionCode')}: {prevodovka.transmissionCode}
-            </p>
-          )}
-          {prevodovka.engineCodes && prevodovka.engineCodes.length > 0 && (
-            <p className="text-sm text-gray-500">
-              {t('compatibleEngines')}: {prevodovka.engineCodes.join(', ')}
+              {t('engineCodes')}: {motor.engineCodes.join(', ')}
             </p>
           )}
           <div className="border-t border-b py-6">
             <div className="flex items-center justify-between">
               <span className="text-3xl font-bold text-gray-900">
-                {prevodovka.price != null
-                  ? format.number(prevodovka.price, 'price')
-                  : ''}
+                {motor.price != null ? format.number(motor.price, 'price') : ''}
               </span>
               <div className="flex items-center space-x-2">
-                {prevodovka.inStock ? (
+                {motor.inStock ? (
                   <>
                     <Check className="h-5 w-5 text-green-500" />
                     <span className="text-green-600 font-medium">{t('inStock')}</span>
@@ -188,56 +184,28 @@ export default async function PrevodovkaDetailPage({params}: Props) {
                 )}
               </div>
             </div>
-            {prevodovka.warrantyPeriod && (
+            {motor.warrantyPeriod && (
               <div className="flex items-center gap-2 text-sm text-gray-600 mt-3">
                 <ShieldCheck className="h-4 w-4 text-green-600" />
                 <span>
-                  {t('warranty')}: {prevodovka.warrantyPeriod}
+                  {t('warranty')}: {motor.warrantyPeriod}
                 </span>
               </div>
             )}
           </div>
-          {prevodovka.description && prevodovka.description.length > 0 && (
+          {motor.description && motor.description.length > 0 && (
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('description')}</h3>
               <div className="prose prose-sm max-w-none text-gray-600">
-                <CustomPortableText value={prevodovka.description as any} />
+                <CustomPortableText value={motor.description as any} />
               </div>
             </div>
           )}
-          <div className="grid grid-cols-2 gap-4">
-            {prevodovka.transmissionType && (
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <h4 className="font-medium text-gray-900">{t('transmissionType')}</h4>
-                <p className="text-sm text-gray-600">{prevodovka.transmissionType}</p>
-              </div>
-            )}
-            {prevodovka.gearCount && (
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <h4 className="font-medium text-gray-900">{t('gearCount')}</h4>
-                <p className="text-sm text-gray-600">
-                  {prevodovka.gearCount} {t('gears')}
-                </p>
-              </div>
-            )}
-            {prevodovka.driveType && (
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <h4 className="font-medium text-gray-900">{t('driveType')}</h4>
-                <p className="text-sm text-gray-600">{prevodovka.driveType}</p>
-              </div>
-            )}
-            {prevodovka.condition && (
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <h4 className="font-medium text-gray-900">{t('condition')}</h4>
-                <p className="text-sm text-gray-600">{prevodovka.condition}</p>
-              </div>
-            )}
-          </div>
-          {prevodovka.specifications && prevodovka.specifications.length > 0 && (
+          {motor.specifications && motor.specifications.length > 0 && (
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('specs')}</h3>
               <div className="space-y-2">
-                {prevodovka.specifications.map((spec, index) => (
+                {motor.specifications.map((spec, index) => (
                   <div key={index} className="flex justify-between py-2 border-b border-gray-100">
                     <span className="font-medium text-gray-700">{spec.label}</span>
                     <span className="text-gray-600">{spec.value}</span>
@@ -246,29 +214,62 @@ export default async function PrevodovkaDetailPage({params}: Props) {
               </div>
             </div>
           )}
-          {prevodovka.mileage && (
+          {motor.relatedTurbochargers && motor.relatedTurbochargers.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('mileage')}</h3>
-              <p className="text-gray-600">{prevodovka.mileage.toLocaleString()} km</p>
-            </div>
-          )}
-          {prevodovka.fluidType && (
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('fluidType')}</h3>
-              <p className="text-gray-600">{prevodovka.fluidType}</p>
-            </div>
-          )}
-          {prevodovka.warrantyPeriod && (
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('warranty')}</h3>
-              <p className="text-gray-600">{prevodovka.warrantyPeriod}</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('relatedTurbos')}</h3>
+              <p className="text-sm text-gray-600 mb-4">{t('relatedTurbosHelp')}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {motor.relatedTurbochargers.map((turbo: any) => (
+                  <div
+                    key={turbo._id}
+                    className="border rounded-lg p-4 hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-start space-x-3">
+                      {turbo.mainImage && (
+                        <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden shrink-0">
+                          <Image
+                            src={urlForImage(turbo.mainImage)?.width(64).height(64).url() || ''}
+                            alt={turbo.mainImage.alt || turbo.name}
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-gray-900 truncate">{turbo.name}</h4>
+                        <p className="text-sm text-gray-500">{turbo.brand}</p>
+                        {turbo.turboCode && (
+                          <p className="text-xs text-gray-400">{turbo.turboCode}</p>
+                        )}
+                        <div className="flex items-center justify-between mt-2">
+                          <span className="font-semibold text-red-600">
+                            {turbo.price != null ? format.number(turbo.price, 'price') : ''}
+                          </span>
+                          {turbo.inStock ? (
+                            <span className="text-xs text-green-600">{t('inStock')}</span>
+                          ) : (
+                            <span className="text-xs text-red-600">{t('outOfStock')}</span>
+                          )}
+                        </div>
+                        <a
+                          href={`/${turboPath}/${turbo.slug}`}
+                          className="inline-block mt-2 text-sm text-red-600 hover:text-red-700 font-medium"
+                        >
+                          {t('viewDetail')}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
           <div className="bg-red-50 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('order')}</h3>
             <p className="text-gray-600 mb-4">{t('orderHelp')}</p>
             <Link
-              href={{pathname: '/kontakt', query: {motor: prevodovka.name ?? ''}}}
+              href={{pathname: '/kontakt', query: {motor: motor.name ?? ''}}}
               className="block mb-4"
             >
               <Button className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white">

@@ -21,7 +21,7 @@ interface HeaderProps {
 const CATEGORY_KEYS = [
   'repasovane-motory',
   'turbodmychadla',
-  'prevodovky',
+  'nove-motory',
   'motorove-hlavy',
   'stare-motory',
 ] as const
@@ -30,7 +30,7 @@ const CATEGORY_KEYS = [
 const CATEGORY_HREFS = {
   'repasovane-motory': '/katalog/repasovane-motory',
   'turbodmychadla': '/katalog/turbodmychadla',
-  'prevodovky': '/katalog/prevodovky',
+  'nove-motory': '/katalog/nove-motory',
   'motorove-hlavy': '/katalog/motorove-hlavy',
   'stare-motory': '/katalog/stare-motory',
 } as const
