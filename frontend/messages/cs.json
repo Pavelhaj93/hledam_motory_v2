@@ -9,7 +9,7 @@
     "repasovane-motory": "Repasované motory",
     "stare-motory": "Staré motory",
     "turbodmychadla": "Turbodmychadla",
-    "prevodovky": "Převodovky",
+    "nove-motory": "Nové motory",
     "motorove-hlavy": "Motorové hlavy"
   },
   "CategoryPage": {
@@ -31,11 +31,11 @@
       "metaTitle": "Turbodmychadla | Repasovaná a nová turba se zárukou",
       "metaDescription": "Široký výběr repasovaných a nových turbodmychadel pro osobní automobily."
     },
-    "prevodovky": {
-      "title": "Repasované převodovky",
-      "description": "Objevte náš rozsáhlý katalog profesionálně repasovaných převodovek - manuálních i automatických. Plná záruka kvality a spolehlivosti.",
-      "metaTitle": "Repasované převodovky | Manuální a automatické převodovky",
-      "metaDescription": "Široký výběr repasovaných převodovek - manuální i automatické. Profesionální renovace s plnou zárukou."
+    "nove-motory": {
+      "title": "Nové motory",
+      "description": "Objevte náš katalog zcela nových motorů s plnou zárukou výrobce a spolehlivostí.",
+      "metaTitle": "Nové motory | Nové náhradní motory se zárukou",
+      "metaDescription": "Široký výběr nových motorů pro osobní automobily s plnou zárukou výrobce."
     },
     "motorove-hlavy": {
       "title": "Motorové hlavy",

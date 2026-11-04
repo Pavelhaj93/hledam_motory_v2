@@ -4,7 +4,7 @@ import {defineRouting} from 'next-intl/routing'
  * next-intl routing config.
  *
  * - `cs` is the default locale and is served UNPREFIXED so existing Czech URLs
- *   (e.g. /katalog/prevodovky) are unchanged.
+ *   (e.g. /katalog/repasovane-motory) are unchanged.
  * - `de-AT` is served under the `/at` prefix.
  * - `pathnames` localizes the static catalog segments. Physical route folders are
  *   NOT renamed; next-intl maps the German URL onto the same internal path.
@@ -29,6 +29,14 @@ export const routing = defineRouting({
       'cs': '/katalog/repasovane-motory/[slug]',
       'de-AT': '/katalog/generalueberholte-motoren/[slug]',
     },
+    '/katalog/nove-motory': {
+      'cs': '/katalog/nove-motory',
+      'de-AT': '/katalog/neue-motoren',
+    },
+    '/katalog/nove-motory/[slug]': {
+      'cs': '/katalog/nove-motory/[slug]',
+      'de-AT': '/katalog/neue-motoren/[slug]',
+    },
     '/katalog/stare-motory': {
       'cs': '/katalog/stare-motory',
       'de-AT': '/katalog/gebrauchtmotoren',
@@ -44,14 +52,6 @@ export const routing = defineRouting({
     '/katalog/turbodmychadla/[slug]': {
       'cs': '/katalog/turbodmychadla/[slug]',
       'de-AT': '/katalog/turbolader/[slug]',
-    },
-    '/katalog/prevodovky': {
-      'cs': '/katalog/prevodovky',
-      'de-AT': '/katalog/getriebe',
-    },
-    '/katalog/prevodovky/[slug]': {
-      'cs': '/katalog/prevodovky/[slug]',
-      'de-AT': '/katalog/getriebe/[slug]',
     },
     '/katalog/motorove-hlavy': {
       'cs': '/katalog/motorove-hlavy',

@@ -135,13 +135,13 @@ export const categoryGrid = defineType({
           featured: true,
         },
         {
-          title: 'Převodovky',
-          slug: 'prevodovky',
+          title: 'Nové motory',
+          slug: 'nove-motory',
           description:
-            'Manuální a automatické převodovky po kompletní renovaci. Výměna všech opotřebovaných komponentů.',
-          icon: 'settings',
-          color: 'bg-gradient-to-br from-purple-500 to-purple-600',
-          featured: false,
+            'Zcela nové motory s plnou zárukou výrobce. Spolehlivé řešení pro dlouhou životnost vašeho vozu.',
+          icon: 'zap',
+          color: 'bg-gradient-to-br from-blue-500 to-blue-600',
+          featured: true,
         },
         {
           title: 'Motorové hlavy',

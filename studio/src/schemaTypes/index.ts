@@ -5,7 +5,7 @@ import brand from './documents/brand'
 import {repasovaneMotory} from './documents/repasovaneMotory'
 import {stareMotory} from './documents/stareMotory'
 import {motoroveHlavy} from './documents/motoroveHlavy'
-import {prevodovky} from './documents/prevodovky'
+import {noveMotory} from './documents/noveMotory'
 import {turbodmychadla} from './documents/turbodmychadla'
 import {callToAction} from './objects/callToAction'
 import {infoSection} from './objects/infoSection'
@@ -39,9 +39,9 @@ export const schemaTypes = [
   brand,
   // Category-specific documents
   repasovaneMotory,
+  noveMotory,
   stareMotory,
   motoroveHlavy,
-  prevodovky,
   turbodmychadla,
   // Objects
   blockContent,
