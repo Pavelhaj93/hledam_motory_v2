@@ -42,6 +42,47 @@ const repasovanyMotorFields = /* groq */ `
   }
 `
 
+const novyMotorFields = /* groq */ `
+  _id,
+  name,
+  "slug": slug.current,
+  "brand": brand->{
+    name,
+    "slug": slug.current,
+    logo
+  },
+  engineCodes,
+  displacement,
+  power,
+  fuelType,
+  description,
+  "mainImage": images[0],
+  price,
+  "currency": select(language == "de-AT" => "EUR", "CZK"),
+  inStock,
+  featured,
+  specifications[] {
+    label,
+    value
+  },
+  compatibility,
+  warrantyPeriod,
+  mileage,
+  condition,
+  "relatedTurbochargers": relatedTurbochargers[]->{
+    _id,
+    name,
+    "slug": slug.current,
+    "brand": brand->name,
+    "mainImage": images[0],
+    price,
+    "currency": select(language == "de-AT" => "EUR", "CZK"),
+    inStock,
+    turboCode,
+    condition
+  }
+`
+
 const staryMotorFields = /* groq */ `
   _id,
   name,
@@ -109,37 +150,6 @@ const motorovaHlavaFields = /* groq */ `
   compatibility,
   condition,
   includedComponents,
-  warrantyPeriod
-`
-
-const prevodovkaFields = /* groq */ `
-  _id,
-  name,
-  "slug": slug.current,
-  "brand": brand->{
-    name,
-    "slug": slug.current,
-    logo
-  },
-  engineCodes,
-  transmissionCode,
-  transmissionType,
-  gearCount,
-  driveType,
-  description,
-  "mainImage": images[0],
-  price,
-  "currency": select(language == "de-AT" => "EUR", "CZK"),
-  inStock,
-  featured,
-  specifications[] {
-    label,
-    value
-  },
-  compatibility,
-  mileage,
-  condition,
-  fluidType,
   warrantyPeriod
 `
 
@@ -351,7 +361,7 @@ export const homepageQuery = defineQuery(`
             slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),
             slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),
             slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),
-            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),
+            slug == "nove-motory" => count(*[_type == "novyMotor" && language == $locale]),
             slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),
             0
           )
@@ -462,7 +472,7 @@ export const getPageQuery = defineQuery(`
             ${linkFields}
           }
         },
-        "products": *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{
+        "products": *[_type in ["repasovanyMotor", "novyMotor", "staryMotor", "motorovaHlava", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...10]{
           _id,
           _type,
           name,
@@ -521,7 +531,7 @@ export const getPageQuery = defineQuery(`
             slug == "repasovane-motory" => count(*[_type == "repasovanyMotor" && language == $locale]),
             slug == "stare-motory" => count(*[_type == "staryMotor" && language == $locale]),
             slug == "motorove-hlavy" => count(*[_type == "motorovaHlava" && language == $locale]),
-            slug == "prevodovky" => count(*[_type == "prevodovka" && language == $locale]),
+            slug == "nove-motory" => count(*[_type == "novyMotor" && language == $locale]),
             slug == "turbodmychadla" => count(*[_type == "turbodmychadlo" && language == $locale]),
             0
           )
@@ -542,7 +552,7 @@ export const sitemapData = defineQuery(`
 `)
 
 export const sitemapProductsData = defineQuery(`
-  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == "cs" && defined(slug.current)] {
+  *[_type in ["repasovanyMotor", "novyMotor", "staryMotor", "motorovaHlava", "turbodmychadlo"] && language == "cs" && defined(slug.current)] {
     "slug": slug.current,
     _type,
     _updatedAt,
@@ -682,24 +692,24 @@ export const motoroveHlavyPagesSlugs = defineQuery(`
   {"slug": slug.current, "language": language}
 `)
 
-// Převodovky queries
-export const allPrevodovkyQuery = defineQuery(`
-  *[_type == "prevodovka" && language == $locale && defined(slug.current)] | order(name asc) {
-    ${prevodovkaFields}
+// Nové motory queries
+export const allNoveMotoryQuery = defineQuery(`
+  *[_type == "novyMotor" && language == $locale && defined(slug.current)] | order(name asc) {
+    ${novyMotorFields}
   }
 `)
 
-export const prevodovkaQuery = defineQuery(`
-  *[_type == "prevodovka" && language == $locale && slug.current == $slug] [0] {
-    ${prevodovkaFields},
+export const novyMotorQuery = defineQuery(`
+  *[_type == "novyMotor" && language == $locale && slug.current == $slug] [0] {
+    ${novyMotorFields},
     images[],
     seo,
     "altSlug": *[_type == "translation.metadata" && references(^._id)][0].translations[_key != $locale][0].value->{"slug": slug.current, "language": language}
   }
 `)
 
-export const prevodovkyPagesSlugs = defineQuery(`
-  *[_type == "prevodovka" && defined(slug.current)]
+export const noveMotoryPagesSlugs = defineQuery(`
+  *[_type == "novyMotor" && defined(slug.current)]
   {"slug": slug.current, "language": language}
 `)
 
@@ -745,7 +755,7 @@ export const relatedProductsQuery = defineQuery(`
 
 // Latest products query for homepage teaser
 export const latestProductsQuery = defineQuery(`
-  *[_type in ["repasovanyMotor", "staryMotor", "motorovaHlava", "prevodovka", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...15]{
+  *[_type in ["repasovanyMotor", "novyMotor", "staryMotor", "motorovaHlava", "turbodmychadlo"] && language == $locale] | order(_createdAt desc)[0...15]{
     _id,
     _type,
     name,

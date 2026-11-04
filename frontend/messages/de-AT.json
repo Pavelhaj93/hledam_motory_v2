@@ -9,7 +9,7 @@
     "repasovane-motory": "Generalüberholte Motoren",
     "stare-motory": "Gebrauchtmotoren",
     "turbodmychadla": "Turbolader",
-    "prevodovky": "Getriebe",
+    "nove-motory": "Neue Motoren",
     "motorove-hlavy": "Zylinderköpfe"
   },
   "CategoryPage": {
@@ -31,11 +31,11 @@
       "metaTitle": "Turbolader | Überholte und neue Turbolader mit Garantie",
       "metaDescription": "Große Auswahl an überholten und neuen Turboladern für Personenkraftwagen."
     },
-    "prevodovky": {
-      "title": "Generalüberholte Getriebe",
-      "description": "Entdecken Sie unseren umfangreichen Katalog professionell überholter Getriebe – Schalt- und Automatikgetriebe. Volle Qualitäts- und Zuverlässigkeitsgarantie.",
-      "metaTitle": "Generalüberholte Getriebe | Schalt- und Automatikgetriebe",
-      "metaDescription": "Große Auswahl an überholten Getrieben – Schalt- und Automatikgetriebe. Professionelle Überholung mit voller Garantie."
+    "nove-motory": {
+      "title": "Neue Motoren",
+      "description": "Entdecken Sie unseren Katalog fabrikneuer Motoren mit voller Herstellergarantie und Zuverlässigkeit.",
+      "metaTitle": "Neue Motoren | Neue Austauschmotoren mit Garantie",
+      "metaDescription": "Große Auswahl an neuen Motoren für Personenkraftwagen mit voller Herstellergarantie."
     },
     "motorove-hlavy": {
       "title": "Zylinderköpfe",

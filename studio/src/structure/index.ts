@@ -2,7 +2,7 @@ import {
   ArchiveIcon,
   CogIcon,
   ComponentIcon,
-  ControlsIcon,
+  RocketIcon,
   DocumentsIcon,
   PackageIcon,
   PlugIcon,
@@ -59,6 +59,15 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
             .filter('_type == "repasovanyMotor" && language == "cs"'),
         ),
       S.listItem()
+        .title('Nové motory')
+        .icon(RocketIcon)
+        .child(
+          S.documentList()
+            .title('Nové motory')
+            .schemaType('novyMotor')
+            .filter('_type == "novyMotor" && language == "cs"'),
+        ),
+      S.listItem()
         .title('Staré motory')
         .icon(ArchiveIcon)
         .child(
@@ -75,15 +84,6 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
             .title('Motorové hlavy')
             .schemaType('motorovaHlava')
             .filter('_type == "motorovaHlava" && language == "cs"'),
-        ),
-      S.listItem()
-        .title('Převodovky')
-        .icon(ControlsIcon)
-        .child(
-          S.documentList()
-            .title('Převodovky')
-            .schemaType('prevodovka')
-            .filter('_type == "prevodovka" && language == "cs"'),
         ),
       S.listItem()
         .title('Turbodmychadla')

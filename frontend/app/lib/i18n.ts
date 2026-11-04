@@ -42,9 +42,9 @@ export const currencyFor: Record<Locale, string> = {
  */
 export const categoryPathByType: Record<string, Record<Locale, string>> = {
   repasovanyMotor: {'cs': 'katalog/repasovane-motory', 'de-AT': 'at/katalog/generalueberholte-motoren'},
+  novyMotor: {'cs': 'katalog/nove-motory', 'de-AT': 'at/katalog/neue-motoren'},
   staryMotor: {'cs': 'katalog/stare-motory', 'de-AT': 'at/katalog/gebrauchtmotoren'},
   motorovaHlava: {'cs': 'katalog/motorove-hlavy', 'de-AT': 'at/katalog/zylinderkoepfe'},
-  prevodovka: {'cs': 'katalog/prevodovky', 'de-AT': 'at/katalog/getriebe'},
   turbodmychadlo: {'cs': 'katalog/turbodmychadla', 'de-AT': 'at/katalog/turbolader'},
 }
 

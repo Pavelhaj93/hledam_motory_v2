@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import {Zap, Cog, Settings, Truck} from 'lucide-react'
+import {Zap, Cog, Truck} from 'lucide-react'
 
 type Category = {
   slug: string
@@ -39,12 +39,12 @@ const categoryData: Category[] = [
     color: 'bg-green-500',
   },
   {
-    slug: 'prevodovky',
-    title: 'Převodovky',
+    slug: 'nove-motory',
+    title: 'Nové motory',
     description:
-      'Manuální a automatické převodovky po kompletní renovaci. Výměna všech opotřebovaných komponentů.',
-    icon: Settings,
-    color: 'bg-purple-500',
+      'Zcela nové motory s plnou zárukou výrobce. Spolehlivé řešení pro dlouhou životnost vašeho vozu.',
+    icon: Zap,
+    color: 'bg-blue-500',
   },
   {
     slug: 'motorove-hlavy',

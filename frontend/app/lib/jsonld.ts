@@ -19,7 +19,7 @@ type ProductJsonLdProps = {
   currency?: string | null
   inStock?: boolean | null
   slug: string
-  /** Locale-correct catalog path (no leading slash), e.g. `at/katalog/getriebe`. */
+  /** Locale-correct catalog path (no leading slash), e.g. `at/katalog/neue-motoren`. */
   categoryPath: string
   categoryLabel: string
   locale: Locale
@@ -113,7 +113,7 @@ export function organizationJsonLd(phone: string | null | undefined, locale: Loc
     ...(locale === 'de-AT' && {areaServed: 'AT'}),
     description:
       locale === 'de-AT'
-        ? 'Größter Online-Katalog für generalüberholte Motoren, Getriebe, Turbolader und Zylinderköpfe für Personenkraftwagen.'
-        : 'Největší online katalog repasovaných motorů, převodovek, turbodmychadel a motorových hlav pro osobní automobily v České republice.',
+        ? 'Größter Online-Katalog für generalüberholte und neue Motoren, Turbolader und Zylinderköpfe für Personenkraftwagen.'
+        : 'Největší online katalog repasovaných a nových motorů, turbodmychadel a motorových hlav pro osobní automobily v České republice.',
   }
 }
