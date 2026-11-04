@@ -9,7 +9,7 @@
     "repasovane-motory": "Generalüberholte Motoren",
     "stare-motory": "Gebrauchtmotoren",
     "turbodmychadla": "Turbolader",
-    "prevodovky": "Getriebe",
+    "nove-motory": "Neue Motoren",
     "motorove-hlavy": "Zylinderköpfe"
   },
   "CategoryPage": {
@@ -31,11 +31,11 @@
       "metaTitle": "Turbolader | Überholte und neue Turbolader mit Garantie",
       "metaDescription": "Große Auswahl an überholten und neuen Turboladern für Personenkraftwagen."
     },
-    "prevodovky": {
-      "title": "Generalüberholte Getriebe",
-      "description": "Entdecken Sie unseren umfangreichen Katalog professionell überholter Getriebe – Schalt- und Automatikgetriebe. Volle Qualitäts- und Zuverlässigkeitsgarantie.",
-      "metaTitle": "Generalüberholte Getriebe | Schalt- und Automatikgetriebe",
-      "metaDescription": "Große Auswahl an überholten Getrieben – Schalt- und Automatikgetriebe. Professionelle Überholung mit voller Garantie."
+    "nove-motory": {
+      "title": "Neue Motoren",
+      "description": "Entdecken Sie unseren Katalog fabrikneuer Motoren mit voller Herstellergarantie und Zuverlässigkeit.",
+      "metaTitle": "Neue Motoren | Neue Austauschmotoren mit Garantie",
+      "metaDescription": "Große Auswahl an neuen Motoren für Personenkraftwagen mit voller Herstellergarantie."
     },
     "motorove-hlavy": {
       "title": "Zylinderköpfe",
@@ -112,6 +112,30 @@
     "sortNameDesc": "Name (Z-A)",
     "sortPriceAsc": "Preis (aufsteigend)",
     "sortPriceDesc": "Preis (absteigend)"
+  },
+  "ContactForm": {
+    "formHeading": "Schreiben Sie uns",
+    "nameLabel": "Vor- und Nachname",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon",
+    "messageLabel": "Nachricht",
+    "messagePlaceholder": "Beschreiben Sie Ihre Anfrage oder Frage...",
+    "submitDefault": "Nachricht senden",
+    "submitting": "Wird gesendet...",
+    "successDefault": "Vielen Dank für Ihr Interesse! Wir melden uns in Kürze bei Ihnen.",
+    "errorMessage": "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per E-Mail.",
+    "closeMessage": "Nachricht schließen",
+    "gdprBefore": "Ich stimme der",
+    "gdprLink": "Verarbeitung personenbezogener Daten",
+    "gdprAfter": "zu *",
+    "gdprConsentRequiredHint": "Bitte stimmen Sie oben zu, um zu senden",
+    "errNameRequired": "Bitte geben Sie Ihren Vor- und Nachnamen ein",
+    "errEmailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "errMessageMin": "Die Nachricht muss mindestens 10 Zeichen lang sein",
+    "infoHeading": "Kontaktdaten",
+    "connectHeading": "Verbinden Sie sich mit uns",
+    "addressHeading": "Adresse",
+    "companyHeading": "Firmendaten"
   },
   "Header": {
     "openMenu": "Menü öffnen",

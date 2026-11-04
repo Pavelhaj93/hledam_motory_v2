@@ -3,29 +3,29 @@ import {languageField, isUniquePerLanguage} from '../shared/i18n'
 import {CogIcon} from '@sanity/icons'
 
 /**
- * Převodovky (Transmissions) document schema.
- * Each document represents one transmission with full details.
+ * Nové motory (New engines) document schema.
+ * Each document represents one brand-new engine with full details.
  */
 
-export const prevodovky = defineType({
-  name: 'prevodovka',
-  title: 'Převodovky',
+export const noveMotory = defineType({
+  name: 'novyMotor',
+  title: 'Nové motory',
   type: 'document',
   icon: CogIcon,
   fields: [
     languageField,
     defineField({
       name: 'name',
-      title: 'Název převodovky',
+      title: 'Název motoru',
       type: 'string',
       validation: (Rule) => Rule.required(),
-      description: 'Celý název produktu, jak se zobrazí zákazníkům, např. „Převodovka Ford 6M6P manuální 6-stupňová"',
+      description: 'Celý název produktu, jak se zobrazí zákazníkům, např. „Motor BMW 2.0D 105 KW N47"',
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       description:
-        'Formát: [značka]-[kód-převodovky]-[rok] → např. ford-6m6p-2018. Rok výroby odliší převodovky se stejným kódem. Pokud jsou dvě se stejným rokem, přidej číslo: ford-6m6p-2018-2. Vynech typ pohonu a počet rychlostí.',
+        'Formát: [značka]-[objem]-[palivo]-[kód-motoru]-[rok] → např. ford-2-2-tdci-p8fa-2018. Rok výroby odliší motory se stejným kódem. Pokud jsou dva se stejným rokem, přidej číslo: ford-2-2-tdci-p8fa-2018-2. Vynech výkon (KW) a emisní normu (EU4).',
       type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {
@@ -53,42 +53,27 @@ export const prevodovky = defineType({
       description: 'Kompatibilní kódy motorů (např. 1.9 TDI, 2.0 FSI, atd.)',
     }),
     defineField({
-      name: 'transmissionCode',
-      title: 'Kód převodovky',
+      name: 'displacement',
+      title: 'Objem motoru',
       type: 'string',
-      description: 'Např. 02T, 01M, 01N, atd.',
+      description: 'Např. 1.9L, 2.0L',
     }),
     defineField({
-      name: 'transmissionType',
-      title: 'Typ převodovky',
+      name: 'power',
+      title: 'Výkon',
+      type: 'string',
+      description: 'Např. 90 kW, 110 HP',
+    }),
+    defineField({
+      name: 'fuelType',
+      title: 'Typ paliva',
       type: 'string',
       options: {
         list: [
-          {title: 'Manuální', value: 'manualni'},
-          {title: 'Automatická', value: 'automaticka'},
-          {title: 'CVT', value: 'cvt'},
-          {title: 'Sekvenční', value: 'sekvencni'},
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-      description: 'Vyberte typ převodovky ze seznamu',
-    }),
-    defineField({
-      name: 'gearCount',
-      title: 'Počet rychlostí',
-      type: 'string',
-      description: 'Např. 5, 6, 7, atd.',
-    }),
-    defineField({
-      name: 'driveType',
-      title: 'Pohon',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Přední', value: 'predni'},
-          {title: 'Zadní', value: 'zadni'},
-          {title: '4x4', value: '4x4'},
-          {title: 'AWD', value: 'awd'},
+          {title: 'Benzín', value: 'benzin'},
+          {title: 'Diesel', value: 'diesel'},
+          {title: 'Hybrid', value: 'hybrid'},
+          {title: 'Elektro', value: 'elektro'},
         ],
       },
     }),
@@ -101,7 +86,7 @@ export const prevodovky = defineType({
     }),
     defineField({
       name: 'images',
-      title: 'Obrázky převodovky',
+      title: 'Obrázky motoru',
       type: 'array',
       of: [
         {
@@ -115,7 +100,7 @@ export const prevodovky = defineType({
               title: 'Alt text',
               type: 'string',
               validation: (Rule) => Rule.required(),
-              description: 'Popis obrázku pro vyhledávače a čtečky obrazovky – popište, co je na obrázku vidět, např. „Převodovka Ford 6M6P pohled zleva"',
+              description: 'Popis obrázku pro vyhledávače a čtečky obrazovky – popište, co je na obrázku vidět, např. „Motor BMW 2.0D N47 pohled zleva"',
             }),
             defineField({
               name: 'caption',
@@ -191,10 +176,16 @@ export const prevodovky = defineType({
       description: 'Kompatibilní modely vozidel, roky, motory atd.',
     }),
     defineField({
+      name: 'warrantyPeriod',
+      title: 'Záruční doba',
+      type: 'string',
+      description: 'Např. 12 měsíců, 24 měsíců',
+    }),
+    defineField({
       name: 'mileage',
       title: 'Nájezd',
       type: 'string',
-      description: 'Nájezd převodovky v km',
+      description: 'Původní nájezd motoru',
     }),
     defineField({
       name: 'condition',
@@ -202,25 +193,24 @@ export const prevodovky = defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Nová', value: 'nova'},
-          {title: 'Repasovaná', value: 'repasovana'},
-          {title: 'Použitá - funkční', value: 'pouzita-funkcni'},
-          {title: 'Na díly', value: 'na-dily'},
+          {title: 'Nový', value: 'novy'},
+          {title: 'Repasovaný', value: 'repasovany'},
         ],
       },
-      validation: (Rule) => Rule.required(),
+      initialValue: 'novy',
     }),
     defineField({
-      name: 'fluidType',
-      title: 'Typ oleje',
-      type: 'string',
-      description: 'Doporučený typ převodového oleje',
-    }),
-    defineField({
-      name: 'warrantyPeriod',
-      title: 'Záruční doba',
-      type: 'string',
-      description: 'Např. 12 měsíců, 24 měsíců',
+      name: 'relatedTurbochargers',
+      title: 'Doporučená turbodmychadla',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'turbodmychadlo'}],
+        },
+      ],
+      description:
+        'Vyberte turbodmychadla, která se k tomuto motoru hodí a můžou být nabídnuta jako doplněk',
     }),
     defineField({
       name: 'inStock',
@@ -263,22 +253,16 @@ export const prevodovky = defineType({
   preview: {
     select: {
       title: 'name',
-      subtitle: 'transmissionType',
+      subtitle: 'engineCode',
       media: 'images.0',
       brand: 'brand.name',
       inStock: 'inStock',
     },
     prepare(selection) {
       const {title, subtitle, media, brand, inStock} = selection
-      const typeLabels: Record<string, string> = {
-        manualni: 'Manuální',
-        automaticka: 'Automatická',
-        cvt: 'CVT',
-        sekvencni: 'Sekvenční',
-      }
       return {
-        title: title || 'Nepojmenovaná převodovka',
-        subtitle: `${brand || 'Bez značky'} ${subtitle ? `• ${typeLabels[subtitle] || subtitle}` : ''} ${!inStock ? '• Není skladem' : ''}`,
+        title: title || 'Nepojmenovaný motor',
+        subtitle: `${brand || 'Bez značky'} ${subtitle ? `• ${subtitle}` : ''} ${!inStock ? '• Není skladem' : ''}`,
         media,
       }
     },

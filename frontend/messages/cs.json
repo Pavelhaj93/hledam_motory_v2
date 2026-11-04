@@ -9,7 +9,7 @@
     "repasovane-motory": "Repasované motory",
     "stare-motory": "Staré motory",
     "turbodmychadla": "Turbodmychadla",
-    "prevodovky": "Převodovky",
+    "nove-motory": "Nové motory",
     "motorove-hlavy": "Motorové hlavy"
   },
   "CategoryPage": {
@@ -31,11 +31,11 @@
       "metaTitle": "Turbodmychadla | Repasovaná a nová turba se zárukou",
       "metaDescription": "Široký výběr repasovaných a nových turbodmychadel pro osobní automobily."
     },
-    "prevodovky": {
-      "title": "Repasované převodovky",
-      "description": "Objevte náš rozsáhlý katalog profesionálně repasovaných převodovek - manuálních i automatických. Plná záruka kvality a spolehlivosti.",
-      "metaTitle": "Repasované převodovky | Manuální a automatické převodovky",
-      "metaDescription": "Široký výběr repasovaných převodovek - manuální i automatické. Profesionální renovace s plnou zárukou."
+    "nove-motory": {
+      "title": "Nové motory",
+      "description": "Objevte náš katalog zcela nových motorů s plnou zárukou výrobce a spolehlivostí.",
+      "metaTitle": "Nové motory | Nové náhradní motory se zárukou",
+      "metaDescription": "Široký výběr nových motorů pro osobní automobily s plnou zárukou výrobce."
     },
     "motorove-hlavy": {
       "title": "Motorové hlavy",
@@ -112,6 +112,30 @@
     "sortNameDesc": "Název (Z-A)",
     "sortPriceAsc": "Cena (nejlevnější)",
     "sortPriceDesc": "Cena (nejdražší)"
+  },
+  "ContactForm": {
+    "formHeading": "Napište nám",
+    "nameLabel": "Jméno a příjmení",
+    "emailLabel": "Email",
+    "phoneLabel": "Telefon",
+    "messageLabel": "Zpráva",
+    "messagePlaceholder": "Popište vaši poptávku nebo dotaz...",
+    "submitDefault": "Odeslat zprávu",
+    "submitting": "Odesílání...",
+    "successDefault": "Děkujeme za váš zájem! Brzy se vám ozveme.",
+    "errorMessage": "Nepodařilo se odeslat zprávu. Zkuste to prosím znovu nebo nás kontaktujte přímo na email.",
+    "closeMessage": "Zavřít zprávu",
+    "gdprBefore": "Souhlasím se",
+    "gdprLink": "zpracováním osobních údajů",
+    "gdprAfter": "*",
+    "gdprConsentRequiredHint": "Zaškrtněte souhlas výše pro odeslání",
+    "errNameRequired": "Zadejte prosím jméno a příjmení",
+    "errEmailInvalid": "Zadejte prosím platnou emailovou adresu",
+    "errMessageMin": "Zpráva musí mít alespoň 10 znaků",
+    "infoHeading": "Kontaktní údaje",
+    "connectHeading": "Spojte se s námi",
+    "addressHeading": "Adresa",
+    "companyHeading": "Údaje o společnosti"
   },
   "Header": {
     "openMenu": "Otevřít menu",

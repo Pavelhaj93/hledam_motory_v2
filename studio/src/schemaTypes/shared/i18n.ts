@@ -19,9 +19,9 @@ export const supportedLanguages = [
  */
 export const translatedTypes = [
   'repasovanyMotor',
+  'novyMotor',
   'staryMotor',
   'motorovaHlava',
-  'prevodovka',
   'turbodmychadlo',
   'page',
   'post',

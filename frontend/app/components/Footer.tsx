@@ -17,7 +17,7 @@ const CATEGORY_KEYS = [
   'repasovane-motory',
   'stare-motory',
   'turbodmychadla',
-  'prevodovky',
+  'nove-motory',
   'motorove-hlavy',
 ] as const
 
@@ -25,7 +25,7 @@ const CATEGORY_HREFS = {
   'repasovane-motory': '/katalog/repasovane-motory',
   'stare-motory': '/katalog/stare-motory',
   'turbodmychadla': '/katalog/turbodmychadla',
-  'prevodovky': '/katalog/prevodovky',
+  'nove-motory': '/katalog/nove-motory',
   'motorove-hlavy': '/katalog/motorove-hlavy',
 } as const
 
