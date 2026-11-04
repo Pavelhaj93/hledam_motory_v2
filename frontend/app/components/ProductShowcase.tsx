@@ -1,15 +1,9 @@
-import React from 'react'
-import Link from 'next/link'
-import {Zap, Cog, Truck} from 'lucide-react'
+'use client'
 
-type Category = {
-  slug: string
-  title: string
-  description: string
-  icon: any
-  color: string
-  count?: number
-}
+import React from 'react'
+import {useTranslations} from 'next-intl'
+import {Link} from '@/i18n/navigation'
+import {Zap, Cog, Truck, Sparkles} from 'lucide-react'
 
 type CategoryShowcaseProps = {
   block: {
@@ -21,49 +15,25 @@ type CategoryShowcaseProps = {
   }
 }
 
-const categoryData: Category[] = [
-  {
-    slug: 'repasovane-motory',
-    title: 'Repasované motory',
-    description:
-      'Kompletní repasované motory s plnou zárukou. Profesionální renovace s výměnou všech opotřebovaných dílů.',
-    icon: Zap,
-    color: 'bg-red-500',
-  },
-  {
-    slug: 'turbodmychadla',
-    title: 'Turbodmychadla',
-    description:
-      'Repasovaná turbodmychadla pro všechny typy vozidel. Kompletní renovace s novými ložisky a těsněními.',
-    icon: Cog,
-    color: 'bg-green-500',
-  },
-  {
-    slug: 'nove-motory',
-    title: 'Nové motory',
-    description:
-      'Zcela nové motory s plnou zárukou výrobce. Spolehlivé řešení pro dlouhou životnost vašeho vozu.',
-    icon: Zap,
-    color: 'bg-blue-500',
-  },
-  {
-    slug: 'motorove-hlavy',
-    title: 'Motorové hlavy',
-    description: 'Repasované motorové hlavy s nově zabroušenými ventily a novými těsněními.',
-    icon: Truck,
-    color: 'bg-orange-500',
-  },
-  {
-    slug: 'stare-motory',
-    title: 'Staré motory',
-    description:
-      'Široký výběr starých motorů pro různé značky a modely vozidel. Ideální pro renovace a opravy.',
-    icon: Truck,
-    color: 'bg-yellow-500',
-  },
-]
+// Category list for the showcase. Titles and descriptions come from next-intl
+// (Categories / CategoryPage) so both the Czech and German sites stay translated.
+const categoryData = [
+  {slug: 'repasovane-motory', href: '/katalog/repasovane-motory', icon: Zap, color: 'bg-red-500'},
+  {slug: 'turbodmychadla', href: '/katalog/turbodmychadla', icon: Cog, color: 'bg-green-500'},
+  {slug: 'nove-motory', href: '/katalog/nove-motory', icon: Sparkles, color: 'bg-blue-500'},
+  {slug: 'motorove-hlavy', href: '/katalog/motorove-hlavy', icon: Truck, color: 'bg-orange-500'},
+  {slug: 'stare-motory', href: '/katalog/stare-motory', icon: Truck, color: 'bg-yellow-500'},
+] as const
 
-function CategoryCard({category, featured = false}: {category: Category; featured?: boolean}) {
+function CategoryCard({
+  category,
+  featured = false,
+}: {
+  category: (typeof categoryData)[number]
+  featured?: boolean
+}) {
+  const tCat = useTranslations('Categories')
+  const tPage = useTranslations('CategoryPage')
   const IconComponent = category.icon
 
   const cardClass = featured
@@ -71,7 +41,7 @@ function CategoryCard({category, featured = false}: {category: Category; feature
     : 'group bg-white rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300 p-6'
 
   return (
-    <Link href={`/katalog/${category.slug}`} className="block h-full">
+    <Link href={category.href} className="block h-full">
       <div className={cardClass}>
         <div
           className={`w-12 h-12 ${category.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
@@ -81,14 +51,11 @@ function CategoryCard({category, featured = false}: {category: Category; feature
         <h3
           className={`font-semibold text-gray-900 mb-2 group-hover:text-red-600 ${featured ? 'text-xl' : 'text-lg'}`}
         >
-          {category.title}
+          {tCat(category.slug)}
         </h3>
         <p className={`text-gray-600 ${featured ? 'text-base' : 'text-sm'}`}>
-          {category.description}
+          {tPage(`${category.slug}.description`)}
         </p>
-        {category.count && (
-          <div className="mt-4 text-sm text-red-600 font-medium">{category.count} produktů</div>
-        )}
       </div>
     </Link>
   )
@@ -120,7 +87,7 @@ export default function ProductShowcase({block}: CategoryShowcaseProps) {
               <CategoryCard category={displayCategories[0]} featured={true} />
             </div>
             <div className="space-y-6">
-              {displayCategories.slice(1).map((category, index) => (
+              {displayCategories.slice(1).map((category) => (
                 <CategoryCard key={category.slug} category={category} />
               ))}
             </div>
@@ -128,7 +95,7 @@ export default function ProductShowcase({block}: CategoryShowcaseProps) {
         ) : layout === 'carousel' ? (
           <div className="overflow-x-auto">
             <div className="flex space-x-6 pb-4">
-              {displayCategories.map((category, index) => (
+              {displayCategories.map((category) => (
                 <div key={category.slug} className="flex-none w-80">
                   <CategoryCard category={category} />
                 </div>
@@ -137,7 +104,7 @@ export default function ProductShowcase({block}: CategoryShowcaseProps) {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {displayCategories.map((category, index) => (
+            {displayCategories.map((category) => (
               <CategoryCard key={category.slug} category={category} />
             ))}
           </div>
