@@ -1,10 +1,14 @@
 import {NextRequest, NextResponse} from 'next/server'
 import {transporter} from '@/lib/nodemailer'
+import {contactEmail, localeDomain} from '@/app/lib/i18n'
 
 export async function POST(request: NextRequest) {
   try {
     const {name, email, phone, message, locale} = await request.json()
     const isAustrian = locale === 'de-AT'
+    // Austrian enquiries go to the Motorfinden mailbox; sent through the same SMTP account.
+    const recipient = isAustrian ? contactEmail['de-AT'] : contactEmail['cs']
+    const siteHost = (isAustrian ? localeDomain['de-AT'] : localeDomain['cs']).replace(/^www\./, '')
 
     const escapeHtml = (value: string) =>
       value.replace(/[&<>"']/g, (ch) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]!))
@@ -29,13 +33,13 @@ export async function POST(request: NextRequest) {
       port: process.env.SMTP_PORT || 587,
       user: process.env.SMTP_USER || 'info@hledammotory.cz',
       from: process.env.SMTP_USER || 'info@hledammotory.cz',
-      to: 'info@hledammotory.cz',
+      to: recipient,
     })
 
     // Send email — always in Czech (email lands with the Czech-based team)
     const info = await transporter.sendMail({
       from: process.env.SMTP_USER || 'info@hledammotory.cz',
-      to: 'info@hledammotory.cz',
+      to: recipient,
       subject: `Nová poptávka – ${nameSubject}`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px;">
@@ -59,7 +63,7 @@ export async function POST(request: NextRequest) {
           <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 20px 0;">
 
           <p style="color: #6B7280; font-size: 12px;">
-            hledammotory.cz
+            ${siteHost}
           </p>
         </div>
       `,
@@ -74,7 +78,7 @@ Zpráva:
 ${message}
 
 ---
-hledammotory.cz
+${siteHost}
       `,
     })
 

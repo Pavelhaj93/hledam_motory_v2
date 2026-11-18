@@ -1,8 +1,9 @@
-import {getTranslations} from 'next-intl/server'
+import {getLocale, getTranslations} from 'next-intl/server'
 import {Link} from '@/i18n/navigation'
 import {Mail, Phone, MapPin, Building2} from 'lucide-react'
 import {AllBrandsWithLogosQueryResult} from '@/sanity.types'
 import Image from 'next/image'
+import {brandName, contactEmail, logoSrc, type Locale} from '@/app/lib/i18n'
 
 interface FooterProps {
   settings?: {
@@ -33,6 +34,8 @@ export default async function Footer({settings}: FooterProps) {
   const currentYear = new Date().getFullYear()
   const phone = settings?.phone || '+420 792 644 755'
   const t = await getTranslations('Common')
+  const locale = (await getLocale()) as Locale
+  const email = contactEmail[locale]
   const tFooter = await getTranslations('Footer')
   const tCat = await getTranslations('Categories')
 
@@ -47,8 +50,8 @@ export default async function Footer({settings}: FooterProps) {
               <div className="flex items-center">
                 <Link href="/" className="flex items-center space-x-2">
                   <Image
-                    src="/images/logo.png"
-                    alt="Hledám motory – prodej repasovaných motorů"
+                    src={logoSrc[locale]}
+                    alt={`${brandName[locale]} – ${t('logoTagline')}`}
                     width={240}
                     height={60}
                     className="h-20 w-auto hover:scale-105 transition-transform"
@@ -122,10 +125,10 @@ export default async function Footer({settings}: FooterProps) {
                 <div className="flex items-center space-x-3">
                   <Mail className="h-4 w-4 text-red-400 shrink-0" />
                   <a
-                    href="mailto:info@hledammotory.cz"
+                    href={`mailto:${email}`}
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    info@hledammotory.cz
+                    {email}
                   </a>
                 </div>
 

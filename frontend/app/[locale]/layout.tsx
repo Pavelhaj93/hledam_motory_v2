@@ -16,11 +16,10 @@ import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import CookieBanner from '@/app/components/CookieBanner'
 import * as demo from '@/sanity/lib/demo'
-import {siteUrl} from '@/sanity/lib/api'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery, popularBrandsWithLogosQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
-import {htmlLang, ogLocale, localePrefix, type Locale} from '@/app/lib/i18n'
+import {absoluteUrl, homePath, htmlLang, ogLocale, siteUrlFor, type Locale} from '@/app/lib/i18n'
 import {routing} from '@/i18n/routing'
 import {handleError} from '../client-utils'
 
@@ -48,15 +47,10 @@ export async function generateMetadata({
   const description = settings?.description || demo.description
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
-  let metadataBase: URL | undefined = undefined
-  try {
-    metadataBase = settings?.ogImage?.metadataBase
-      ? new URL(settings.ogImage.metadataBase)
-      : new URL(siteUrl)
-  } catch {
-    metadataBase = new URL(siteUrl)
-  }
-  const home = localePrefix[locale] || '/'
+  // Each locale has its own origin (motorfinden.at for de-AT in production), so metadataBase is
+  // always derived from the locale. `settings.ogImage.metadataBase` is ignored on purpose: it is a
+  // single URL and would point the Austrian site's canonical/OG URLs at the Czech domain.
+  const metadataBase = new URL(siteUrlFor(locale))
   return {
     metadataBase,
     title: {
@@ -65,11 +59,12 @@ export async function generateMetadata({
     },
     description: toPlainText(description),
     alternates: {
-      canonical: home,
+      canonical: homePath(locale),
+      // Absolute: the alternates live on different domains.
       languages: {
-        'cs': '/',
-        'de-AT': '/at',
-        'x-default': '/',
+        'cs': absoluteUrl('cs', homePath('cs')),
+        'de-AT': absoluteUrl('de-AT', homePath('de-AT')),
+        'x-default': absoluteUrl('cs', homePath('cs')),
       },
     },
     openGraph: {

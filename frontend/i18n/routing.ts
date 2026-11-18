@@ -1,4 +1,5 @@
 import {defineRouting} from 'next-intl/routing'
+import {localeDomain, localeDomainsEnabled} from '@/app/lib/i18n'
 
 /**
  * next-intl routing config.
@@ -9,6 +10,11 @@ import {defineRouting} from 'next-intl/routing'
  * - `pathnames` localizes the static catalog segments. Physical route folders are
  *   NOT renamed; next-intl maps the German URL onto the same internal path.
  *   The dynamic product `[slug]` value itself comes from Sanity per-locale.
+ * - `domains` (only when NEXT_PUBLIC_I18N_DOMAINS=true, i.e. Vercel Production): cs is served on
+ *   www.hledammotory.cz and de-AT on motorfinden.at, each unprefixed. A request for the other
+ *   locale's prefix (hledammotory.cz/at/...) is redirected to its domain — though the permanent
+ *   301 for `/at/*` lives in next.config.ts, which runs before this middleware.
+ *   Localhost and preview deploys keep the single-host `/at` setup.
  */
 export const routing = defineRouting({
   locales: ['cs', 'de-AT'],
@@ -19,6 +25,12 @@ export const routing = defineRouting({
       'de-AT': '/at',
     },
   },
+  domains: localeDomainsEnabled
+    ? [
+        {domain: localeDomain['cs'], defaultLocale: 'cs', locales: ['cs']},
+        {domain: localeDomain['de-AT'], defaultLocale: 'de-AT', locales: ['de-AT']},
+      ]
+    : undefined,
   pathnames: {
     '/': '/',
     '/katalog/repasovane-motory': {

@@ -4,7 +4,7 @@ import BlockRenderer from '@/app/components/BlockRenderer'
 import {homepageQuery, settingsQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
 import {organizationJsonLd} from '@/app/lib/jsonld'
-import {ogLocale, localePrefix, type Locale} from '@/app/lib/i18n'
+import {absoluteUrl, homePath, ogLocale, type Locale} from '@/app/lib/i18n'
 
 type Props = {params: Promise<{locale: Locale}>}
 
@@ -20,8 +20,12 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     title: homepage?.name || 'Homepage',
     description: homepage?.name || 'Welcome to our engine parts catalog',
     alternates: {
-      canonical: localePrefix[locale] || '/',
-      languages: {'cs': '/', 'de-AT': '/at', 'x-default': '/'},
+      canonical: homePath(locale),
+      languages: {
+        'cs': absoluteUrl('cs', homePath('cs')),
+        'de-AT': absoluteUrl('de-AT', homePath('de-AT')),
+        'x-default': absoluteUrl('cs', homePath('cs')),
+      },
     },
     openGraph: {
       locale: ogLocale[locale],
