@@ -23,7 +23,7 @@ import RelatedProducts from '@/app/components/RelatedProducts'
 import {productJsonLd} from '@/app/lib/jsonld'
 import {productAlternates} from '@/app/lib/categoryMeta'
 import {categoryPath, categoryTypeByKey} from '@/app/lib/categories'
-import {ogLocale, type Locale} from '@/app/lib/i18n'
+import {contactEmail, ogLocale, type Locale} from '@/app/lib/i18n'
 
 const CATEGORY = 'motorove-hlavy' as const
 type Props = {params: Promise<{locale: Locale; slug: string}>}
@@ -251,11 +251,11 @@ export default async function MotorovaHlavaDetailPage({params}: Props) {
                 <span>{phone}</span>
               </a>
               <a
-                href="mailto:info@hledammotory.cz"
+                href={`mailto:${contactEmail[locale]}`}
                 className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700"
               >
                 <Mail className="h-4 w-4" />
-                <span>info@hledammotory.cz</span>
+                <span>{contactEmail[locale]}</span>
               </a>
             </div>
           </div>

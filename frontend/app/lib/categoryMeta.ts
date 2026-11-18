@@ -1,6 +1,6 @@
 import type {Metadata} from 'next'
 import {getTranslations} from 'next-intl/server'
-import {ogLocale, type Locale} from './i18n'
+import {absoluteUrl, logoSrc, ogLocale, type Locale} from './i18n'
 import {categoryPath, type CategoryKey} from './categories'
 
 type AltSlug = {slug?: string | null; language?: string | null} | null | undefined
@@ -9,6 +9,7 @@ type AltSlug = {slug?: string | null; language?: string | null} | null | undefin
  * Self-referential canonical + reciprocal hreflang for a product detail page.
  * The de-AT alternate uses the TRANSLATED German slug (from `altSlug`), never a
  * naive prefix. Alternates are emitted only when the counterpart exists.
+ * Alternates are absolute because cs and de-AT are served from different domains.
  */
 export function productAlternates(
   locale: Locale,
@@ -22,10 +23,10 @@ export function productAlternates(
   const deSlug = locale === 'de-AT' ? slug : altSlug?.slug
   const languages: Record<string, string> = {}
   if (csSlug) {
-    languages['cs'] = `/${csKeyPath}/${csSlug}`
-    languages['x-default'] = `/${csKeyPath}/${csSlug}`
+    languages['cs'] = absoluteUrl('cs', `/${csKeyPath}/${csSlug}`)
+    languages['x-default'] = absoluteUrl('cs', `/${csKeyPath}/${csSlug}`)
   }
-  if (deSlug) languages['de-AT'] = `/${deKeyPath}/${deSlug}`
+  if (deSlug) languages['de-AT'] = absoluteUrl('de-AT', `/${deKeyPath}/${deSlug}`)
   return {canonical: `/${categoryPath(key, locale)}/${slug}`, languages}
 }
 
@@ -45,13 +46,17 @@ export async function buildCategoryMetadata(locale: Locale, key: CategoryKey): P
     description,
     alternates: {
       canonical: self,
-      languages: {'cs': csPath, 'de-AT': dePath, 'x-default': csPath},
+      languages: {
+        'cs': absoluteUrl('cs', csPath),
+        'de-AT': absoluteUrl('de-AT', dePath),
+        'x-default': absoluteUrl('cs', csPath),
+      },
     },
     openGraph: {
       title,
       description,
       type: 'website',
-      images: [{url: '/images/logo.png'}],
+      images: [{url: logoSrc[locale]}],
       locale: ogLocale[locale],
       alternateLocale: locale === 'cs' ? ['de_AT'] : ['cs_CZ'],
     },
@@ -59,7 +64,7 @@ export async function buildCategoryMetadata(locale: Locale, key: CategoryKey): P
       card: 'summary_large_image',
       title,
       description,
-      images: ['/images/logo.png'],
+      images: [logoSrc[locale]],
     },
   }
 }

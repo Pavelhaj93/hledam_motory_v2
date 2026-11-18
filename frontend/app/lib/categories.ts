@@ -1,4 +1,4 @@
-import {categoryPathByType, type Locale} from './i18n'
+import {categoryPathByType, withLocalePrefix, type Locale} from './i18n'
 
 /** Catalog category keys (the Czech folder names, used as message keys too). */
 export type CategoryKey =
@@ -17,9 +17,18 @@ export const categoryTypeByKey: Record<CategoryKey, string> = {
   'motorove-hlavy': 'motorovaHlava',
 }
 
-/** Locale-correct catalog path (no leading slash), e.g. `at/katalog/neue-motoren`. */
+/**
+ * Locale-correct catalog path relative to the locale's own host (no leading slash), e.g.
+ * `at/katalog/neue-motoren` on a single host, `katalog/neue-motoren` on motorfinden.at.
+ */
 export function categoryPath(key: CategoryKey, locale: Locale): string {
-  return categoryPathByType[categoryTypeByKey[key]][locale]
+  return categoryPathForType(categoryTypeByKey[key], locale)
+}
+
+/** Same as `categoryPath()`, keyed by Sanity `_type`. Returns '' for unknown types. */
+export function categoryPathForType(type: string, locale: Locale): string {
+  const paths = categoryPathByType[type]
+  return paths ? withLocalePrefix(locale, paths[locale]) : ''
 }
 
 /** Absolute (root-relative) URL path for a category, with `/` prefix. */

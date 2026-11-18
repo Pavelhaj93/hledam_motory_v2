@@ -1,11 +1,20 @@
 import type {NextConfig} from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
+import {localeDomain, localeDomainsEnabled} from './app/lib/i18n'
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
+type Redirect = Awaited<ReturnType<NonNullable<NextConfig['redirects']>>>[number]
+
+const AT_SITE_URL = `https://${localeDomain['de-AT']}`
+/** Host regex for `has` conditions; matches with and without `www.`. */
+const hostPattern = (host: string) => `(www\\.)?${host.replace(/^www\./, '').replace(/\./g, '\\.')}`
+const CS_HOST_PATTERN = hostPattern(localeDomain['cs'])
+const AT_HOST_PATTERN = hostPattern(localeDomain['de-AT'])
+
 // Old repasovanyMotor slugs → new SEO-optimized slugs.
-// Both the Czech (/katalog/repasovane-motory/) and Austrian (/at/katalog/generalueberholte-motoren/) paths are covered.
-const repasovanyMotorSlugRedirects: {source: string; destination: string}[] = [
+// Both the Czech (/katalog/repasovane-motory/) and Austrian (generalueberholte-motoren) paths are covered.
+const repasovanyMotorSlugRedirects: {source: string; destination: string; has?: Redirect['has']}[] = [
   ['motor-bmw-20d-n47-656dfd90c4ffb8d2116f14ed', 'repasovany-motor-bmw-2-0d-n47'],
   ['motor-citroen-2-0-bluehdi-96-132-kw-eu6-kod-motoru-4h03-ahp-ahm-ahn-ah03-10dyzz-blfa-ynfa', 'repasovany-motor-citroen-2-0-bluehdi-4h03'],
   ['motor-citron-22-tdci-63114-kw-eu4-kd-motoru4hv4hu-6707bca4c084e2525651d819', 'repasovany-motor-citroen-2-2-tdci-eu4-4hv'],
@@ -43,15 +52,102 @@ const repasovanyMotorSlugRedirects: {source: string; destination: string}[] = [
     source: `/katalog/repasovane-motory/${oldSlug}`,
     destination: `/katalog/repasovane-motory/${newSlug}`,
   },
-  {
-    source: `/at/katalog/generalueberholte-motoren/${oldSlug}`,
-    destination: `/at/katalog/generalueberholte-motoren/${newSlug}`,
-  },
+  // de-AT: with domain routing, go straight to motorfinden.at in one hop (from hledammotory.cz/at/…)
+  // and also catch the unprefixed old slug on motorfinden.at itself.
+  ...(localeDomainsEnabled
+    ? [
+        {
+          source: `/at/katalog/generalueberholte-motoren/${oldSlug}`,
+          destination: `${AT_SITE_URL}/katalog/generalueberholte-motoren/${newSlug}`,
+        },
+        {
+          source: `/katalog/generalueberholte-motoren/${oldSlug}`,
+          has: [{type: 'host' as const, value: AT_HOST_PATTERN}],
+          destination: `/katalog/generalueberholte-motoren/${newSlug}`,
+        },
+      ]
+    : [
+        {
+          source: `/at/katalog/generalueberholte-motoren/${oldSlug}`,
+          destination: `/at/katalog/generalueberholte-motoren/${newSlug}`,
+        },
+      ]),
 ])
+
+/**
+ * Austrian site moved from www.hledammotory.cz/at/* to motorfinden.at/* (de-AT unprefixed).
+ * Permanent 301 so search engines transfer the old /at URLs. Localized German path segments are
+ * identical on both, so a plain prefix strip is enough. next-intl's middleware would redirect too,
+ * but only with a 307 — next.config redirects run first.
+ */
+const atDomainRedirects: Redirect[] = localeDomainsEnabled
+  ? [
+      {
+        source: '/at',
+        has: [{type: 'host', value: CS_HOST_PATTERN}],
+        destination: `${AT_SITE_URL}/`,
+        permanent: true,
+      },
+      {
+        source: '/at/:path*',
+        has: [{type: 'host', value: CS_HOST_PATTERN}],
+        destination: `${AT_SITE_URL}/:path*`,
+        permanent: true,
+      },
+    ]
+  : []
+
+/**
+ * Old static motorfinden.at (PHP copy made by a third-party agency, live 09–11/2026): map its
+ * .php pages to the real routes. Its ~2 100 auto-generated local pages
+ * (/Generalüberholte-Motoren/<Ort>, /Motorüberholungen/<Land>) are intentionally NOT redirected —
+ * thin doorway content; letting them 404 is the decision (see hub clients/hledammotory_v2/decisions.md).
+ * de-AT product slugs in Sanity equal the old .php names with `uberholter-` → `repasovany-`.
+ */
+const oldMotorfindenPhpRedirects: Redirect[] = localeDomainsEnabled
+  ? [
+      ['/index.php', '/'],
+      ['/katalog.php', '/katalog'],
+      ['/kontakt.php', '/kontakt'],
+      ['/ueber-uns.php', '/ueber-uns'],
+      ['/datenschutz.php', '/datenschutz'],
+      ['/cookies.php', '/cookies'],
+      ...[
+        'ford-2-2-tdci-eu4-p8fa',
+        'ford-1-0-ecoboost-m1da',
+        'fiat-ducato-2-3-jtd-eu5-f1ae3481',
+        'ford-2-0-bluehdi-blfa',
+        'fiat-ducato-3-0-jtd-eu4-f1ceo481',
+        'mercedes-2-2-cdi-646',
+        'volkswagen-1-9-tdi-bxe',
+        'renault-2-3-dci-eu6-m9t',
+        'opel-2-0-cdti-a20dth',
+        'mercedes-2-2-cdi-651',
+        'peugeot-2-0-bluehdi-4h03',
+        'ford-2-2-tdci-eu5-drfa',
+      ].map(
+        (m) =>
+          [`/uberholter-motor-${m}.php`, `/katalog/generalueberholte-motoren/repasovany-motor-${m}`] as [
+            string,
+            string,
+          ],
+      ),
+    ].map(([source, destination]) => ({
+      source,
+      destination,
+      has: [{type: 'host', value: AT_HOST_PATTERN}],
+      permanent: true,
+    }))
+  : []
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return repasovanyMotorSlugRedirects.map((r) => ({...r, permanent: true}))
+    // Order matters: specific slug redirects first (single hop), then the /at/* domain move.
+    return [
+      ...repasovanyMotorSlugRedirects.map((r) => ({...r, permanent: true})),
+      ...atDomainRedirects,
+      ...oldMotorfindenPhpRedirects,
+    ]
   },
   env: {
     // Matches the behavior of `sanity dev` which sets styled-components to use the fastest way of inserting CSS rules in both dev and production. It's default behavior is to disable it in dev mode.

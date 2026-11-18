@@ -1,7 +1,7 @@
 'use client'
 
 import {useState, useEffect, useRef} from 'react'
-import {useTranslations} from 'next-intl'
+import {useLocale, useTranslations} from 'next-intl'
 import {Link} from '@/i18n/navigation'
 import {Mail, Phone, Menu, X, ChevronDown} from 'lucide-react'
 import Image from 'next/image'
@@ -9,6 +9,7 @@ import BrandSelector from './BrandSelector'
 import LocaleSwitcher from './LocaleSwitcher'
 import {AllBrandsWithLogosQueryResult} from '@/sanity.types'
 import {Button} from './ui/button'
+import {brandName, contactEmail, logoSrc, type Locale} from '@/app/lib/i18n'
 
 interface HeaderProps {
   settings?: {
@@ -38,6 +39,8 @@ const CATEGORY_HREFS = {
 // Client-side Header Component
 export default function Header({settings, brands}: HeaderProps) {
   const t = useTranslations('Common')
+  const locale = useLocale() as Locale
+  const email = contactEmail[locale]
   const tCat = useTranslations('Categories')
   const tHeader = useTranslations('Header')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -93,8 +96,8 @@ export default function Header({settings, brands}: HeaderProps) {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/images/logo.png"
-                alt="Hledám motory – prodej repasovaných motorů"
+                src={logoSrc[locale]}
+                alt={`${brandName[locale]} – ${t('logoTagline')}`}
                 width={240}
                 height={60}
                 className="h-20 w-auto hover:scale-105 transition-transform"
@@ -113,11 +116,11 @@ export default function Header({settings, brands}: HeaderProps) {
               <span>{phone}</span>
             </a>
             <a
-              href="mailto:info@hledammotory.cz"
+              href={`mailto:${email}`}
               className="flex items-center space-x-2 hover:text-red-600"
             >
               <Mail className="size-5 text-red-600" />
-              <span>info@hledammotory.cz</span>
+              <span>{email}</span>
             </a>
           </div>
 
@@ -229,11 +232,11 @@ export default function Header({settings, brands}: HeaderProps) {
               {/* Contact info in mobile menu */}
               <div className="pt-4 border-t border-gray-200 space-y-2">
                 <a
-                  href="mailto:info@hledammotory.cz"
+                  href={`mailto:${email}`}
                   className="flex items-center space-x-2 text-sm text-gray-600 hover:text-red-600"
                 >
                   <Mail className="h-4 w-4" />
-                  <span>info@hledammotory.cz</span>
+                  <span>{email}</span>
                 </a>
                 <a
                   href={`tel:${phone.replace(/\s/g, '')}`}

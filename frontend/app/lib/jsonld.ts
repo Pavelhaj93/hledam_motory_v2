@@ -1,14 +1,20 @@
-import {siteUrl} from '@/sanity/lib/api'
-import {currencyFor, localePrefix, type Locale} from '@/app/lib/i18n'
-
-const BASE_URL = siteUrl
+import {
+  absoluteUrl,
+  brandName as siteBrandName,
+  contactEmail,
+  currencyFor,
+  homePath,
+  withLocalePrefix,
+  type Locale,
+} from '@/app/lib/i18n'
 
 /** Breadcrumb labels (Home / Catalog), passed in translated from the page. */
 type BreadcrumbLabels = {home: string; catalog: string}
 
 const inLanguageFor = (locale: Locale) => (locale === 'de-AT' ? 'de-AT' : 'cs')
-const catalogPath = (locale: Locale) => (locale === 'de-AT' ? 'at/katalog' : 'katalog')
-const homeUrl = (locale: Locale) => `${BASE_URL}${localePrefix[locale] || ''}`
+// All URLs are absolute on the locale's own domain (motorfinden.at for de-AT in production).
+const catalogUrl = (locale: Locale) => absoluteUrl(locale, `/${withLocalePrefix(locale, 'katalog')}`)
+const homeUrl = (locale: Locale) => absoluteUrl(locale, homePath(locale))
 
 type ProductJsonLdProps = {
   name: string
@@ -19,7 +25,7 @@ type ProductJsonLdProps = {
   currency?: string | null
   inStock?: boolean | null
   slug: string
-  /** Locale-correct catalog path (no leading slash), e.g. `at/katalog/neue-motoren`. */
+  /** Host-relative catalog path from `categoryPath()` (no leading slash). */
   categoryPath: string
   categoryLabel: string
   locale: Locale
@@ -53,8 +59,8 @@ export function productJsonLd({
       priceCurrency: currency || currencyFor[locale],
       ...(price != null && {price: price.toString()}),
       availability: inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      url: `${BASE_URL}/${categoryPath}/${slug}`,
-      seller: {'@type': 'Organization', name: 'Hledám motory'},
+      url: absoluteUrl(locale, `/${categoryPath}/${slug}`),
+      seller: {'@type': 'Organization', name: siteBrandName[locale]},
     },
   }
 
@@ -63,12 +69,12 @@ export function productJsonLd({
     '@type': 'BreadcrumbList',
     itemListElement: [
       {'@type': 'ListItem', position: 1, name: labels.home, item: homeUrl(locale)},
-      {'@type': 'ListItem', position: 2, name: labels.catalog, item: `${BASE_URL}/${catalogPath(locale)}`},
+      {'@type': 'ListItem', position: 2, name: labels.catalog, item: catalogUrl(locale)},
       {
         '@type': 'ListItem',
         position: 3,
         name: categoryLabel,
-        item: `${BASE_URL}/${categoryPath}`,
+        item: absoluteUrl(locale, `/${categoryPath}`),
       },
       {'@type': 'ListItem', position: 4, name},
     ],
@@ -88,8 +94,8 @@ export function categoryBreadcrumbJsonLd(
     '@type': 'BreadcrumbList',
     itemListElement: [
       {'@type': 'ListItem', position: 1, name: labels.home, item: homeUrl(locale)},
-      {'@type': 'ListItem', position: 2, name: labels.catalog, item: `${BASE_URL}/${catalogPath(locale)}`},
-      {'@type': 'ListItem', position: 3, name: categoryLabel, item: `${BASE_URL}/${categoryPath}`},
+      {'@type': 'ListItem', position: 2, name: labels.catalog, item: catalogUrl(locale)},
+      {'@type': 'ListItem', position: 3, name: categoryLabel, item: absoluteUrl(locale, `/${categoryPath}`)},
     ],
   }
 }
@@ -98,11 +104,11 @@ export function organizationJsonLd(phone: string | null | undefined, locale: Loc
   return {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'LocalBusiness'],
-    name: 'Hledám motory',
+    name: siteBrandName[locale],
     url: homeUrl(locale),
     inLanguage: inLanguageFor(locale),
     telephone: (phone || '+420 792 644 755').replace(/\s/g, ''),
-    email: 'info@hledammotory.cz',
+    email: contactEmail[locale],
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Prachnerova 642/10',

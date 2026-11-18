@@ -1,6 +1,7 @@
 # hledammotory.cz — Next.js + Sanity
 
 Czech marketplace/catalog for motors and engine parts. Live site: https://www.hledammotory.cz
+(cs). The Austrian version (de-AT) moves to its own domain https://motorfinden.at.
 
 ## Structure
 
@@ -20,6 +21,20 @@ npm workspaces monorepo:
 | `npm run type-check` | `tsc --noEmit` in all workspaces |
 | `npm run typegen --workspace=frontend` | Sanity TypeGen (also runs automatically as `prebuild`) |
 | `npm run build --workspace=frontend` | Production build (runs typegen first) |
+
+## Domains (cs ↔ de-AT)
+
+- One Vercel deployment serves both markets. `NEXT_PUBLIC_I18N_DOMAINS=true` (Vercel Production
+  only) turns on next-intl `domains`: cs on www.hledammotory.cz, de-AT unprefixed on motorfinden.at.
+  Without it (localhost, previews) de-AT stays under `/at` on one host.
+- `frontend/app/lib/i18n.ts` is the single source of truth: `siteUrlFor`, `absoluteUrl`,
+  `localePrefix`, `localeForHost`, and per-market `contactEmail` / `brandName` / `logoSrc`
+  (Motorfinden branding is also tied to the flag). Build cross-domain URLs (hreflang, sitemap,
+  JSON-LD) only through `absoluteUrl` and catalog paths only through `categoryPath()`.
+- `sitemap.xml` and `robots.txt` are host-aware. 301s for `hledammotory.cz/at/*` → motorfinden.at
+  and for the old agency `.php` pages live in `frontend/next.config.ts`.
+- Test the domain mode locally: `NEXT_PUBLIC_I18N_DOMAINS=true` build + `next start`, then
+  `curl -H "Host: motorfinden.at" localhost:3000/...`.
 
 ## Rules
 

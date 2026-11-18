@@ -1,6 +1,6 @@
 import type {Metadata} from 'next'
 import {setRequestLocale} from 'next-intl/server'
-import type {Locale} from '@/app/lib/i18n'
+import {contactEmail, type Locale} from '@/app/lib/i18n'
 
 type Props = {params: Promise<{locale: Locale}>}
 
@@ -38,7 +38,6 @@ type Copy = {
 }
 
 const ADDRESS = 'Prachnerova 642/10, Praha 5 150 00'
-const EMAIL = 'info@hledammotory.cz'
 const PHONE = '+420 724 704 764'
 
 const COPY: Record<Locale, Copy> = {
@@ -186,7 +185,7 @@ export default async function PrivacyPage({params}: Props) {
             <br />
             {c.s1addressLabel}: {ADDRESS}
             <br />
-            {c.s1emailLabel}: {EMAIL}
+            {c.s1emailLabel}: {contactEmail[locale]}
             <br />
             {c.s1phoneLabel}: {PHONE}
           </p>
