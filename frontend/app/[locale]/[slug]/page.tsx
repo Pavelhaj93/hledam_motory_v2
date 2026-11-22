@@ -5,7 +5,7 @@ import CategoryHero from '@/app/components/CategoryHero'
 import {sanityFetch} from '@/sanity/lib/live'
 import {getPageQuery, pagesSlugs} from '@/sanity/lib/queries'
 import {GetPageQueryResult} from '@/sanity.types'
-import {PageOnboarding} from '@/app/components/Onboarding'
+import {notFound} from 'next/navigation'
 import {localePrefix, type Locale} from '@/app/lib/i18n'
 
 type Props = {
@@ -54,12 +54,9 @@ export default async function Page(props: Props) {
     sanityFetch({query: getPageQuery, params: {locale, slug}}),
   ])
 
+  // Unknown slug → real 404 (status + not-found page), not the starter-template placeholder.
   if (!page?._id) {
-    return (
-      <div className="py-40">
-        <PageOnboarding />
-      </div>
-    )
+    notFound()
   }
 
   const showHero = page.showIntroBanner !== false

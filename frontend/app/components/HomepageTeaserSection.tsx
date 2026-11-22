@@ -1,22 +1,36 @@
-import Link from 'next/link'
+import {useLocale, useTranslations} from 'next-intl'
+import {Link} from '@/i18n/navigation'
 import type {LatestProductsQueryResult} from '@/sanity.types'
 import ResolvedLink from './ResolvedLink'
 import Image from 'next/image'
 import {toPlainText} from 'next-sanity'
 import {urlForImage} from '@/sanity/lib/utils'
+import {currencyFor, type Locale} from '@/app/lib/i18n'
 import {Button} from './ui/button'
 import MissingImage from './MissingImage'
 
-// Format price function
-const formatPrice = (price?: number, currency = 'CZK'): string => {
-  if (!price) return 'Cena na dotaz'
-  return new Intl.NumberFormat('cs-CZ', {
+// Catalog category (route segment + `Categories` message key) for each product document type.
+const categoryByType = {
+  repasovanyMotor: 'repasovane-motory',
+  novyMotor: 'nove-motory',
+  staryMotor: 'stare-motory',
+  turbodmychadlo: 'turbodmychadla',
+  motorovaHlava: 'motorove-hlavy',
+} as const
+
+type CategoryKey = (typeof categoryByType)[keyof typeof categoryByType]
+
+const categoryFor = (type?: string): CategoryKey =>
+  categoryByType[type as keyof typeof categoryByType] ?? 'repasovane-motory'
+
+// Prices in Sanity are stored per locale document: CZK in `cs`, EUR in `de-AT`.
+const formatPrice = (price: number, locale: Locale): string =>
+  new Intl.NumberFormat(locale === 'de-AT' ? 'de-AT' : 'cs-CZ', {
     style: 'currency',
-    currency: currency,
+    currency: currencyFor[locale],
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price)
-}
 
 type HomepageTeaserSectionData = {
   title?: string
@@ -44,6 +58,9 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
     secondaryButton,
     products,
   } = block ?? {}
+  const locale = useLocale() as Locale
+  const tCategories = useTranslations('Categories')
+  const tCatalog = useTranslations('Catalog')
 
   if (!products || products.length === 0) {
     return null
@@ -64,7 +81,10 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
             {products.map((product, index) => (
               <Link
                 key={product._id}
-                href={`/katalog/repasovane-motory/${product.slug}`}
+                href={{
+                  pathname: `/katalog/${categoryFor(product._type)}/[slug]` as const,
+                  params: {slug: product.slug ?? ''},
+                }}
                 className={`group ${index >= 3 ? 'hidden' : ''} ${
                   index >= 3 && index < 6 ? 'sm:block' : ''
                 } ${index >= 6 && index < 9 ? 'lg:block' : ''} ${
@@ -104,7 +124,7 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
                       )}
 
                       <span className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium mt-2">
-                        Repasované motory
+                        {tCategories(categoryFor(product._type))}
                       </span>
 
                       {product.description && (
@@ -117,7 +137,9 @@ export default function HomepageTeaserSection({block}: HomepageTeaserSectionProp
                     <div className="mt-4 pt-4 border-t border-gray-100">
                       <div className="flex items-center justify-end">
                         <span className="text-lg font-bold text-gray-900">
-                          {formatPrice(product.price ?? undefined, 'CZK')}
+                          {product.price
+                            ? formatPrice(product.price, locale)
+                            : tCatalog('priceOnRequest')}
                         </span>
                       </div>
                     </div>
