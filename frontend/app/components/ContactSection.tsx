@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import {Button} from './ui/button'
 import {Link} from '@/i18n/navigation'
+import {trackEvent} from '@/app/lib/analytics'
 
 interface ContactSectionProps {
   block?: {
@@ -160,6 +161,14 @@ export default function ContactSection({block}: ContactSectionProps) {
           console.error('Sklik tracking error:', e)
         }
       }
+
+      // GA4 lead conversion (mark `generate_lead` as a key event in GA4 Admin).
+      trackEvent('generate_lead', {
+        locale,
+        page_path: window.location.pathname,
+        // Product inquiries arrive prefilled from the "Poptat tento produkt" button.
+        inquiry_type: formData.message.startsWith(inquiryPrefix) ? 'product' : 'general',
+      })
 
       setShowSuccess(true)
       setFormData({

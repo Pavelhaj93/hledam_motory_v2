@@ -114,7 +114,13 @@
     "sortPriceAsc": "Cena (nejlevnější)",
     "sortPriceDesc": "Cena (nejdražší)",
     "viewCategory": "Prohlédnout kategorii",
-    "priceOnRequest": "Cena na dotaz"
+    "priceOnRequest": "Cena na dotaz",
+    "fuel": {
+      "benzin": "Benzín",
+      "diesel": "Diesel",
+      "hybrid": "Hybrid",
+      "elektro": "Elektro"
+    }
   },
   "ContactForm": {
     "formHeading": "Napište nám",
@@ -175,5 +181,14 @@
     "description": "Stránka, kterou hledáte, neexistuje nebo byla přesunuta.",
     "home": "Zpět na úvod",
     "catalog": "Procházet katalog"
+  },
+  "Seo": {
+    "homeTitle": "Repasované motory se zárukou 12 měsíců | {brand}",
+    "homeDescription": "Repasované i nové motory, turbodmychadla a motorové hlavy pro osobní a dodávková auta. Záruka 12 měsíců bez omezení km, výměnný systém, doprava po celé ČR.",
+    "pageDescription": "{heading} – {brand}: repasované a nové motory, turbodmychadla a motorové hlavy se zárukou 12 měsíců.",
+    "productPrice": "za {price}",
+    "productWarranty": "záruka {warranty}",
+    "productInStock": "skladem",
+    "productCta": "Nezávazná poptávka online – {brand}."
   }
 }

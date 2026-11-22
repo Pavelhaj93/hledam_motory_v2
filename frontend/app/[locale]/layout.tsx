@@ -15,11 +15,20 @@ import DraftModeToast from '@/app/components/DraftModeToast'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import CookieBanner from '@/app/components/CookieBanner'
+import ConversionTracking from '@/app/components/ConversionTracking'
 import * as demo from '@/sanity/lib/demo'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery, popularBrandsWithLogosQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
-import {absoluteUrl, homePath, htmlLang, ogLocale, siteUrlFor, type Locale} from '@/app/lib/i18n'
+import {
+  absoluteUrl,
+  brandName,
+  homePath,
+  htmlLang,
+  ogLocale,
+  siteUrlFor,
+  type Locale,
+} from '@/app/lib/i18n'
 import {routing} from '@/i18n/routing'
 import {handleError} from '../client-utils'
 
@@ -54,7 +63,8 @@ export async function generateMetadata({
   return {
     metadataBase,
     title: {
-      template: `%s | ${title}`,
+      // Short brand suffix: the long settings title made every page title 100–150 chars.
+      template: `%s | ${brandName[locale]}`,
       default: title,
     },
     description: toPlainText(description),
@@ -214,6 +224,7 @@ export default async function RootLayout({
             <main className="min-h-[calc(100vh-29rem)]">{children}</main>
             <Footer settings={settings || undefined} brands={brands || []} />
             <CookieBanner isDraftMode={isDraftMode} />
+            <ConversionTracking />
           </section>
           <SpeedInsights />
           <Analytics />

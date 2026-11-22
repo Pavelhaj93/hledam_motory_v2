@@ -22,6 +22,7 @@ import MissingImage from '@/app/components/MissingImage'
 import RelatedProducts from '@/app/components/RelatedProducts'
 import {productJsonLd} from '@/app/lib/jsonld'
 import {productAlternates} from '@/app/lib/categoryMeta'
+import {productMetaDescription} from '@/app/lib/seo'
 import {categoryPath, categoryTypeByKey} from '@/app/lib/categories'
 import {contactEmail, ogLocale, type Locale} from '@/app/lib/i18n'
 
@@ -53,7 +54,8 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const title =
     turbodmychadlo.seo?.metaTitle || `${turbodmychadlo.name} | ${turbodmychadlo.brand?.name || ''}`
   const description =
-    turbodmychadlo.seo?.metaDescription || toPlainText(turbodmychadlo.description as any) || ''
+    turbodmychadlo.seo?.metaDescription ||
+    (await productMetaDescription(locale, CATEGORY, turbodmychadlo))
   return {
     title,
     description,
