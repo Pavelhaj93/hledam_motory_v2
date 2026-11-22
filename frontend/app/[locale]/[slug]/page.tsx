@@ -6,7 +6,8 @@ import {sanityFetch} from '@/sanity/lib/live'
 import {getPageQuery, pagesSlugs} from '@/sanity/lib/queries'
 import {GetPageQueryResult} from '@/sanity.types'
 import {notFound} from 'next/navigation'
-import {localePrefix, type Locale} from '@/app/lib/i18n'
+import {brandName, localePrefix, type Locale} from '@/app/lib/i18n'
+import {clampDescription} from '@/app/lib/seo'
 
 type Props = {
   params: Promise<{locale: Locale; slug: string}>
@@ -36,9 +37,19 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   })
 
   const base = localePrefix[locale]
+  const t = await getTranslations({locale, namespace: 'Seo'})
+  const heading = page?.heading || page?.name || ''
+  // Use the visible subheading when it says something; short ones ("Kontaktujte nás") get a
+  // descriptive fallback instead of a one-word meta description.
+  const subheading = page?.subheading?.trim() || ''
+  const description =
+    subheading.length >= 50
+      ? clampDescription(subheading)
+      : t('pageDescription', {heading, brand: brandName[locale]})
+
   return {
-    title: page?.name,
-    description: page?.heading,
+    title: heading,
+    description,
     alternates: {
       canonical: `${base}/${slug}`,
     },
@@ -70,6 +81,9 @@ export default async function Page(props: Props) {
           breadcrumbs={[{label: t('home'), href: '/'}, {label: page.heading || 'Page'}]}
         />
       )}
+      {/* Without the hero the page has no visible H1 (blocks start at H2), so keep one for SEO
+          and screen readers. */}
+      {!showHero && <h1 className="sr-only">{page.heading || page.name}</h1>}
 
       <div className={showHero ? 'container mx-auto px-4 py-12' : ''}>
         <PageBuilderPage page={page as GetPageQueryResult} />

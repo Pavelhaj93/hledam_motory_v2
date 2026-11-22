@@ -114,7 +114,13 @@
     "sortPriceAsc": "Preis (aufsteigend)",
     "sortPriceDesc": "Preis (absteigend)",
     "viewCategory": "Kategorie ansehen",
-    "priceOnRequest": "Preis auf Anfrage"
+    "priceOnRequest": "Preis auf Anfrage",
+    "fuel": {
+      "benzin": "Benzin",
+      "diesel": "Diesel",
+      "hybrid": "Hybrid",
+      "elektro": "Elektro"
+    }
   },
   "ContactForm": {
     "formHeading": "Schreiben Sie uns",
@@ -175,5 +181,14 @@
     "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
     "home": "Zur Startseite",
     "catalog": "Katalog durchsuchen"
+  },
+  "Seo": {
+    "homeTitle": "Generalüberholte Motoren mit 12 Monaten Garantie | {brand}",
+    "homeDescription": "Generalüberholte und neue Motoren, Turbolader und Zylinderköpfe für Pkw und Transporter. 12 Monate Garantie ohne Kilometerbegrenzung, Austauschsystem.",
+    "pageDescription": "{heading} – {brand}: generalüberholte und neue Motoren, Turbolader und Zylinderköpfe mit 12 Monaten Garantie.",
+    "productPrice": "für {price}",
+    "productWarranty": "Garantie {warranty}",
+    "productInStock": "auf Lager",
+    "productCta": "Jetzt unverbindlich anfragen – {brand}."
   }
 }

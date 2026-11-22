@@ -1,24 +1,23 @@
 import type {Metadata} from 'next'
-import {setRequestLocale} from 'next-intl/server'
+import {getTranslations, setRequestLocale} from 'next-intl/server'
 import BlockRenderer from '@/app/components/BlockRenderer'
 import {homepageQuery, settingsQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
 import {organizationJsonLd} from '@/app/lib/jsonld'
-import {absoluteUrl, homePath, ogLocale, type Locale} from '@/app/lib/i18n'
+import {absoluteUrl, brandName, homePath, ogLocale, type Locale} from '@/app/lib/i18n'
 
 type Props = {params: Promise<{locale: Locale}>}
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params
-  const {data: homepage} = await sanityFetch({
-    query: homepageQuery,
-    params: {locale},
-    stega: false,
-  })
+  const t = await getTranslations({locale, namespace: 'Seo'})
+  // `homepage.name` is the internal document name ("Homepage"/"Startseite"), not SEO copy.
+  const title = t('homeTitle', {brand: brandName[locale]})
+  const description = t('homeDescription')
 
   return {
-    title: homepage?.name || 'Homepage',
-    description: homepage?.name || 'Welcome to our engine parts catalog',
+    title: {absolute: title},
+    description,
     alternates: {
       canonical: homePath(locale),
       languages: {
@@ -28,6 +27,8 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
       },
     },
     openGraph: {
+      title,
+      description,
       locale: ogLocale[locale],
       alternateLocale: locale === 'cs' ? ['de_AT'] : ['cs_CZ'],
     },
