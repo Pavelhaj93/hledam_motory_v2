@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import {useTranslations} from 'next-intl'
 import {Zap, Cog, Settings, Wrench, Car, Truck, Package} from 'lucide-react'
 
 interface Category {
@@ -35,6 +36,7 @@ const iconMap = {
 
 export default function CategoryGrid({block}: CategoryGridProps) {
   const {heading, subheading, categories} = block ?? {}
+  const t = useTranslations('Catalog')
 
   if (!categories || categories.length === 0) {
     return null
@@ -90,7 +92,7 @@ export default function CategoryGrid({block}: CategoryGridProps) {
                   <p className="text-gray-600 leading-relaxed mb-4">{category.description}</p>
 
                   <div className="flex items-center text-red-600 font-semibold">
-                    <span>Prohlédnout kategori</span>
+                    <span>{t('viewCategory')}</span>
                     <svg
                       className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
                       fill="none"

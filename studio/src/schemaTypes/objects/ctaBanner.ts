@@ -37,7 +37,7 @@ export const ctaBanner = defineType({
           name: 'text',
           title: 'Button Text',
           type: 'string',
-          initialValue: 'Kontakujte nás',
+          initialValue: 'Kontaktujte nás',
         }),
         defineField({
           name: 'link',

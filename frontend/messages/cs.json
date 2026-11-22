@@ -112,7 +112,9 @@
     "sortNameAsc": "Název (A-Z)",
     "sortNameDesc": "Název (Z-A)",
     "sortPriceAsc": "Cena (nejlevnější)",
-    "sortPriceDesc": "Cena (nejdražší)"
+    "sortPriceDesc": "Cena (nejdražší)",
+    "viewCategory": "Prohlédnout kategorii",
+    "priceOnRequest": "Cena na dotaz"
   },
   "ContactForm": {
     "formHeading": "Napište nám",
@@ -167,5 +169,11 @@
     "label": "Jazyk",
     "cs": "Čeština",
     "de-AT": "Deutsch (AT)"
+  },
+  "NotFound": {
+    "title": "Stránka nenalezena",
+    "description": "Stránka, kterou hledáte, neexistuje nebo byla přesunuta.",
+    "home": "Zpět na úvod",
+    "catalog": "Procházet katalog"
   }
 }

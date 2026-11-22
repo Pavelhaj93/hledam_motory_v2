@@ -112,7 +112,9 @@
     "sortNameAsc": "Name (A-Z)",
     "sortNameDesc": "Name (Z-A)",
     "sortPriceAsc": "Preis (aufsteigend)",
-    "sortPriceDesc": "Preis (absteigend)"
+    "sortPriceDesc": "Preis (absteigend)",
+    "viewCategory": "Kategorie ansehen",
+    "priceOnRequest": "Preis auf Anfrage"
   },
   "ContactForm": {
     "formHeading": "Schreiben Sie uns",
@@ -167,5 +169,11 @@
     "label": "Sprache",
     "cs": "Čeština",
     "de-AT": "Deutsch (AT)"
+  },
+  "NotFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "home": "Zur Startseite",
+    "catalog": "Katalog durchsuchen"
   }
 }
