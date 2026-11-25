@@ -379,7 +379,8 @@ function ProductCatalogInner({products}: ProductCatalogProps) {
             <option value="all">{t('allFuelTypes')}</option>
             {uniqueFuelTypes.map((fuel) => (
               <option key={fuel} value={fuel}>
-                {fuel}
+                {/* Schema values are lowercase keys (benzin, diesel, …); show a translated label. */}
+                {t.has(`fuel.${fuel}`) ? t(`fuel.${fuel}`) : fuel}
               </option>
             ))}
           </select>

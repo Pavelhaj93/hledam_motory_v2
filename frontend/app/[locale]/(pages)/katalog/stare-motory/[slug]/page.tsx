@@ -22,6 +22,7 @@ import MissingImage from '@/app/components/MissingImage'
 import RelatedProducts from '@/app/components/RelatedProducts'
 import {productJsonLd} from '@/app/lib/jsonld'
 import {productAlternates} from '@/app/lib/categoryMeta'
+import {productMetaDescription} from '@/app/lib/seo'
 import {categoryPath, categoryTypeByKey} from '@/app/lib/categories'
 import {contactEmail, ogLocale, type Locale} from '@/app/lib/i18n'
 
@@ -51,7 +52,8 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     return {title: t('notFound'), description: t('notFoundDescription')}
   }
   const title = motor.seo?.metaTitle || `${motor.name} | ${motor.brand?.name || ''}`
-  const description = motor.seo?.metaDescription || toPlainText(motor.description as any) || ''
+  const description = motor.seo?.metaDescription ||
+    (await productMetaDescription(locale, CATEGORY, motor))
   return {
     title,
     description,
