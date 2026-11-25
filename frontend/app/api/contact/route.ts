@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
       value.replace(/[&<>"']/g, (ch) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]!))
 
     const nameSubject = String(name).replace(/[\r\n]+/g, ' ')
+    // Reply-To = the customer, so "Reply" in the mailbox answers them, not our own SMTP sender.
+    const replyToEmail = String(email).replace(/[\r\n]+/g, '').trim()
     const nameHtml = escapeHtml(String(name))
     const emailHtml = escapeHtml(String(email))
     const phoneHtml = phone ? escapeHtml(String(phone)) : ''
@@ -40,6 +42,7 @@ export async function POST(request: NextRequest) {
     const info = await transporter.sendMail({
       from: process.env.SMTP_USER || 'info@hledammotory.cz',
       to: recipient,
+      replyTo: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(replyToEmail) ? replyToEmail : undefined,
       subject: `Nová poptávka – ${nameSubject}`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px;">
